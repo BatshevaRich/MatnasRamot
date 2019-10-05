@@ -1,0 +1,69 @@
+<div dir="rtl" class="text-right" style="padding-top: 3%">
+  <div class="container">
+    <div class="row">
+      <!--  <h4>ID : {{volunteer.id}}</h4>  -->
+      <div class="col-4">
+        <div class="card">
+          <div class="card-header">
+            <h4>שם: {{ volunteer.Name }}</h4>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">פרטים</h5>
+            <div class="card-text">
+              <p>טלפון: {{ volunteer.Telephone }}</p>
+              <p>פלאפון: {{ volunteer.Pelephone | phone }}</p>
+              <p>כתובת: {{ volunteer.Address }}</p>
+              <p>מייל: {{ volunteer.Email }}</p>
+              <p>יום הולדת: {{ volunteer.Age }}</p>
+            </div>
+            <p class="card-text"></p>
+            <button class="btn btn-primary">לעריכת הפרטים</button>
+          </div>
+        </div>
+
+        <!-- <h4>שם : {{ volunteer.Name }}</h4>
+  <h4>טלפון: {{ volunteer.Telephone }}</h4>
+  <h4>פלאפון: {{ volunteer.Pelephone | phone }}</h4>
+  <h4>כתובת: {{ volunteer.Address }}</h4>
+  <h4>מייל: {{ volunteer.Email }}</h4>
+  <h4>יום הולדת: {{ volunteer.Age }}</h4> -->
+      </div>
+      <div dir="rtl" class="col-8 card">
+        <nav class="navbar navbar-expand-md static-top">
+          <div dir="rtl" class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav nav-tabs">
+              <li class="nav-item active ">
+                <a
+                  class="nav-link"
+                  routerLink="families"
+                  routerLinkActive="activeLink"
+                >
+                  <h3>משפחות</h3></a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  routerLink="organizations"
+                  routerLinkActive="activeLink"
+                >
+                  <h3>ארגונים</h3></a
+                >
+              </li>
+              <li class="nav-item ">
+                <a
+                  class="nav-link"
+                  routerLink="events"
+                  routerLinkActive="activeLink"
+                >
+                  <h3>ארועים</h3></a
+                >
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

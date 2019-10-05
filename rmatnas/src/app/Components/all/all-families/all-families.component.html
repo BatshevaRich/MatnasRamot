@@ -1,0 +1,67 @@
+<!-- <div dir="rtl" class="card">
+  <div class="card-header">
+    <input type="text" placeholder="לחיפוש..." [(ngModel)]="search" />
+  </div>
+  <div class="card-body">
+    
+    <div
+      *ngFor="let f of families"
+      class="list-group-flush text-right"
+    >
+      <p>{{ f.firstNameF }} {{ f.lastName }}</p>
+      <a
+      style="background-color:#e27216d9"
+        routerLink="/list/family/{{ f.id }}"
+        class="list-group-item list-group-item-info"
+        >לפרטים</a
+      >
+    </div>
+  </div>
+  <a
+    class="nav-link list-group-item active list-group-item-primary text-right bg-dark"
+    routerLink="/list/add-family"
+    routerLinkActive="activeLink"
+    >הוספת משפחה</a
+  >
+  <router-outlet></router-outlet>
+</div> -->
+<div style="padding: 2%">
+  <div class="row">
+    <div class="col">
+      <div dir="rtl" class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col">
+            <input type="text" placeholder="לחיפוש..." [(ngModel)]="search" />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="card-body">
+            <div *ngFor="let v of families" class="list-group-flush text-right">
+              <p>{{ v.LastName }}</p>
+              <a
+                style="background-color:#e27216d9"
+                routerLink="/list/family/{{ v.Id }}"
+                class="list-group-item list-group-item-info"
+                >לפרטים</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+    <!-- </div> -->
+    <div class="col-4">
+      <div dir="rtl" class="card">
+        <div class="card-header">להוספת משפחה</div>
+        <div class="card-body">
+          <app-family-f></app-family-f>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

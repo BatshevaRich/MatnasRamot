@@ -1,0 +1,23 @@
+<div dir="rtl">
+  <div class="card-header">
+    <input type="text" placeholder="לחיפוש..." [(ngModel)]="search" />
+  </div>
+  <div class="card-body">
+    <div *ngFor="let o of organizations" class="list-group-flush text-right">
+      <p>{{ o.name }}</p>
+      <a
+        style="background-color:#dabd03b0"
+        routerLink="/list/organization/{{ o.id }}"
+        class="list-group-item list-group-item-info"
+        >לפרטים</a
+      >
+    </div>
+  </div>
+  <a
+    class="nav-link list-group-item active list-group-item-primary text-right"
+    routerLink="/list/add-organization"
+    routerLinkActive="activeLink"
+    >הוספת ארגון</a
+  >
+  <router-outlet></router-outlet>
+</div>

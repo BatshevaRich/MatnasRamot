@@ -1,0 +1,40 @@
+<div dir="rtl">
+        <form (ngSubmit)="submitForm(organizationForm)" class="text-right" #organizationForm="ngForm">
+          <div class="form-group">
+            <label>שם:
+              <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                [(ngModel)]="newOrganization.name" name="name" required>
+            </label>
+            <span class="spn">&</span>
+            <label>שם איש קשר:
+              <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                [(ngModel)]="newOrganization.contact" name="contact" required>
+            </label>
+            <br>
+            <label> פלאפון:
+              <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+              appPhoneMask [(ngModel)]="newOrganization.phone" name="phone" required>
+            </label>
+            <br>
+            <label> מייל:
+              <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm" email
+                [(ngModel)]="newOrganization.email" name="email">
+            </label>
+            <br>
+            <label> כתובת:
+              <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                [(ngModel)]="newOrganization.address" name="address">
+            </label>
+            <br>
+            <label> הערות:
+              <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                type="date" [(ngModel)]="newOrganization.comments" name="comments">
+            </label>
+            <br>
+          </div>
+          <button class="btn btn-primary" type="submit" [disabled]="organizationForm.invalid">להוספת הארגון</button>
+        </form>
+        <span *ngIf="organizationForm.submitted">
+          {{organizationForm.value | json}}
+        </span>
+      </div>

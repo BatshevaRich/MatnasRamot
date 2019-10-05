@@ -1,0 +1,20 @@
+<div dir="rtl">
+        <form (ngSubmit)="submitForm(eventForm)" class="text-right" #eventForm="ngForm">
+          <div class="form-group">
+            <label>תאור:
+              <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                [(ngModel)]="newEvent.description" name="description" required>
+            </label>
+           <br>
+            <label> תאריך:
+              <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                type="date" [(ngModel)]="newEvent.date" name="date">
+            </label>
+            <br>
+          </div>
+          <button class="btn btn-primary" type="submit" [disabled]="eventForm.invalid">להוספת הארוע</button>
+        </form>
+        <span *ngIf="eventForm.submitted">
+          {{eventForm.value | json}}
+        </span>
+      </div>

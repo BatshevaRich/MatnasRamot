@@ -1,0 +1,135 @@
+<div dir="rtl">
+  <form
+    (ngSubmit)="submitForm(volunteerForm)"
+    class="text-right"
+    #volunteerForm="ngForm"
+  >
+    <div class="form-group">
+      <label>
+        שם פרטי אב:
+        <input
+          class="form-control form-control-sm"
+          aria-label="Small"
+          aria-describedby="inputGroup-sizing-sm"
+          [(ngModel)]="newFamily.FirstNameFather"
+          name="firstNameF"
+          required
+          appBorder
+        />
+      </label>
+      <span class="spn">&</span>
+      <label>
+        שם פרטי אם:
+        <input
+          class="form-control form-control-sm"
+          aria-label="Small"
+          aria-describedby="inputGroup-sizing-sm"
+          [(ngModel)]="newFamily.FirstNameMother"
+          name="FirstNameMother"
+          required
+          appBorder
+        />
+      </label>
+      <br />
+      <label>
+        שם משפחה:
+        <input
+          class="form-control form-control-sm"
+          aria-label="Small"
+          aria-describedby="inputGroup-sizing-sm"
+          [(ngModel)]="newFamily.LastName"
+          name="LastName"
+          required
+        />
+      </label>
+      <br />
+      <label>
+        מייל:
+        <input
+          class="form-control form-control-sm"
+          aria-label="Small"
+          aria-describedby="inputGroup-sizing-sm"
+          Email
+          appBorder
+          [(ngModel)]="newFamily.Email"
+          name="Email"
+        />
+      </label>
+      <br />
+      <label>
+        פלאפון אב:
+        <input
+          class="form-control form-control-sm"
+          aria-label="Small"
+          aria-describedby="inputGroup-sizing-sm"
+          appBorder
+          appPhoneMask
+          [(ngModel)]="newFamily.PelephoneFather"
+          name="PelephoneFather"
+        />
+      </label>
+      <br />
+      <label>
+        פלאפון אם:
+        <input
+          class="form-control form-control-sm"
+          aria-label="Small"
+          aria-describedby="inputGroup-sizing-sm"
+          appPhoneMask
+          appBorder
+          [(ngModel)]="newFamily.PelephoneMother"
+          name="PelephoneMother"
+        />
+      </label>
+      <br />
+      <label>
+        טלפון:
+        <input
+          class="form-control form-control-sm"
+          aria-label="Small"
+          aria-describedby="inputGroup-sizing-sm"
+          appBorder
+          appPhoneMask
+          [(ngModel)]="newFamily.Telephone"
+          name="Telephone"
+        />
+      </label>
+      <br />
+      <label>
+        כתובת:
+        <input
+          class="form-control form-control-sm"
+          aria-label="Small"
+          aria-describedby="inputGroup-sizing-sm"
+          appBorder
+          [(ngModel)]="newFamily.Address"
+          name="Address"
+        />
+      </label>
+      <br />
+      <!-- <label>
+        תאריך לידה??:
+        <input
+          class="form-control form-control-sm"
+          aria-label="Small"
+          aria-describedby="inputGroup-sizing-sm"
+          appBorder
+          type="date"
+          [(ngModel)]="newFamily.birthdate"
+          name="birthdate"
+        />
+      </label>
+      <br /> -->
+    </div>
+    <button
+      class="btn btn-primary"
+      type="submit"
+      [disabled]="volunteerForm.invalid"
+    >
+      להוספת המשפחה
+    </button>
+  </form>
+  <span *ngIf="volunteerForm.submitted">
+    {{ volunteerForm.value | json }}
+  </span>
+</div>

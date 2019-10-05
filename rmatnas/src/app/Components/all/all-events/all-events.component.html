@@ -1,0 +1,27 @@
+<div dir="rtl">
+  <div class="card-header">
+    <input type="text" placeholder="לחיפוש..." [(ngModel)]="search" />
+  </div>
+  <div class="card-body">
+    
+  <div
+    *ngFor="let e of events | filter: search"
+    class="list-group-flush text-right"
+  >
+    <p>{{ e.description }} {{ e.date }}</p>
+    <a
+    style="background-color:#62da03b0"
+      routerLink="/list/event/{{ e.id }}"
+      class="list-group-item list-group-item-info"
+      >לפרטים</a
+    >
+  </div>
+  </div>
+  <a
+    class="nav-link list-group-item active list-group-item-primary text-right"
+    routerLink="/list/add-event"
+    routerLinkActive="activeLink"
+    >הוספת ארוע</a
+  >
+  <router-outlet></router-outlet>
+</div>

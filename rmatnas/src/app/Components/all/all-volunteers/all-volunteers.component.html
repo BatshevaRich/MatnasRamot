@@ -1,0 +1,53 @@
+<div style="padding: 2%">
+  <div class="row">
+    <div class="col">
+      <div dir="rtl" class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col">
+              <input type="text" placeholder="לחיפוש..." [(ngModel)]="search" />
+            </div>
+            <!-- <div class="col-2">
+              <a
+                class="nav-link list-group-item active list-group-item-primary text-right"
+                routerLink="/list/add-volunteer"
+                routerLinkActive="activeLink"
+                >הוספת מתנדב</a
+              >
+            </div> -->
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <!--<div style="padding-left: 3%; padding-right: 3%"> -->
+            <div class="card-body">
+              <div
+                *ngFor="let v of volunteers"
+                class="list-group-flush text-right"
+              >
+                <p>{{ v.Name }}</p>
+                <a
+                  style="background-color:#bf0000b0"
+                  routerLink="/list/volunteer/{{ v.Id }}"
+                  class="list-group-item list-group-item-info"
+                  >לפרטים</a
+                >
+              </div>
+              <!-- </div> -->
+            </div>
+          </div>
+        </div>
+
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+    <div class="col-4">
+      <div dir="rtl" class="card">
+        <div class="card-header">להוספת מתנדב</div>
+        <div class="card-body">
+          <app-volunteer-f></app-volunteer-f>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
