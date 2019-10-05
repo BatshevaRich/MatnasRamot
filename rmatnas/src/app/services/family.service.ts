@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Family } from '../classes/Family';
-
+import { baseURL} from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class FamilyService {
   // tslint:disable-next-line:member-ordering
 
-  path = 'http://localhost:51229/api/Family';
+  path = baseURL + 'Family';
   constructor(private http: HttpClient) {}
 
   getFamilies(): Observable<Family[]> {

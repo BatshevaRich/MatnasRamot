@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Organization } from '../classes/Organization';
+import { baseURL} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +10,8 @@ import { Organization } from '../classes/Organization';
 export class GroupService {
   // tslint:disable-next-line:member-ordering
 
-  path: string;
-  constructor(private http: HttpClient) { this.path = 'http://localhost:51229/api/Group'; }
+  path = baseURL + 'Group';
+  constructor(private http: HttpClient) { }
 
   getOrganizations(): Observable<Organization[]> {
     return this.http.get<Organization[]>( this.path);

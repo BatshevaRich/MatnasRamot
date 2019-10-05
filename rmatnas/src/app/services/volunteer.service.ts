@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Volunteer } from '../classes/Volunteer';
-
+import { baseURL} from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class VolunteerService {
-  path: string;
+  path = baseURL + 'volunteer';
   // tslint:disable-next-line:member-ordering
-  constructor(private http: HttpClient) { this.path = 'http://localhost:51229/api/volunteer'; }
+  constructor(private http: HttpClient) { }
   getVolunteers(): Observable<Volunteer[]> {
     return this.http.get<Volunteer[]>(this.path);
   }
