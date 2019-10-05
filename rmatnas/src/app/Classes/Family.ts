@@ -1,5 +1,5 @@
 export class Family {
-    id: number;
+    Id: number;
     FirstNameFather: string;
     FirstNameMother: string;
     LastName: string;
@@ -15,7 +15,7 @@ export class Family {
 
     // tslint:disable-next-line: max-line-length
     constructor(id: number, fatherName: string, motherName: string, lastName: string, telephone: string, pfather: string, pmother: string, address: string, email: string, status: string, nChildren: number, reason: string, reference: string) {
-        this.id = id;
+        this.Id = id;
         this.FirstNameFather = fatherName;
         this.FirstNameMother = motherName;
         this.LastName = lastName;

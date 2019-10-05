@@ -13,12 +13,12 @@ export class OrganizationComponent implements OnInit, OnDestroy {
 
   organization: Organization = new Organization(1, 'ברירת מחדל', 'ברירת מחדל', '11', 'ברירת מחדל', 'ברירת מחדל', '11@11');
   mySubscription: Subscription;
-  id: number;
+  Id: number;
   constructor(public ds: DataServiceService, public ARS: ActivatedRoute) {
 
     this.mySubscription = ARS.params.subscribe((args) => {
-      this.id = args.organizationId;
-      this.organization = ds.getOrganization(this.id);
+      this.Id = args.organizationId;
+      this.organization = ds.getOrganization(this.Id);
       this.mySubscription.unsubscribe();
     });
   }

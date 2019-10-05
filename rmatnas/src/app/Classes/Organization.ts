@@ -1,5 +1,5 @@
 export class Organization {
-    id: number;
+    Id: number;
     name: string;
     contact: string;
     phone: string;
@@ -7,7 +7,7 @@ export class Organization {
     comments: string;
     email: string;
     constructor(id: number, name: string, contact: string, phone: string, address: string, comments: string, email: string) {
-        this.id = id;
+        this.Id = id;
         this.name = name;
         this.contact = contact;
         this.phone = phone;

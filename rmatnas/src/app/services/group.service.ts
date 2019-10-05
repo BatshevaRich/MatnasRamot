@@ -16,8 +16,8 @@ export class GroupService {
   getOrganizations(): Observable<Organization[]> {
     return this.http.get<Organization[]>( this.path);
   }
-  getOrganization(id: number): Observable<Organization> {
-    return this.http.get<Organization>(this.path + '/' + id);
+  getOrganization(Id: number): Observable<Organization> {
+    return this.http.get<Organization>(this.path + '/' + Id);
   }
   addOrganization(organization: Organization) {
     // const head = {params: new HttpParams().set ('newOrganization','Organization')};
@@ -32,10 +32,10 @@ export class GroupService {
   }
   updateOrganization(organization: Organization) {
     // const head={params:new HttpParams() ('newOrganization',Organization)};
-    this.http.put(this.path + '/' + organization.id, organization);
+    this.http.put(this.path + '/' + organization.Id, organization);
   }
-  removeOrganization(id: number) {
+  removeOrganization(Id: number) {
     // const head={params:new HttpParams() ('newOrganization',Organization)};
-    this.http.delete(this.path + '/' + id);
+    this.http.delete(this.path + '/' + Id);
   }
 }

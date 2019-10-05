@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataServiceService } from '../../../Services/data-service.service';
-import { Event } from 'src/app/classes/Event';
+import { Eventt } from 'src/app/Classes/Eventt';
 
 @Component({
   selector: 'app-all-events',
@@ -8,7 +8,7 @@ import { Event } from 'src/app/classes/Event';
   styleUrls: ['./all-events.component.css']
 })
 export class AllEventsComponent implements OnInit {
-  events: Event[] = [];
+  events: Eventt[] = [];
   search = '';
   constructor(public ds: DataServiceService) {}
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Event } from 'src/app/classes/Event';
+import { Eventt } from 'src/app/Classes/Eventt';
 import { DataServiceService } from '../../../Services/data-service.service';
 
 @Component({
@@ -9,14 +9,14 @@ import { DataServiceService } from '../../../Services/data-service.service';
 })
 export class EventFComponent implements OnInit {
 
-  newEvent: Event = new Event(1, 'ברירת מחדל', 'ברירת מחדל');
+  newEvent: Eventt = new Eventt(1, 'ברירת מחדל', 'ברירת מחדל');
   constructor(public ds: DataServiceService) { }
 
   ngOnInit() {
   }
   submitForm(f) {
     // tslint:disable-next-line: max-line-length
-    this.ds.addEvent(new Event(this.newEvent.id, this.newEvent.description, this.newEvent.date));
+    this.ds.addEvent(new Eventt(this.newEvent.Id, this.newEvent.description, this.newEvent.date));
     f.reset();
   }
 }

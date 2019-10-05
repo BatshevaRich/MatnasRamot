@@ -14,7 +14,7 @@ export class OrganizationFComponent implements OnInit {
   ngOnInit() {
   }
   submitForm(f){
-    this.ds.addOrganization(new Organization(this.newOrganization.id,this.newOrganization.name,this.newOrganization.contact,this.newOrganization.phone,this.newOrganization.address,this.newOrganization.comments,this.newOrganization.email) );
+    this.ds.addOrganization(new Organization(this.newOrganization.Id,this.newOrganization.name,this.newOrganization.contact,this.newOrganization.phone,this.newOrganization.address,this.newOrganization.comments,this.newOrganization.email) );
       f.reset();
   }
 }

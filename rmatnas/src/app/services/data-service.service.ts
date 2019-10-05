@@ -1,20 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Volunteer } from '../classes/Volunteer';
 import { Family } from '../classes/Family';
-import { Event } from 'src/app/classes/Event';
+import { Eventt } from 'src/app/Classes/Eventt';
 import { Organization } from 'src/app/classes/Organization';
 import { MyTask } from 'src/app/Classes/MyTask';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {User2} from '../user2';
-
+import { baseURL} from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class DataServiceService {
+  path = baseURL;
   volunteers: Volunteer[] = []; // init by db
   families: Family[] = [];
-  events: Event[] = [];
+  events: Eventt[] = [];
   organizations: Organization[] = [];
   tasks: MyTask[] = [];
   constructor(private http: HttpClient) {
@@ -70,7 +71,7 @@ export class DataServiceService {
         'סיבת הפניה'
       )
     );*/
-    this.events.push(new Event(1, 'ברירת מחדל', '1999'));
+    this.events.push(new Eventt(1, 'ברירת מחדל', '1999'));
     this.organizations.push(
       new Organization(
         1,
@@ -89,39 +90,39 @@ export class DataServiceService {
       new MyTask(3, 'להודיע לאסתי רפפורט לא לבוא השבוע למשחקיה', '02/05/2019')
     );*/
   }
-  getVolunteer(id) {
+  getVolunteer(Id) {
     // go to db
-    id = +id;
+    Id = +Id;
     return this.volunteers.find(v => {
-      return v.Id === id;
+      return v.Id === Id;
     });
   }
-  getFamily(id) {
+  getFamily(Id) {
     // go to db
-    id = +id;
+    Id = +Id;
     return this.families.find(f => {
-      return f.id === id;
+      return f.Id === Id;
     });
   }
-  getEvent(id) {
+  getEvent(Id) {
     // go to db
-    id = +id;
+    Id = +Id;
     return this.events.find(e => {
-      return e.id === id;
+      return e.Id === Id;
     });
   }
-  getOrganization(id) {
+  getOrganization(Id) {
     // go to db
-    id = +id;
+    Id = +Id;
     return this.organizations.find(o => {
-      return o.id === id;
+      return o.Id === Id;
     });
   }
-  getTask(id) {
+  getTask(Id) {
     // go to db
-    id = +id;
+    Id = +Id;
     return this.tasks.find(t => {
-      return t.id === id;
+      return t.Id === Id;
     });
   }
   addVolunteer(v: Volunteer) {
@@ -129,23 +130,23 @@ export class DataServiceService {
     this.volunteers.push(v);
   }
   addFamily(f: Family) {
-    f.id = this.families.length + 1;
+    f.Id = this.families.length + 1;
     this.families.push(f);
   }
   addOrganization(o: Organization) {
-    o.id = this.organizations.length + 1;
+    o.Id = this.organizations.length + 1;
     this.organizations.push(o);
   }
-  addEvent(e: Event) {
-    e.id = this.events.length + 1;
+  addEvent(e: Eventt) {
+    e.Id = this.events.length + 1;
     this.events.push(e);
   }
   addTask(t: MyTask) {
-    t.id = this.tasks.length + 1;
+    t.Id = this.tasks.length + 1;
     this.events.push(t);
   }
   postS(val:string){
-    return this.http.post('http://localhost:57624/api/user/9',val);
+    return this.http.post(this.path + 'user/9',val);
   }
   getAllVolunteers() {
     return this.volunteers;
@@ -163,7 +164,7 @@ export class DataServiceService {
     return this.tasks;
   }
   updateFamily(f: Family) {
-    const f2 = this.getFamily(f.id);
+    const f2 = this.getFamily(f.Id);
     f2.FirstNameFather = f.FirstNameFather;
     f2.FirstNameMother = f.FirstNameMother;
     f2.LastName = f.LastName;
@@ -178,13 +179,13 @@ export class DataServiceService {
   }
 
  
-  updateEvent(e: Event) {
-    const e2 = this.getEvent(e.id);
+  updateEvent(e: Eventt) {
+    const e2 = this.getEvent(e.Id);
     e2.description = e.description;
     e2.date = e.date;
   }
   updateOrganization(o: Organization) {
-    const o2 = this.getOrganization(o.id);
+    const o2 = this.getOrganization(o.Id);
     o2.name = o.name;
     o2.phone = o.phone;
     o2.address = o.address;
@@ -193,12 +194,12 @@ export class DataServiceService {
     o2.comments = o.comments;
   }
   getVolunteersFromServer(): Observable<Volunteer[]> {
-    return this.http.get<Volunteer[]>('http://localhost:59945/api/volunteer');
+    return this.http.get<Volunteer[]>(this.path + 'volunteer');
   }
   getFamiliesFromServer(): Observable<Family[]> {
-    return this.http.get<Family[]>('http://localhost:59945/api/family');
+    return this.http.get<Family[]>(this.path + 'family');
   }
   getVolunteerFromServer(): Observable<Volunteer> {
-    return this.http.get<Volunteer>('http://localhost:51229/api/volunteer/1');
+    return this.http.get<Volunteer>(this.path + 'volunteer/1');
   }
 }
