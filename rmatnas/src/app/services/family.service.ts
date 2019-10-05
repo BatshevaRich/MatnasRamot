@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Family } from '../classes/Family';
 import { baseURL} from '../../environments/environment';
+import { Category } from '../Classes/Category';
 @Injectable({
   providedIn: 'root'
 })
@@ -32,10 +33,13 @@ export class FamilyService {
   }
   updateFamily(family: Family) {
     // const head={params:new HttpParams() ('newFamily',Family)};
-    this.http.put(this.path + '/' + family.id, family);
+    this.http.put(this.path + '/' + family.Id, family);
   }
   removeFamily(id: number) {
     // const head={params:new HttpParams() ('newFamily',Family)};
     this.http.delete(this.path + '/' + id);
+  }
+  getCategoriesOfFamily(id: number): Observable<Category[]> {
+    return this.http.get<Category[]>(this.path + id);
   }
 }

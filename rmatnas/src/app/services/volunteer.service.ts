@@ -8,7 +8,6 @@ import { baseURL} from '../../environments/environment';
 })
 export class VolunteerService {
   path = baseURL + 'volunteer';
-  // tslint:disable-next-line:member-ordering
   constructor(private http: HttpClient) { }
   getVolunteers(): Observable<Volunteer[]> {
     return this.http.get<Volunteer[]>(this.path);
