@@ -1,0 +1,4 @@
+<span *ngFor="let c of categories"  >
+  <input type="checkbox"  (click)="add(c)" [title]="c.Name">{{c.Name}}
+</span>
+<button (click)="finishCheck()">אישור</button>
