@@ -15,3 +15,9 @@ C:\Users\owner\Desktop\merge\Matnas\Common\obj\Debug\Common.csprojAssemblyRefere
 C:\Users\owner\Desktop\merge\Matnas\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
 C:\Users\owner\Desktop\merge\Matnas\Common\obj\Debug\Common.dll
 C:\Users\owner\Desktop\merge\Matnas\Common\obj\Debug\Common.pdb
+C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Common\bin\Debug\Common.dll
+C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Common\bin\Debug\Common.pdb
+C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Common\obj\Debug\Common.csprojAssemblyReference.cache
+C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
+C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Common\obj\Debug\Common.dll
+C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Common\obj\Debug\Common.pdb

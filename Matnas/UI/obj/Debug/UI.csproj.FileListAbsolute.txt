@@ -58,3 +58,10 @@ C:\Users\owner\Desktop\Matnas\UI\obj\Debug\UI.exe
 C:\Users\owner\Desktop\Matnas\UI\obj\Debug\UI.pdb
 C:\Users\owner\Desktop\Matnas\UI\bin\Debug\dbRamot.mdf
 C:\Users\owner\Desktop\Matnas\UI\bin\Debug\dbRamot_log.ldf
+C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\UI\obj\Debug\UI.csprojAssemblyReference.cache
+C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\UI\obj\Debug\UI.Form1.resources
+C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\UI\obj\Debug\UI.Properties.Resources.resources
+C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\UI\obj\Debug\UI.csproj.GenerateResource.cache
+C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\UI\obj\Debug\UI.csproj.CoreCompileInputs.cache
+C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\UI\obj\Debug\UI.exe
+C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\UI\obj\Debug\UI.pdb

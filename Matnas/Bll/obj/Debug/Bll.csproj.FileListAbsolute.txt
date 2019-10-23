@@ -39,3 +39,17 @@ C:\Users\owner\Desktop\merge\Matnas\Bll\obj\Debug\Bll.csproj.CoreCompileInputs.c
 C:\Users\owner\Desktop\merge\Matnas\Bll\obj\Debug\Bll.csproj.CopyComplete
 C:\Users\owner\Desktop\merge\Matnas\Bll\obj\Debug\Bll.dll
 C:\Users\owner\Desktop\merge\Matnas\Bll\obj\Debug\Bll.pdb
+C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Bll\bin\Debug\Bll.dll
+C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Bll\bin\Debug\Bll.pdb
+C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Bll\bin\Debug\Common.dll
+C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Bll\bin\Debug\Dal.dll
+C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Bll\bin\Debug\EntityFramework.dll
+C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Bll\bin\Debug\Common.pdb
+C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Bll\bin\Debug\Dal.pdb
+C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Bll\bin\Debug\Dal.dll.config
+C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Bll\bin\Debug\EntityFramework.xml
+C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Bll\obj\Debug\Bll.csprojAssemblyReference.cache
+C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Bll\obj\Debug\Bll.csproj.CoreCompileInputs.cache
+C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Bll\obj\Debug\Bll.csproj.CopyComplete
+C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Bll\obj\Debug\Bll.dll
+C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Bll\obj\Debug\Bll.pdb

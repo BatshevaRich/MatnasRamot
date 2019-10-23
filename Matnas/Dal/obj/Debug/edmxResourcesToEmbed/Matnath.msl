@@ -14,7 +14,7 @@
         <MappingFragment StoreEntitySet="Events">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="description" ColumnName="description" />
-          <ScalarProperty Name="dateAdded" ColumnName="dateAdded" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -70,7 +70,7 @@
           <ScalarProperty Name="IdOrganization" ColumnName="IdOrganization" />
           <ScalarProperty Name="IdCategory" ColumnName="IdCategory" />
           <ScalarProperty Name="Comments" ColumnName="Comments" />
-          <ScalarProperty Name="dateAdded" ColumnName="dateAdded" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -92,7 +92,7 @@
           <ScalarProperty Name="IdVolunteer" ColumnName="IdVolunteer" />
           <ScalarProperty Name="IdCategory" ColumnName="IdCategory" />
           <ScalarProperty Name="Comments" ColumnName="Comments" />
-          <ScalarProperty Name="dateAdded" ColumnName="dateAdded" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -104,7 +104,7 @@
           <ScalarProperty Name="IdVolunteer" ColumnName="IdVolunteer" />
           <ScalarProperty Name="IdCategory" ColumnName="IdCategory" />
           <ScalarProperty Name="Comments" ColumnName="Comments" />
-          <ScalarProperty Name="dateAdded" ColumnName="dateAdded" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

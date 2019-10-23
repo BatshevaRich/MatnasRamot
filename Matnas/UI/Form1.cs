@@ -41,8 +41,8 @@ namespace UI
 
         private void Button2_Click(object sender, EventArgs e)
         {
-            EventManager.AddEvent(new Event() { Id = 8, dateAdded = DateTime.Now, description = "dfggfdghd" });
-            EventManager.UpdateEvent(new Event() { Id =8, dateAdded = DateTime.Now, description = "new des" });
+            EventManager.AddEvent(new Event() { Id = 8, DateAdded = DateTime.Now, Description = "dfggfdghd" });
+            EventManager.UpdateEvent(new Event() { Id =8, DateAdded = DateTime.Now, Description = "new des" });
         }
 
         private void Button3_Click(object sender, EventArgs e)

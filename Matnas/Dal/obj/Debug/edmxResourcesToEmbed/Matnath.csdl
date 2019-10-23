@@ -21,7 +21,7 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="dateAdded" Type="DateTime" Precision="0" />
+    <Property Name="DateAdded" Type="DateTime" Precision="0" />
     <NavigationProperty Name="VolunteerAndEvent" Relationship="Self.event" FromRole="Events" ToRole="VolunteerAndEvent" />
     <NavigationProperty Name="Categories" Relationship="Self.CategoriesForEvents" FromRole="Events" ToRole="Categories" />
   </EntityType>
@@ -82,7 +82,7 @@
     <Property Name="IdOrganization" Type="Int32" Nullable="false" />
     <Property Name="IdCategory" Type="Int32" />
     <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="dateAdded" Type="DateTime" Precision="0" />
+    <Property Name="DateAdded" Type="DateTime" Precision="0" />
     <NavigationProperty Name="Categories" Relationship="Self.categoriesPerVolunteeringO" FromRole="OrganizationAndFamily" ToRole="Categories" />
     <NavigationProperty Name="Families" Relationship="Self.familyO" FromRole="OrganizationAndFamily" ToRole="Families" />
     <NavigationProperty Name="Organization" Relationship="Self.OrganizationF" FromRole="OrganizationAndFamily" ToRole="Organization" />
@@ -105,7 +105,7 @@
     <Property Name="IdVolunteer" Type="Int32" Nullable="false" />
     <Property Name="IdCategory" Type="Int32" />
     <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="dateAdded" Type="DateTime" Precision="0" />
+    <Property Name="DateAdded" Type="DateTime" Precision="0" />
     <NavigationProperty Name="Categories" Relationship="Self.categoriesPerVolunteeringEvent" FromRole="VolunteerAndEvent" ToRole="Categories" />
     <NavigationProperty Name="Events" Relationship="Self.event" FromRole="VolunteerAndEvent" ToRole="Events" />
     <NavigationProperty Name="Volunteers" Relationship="Self.volunteerEvent" FromRole="VolunteerAndEvent" ToRole="Volunteers" />
@@ -119,7 +119,7 @@
     <Property Name="IdVolunteer" Type="Int32" Nullable="false" />
     <Property Name="IdCategory" Type="Int32" />
     <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="dateAdded" Type="DateTime" Precision="0" />
+    <Property Name="DateAdded" Type="DateTime" Precision="0" />
     <NavigationProperty Name="Categories" Relationship="Self.categoriesPerVolunteering" FromRole="VolunteerAndFamily" ToRole="Categories" />
     <NavigationProperty Name="Families" Relationship="Self.family" FromRole="VolunteerAndFamily" ToRole="Families" />
     <NavigationProperty Name="Volunteers" Relationship="Self.volunteer" FromRole="VolunteerAndFamily" ToRole="Volunteers" />

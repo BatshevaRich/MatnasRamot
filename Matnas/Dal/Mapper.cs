@@ -140,7 +140,7 @@ namespace Dal
         {
             return new Events()
             {
-                dateAdded = eventt.DateAdded,
+                DateAdded = eventt.DateAdded,
                 description = eventt.Description,
                 Id = eventt.Id
             };
@@ -149,7 +149,7 @@ namespace Dal
         {
             return new Event()
             {
-                DateAdded = eventt.dateAdded,
+                DateAdded = eventt.DateAdded,
                 Description = eventt.description,
                 Id = eventt.Id
             };

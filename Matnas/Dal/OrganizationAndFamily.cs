@@ -19,7 +19,7 @@ namespace Dal
         public int IdOrganization { get; set; }
         public Nullable<int> IdCategory { get; set; }
         public string Comments { get; set; }
-        public Nullable<System.DateTime> dateAdded { get; set; }
+        public Nullable<System.DateTime> DateAdded { get; set; }
     
         public virtual Categories Categories { get; set; }
         public virtual Families Families { get; set; }
