@@ -15,8 +15,7 @@ export class VolunteerFComponent implements OnInit {
   ngOnInit() {
   }
   submitForm(f) {
-    // tslint:disable-next-line: max-line-length
     this.vs.addVolunteer(new Volunteer(this.newVolunteer.Id, this.newVolunteer.Name, this.newVolunteer.Telephone, this.newVolunteer.Pelephone, this.newVolunteer.Email, this.newVolunteer.Address, this.newVolunteer.Age));
-    //f.reset();
+    f.reset();
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Organization } from 'src/app/classes/Organization';
-import { GroupService } from 'src/app/services/group.service';
+import { DataServiceService } from '../../../Services/data-service.service';
 
 @Component({
   selector: 'app-all-organizations',
@@ -10,15 +10,10 @@ import { GroupService } from 'src/app/services/group.service';
 export class AllOrganizationsComponent implements OnInit {
   organizations: Organization[] = [];
   search = '';
-  constructor(public gs: GroupService) { }
+  constructor(public ds: DataServiceService) { }
 
   ngOnInit() {
-    this.gs.getOrganizations().subscribe(data => {
-      this.organizations = data;
-      console.log(this.organizations);
-    });
-    //this.organizations = this.ds.getAllOrganizations();
-    
+    this.organizations = this.ds.getAllOrganizations();
   }
 
 }

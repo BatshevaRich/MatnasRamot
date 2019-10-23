@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DataServiceService } from '../../../Services/data-service.service';
 import { Eventt } from 'src/app/Classes/Eventt';
+import { EventService } from 'src/app/services/event.service';
 
 @Component({
   selector: 'app-all-events',
@@ -10,9 +10,14 @@ import { Eventt } from 'src/app/Classes/Eventt';
 export class AllEventsComponent implements OnInit {
   events: Eventt[] = [];
   search = '';
-  constructor(public ds: DataServiceService) {}
-
+  constructor(public es: EventService) {}
   ngOnInit() {
-    this.events = this.ds.getAllEvents();
-  }
+    this.es.getEvents() .subscribe(data => {
+   this.events = data;
+ }); }
+
+ delete(e: number) {
+   this.es.removeEvent(e);
+   this.events = this.events.filter(eo => eo.Id !== e);
+ }
 }

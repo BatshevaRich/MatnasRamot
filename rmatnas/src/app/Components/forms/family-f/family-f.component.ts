@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Family } from 'src/app/classes/Family';
+import { Family } from 'src/app/Classes/Family';
 import { DataServiceService } from '../../../Services/data-service.service';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { FamilyService } from 'src/app/services/family.service';
+import { Category } from '../../../Classes/Category';
+import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
   selector: 'app-family-f',
@@ -28,23 +31,19 @@ export class FamilyFComponent implements OnInit {
   );
   mySubscription: Subscription;
   id: number;
-  constructor(public ds: DataServiceService, public ARS: ActivatedRoute) {
-   /* this.mySubscription = ARS.params.subscribe(args => {
-      this.id = args.familyId;*/
-     /* if (this.id !== 0) {*/
-       // this.newFamily = ds.getFamily(this.id);
-    /*  }
-      this.mySubscription.unsubscribe();*/
-  //  });
+  categories: Category[] = [];
+  constructor(public fs: FamilyService, private cs: CategoryService) {
   }
   ngOnInit() {}
   submitForm(f) {
-    // tslint:disable-next-line: max-line-length
-  /*  if (this.id !== 0) {
-      this.ds.addFamily(this.newFamily);
-    } else {*/
-      this.ds.addFamily(this.newFamily);
-   
-    //  f.reset();
+      const fa = new Family(this.newFamily.Id, this.newFamily.FirstNameFather
+        , this.newFamily.FirstNameMother, this.newFamily.LastName, this.newFamily.Telephone, this.newFamily.PelephoneFather, this.newFamily.PelephoneMother,
+        this.newFamily.Address, this.newFamily.Email, this.newFamily.Status, this.newFamily.NumChildren, this.newFamily.Reason, this.newFamily.Reference);
+      this.fs.addFamily(fa);
+      this.cs.AddCategoriesForFamily(fa, this.categories);
+      f.reset();
+  }
+  selectCategories(e) {
+ this.categories = e;
   }
 }

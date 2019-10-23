@@ -1,10 +1,10 @@
 export class Eventt {
     Id: number;
-    description: string;
-    date: string;
+    Description: string;
+    DateAdded: string;
     constructor(id: number, description: string, date: string) {
         this.Id = id;
-        this.description = description;
-        this.date = date;
+        this.Description = description;
+        this.DateAdded = date;
     }
 }

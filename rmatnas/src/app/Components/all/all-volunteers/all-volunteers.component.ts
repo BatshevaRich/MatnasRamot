@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Volunteer } from '../../../classes/Volunteer';
+import {Volunteer} from '../../../classes/Volunteer';
 import { VolunteerService } from 'src/app/services/volunteer.service';
 @Component({
   selector: 'app-all-volunteers',
@@ -7,13 +7,19 @@ import { VolunteerService } from 'src/app/services/volunteer.service';
   styleUrls: ['./all-volunteers.component.css']
 })
 export class AllVolunteersComponent implements OnInit {
-  volunteers: Volunteer[] = [];
+  volunteers: Volunteer[];
   search = '';
-  constructor(public vs: VolunteerService) {}
+  constructor(public vs: VolunteerService) {
+
+  }
 
   ngOnInit() {
     this.vs.getVolunteers().subscribe(data => {
       this.volunteers = data;
     });
+  }
+  delete(v: number) {
+    this.vs.removeVolunteer(v);
+    this.volunteers = this.volunteers.filter(vo => vo.Id !== v);
   }
 }

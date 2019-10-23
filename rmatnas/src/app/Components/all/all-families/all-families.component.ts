@@ -13,9 +13,12 @@ export class AllFamiliesComponent implements OnInit {
   constructor(public fs: FamilyService) {}
 
   ngOnInit() {
-    this.fs.getFamilies().subscribe(data => {
-      this.families = data;
-      console.log(this.families);
-    });
+     this.fs.getFamilies() .subscribe(data => {
+    this.families = data;
+  }); }
+
+  delete(f: number) {
+    this.fs.removeFamily(f);
+    this.families = this.families.filter(fo => fo.Id !== f);
   }
 }

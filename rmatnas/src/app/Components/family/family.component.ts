@@ -15,23 +15,23 @@ export class FamilyComponent implements OnInit, OnDestroy {
   // tslint:disable-next-line: max-line-length
   family: Family = new Family(1, 'default', 'default', 'hgfds', '87654687465', '6785468654', '687465654', 'default', 'default@dk', 'default', 0, 'default', 'default');
   mySubscription: Subscription;
-  Id: number;
-  categories:Category[]=[];
-  mySubscription2:Subscription;
+  id: number;
+  categories: Category[] = [];
+  mySubscription2: Subscription;
   constructor(public fs: FamilyService, public ARS: ActivatedRoute) {
 
     this.mySubscription = ARS.params.subscribe((args) => {
-      this.Id = args.familyId;
-      fs.getFamily(this.Id).subscribe(d=>{
+      this.id = args.familyId;
+      fs.getFamily(this.id).subscribe(d => {
         this.family = d;
-      this.mySubscription2=this.fs.getCategoriesOfFamily(this.family.Id).subscribe(data=>{
-      this.categories=data;
+        this.mySubscription2 = this.fs.getCategoriesOfFamily(this.family.Id).subscribe(data => {
+      this.categories = data;
     });
       });
     });
   }
   ngOnInit() {
-   
+
   }
   ngOnDestroy(): void {
     this.mySubscription.unsubscribe();

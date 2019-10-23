@@ -143,7 +143,7 @@ export class DataServiceService {
   }
   addTask(t: MyTask) {
     t.Id = this.tasks.length + 1;
-    this.events.push(t);
+    this.tasks.push(t);
   }
   postS(val:string){
     return this.http.post(this.path + 'user/9',val);
@@ -181,8 +181,8 @@ export class DataServiceService {
  
   updateEvent(e: Eventt) {
     const e2 = this.getEvent(e.Id);
-    e2.description = e.description;
-    e2.date = e.date;
+    e2.Description = e.Description;
+    e2.DateAdded = e.DateAdded;
   }
   updateOrganization(o: Organization) {
     const o2 = this.getOrganization(o.Id);
