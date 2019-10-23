@@ -17,7 +17,10 @@ namespace Dal
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Volunteers()
         {
+            this.VolunteerAndEvent = new HashSet<VolunteerAndEvent>();
+            this.VolunteerAndFamily = new HashSet<VolunteerAndFamily>();
             this.Categories = new HashSet<Categories>();
+            this.Groups = new HashSet<Groups>();
         }
     
         public int Id { get; set; }
@@ -31,6 +34,12 @@ namespace Dal
         public Nullable<bool> IsActive { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<VolunteerAndEvent> VolunteerAndEvent { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<VolunteerAndFamily> VolunteerAndFamily { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Categories> Categories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Groups> Groups { get; set; }
     }
 }

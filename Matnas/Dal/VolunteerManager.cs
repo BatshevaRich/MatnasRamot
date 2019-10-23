@@ -12,7 +12,7 @@ namespace Dal
         public static void AddVolunteer(Volunteer volunteer)
         {
             Volunteers v = Mapper.CastVolunteer(volunteer);
-            using (dbRamotEntities1 db = new dbRamotEntities1())
+            using (dbRamotEntities db = new dbRamotEntities())
             {
                 db.Volunteers.Add(v);
                 db.SaveChanges();
@@ -21,7 +21,7 @@ namespace Dal
         public static void RemoveVolunteer(Volunteer volunteer)
         {
             Volunteers v = Mapper.CastVolunteer(volunteer);
-            using (dbRamotEntities1 db = new dbRamotEntities1())
+            using (dbRamotEntities db = new dbRamotEntities())
             {
                 db.Volunteers.Remove(v);
                 db.SaveChanges();
@@ -30,7 +30,7 @@ namespace Dal
         public static void UpdateVolunteer(Volunteer volunteer)
         {
             Volunteers v = Mapper.CastVolunteer(volunteer);
-            using (dbRamotEntities1 db = new dbRamotEntities1())
+            using (dbRamotEntities db = new dbRamotEntities())
             {
                 db.Entry<Volunteers>(db.Set<Volunteers>().Find(v.Id)).CurrentValues.SetValues(v);
                 db.SaveChanges();
@@ -39,16 +39,30 @@ namespace Dal
 
         public static void RemoveVolunteer(int id)
         {
-            using (dbRamotEntities1 db = new dbRamotEntities1())
+            using (dbRamotEntities db = new dbRamotEntities())
             {
                 db.Volunteers.Remove(db.Volunteers.Find(id));
                 db.SaveChanges();
             }
         }
 
+        public static IEnumerable<Category> GetCategoriesOfVolunteer(int id)
+        {
+            using (dbRamotEntities db = new dbRamotEntities())
+            {
+                IEnumerable<Categories> c = db.Volunteers.Find(id).Categories.ToList();
+                List<Category> categories = new List<Category>();
+                foreach (var category in c)
+                {
+                    categories.Add(Mapper.CastCategoryToCommon(category));
+                }
+                return categories;
+            }
+        }
+
         public static IEnumerable<Volunteer> GetVolunteers()
         {
-            using (dbRamotEntities1 db = new dbRamotEntities1())
+            using (dbRamotEntities db = new dbRamotEntities())
             {
                 List<Volunteer> volunteers = new List<Volunteer>();
                 foreach (var v in db.Volunteers.ToList())
@@ -58,19 +72,77 @@ namespace Dal
                 return volunteers;
             }
         }
-        public static List<string> GetCategoriesForVolunteer(Volunteer volunteer)
-        {
-            using (dbRamotEntities1 db = new dbRamotEntities1())
-            {
-                return db.Families.Find(volunteer.Id).Categories.Select(c => c.Name).ToList();
-            }
-        }
+
         public static Volunteer GetVolunteer(int id)
         {
-            using (dbRamotEntities1 db = new dbRamotEntities1())
+            using (dbRamotEntities db = new dbRamotEntities())
             {
                 return Mapper.CastVolunteerToComon(db.Volunteers.Find(id));
             }
+        }
+
+        public static void AddCategotyToVolunteer(int id, Category category)
+        {
+
+            using (dbRamotEntities db = new dbRamotEntities())
+            {
+                Volunteers v = db.Volunteers.Find(id);
+                v.Categories.Add(Mapper.CastCategory(category));
+                db.SaveChanges();
+            }
+        }
+        public static void RemoveCategotyFromVolunteer(int id, Category category)
+        {
+
+            using (dbRamotEntities db = new dbRamotEntities())
+            {
+                Volunteers v = db.Volunteers.Find(id);
+                v.Categories.Remove(Mapper.CastCategory(category));
+                db.SaveChanges();
+            }
+        }
+        public static IEnumerable<Family> GetFamilies(int id)
+        {
+            List<Family> families = new List<Family>();
+              using (dbRamotEntities db = new dbRamotEntities())
+                {    
+                var f = db.VolunteerAndFamily.Where(g => g.IdVolunteer == id).Select(g=>g.IdFamily).ToArray();
+                foreach (var i in f)
+                {
+                    families.Add(Mapper.CastFamilyToComon(db.Families.Find(i)));
+                }
+                
+                }
+            return families;
+        }
+        public static IEnumerable<Event> GetEvents(int id)
+        {
+            List<Event> events = new List<Event>();
+            using (dbRamotEntities db = new dbRamotEntities())
+            {
+                var f = db.VolunteerAndEvent.Where(g => g.IdVolunteer == id).Select(g => g.IdEvent).ToArray();
+                foreach (var i in f)
+                {
+                    events.Add(Mapper.CastEventToComon(db.Events.Find(i)));
+                }
+            }
+            return events;
+        }
+        public static IEnumerable<Group> GetGroups(int id)
+        {
+            List<Group> groups = new List<Group>();
+            using (dbRamotEntities db = new dbRamotEntities())
+            {
+                Volunteers v = db.Volunteers.Find(id);
+                var f = db.Groups.ToList();
+                foreach (var g in f)
+                {
+                    var s = g.Volunteers.ToList();
+                    if (s.Contains(v))
+                       groups.Add(Mapper.CastGroupToComon(g));
+                }
+            }
+            return groups;
         }
     }
 }

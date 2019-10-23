@@ -13,30 +13,27 @@ namespace Bll
         {
             Dal.GroupManager.AddGroup(group);
         }
-        public static void RemoveGroup(Group group)
+        public static void RemoveGroup(int id)
         {
-            Dal.GroupManager.RemoveGroup(group);
+            Dal.GroupManager.RemoveGroup(id);
         }
         public static void UpdateGroup(Group group)
         {
             Dal.GroupManager.UpdateGroup(group);
         }
-        public static IEnumerable<Group> GetGroups()
-        {
-            return Dal.GroupManager.GetGroups();
-        }
-        public static List<string> GetCategoriesForGroup(Group group)
-        {
-            return Dal.GroupManager.GetCategoriesForGroup(group);
-        }
+
         public static Group GetGroup(int id)
         {
             return Dal.GroupManager.GetGroup(id);
         }
 
-        public static void RemoveGroup(int id)
+        public static IEnumerable<Group> GetGroups()
         {
-            Dal.GroupManager.RemoveGroup(id);
+           return Dal.GroupManager.GetGroups();
+        }
+        public static IEnumerable<Common.Volunteer> GetVolunteers(int id)
+        {
+            return Dal.GroupManager.GetVolunteers(id);
         }
     }
 }

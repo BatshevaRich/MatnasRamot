@@ -11,66 +11,67 @@ namespace Dal
     {
         public static void AddGroup(Group group)
         {
-            Groups v = Mapper.CastGroup(group);
-            using (dbRamotEntities1 db = new dbRamotEntities1())
-            {
-                db.Groups.Add(v);
+            Groups g = Mapper.CastGroup(group);
+            using (dbRamotEntities db = new dbRamotEntities())
+            { //if (db.Groups.Contains(g)) 
+                db.Groups.Add(g);
                 db.SaveChanges();
             }
         }
-        public static void RemoveGroup(Group group)
-        {
-            Groups v = Mapper.CastGroup(group);
-            using (dbRamotEntities1 db = new dbRamotEntities1())
-            {
-                db.Groups.Remove(v);
-                db.SaveChanges();
-            }
-        }
-        public static void UpdateGroup(Group group)
-        {
-            Groups v = Mapper.CastGroup(group);
-            using (dbRamotEntities1 db = new dbRamotEntities1())
-            {
-                db.Entry<Groups>(db.Set<Groups>().Find(v.Id)).CurrentValues.SetValues(v);
-                db.SaveChanges();
-            }
-        }
-
         public static void RemoveGroup(int id)
         {
-            using (dbRamotEntities1 db = new dbRamotEntities1())
+            
+            using (dbRamotEntities db = new dbRamotEntities())
             {
-                db.Groups.Remove(db.Groups.Find(id));
+                Groups g = db.Groups.Find(id);
+                db.Groups.Remove(g);
                 db.SaveChanges();
             }
         }
 
-        public static IEnumerable<Group> GetGroups()
-        {
-            using (dbRamotEntities1 db = new dbRamotEntities1())
-            {
-                List<Group> groups = new List<Group>();
-                foreach (var v in db.Groups.ToList())
-                {
-                    groups.Add(Mapper.CastGroupToComon(v));
-                }
-                return groups;
-            }
-        }
-        public static List<string> GetCategoriesForGroup(Group group)
-        {
-            using (dbRamotEntities1 db = new dbRamotEntities1())
-            {
-                return db.Groups.Find(group.Id).Categories.Select(c => c.Name).ToList();
-            }
-        }
         public static Group GetGroup(int id)
         {
-            using (dbRamotEntities1 db = new dbRamotEntities1())
+            using (dbRamotEntities db=new dbRamotEntities())
             {
                 return Mapper.CastGroupToComon(db.Groups.Find(id));
             }
+        }
+
+        public static void UpdateGroup(Group group)
+        {
+            Groups g = Mapper.CastGroup(group);
+            using (dbRamotEntities db = new dbRamotEntities())
+            {
+
+                db.Entry<Groups>(db.Set<Groups>().Find(g.Id)).CurrentValues.SetValues(g);
+                db.SaveChanges();
+            }
+        }
+        public static IEnumerable<Group> GetGroups()
+        {
+            using (dbRamotEntities db = new dbRamotEntities())
+            {
+                List<Group> groups = new List<Group>();
+                foreach (var g in   db.Groups.ToList())
+                {
+                    groups.Add(Mapper.CastGroupToComon(g));
+                } 
+                return groups;
+            }
+        }
+        public static IEnumerable<Common.Volunteer> GetVolunteers(int id)
+        {
+            List<Volunteer> volunteers = new List<Volunteer>();
+            using (dbRamotEntities db = new dbRamotEntities())
+            {
+                var g = db.Groups.Find(id).Volunteers.ToList();
+                foreach (var v in g)
+                {
+                    volunteers.Add(Mapper.CastVolunteerToComon(v));
+                }
+
+            }
+            return volunteers;
         }
     }
 }

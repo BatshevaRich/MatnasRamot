@@ -4,7 +4,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nchar" MaxLength="20" Nullable="false" />
   </EntityType>
   <EntityType Name="CategoriesForEvents">
@@ -31,6 +31,14 @@
     <Property Name="IdCategory" Type="int" Nullable="false" />
     <Property Name="IdGroup" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="CategoriesForOrganization">
+    <Key>
+      <PropertyRef Name="IdOrganization" />
+      <PropertyRef Name="IdCategory" />
+    </Key>
+    <Property Name="IdOrganization" Type="int" Nullable="false" />
+    <Property Name="IdCategory" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="CategoriesForVolunteer">
     <Key>
       <PropertyRef Name="IdVolunteer" />
@@ -43,7 +51,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="description" Type="nvarchar" MaxLength="50" />
     <Property Name="dateAdded" Type="date" />
   </EntityType>
@@ -51,7 +59,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="FirstNameFather" Type="nchar" MaxLength="20" />
     <Property Name="FirstNameMother" Type="nchar" MaxLength="20" />
     <Property Name="LastName" Type="nchar" MaxLength="20" Nullable="false" />
@@ -68,7 +76,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nchar" MaxLength="20" Nullable="false" />
     <Property Name="Contact" Type="nchar" MaxLength="20" />
     <Property Name="Phone" Type="nchar" MaxLength="10" />
@@ -76,16 +84,28 @@
     <Property Name="Comments" Type="nvarchar" MaxLength="50" />
     <Property Name="email" Type="nvarchar" MaxLength="50" />
   </EntityType>
-  <EntityType Name="Matches">
+  <EntityType Name="Organization">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="Contact" Type="nchar" MaxLength="20" />
+    <Property Name="Phone" Type="nchar" MaxLength="10" />
+    <Property Name="Address" Type="nchar" MaxLength="50" />
+    <Property Name="Comments" Type="nvarchar" MaxLength="50" />
+    <Property Name="email" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="OrganizationAndFamily">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" Nullable="false" />
-    <Property Name="IdFamilyOrIdEvent" Type="int" Nullable="false" />
-    <Property Name="IdVolunteerOrGroup" Type="int" Nullable="false" />
+    <Property Name="IdFamily" Type="int" Nullable="false" />
+    <Property Name="IdOrganization" Type="int" Nullable="false" />
     <Property Name="IdCategory" Type="int" />
     <Property Name="Comments" Type="nvarchar" MaxLength="50" />
-    <Property Name="dateAdded" Type="date" Nullable="false" />
+    <Property Name="dateAdded" Type="date" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -96,29 +116,119 @@
     <Property Name="Password" Type="nchar" MaxLength="10" Nullable="false" />
     <Property Name="isVolunteer" Type="bit" Nullable="false" />
   </EntityType>
-  <EntityType Name="Volunteers">
+  <EntityType Name="VolunteerAndEvent">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="IdEvent" Type="int" Nullable="false" />
+    <Property Name="IdVolunteer" Type="int" Nullable="false" />
+    <Property Name="IdCategory" Type="int" />
+    <Property Name="Comments" Type="nvarchar" MaxLength="50" />
+    <Property Name="dateAdded" Type="date" />
+  </EntityType>
+  <EntityType Name="VolunteerAndFamily">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="IdFamily" Type="int" Nullable="false" />
+    <Property Name="IdVolunteer" Type="int" Nullable="false" />
+    <Property Name="IdCategory" Type="int" />
+    <Property Name="Comments" Type="nvarchar" MaxLength="50" />
+    <Property Name="dateAdded" Type="date" />
+  </EntityType>
+  <EntityType Name="Volunteers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nchar" MaxLength="30" Nullable="false" />
     <Property Name="Address" Type="nchar" MaxLength="50" />
     <Property Name="Telephone" Type="nchar" MaxLength="10" />
     <Property Name="Pelephone" Type="nchar" MaxLength="10" />
-    <Property Name="Email" Type="nchar" MaxLength="10" />
-    <Property Name="Age" Type="smalldatetime" />
+    <Property Name="Email" Type="nchar" MaxLength="30" />
+    <Property Name="Age" Type="datetime" />
     <Property Name="Comments" Type="text" />
     <Property Name="IsActive" Type="bit" />
   </EntityType>
-  <Association Name="categoriesPerVolunteer">
+  <EntityType Name="VolunteersInGroup">
+    <Key>
+      <PropertyRef Name="IdVolunteer" />
+      <PropertyRef Name="IdGroup" />
+    </Key>
+    <Property Name="IdVolunteer" Type="int" Nullable="false" />
+    <Property Name="IdGroup" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="categoriesPerVolunteering">
     <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
-    <End Role="Matches" Type="Self.Matches" Multiplicity="*" />
+    <End Role="VolunteerAndFamily" Type="Self.VolunteerAndFamily" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Categories">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Matches">
+      <Dependent Role="VolunteerAndFamily">
         <PropertyRef Name="IdCategory" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="categoriesPerVolunteeringEvent">
+    <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+    <End Role="VolunteerAndEvent" Type="Self.VolunteerAndEvent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VolunteerAndEvent">
+        <PropertyRef Name="IdCategory" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="categoriesPerVolunteeringO">
+    <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+    <End Role="OrganizationAndFamily" Type="Self.OrganizationAndFamily" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrganizationAndFamily">
+        <PropertyRef Name="IdCategory" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="event">
+    <End Role="Events" Type="Self.Events" Multiplicity="1" />
+    <End Role="VolunteerAndEvent" Type="Self.VolunteerAndEvent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Events">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VolunteerAndEvent">
+        <PropertyRef Name="IdEvent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="family">
+    <End Role="Families" Type="Self.Families" Multiplicity="1" />
+    <End Role="VolunteerAndFamily" Type="Self.VolunteerAndFamily" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Families">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VolunteerAndFamily">
+        <PropertyRef Name="IdFamily" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="familyO">
+    <End Role="Families" Type="Self.Families" Multiplicity="1" />
+    <End Role="OrganizationAndFamily" Type="Self.OrganizationAndFamily" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Families">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrganizationAndFamily">
+        <PropertyRef Name="IdFamily" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -142,6 +252,18 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="CategoriesForEvents">
+        <PropertyRef Name="IdCategory" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_categories_Organization">
+    <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+    <End Role="CategoriesForOrganization" Type="Self.CategoriesForOrganization" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CategoriesForOrganization">
         <PropertyRef Name="IdCategory" />
       </Dependent>
     </ReferentialConstraint>
@@ -206,6 +328,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_GroupForVolunteer_ToTable2">
+    <End Role="Volunteers" Type="Self.Volunteers" Multiplicity="1" />
+    <End Role="VolunteersInGroup" Type="Self.VolunteersInGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Volunteers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VolunteersInGroup">
+        <PropertyRef Name="IdVolunteer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_groups">
     <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
     <End Role="CategoriesForGroup" Type="Self.CategoriesForGroup" Multiplicity="*" />
@@ -218,21 +352,106 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_GroupVolunteer_ToTable_1">
+    <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
+    <End Role="VolunteersInGroup" Type="Self.VolunteersInGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Groups">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VolunteersInGroup">
+        <PropertyRef Name="IdGroup" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Organization">
+    <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+    <End Role="CategoriesForOrganization" Type="Self.CategoriesForOrganization" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organization">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CategoriesForOrganization">
+        <PropertyRef Name="IdOrganization" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="OrganizationF">
+    <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+    <End Role="OrganizationAndFamily" Type="Self.OrganizationAndFamily" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organization">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrganizationAndFamily">
+        <PropertyRef Name="IdOrganization" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="volunteer">
+    <End Role="Volunteers" Type="Self.Volunteers" Multiplicity="1" />
+    <End Role="VolunteerAndFamily" Type="Self.VolunteerAndFamily" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Volunteers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VolunteerAndFamily">
+        <PropertyRef Name="IdVolunteer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="volunteerEvent">
+    <End Role="Volunteers" Type="Self.Volunteers" Multiplicity="1" />
+    <End Role="VolunteerAndEvent" Type="Self.VolunteerAndEvent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Volunteers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VolunteerAndEvent">
+        <PropertyRef Name="IdVolunteer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="dbRamotModelStoreContainer">
     <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CategoriesForEvents" EntityType="Self.CategoriesForEvents" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CategoriesForFamily" EntityType="Self.CategoriesForFamily" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CategoriesForGroup" EntityType="Self.CategoriesForGroup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CategoriesForOrganization" EntityType="Self.CategoriesForOrganization" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CategoriesForVolunteer" EntityType="Self.CategoriesForVolunteer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Events" EntityType="Self.Events" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Families" EntityType="Self.Families" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Matches" EntityType="Self.Matches" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Organization" EntityType="Self.Organization" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrganizationAndFamily" EntityType="Self.OrganizationAndFamily" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VolunteerAndEvent" EntityType="Self.VolunteerAndEvent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VolunteerAndFamily" EntityType="Self.VolunteerAndFamily" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Volunteers" EntityType="Self.Volunteers" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="categoriesPerVolunteer" Association="Self.categoriesPerVolunteer">
+    <EntitySet Name="VolunteersInGroup" EntityType="Self.VolunteersInGroup" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="categoriesPerVolunteering" Association="Self.categoriesPerVolunteering">
       <End Role="Categories" EntitySet="Categories" />
-      <End Role="Matches" EntitySet="Matches" />
+      <End Role="VolunteerAndFamily" EntitySet="VolunteerAndFamily" />
+    </AssociationSet>
+    <AssociationSet Name="categoriesPerVolunteeringEvent" Association="Self.categoriesPerVolunteeringEvent">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="VolunteerAndEvent" EntitySet="VolunteerAndEvent" />
+    </AssociationSet>
+    <AssociationSet Name="categoriesPerVolunteeringO" Association="Self.categoriesPerVolunteeringO">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="OrganizationAndFamily" EntitySet="OrganizationAndFamily" />
+    </AssociationSet>
+    <AssociationSet Name="event" Association="Self.event">
+      <End Role="Events" EntitySet="Events" />
+      <End Role="VolunteerAndEvent" EntitySet="VolunteerAndEvent" />
+    </AssociationSet>
+    <AssociationSet Name="family" Association="Self.family">
+      <End Role="Families" EntitySet="Families" />
+      <End Role="VolunteerAndFamily" EntitySet="VolunteerAndFamily" />
+    </AssociationSet>
+    <AssociationSet Name="familyO" Association="Self.familyO">
+      <End Role="Families" EntitySet="Families" />
+      <End Role="OrganizationAndFamily" EntitySet="OrganizationAndFamily" />
     </AssociationSet>
     <AssociationSet Name="FK_categories" Association="Self.FK_categories">
       <End Role="Categories" EntitySet="Categories" />
@@ -241,6 +460,10 @@
     <AssociationSet Name="FK_categories_events" Association="Self.FK_categories_events">
       <End Role="Categories" EntitySet="Categories" />
       <End Role="CategoriesForEvents" EntitySet="CategoriesForEvents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_categories_Organization" Association="Self.FK_categories_Organization">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="CategoriesForOrganization" EntitySet="CategoriesForOrganization" />
     </AssociationSet>
     <AssociationSet Name="FK_CategoriesForFamily_ToTable" Association="Self.FK_CategoriesForFamily_ToTable">
       <End Role="Families" EntitySet="Families" />
@@ -262,9 +485,33 @@
       <End Role="Events" EntitySet="Events" />
       <End Role="CategoriesForEvents" EntitySet="CategoriesForEvents" />
     </AssociationSet>
+    <AssociationSet Name="FK_GroupForVolunteer_ToTable2" Association="Self.FK_GroupForVolunteer_ToTable2">
+      <End Role="Volunteers" EntitySet="Volunteers" />
+      <End Role="VolunteersInGroup" EntitySet="VolunteersInGroup" />
+    </AssociationSet>
     <AssociationSet Name="FK_groups" Association="Self.FK_groups">
       <End Role="Groups" EntitySet="Groups" />
       <End Role="CategoriesForGroup" EntitySet="CategoriesForGroup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupVolunteer_ToTable_1" Association="Self.FK_GroupVolunteer_ToTable_1">
+      <End Role="Groups" EntitySet="Groups" />
+      <End Role="VolunteersInGroup" EntitySet="VolunteersInGroup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Organization" Association="Self.FK_Organization">
+      <End Role="Organization" EntitySet="Organization" />
+      <End Role="CategoriesForOrganization" EntitySet="CategoriesForOrganization" />
+    </AssociationSet>
+    <AssociationSet Name="OrganizationF" Association="Self.OrganizationF">
+      <End Role="Organization" EntitySet="Organization" />
+      <End Role="OrganizationAndFamily" EntitySet="OrganizationAndFamily" />
+    </AssociationSet>
+    <AssociationSet Name="volunteer" Association="Self.volunteer">
+      <End Role="Volunteers" EntitySet="Volunteers" />
+      <End Role="VolunteerAndFamily" EntitySet="VolunteerAndFamily" />
+    </AssociationSet>
+    <AssociationSet Name="volunteerEvent" Association="Self.volunteerEvent">
+      <End Role="Volunteers" EntitySet="Volunteers" />
+      <End Role="VolunteerAndEvent" EntitySet="VolunteerAndEvent" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

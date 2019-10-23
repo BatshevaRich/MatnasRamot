@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="dbRamotModelStoreContainer" CdmEntityContainer="dbRamotEntities1">
+  <EntityContainerMapping StorageEntityContainer="dbRamotModelStoreContainer" CdmEntityContainer="dbRamotEntities">
     <EntitySetMapping Name="Categories">
       <EntityTypeMapping TypeName="dbRamotModel.Categories">
         <MappingFragment StoreEntitySet="Categories">
@@ -49,12 +49,25 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Matches">
-      <EntityTypeMapping TypeName="dbRamotModel.Matches">
-        <MappingFragment StoreEntitySet="Matches">
+    <EntitySetMapping Name="Organization">
+      <EntityTypeMapping TypeName="dbRamotModel.Organization">
+        <MappingFragment StoreEntitySet="Organization">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="IdFamilyOrIdEvent" ColumnName="IdFamilyOrIdEvent" />
-          <ScalarProperty Name="IdVolunteerOrGroup" ColumnName="IdVolunteerOrGroup" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Contact" ColumnName="Contact" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="email" ColumnName="email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrganizationAndFamily">
+      <EntityTypeMapping TypeName="dbRamotModel.OrganizationAndFamily">
+        <MappingFragment StoreEntitySet="OrganizationAndFamily">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdFamily" ColumnName="IdFamily" />
+          <ScalarProperty Name="IdOrganization" ColumnName="IdOrganization" />
           <ScalarProperty Name="IdCategory" ColumnName="IdCategory" />
           <ScalarProperty Name="Comments" ColumnName="Comments" />
           <ScalarProperty Name="dateAdded" ColumnName="dateAdded" />
@@ -68,6 +81,45 @@
           <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="isVolunteer" ColumnName="isVolunteer" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VolunteerAndEvent">
+      <EntityTypeMapping TypeName="dbRamotModel.VolunteerAndEvent">
+        <MappingFragment StoreEntitySet="VolunteerAndEvent">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdEvent" ColumnName="IdEvent" />
+          <ScalarProperty Name="IdVolunteer" ColumnName="IdVolunteer" />
+          <ScalarProperty Name="IdCategory" ColumnName="IdCategory" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="dateAdded" ColumnName="dateAdded" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VolunteerAndFamily">
+      <EntityTypeMapping TypeName="dbRamotModel.VolunteerAndFamily">
+        <MappingFragment StoreEntitySet="VolunteerAndFamily">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdFamily" ColumnName="IdFamily" />
+          <ScalarProperty Name="IdVolunteer" ColumnName="IdVolunteer" />
+          <ScalarProperty Name="IdCategory" ColumnName="IdCategory" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="dateAdded" ColumnName="dateAdded" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Volunteers">
+      <EntityTypeMapping TypeName="dbRamotModel.Volunteers">
+        <MappingFragment StoreEntitySet="Volunteers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+          <ScalarProperty Name="Pelephone" ColumnName="Pelephone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -95,27 +147,28 @@
         <ScalarProperty Name="Id" ColumnName="IdGroup" />
       </EndProperty>
     </AssociationSetMapping>
-    <EntitySetMapping Name="Volunteers">
-      <EntityTypeMapping TypeName="dbRamotModel.Volunteers">
-        <MappingFragment StoreEntitySet="Volunteers">
-          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-          <ScalarProperty Name="Comments" ColumnName="Comments" />
-          <ScalarProperty Name="Age" ColumnName="Age" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Pelephone" ColumnName="Pelephone" />
-          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <AssociationSetMapping Name="CategoriesForVolunteer" TypeName="dbRamotModel.CategoriesForVolunteer" StoreEntitySet="CategoriesForVolunteer">
+    <AssociationSetMapping Name="CategoriesForOrganization" TypeName="dbRamotModel.CategoriesForOrganization" StoreEntitySet="CategoriesForOrganization">
       <EndProperty Name="Categories">
         <ScalarProperty Name="Id" ColumnName="IdCategory" />
       </EndProperty>
+      <EndProperty Name="Organization">
+        <ScalarProperty Name="Id" ColumnName="IdOrganization" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CategoriesForVolunteer" TypeName="dbRamotModel.CategoriesForVolunteer" StoreEntitySet="CategoriesForVolunteer">
       <EndProperty Name="Volunteers">
         <ScalarProperty Name="Id" ColumnName="IdVolunteer" />
+      </EndProperty>
+      <EndProperty Name="Categories">
+        <ScalarProperty Name="Id" ColumnName="IdCategory" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="VolunteersInGroup" TypeName="dbRamotModel.VolunteersInGroup" StoreEntitySet="VolunteersInGroup">
+      <EndProperty Name="Volunteers">
+        <ScalarProperty Name="Id" ColumnName="IdVolunteer" />
+      </EndProperty>
+      <EndProperty Name="Groups">
+        <ScalarProperty Name="Id" ColumnName="IdGroup" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>

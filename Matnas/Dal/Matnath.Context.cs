@@ -13,10 +13,10 @@ namespace Dal
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class dbRamotEntities1 : DbContext
+    public partial class dbRamotEntities : DbContext
     {
-        public dbRamotEntities1()
-            : base("name=dbRamotEntities1")
+        public dbRamotEntities()
+            : base("name=dbRamotEntities")
         {
         }
     
@@ -29,8 +29,11 @@ namespace Dal
         public virtual DbSet<Events> Events { get; set; }
         public virtual DbSet<Families> Families { get; set; }
         public virtual DbSet<Groups> Groups { get; set; }
-        public virtual DbSet<Matches> Matches { get; set; }
+        public virtual DbSet<Organization> Organization { get; set; }
+        public virtual DbSet<OrganizationAndFamily> OrganizationAndFamily { get; set; }
         public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<VolunteerAndEvent> VolunteerAndEvent { get; set; }
+        public virtual DbSet<VolunteerAndFamily> VolunteerAndFamily { get; set; }
         public virtual DbSet<Volunteers> Volunteers { get; set; }
     }
 }

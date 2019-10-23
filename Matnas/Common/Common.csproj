@@ -46,9 +46,13 @@
     <Compile Include="Family.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="Match.cs" />
+    <Compile Include="Organization.cs" />
+    <Compile Include="OrganizationAndFamily.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Volunteer.cs" />
+    <Compile Include="VolunteerAndEvent.cs" />
+    <Compile Include="VolunteerAndFamily.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

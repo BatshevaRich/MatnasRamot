@@ -17,6 +17,7 @@ namespace Dal
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Events()
         {
+            this.VolunteerAndEvent = new HashSet<VolunteerAndEvent>();
             this.Categories = new HashSet<Categories>();
         }
     
@@ -24,6 +25,8 @@ namespace Dal
         public string description { get; set; }
         public Nullable<System.DateTime> dateAdded { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<VolunteerAndEvent> VolunteerAndEvent { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Categories> Categories { get; set; }
     }

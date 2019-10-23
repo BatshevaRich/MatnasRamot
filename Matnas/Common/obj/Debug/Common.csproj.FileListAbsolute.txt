@@ -5,13 +5,13 @@ W:\פרויקט אנגולר\Matnas\Common\obj\Debug\Common.dll
 W:\פרויקט אנגולר\Matnas\Common\obj\Debug\Common.pdb
 D:\פנינה בולבין\מסמכים\הנדסאים\Matnas\Common\bin\Debug\Common.dll
 D:\פנינה בולבין\מסמכים\הנדסאים\Matnas\Common\bin\Debug\Common.pdb
-D:\פנינה בולבין\מסמכים\הנדסאים\Matnas\Common\obj\Debug\Common.csprojAssemblyReference.cache
 D:\פנינה בולבין\מסמכים\הנדסאים\Matnas\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
 D:\פנינה בולבין\מסמכים\הנדסאים\Matnas\Common\obj\Debug\Common.dll
 D:\פנינה בולבין\מסמכים\הנדסאים\Matnas\Common\obj\Debug\Common.pdb
-C:\Users\owner\Desktop\Matnas\Common\bin\Debug\Common.dll
-C:\Users\owner\Desktop\Matnas\Common\bin\Debug\Common.pdb
-C:\Users\owner\Desktop\Matnas\Common\obj\Debug\Common.csprojAssemblyReference.cache
-C:\Users\owner\Desktop\Matnas\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
-C:\Users\owner\Desktop\Matnas\Common\obj\Debug\Common.dll
-C:\Users\owner\Desktop\Matnas\Common\obj\Debug\Common.pdb
+D:\פנינה בולבין\מסמכים\הנדסאים\Matnas\Common\obj\Debug\Common.csprojAssemblyReference.cache
+C:\Users\owner\Desktop\merge\Matnas\Common\bin\Debug\Common.dll
+C:\Users\owner\Desktop\merge\Matnas\Common\bin\Debug\Common.pdb
+C:\Users\owner\Desktop\merge\Matnas\Common\obj\Debug\Common.csprojAssemblyReference.cache
+C:\Users\owner\Desktop\merge\Matnas\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
+C:\Users\owner\Desktop\merge\Matnas\Common\obj\Debug\Common.dll
+C:\Users\owner\Desktop\merge\Matnas\Common\obj\Debug\Common.pdb

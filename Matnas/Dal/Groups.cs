@@ -18,6 +18,7 @@ namespace Dal
         public Groups()
         {
             this.Categories = new HashSet<Categories>();
+            this.Volunteers = new HashSet<Volunteers>();
         }
     
         public int Id { get; set; }
@@ -30,5 +31,7 @@ namespace Dal
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Categories> Categories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Volunteers> Volunteers { get; set; }
     }
 }

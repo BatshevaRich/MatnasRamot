@@ -17,6 +17,8 @@ namespace Dal
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Families()
         {
+            this.VolunteerAndFamily = new HashSet<VolunteerAndFamily>();
+            this.OrganizationAndFamily = new HashSet<OrganizationAndFamily>();
             this.Categories = new HashSet<Categories>();
         }
     
@@ -33,6 +35,10 @@ namespace Dal
         public string Reference { get; set; }
         public string Reason { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<VolunteerAndFamily> VolunteerAndFamily { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrganizationAndFamily> OrganizationAndFamily { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Categories> Categories { get; set; }
     }

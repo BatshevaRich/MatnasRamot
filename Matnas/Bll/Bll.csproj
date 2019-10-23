@@ -40,12 +40,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CategoryManager.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="EventManager.cs" />
     <Compile Include="FamilyManager.cs" />
     <Compile Include="GroupManager.cs" />
+    <Compile Include="OrganizationAndFamilyManager.cs" />
+    <Compile Include="OrganizationManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserManager.cs" />
+    <Compile Include="VolunteerAndEventManager.cs" />
+    <Compile Include="VolunteerAndFamilyManager.cs" />
     <Compile Include="VolunteerManager.cs" />
   </ItemGroup>
   <ItemGroup>

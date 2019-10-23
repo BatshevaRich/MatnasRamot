@@ -22,9 +22,40 @@ namespace Bll
         {
             Dal.EventManager.UpdateEvent(eventt);
         }
+
+        public static Event GetEvent(int id)
+        {
+            return Dal.EventManager.GetEvent(id);
+        }
+
         public static IEnumerable<Event> GetEvents()
         {
             return Dal.EventManager.GetEvents();
         }
+
+        public static void RemoveEvent(int id)
+        {
+            Dal.EventManager.RemoveEvent(id);
+        }
+
+        public static void RemoveCategory(int id, Category category)
+        {
+            Dal.EventManager.RemoveCategotyFromEvent(id, category);
+        }
+
+        public static void AddCategory(int id, Category category)
+        {
+            Dal.EventManager.AddCategotyToEvent(id, category);
+        }
+        public static List<Category> GetCategories(int id)
+        {
+            return Dal.EventManager.GetCategoriesOfEvent(id);
+        }
+        public static IEnumerable<Volunteer> GetVolunteers(int id)
+        {
+            return Dal.EventManager.GetVolunteers(id);
+        }
+
     }
 }
+

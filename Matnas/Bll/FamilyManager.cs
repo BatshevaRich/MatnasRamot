@@ -25,10 +25,20 @@ namespace Bll
         {
             return Dal.FamilyManager.GetFamilies();
         }
-        public static List<string> GetCategoriesForFamily(Family family)
+        public static void RemoveCategory(int id, Category category)
         {
-            return Dal.FamilyManager.GetCategoriesForFamily(family);
+            Dal.FamilyManager.RemoveCategotyFromFamily(id, category);
         }
+
+        public static void AddCategory(int id, Category category)
+        {
+            Dal.FamilyManager.AddCategotyToFamily(id, category);
+        }
+        public static List<Category> GetCategories(int id)
+        {
+            return Dal.FamilyManager.GetCategoriesOfFamily(id);
+        }
+
         public static Family GetFamily(int id)
         {
             return Dal.FamilyManager.GetFamily(id);
@@ -37,6 +47,24 @@ namespace Bll
         public static void RemoveFamily(int id)
         {
             Dal.FamilyManager.RemoveFamily(id);
+        }
+
+        public static void AddCategoriesForFamily(Family family, IEnumerable<Category> categories)
+        {
+            Dal.FamilyManager.AddCategoriesToFamily(family, categories);
+        }//??????
+
+        public static void AddCategoriesForFamily(IEnumerable<Category> categories)
+        {
+            Dal.FamilyManager.AddCategoriesToFamily(categories);
+        }////?????
+        public static IEnumerable<Volunteer> GetVolunteers(int id)
+        {
+            return Dal.FamilyManager.GetVolunteers(id);
+        }
+        public static IEnumerable<Common.Organization> GetOrganizations(int id)
+        {
+            return Dal.FamilyManager.GetOrganizations(id);
         }
     }
 }

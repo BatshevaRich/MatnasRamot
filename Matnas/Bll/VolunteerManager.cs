@@ -25,10 +25,7 @@ namespace Bll
         {
             return Dal.VolunteerManager.GetVolunteers();
         }
-        public static List<string> GetCategoriesForVolunteer(Volunteer volunteer)
-        {
-            return Dal.VolunteerManager.GetCategoriesForVolunteer(volunteer);
-        }
+        
         public static Volunteer GetVolunteer(int id)
         {
             return Dal.VolunteerManager.GetVolunteer(id);
@@ -37,6 +34,32 @@ namespace Bll
         public static void RemoveVolunteer(int id)
         {
             Dal.VolunteerManager.RemoveVolunteer(id);
+        }
+
+        public static IEnumerable<Category> GetCategories(int id)
+        {
+            return Dal.VolunteerManager.GetCategoriesOfVolunteer(id);
+        }
+        public static void RemoveCategory(int id, Category category)
+        {
+            Dal.VolunteerManager.RemoveCategotyFromVolunteer(id, category);
+        }
+
+        public static void AddCategory(int id, Category category)
+        {
+            Dal.VolunteerManager.AddCategotyToVolunteer(id, category);
+        }
+        public static IEnumerable<Group> GetGroups(int id)
+        {
+          return  Dal.VolunteerManager.GetGroups(id);
+        }
+        public static IEnumerable<Family> GetFamilies(int id)
+        {
+            return Dal.VolunteerManager.GetFamilies(id);
+        }
+        public static IEnumerable<Event> GetEvents(int id)
+        {
+            return Dal.VolunteerManager.GetEvents(id);
         }
     }
 }

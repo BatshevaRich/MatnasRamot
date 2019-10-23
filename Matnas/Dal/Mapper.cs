@@ -28,6 +28,65 @@ namespace Dal
             };
 
         }
+
+        internal static VolunteerAndEvent CastVolunteerAndEvent(Common.VolunteerAndEvent vae)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static OrganizationAndFamily CastOrganizationAndFamily(Common.OrganizationAndFamily oaf)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static VolunteerAndFamily CastVolunteerAndFamily(Common.VolunteerAndFamily vaf)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static Organization CastOrganization(Common.Organization organization)
+        {
+            return new Organization()
+            {
+               Id=organization.Id,
+               Name=organization.Name,
+               Address=organization.Address,
+              email=organization.email,
+              Comments=organization.Comments,
+              Contact=organization.Contact,
+              Phone=organization.Phone 
+            };
+        }
+
+        internal static Common.Organization CastOrganizationToComon(Organization organization)
+        {
+            return new Common.Organization()
+            {
+                Id = organization.Id,
+                Name = organization.Name,
+                Address = organization.Address,
+                email = organization.email,
+                Comments = organization.Comments,
+                Contact = organization.Contact,
+                Phone = organization.Phone
+            };
+        }
+
+        internal static Common.VolunteerAndEvent CastVolunteerAndEventToComon(VolunteerAndEvent volunteerAndEvent)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static Common.OrganizationAndFamily CastOrganizationAndFamilyToComon(OrganizationAndFamily organizationAndFamily)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static Common.VolunteerAndFamily CastVolunteerAndFamilyToComon(VolunteerAndFamily g)
+        {
+            throw new NotImplementedException();
+        }
+
         public static Family CastFamilyToComon(Families family)
         {
             return new Family()
@@ -47,6 +106,23 @@ namespace Dal
             };
 
         }
+
+        public static Categories CastCategory(Category category)
+        {
+            return new Categories
+            {
+                Id = category.Id,
+                Name = category.Name
+            };
+        }
+        public static Category CastCategoryToCommon(Categories category)
+        {
+            return new Category
+            {
+                Id = category.Id,
+                Name = category.Name
+            };
+        }
         public static Group CastGroupToComon(Groups group)
         {
             return new Group()
@@ -64,8 +140,8 @@ namespace Dal
         {
             return new Events()
             {
-                dateAdded = eventt.dateAdded,
-                description = eventt.description,
+                dateAdded = eventt.DateAdded,
+                description = eventt.Description,
                 Id = eventt.Id
             };
         }
@@ -73,8 +149,8 @@ namespace Dal
         {
             return new Event()
             {
-                dateAdded = eventt.dateAdded,
-                description = eventt.description,
+                DateAdded = eventt.dateAdded,
+                Description = eventt.description,
                 Id = eventt.Id
             };
         }
