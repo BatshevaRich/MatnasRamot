@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Family } from '../Classes/Family';
-import { baseURL} from '../../environments/environment';
+import { baseURL } from '../../environments/environment';
 import { Category } from '../Classes/Category';
 @Injectable({
   providedIn: 'root'
@@ -10,8 +10,8 @@ import { Category } from '../Classes/Category';
 export class FamilyService {
   // tslint:disable-next-line:member-ordering
 
-  path = baseURL + 'Family';
-  constructor(private http: HttpClient) {}
+  path = baseURL + 'family';
+  constructor(private http: HttpClient) { }
 
   getFamilies(): Observable<Family[]> {
     console.log(this.http.get<Family[]>(this.path));
@@ -33,11 +33,11 @@ export class FamilyService {
   }
   updateFamily(family: Family) {
     // const head={params:new HttpParams() ('newFamily',Family)};
-    this.http.put(this.path + '/' + family.Id, family);
+    this.http.put(this.path + '/' + family.Id, family).subscribe(x => console.log(x));
   }
   removeFamily(id: number) {
     // const head={params:new HttpParams() ('newFamily',Family)};
-    this.http.delete(this.path + '/' + id);
+    this.http.delete(this.path + '/' + id).subscribe(x => console.log(x));
   }
   getCategoriesOfFamily(id: number): Observable<Category[]> {
     return this.http.get<Category[]>(this.path + id);

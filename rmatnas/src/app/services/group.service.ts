@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Organization } from '../Classes/Organization';
-import { baseURL} from '../../environments/environment';
+import { baseURL } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class GroupService {
   constructor(private http: HttpClient) { }
 
   getOrganizations(): Observable<Organization[]> {
-    return this.http.get<Organization[]>( this.path);
+    return this.http.get<Organization[]>(this.path);
   }
   getOrganization(Id: number): Observable<Organization> {
     return this.http.get<Organization>(this.path + '/' + Id);
@@ -32,10 +32,10 @@ export class GroupService {
   }
   updateOrganization(organization: Organization) {
     // const head={params:new HttpParams() ('newOrganization',Organization)};
-    this.http.put(this.path + '/' + organization.Id, organization);
+    this.http.put(this.path + '/' + organization.Id, organization).subscribe(x => console.log(x));
   }
   removeOrganization(Id: number) {
     // const head={params:new HttpParams() ('newOrganization',Organization)};
-    this.http.delete(this.path + '/' + Id);
+    this.http.delete(this.path + '/' + Id).subscribe(x => console.log(x));
   }
 }
