@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Volunteer } from '../../../classes/Volunteer';
+import { Volunteer } from '../../../Classes/Volunteer';
 import { DataServiceService } from '../../../Services/data-service.service';
 import { VolunteerService } from 'src/app/services/volunteer.service';
 @Component({

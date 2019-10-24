@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Family } from '../../classes/Family';
+import { Family } from '../../Classes/Family';
 import { DataServiceService } from '../../Services/data-service.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';

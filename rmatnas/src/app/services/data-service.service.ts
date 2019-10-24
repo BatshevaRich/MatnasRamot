@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Volunteer } from '../classes/Volunteer';
-import { Family } from '../classes/Family';
+import { Volunteer } from '../Classes/Volunteer';
+import { Family } from '../Classes/Family';
 import { Eventt } from 'src/app/Classes/Eventt';
-import { Organization } from 'src/app/classes/Organization';
+import { Organization } from 'src/app/Classes/Organization';
 import { MyTask } from 'src/app/Classes/MyTask';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';

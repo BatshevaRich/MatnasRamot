@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Family } from '../../../classes/Family';
+import { Family } from '../../../Classes/Family';
 import { FamilyService } from 'src/app/services/family.service';
 @Component({
   selector: 'app-all-families',

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Volunteer } from '../../classes/Volunteer';
+import { Volunteer } from '../../Classes/Volunteer';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { DataServiceService } from '../../Services/data-service.service';
