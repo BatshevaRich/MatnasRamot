@@ -40,6 +40,6 @@ export class FamilyService {
     this.http.delete(this.path + '/' + id).subscribe(x => console.log(x));
   }
   getCategoriesOfFamily(id: number): Observable<Category[]> {
-    return this.http.get<Category[]>(this.path + id);
+    return this.http.get<Category[]>(this.path + '/' + id);
   }
 }
