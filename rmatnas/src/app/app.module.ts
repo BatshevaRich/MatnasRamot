@@ -28,6 +28,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { TaskFComponent } from './Components/forms/task-f/task-f.component';
 import { PhonePipe } from './Pipes/phone.pipe';
 import { FilterPipe } from './Pipes/filter.pipe';
+import { CategoryComponent } from './Components/category/category.component';
+import { ChooseCategoryComponent } from './Components/choose-category/choose-category.component';
 export const routeList: Routes = [
   { path: '', component: /*VolunteerFComponent*/ HomeComponent },
   { path: 'main', component: /*VolunteerFComponent*/ HomeComponent },
@@ -104,6 +106,8 @@ export const routeList: Routes = [
     FooterComponent,
     AsideComponent,
     MyTaskComponent,
+    CategoryComponent,
+    ChooseCategoryComponent,
     AllTasksComponent,
     BorderDirective,
     PhoneMaskDirective,
