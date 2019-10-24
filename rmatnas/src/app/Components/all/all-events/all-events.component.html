@@ -1,27 +1,50 @@
-<div dir="rtl">
-  <div class="card-header">
-    <input type="text" placeholder="לחיפוש..." [(ngModel)]="search" />
+  <div class="row">
+    <div class="col">
+      <div dir="rtl" class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col">
+              <input type="text" placeholder="לחיפוש..." [(ngModel)]="search" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="card-body">
+
+              <div
+                *ngFor="let e of events | filter: search"
+                class="list-group-flush text-right"
+              >
+                <p>{{ e.Description }} {{ e.DateAdded }}</p>
+                <a
+                  style="background-color:#62da03b0"
+                  routerLink="/list/event/{{ e.Id }}"
+                  class="list-group-item list-group-item-info"
+                  >לפרטים</a
+                >
+                <input
+                  type="button"
+                  style="background-color:#bf0000b0"
+                  (click)="delete(e.Id)"
+                  value="הסרה"
+                  class="list-group-item list-group-item-info"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+    <!-- </div> -->
+    <div class="col-4">
+      <div dir="rtl" class="card">
+        <div class="card-header">להוספת ארוע</div>
+        <div class="card-body">
+          <app-event-f></app-event-f>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="card-body">
-    
-  <div
-    *ngFor="let e of events | filter: search"
-    class="list-group-flush text-right"
-  >
-    <p>{{ e.description }} {{ e.date }}</p>
-    <a
-    style="background-color:#62da03b0"
-      routerLink="/list/event/{{ e.Id }}"
-      class="list-group-item list-group-item-info"
-      >לפרטים</a
-    >
-  </div>
-  </div>
-  <a
-    class="nav-link list-group-item active list-group-item-primary text-right"
-    routerLink="/list/add-event"
-    routerLinkActive="activeLink"
-    >הוספת ארוע</a
-  >
-  <router-outlet></router-outlet>
-</div>
+<br />

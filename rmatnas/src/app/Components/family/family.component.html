@@ -10,51 +10,57 @@
           <div class="card-body">
             <h5 class="card-title">פרטים</h5>
             <div class="card-text">
-              <p>שם פרטי אב: {{ family.FirstNameFather }}</p>
-              <p>שם פרטי אם: {{ family.FirstNameMother }}</p>
-              <p>טלפון: {{ family.Telephone }}</p>
-              <p>פלאפון אב: {{ family.PelephoneFather | phone }}</p>
-              <p>פלאפון אם: {{ family.PelephoneMother | phone }}</p>
-              <p>כתובת: {{ family.Address }}</p>
-              <p>סטטוס: {{ family.Status }}</p>
-              <p>מספר ילדים: {{ family.NumChildren }}</p>
-              <p>מפנה: {{ family.Reference }}</p>
-              <p>סיבת ההפניה: {{ family.Reason }}</p>
+              <h4>שם פרטי אב: {{ family.FirstNameFather }}</h4>
+              <h4>שם פרטי אם: {{ family.FirstNameMother }}</h4>
+              <h4>שם משפחה: {{ family.LastName }}</h4>
+              <h4>טלפון: {{ family.Telephone }}</h4>
+              <h4>פלאפון אב: {{ family.PelephoneFather | phone }}</h4>
+              <h4>פלאפון אם: {{ family.PelephoneMother | phone }}</h4>
+              <h4>כתובת: {{ family.Address }}</h4>
+              <h4>סטטוס: {{ family.Status }}</h4>
+              <h4>מספר ילדים: {{ family.NumChildren }}</h4>
+              <h4>מפנה: {{ family.Reference }}</h4>
+              <h4>סיבת ההפניה: {{ family.Reason }}</h4>
+              קטגוריות:
+              <!-- <app-category
+                *ngFor="let c of categories"
+                [category]="c"
+              ></app-category> -->
             </div>
             <p class="card-text"></p>
             <a href="#" class="btn btn-primary">Go somewhere</a>
           </div>
         </div>
       </div>
-      <div dir="rtl" class="col-sm-8">
-        <nav class="navbar navbar-expand-md bg-light navbar-light static-top">
-          <div dir="rtl" class="collapse navbar-collapse " id="navbarCollapse">
+      <div dir="rtl" class="col-8 card">
+        <nav class="navbar navbar-expand-md static-top">
+          <div dir="rtl" class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav nav-tabs">
-              <li class="nav-item ">
+              <li class="nav-item active ">
                 <a
-                  class="nav-link active"
+                  class="nav-link"
                   routerLink="volunteers"
                   routerLinkActive="activeLink"
                 >
-                  מתנדבות</a
+                  <h3>מתנדבות</h3></a
                 >
               </li>
               <li class="nav-item">
                 <a
-                  class="nav-link active"
+                  class="nav-link"
                   routerLink="organizations"
                   routerLinkActive="activeLink"
                 >
-                  ארגונים</a
+                  <h3>ארגונים</h3></a
                 >
               </li>
               <li class="nav-item ">
                 <a
-                  class="nav-link active"
+                  class="nav-link"
                   routerLink="events"
                   routerLinkActive="activeLink"
                 >
-                  ארועים</a
+                  <h3>ארועים</h3></a
                 >
               </li>
             </ul>
@@ -65,17 +71,4 @@
     </div>
   </div>
 </div>
-<!-- 
-<div class="text-right" dir="rtl">
-  <h4>שם פרטי אב: {{ family.FirstNameFather }}</h4>
-  <h4>שם פרטי אם: {{ family.FirstNameMother }}</h4>
-  <h4>שם משפחה: {{ family.LastName }}</h4>
-  <h4>טלפון: {{ family.Telephone }}</h4>
-  <h4>פלאפון אב: {{ family.PelephoneFather | phone }}</h4>
-  <h4>פלאפון אם: {{ family.PelephoneMother | phone }}</h4>
-  <h4>כתובת: {{ family.Address }}</h4>
-  <h4>סטטוס: {{ family.Status }}</h4>
-  <h4>מספר ילדים: {{ family.NumChildren }}</h4>
-  <h4>מפנה: {{ family.Reference }}</h4>
-  <h4>סיבת ההפניה: {{ family.Reason }}</h4>
-</div> -->
+

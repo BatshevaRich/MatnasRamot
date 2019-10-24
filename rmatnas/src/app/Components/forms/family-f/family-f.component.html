@@ -1,8 +1,8 @@
 <div dir="rtl">
   <form
-    (ngSubmit)="submitForm(volunteerForm)"
+    (ngSubmit)="submitForm(familyForm)"
     class="text-right"
-    #volunteerForm="ngForm"
+    #familyForm="ngForm"
   >
     <div class="form-group">
       <label>
@@ -12,12 +12,12 @@
           aria-label="Small"
           aria-describedby="inputGroup-sizing-sm"
           [(ngModel)]="newFamily.FirstNameFather"
-          name="firstNameF"
+          name="FirstNameFather"
           required
           appBorder
         />
       </label>
-      <span class="spn">&</span>
+      <span class="spn">   &   </span>
       <label>
         שם פרטי אם:
         <input
@@ -49,7 +49,8 @@
           class="form-control form-control-sm"
           aria-label="Small"
           aria-describedby="inputGroup-sizing-sm"
-          Email
+          email
+          type="email"
           appBorder
           [(ngModel)]="newFamily.Email"
           name="Email"
@@ -107,29 +108,69 @@
         />
       </label>
       <br />
-      <!-- <label>
-        תאריך לידה??:
+      <label>
+        סיבה:
         <input
           class="form-control form-control-sm"
           aria-label="Small"
           aria-describedby="inputGroup-sizing-sm"
           appBorder
-          type="date"
-          [(ngModel)]="newFamily.birthdate"
-          name="birthdate"
+          [(ngModel)]="newFamily.Reason"
+          name="Reason"
         />
       </label>
-      <br /> -->
+      <br />
+      <label>
+        גורם מפנה:
+        <input
+          class="form-control form-control-sm"
+          aria-label="Small"
+          aria-describedby="inputGroup-sizing-sm"
+          appBorder
+          [(ngModel)]="newFamily.Reference"
+          name="Reference"
+        />
+      </label>
+      <br />
+      <label>
+        מספר ילדים:
+        <input
+          class="form-control form-control-sm"
+          aria-label="Small"
+          type="number"
+          aria-describedby="inputGroup-sizing-sm"
+          appBorder
+          [(ngModel)]="newFamily.NumChildren"
+          name="NumChildren"
+          type="number"
+          min="0"
+          max="20"
+        />
+      </label>
+      <br />
+      <label>
+        סטטוס:
+        <input
+          class="form-control form-control-sm"
+          aria-label="Small"
+          aria-describedby="inputGroup-sizing-sm"
+          appBorder
+          [(ngModel)]="newFamily.Status"
+          name="Status"
+        />
+      </label>
+      <br />
     </div>
     <button
       class="btn btn-primary"
       type="submit"
-      [disabled]="volunteerForm.invalid"
+      [disabled]="familyForm.invalid"
     >
       להוספת המשפחה
     </button>
   </form>
-  <span *ngIf="volunteerForm.submitted">
-    {{ volunteerForm.value | json }}
+  <span *ngIf="familyForm.submitted">
+    {{ familyForm.value | json }}
   </span>
+  <app-choose-category (select)="selectCategories($event)"></app-choose-category>
 </div>
