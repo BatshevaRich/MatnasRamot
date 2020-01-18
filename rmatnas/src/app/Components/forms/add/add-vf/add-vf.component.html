@@ -1,0 +1,36 @@
+<div dir="rtl">
+  <form
+    (ngSubmit)="submitForm(familyForm)"
+    class="text-right"
+    #familyForm="ngForm"
+  >
+    <div class="form-group">
+      <!-- <label></label> do ngif from families or volunteers, show id of chosen one -->
+      <h1>hello</h1>
+      <select
+      class="selectpicker"
+        [ngModel]="selectedFamily"
+        (ngModelChange)="onChangeFamily($event)"
+        name="sel"
+      >
+        <option [ngValue]="i" *ngFor="let i of families">{{ i.LastName}},{{i.Address }}</option>
+      </select>
+      <br>
+      <select
+      class="selectpicker"
+        [ngModel]="selectedVolunteer"
+        (ngModelChange)="onChangeVolunteer($event)"
+        name="sel1"
+      >
+        <option [ngValue]="i" *ngFor="let i of volunteers">{{
+          i | json
+        }}</option>
+      </select>
+    </div>
+    <button class="btn btn-primary" type="submit">שמירה</button>
+  </form>
+  <br />
+  <br />
+  <br />
+  <br />
+</div>
