@@ -10,12 +10,13 @@ export class AllFamiliesComponent implements OnInit {
   families: Family[] = [];
 
   search = '';
-  constructor(public fs: FamilyService) {}
+  constructor(public fs: FamilyService) { }
 
   ngOnInit() {
-     this.fs.getFamilies() .subscribe(data => {
-    this.families = data;
-  }); }
+    this.fs.getFamilies().subscribe(data => {
+      this.families = data;
+    });
+  }
 
   delete(f: number) {
     this.fs.removeFamily(f);

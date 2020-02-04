@@ -1,3 +1,4 @@
+<div style="padding: 2%">
   <div class="row">
     <div class="col">
       <div dir="rtl" class="card">
@@ -11,11 +12,7 @@
         <div class="row">
           <div class="col">
             <div class="card-body">
-
-              <div
-                *ngFor="let e of events | filter: search"
-                class="list-group-flush text-right"
-              >
+              <div *ngFor="let e of events" class="list-group-flush text-right">
                 <p>{{ e.Description }} {{ e.DateAdded }}</p>
                 <a
                   style="background-color:#62da03b0"
@@ -37,7 +34,7 @@
         <router-outlet></router-outlet>
       </div>
     </div>
-    <!-- </div> -->
+
     <div class="col-4">
       <div dir="rtl" class="card">
         <div class="card-header">להוספת ארוע</div>
@@ -47,4 +44,5 @@
       </div>
     </div>
   </div>
-<br />
+  <br />
+</div>
