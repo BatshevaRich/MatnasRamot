@@ -30,9 +30,17 @@ import { PhonePipe } from './Pipes/phone.pipe';
 import { FilterPipe } from './Pipes/filter.pipe';
 import { CategoryComponent } from './Components/category/category.component';
 import { ChooseCategoryComponent } from './Components/choose-category/choose-category.component';
+import { AddVFComponent } from './Components/forms/add/add-vf/add-vf.component';
+import { AddVEComponent } from './Components/forms/add/add-ve/add-ve.component';
+import { AddVGComponent } from './Components/forms/add/add-vg/add-vg.component';
+import { AddFOComponent } from './Components/forms/add/add-fo/add-fo.component';
+import { ToVolunteerComponent } from './Components/to-volunteer/to-volunteer.component';
+import { CategoryFComponent } from './Components/forms/category-f/category-f.component';
 export const routeList: Routes = [
   { path: '', component: /*VolunteerFComponent*/ HomeComponent },
   { path: 'main', component: /*VolunteerFComponent*/ HomeComponent },
+  { path: 'addvf', component: /*VolunteerFComponent*/ AddVFComponent },
+
   {
     path: 'list',
     children: [
@@ -113,7 +121,13 @@ export const routeList: Routes = [
     PhoneMaskDirective,
     TaskFComponent,
     PhonePipe,
-    FilterPipe
+    FilterPipe,
+    AddVFComponent,
+    AddVEComponent,
+    AddVGComponent,
+    AddFOComponent,
+    ToVolunteerComponent,
+    CategoryFComponent
   ],
   imports: [
     BrowserModule,
