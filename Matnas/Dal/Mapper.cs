@@ -9,7 +9,7 @@ namespace Dal
 {
     public static class Mapper
     {
-          public static Families CastFamily(Family family)
+        public static Families CastFamily(Family family)
         {
             return new Families()
             {
@@ -31,30 +31,54 @@ namespace Dal
 
         internal static VolunteerAndEvent CastVolunteerAndEvent(Common.VolunteerAndEvent vae)
         {
-            throw new NotImplementedException();
+           return new VolunteerAndEvent()
+           {
+               Id=vae.Id,
+               Categories =CastCategory( vae.Category),
+               Events =CastEvent( vae.Event),
+               Volunteers =CastVolunteer (vae.Volunteer),
+               Comments = vae.Comments,
+               dateAdded =vae.DateAdded
+           };
         }
 
         internal static OrganizationAndFamily CastOrganizationAndFamily(Common.OrganizationAndFamily oaf)
         {
-            throw new NotImplementedException();
+            return new OrganizationAndFamily()
+            {
+                Id = oaf.Id,
+                Categories = CastCategory(oaf.Category),
+                Families = CastFamily(oaf.Family),
+                Organization = CastOrganization(oaf.Organization),
+                Comments = oaf.Comments,
+                dateAdded = oaf.DateAdded
+            };
         }
 
         internal static VolunteerAndFamily CastVolunteerAndFamily(Common.VolunteerAndFamily vaf)
         {
-            throw new NotImplementedException();
+            return new VolunteerAndFamily()
+            {
+                Id = vaf.Id,
+                Categories =Mapper.CastCategory( vaf.Category),
+                Families = Mapper.CastFamily(vaf.Family),
+                Volunteers = Mapper.CastVolunteer(vaf.Volunteer),
+                Comments = vaf.Comments,
+                dateAdded = vaf.DateAdded
+            };
         }
 
         internal static Organization CastOrganization(Common.Organization organization)
         {
             return new Organization()
             {
-               Id=organization.Id,
-               Name=organization.Name,
-               Address=organization.Address,
-              email=organization.email,
-              Comments=organization.Comments,
-              Contact=organization.Contact,
-              Phone=organization.Phone 
+                Id = organization.Id,
+                Name = organization.Name,
+                Address = organization.Address,
+                email = organization.email,
+                Comments = organization.Comments,
+                Contact = organization.Contact,
+                Phone = organization.Phone
             };
         }
 
@@ -72,44 +96,43 @@ namespace Dal
             };
         }
 
-        internal static Common.VolunteerAndEvent CastVolunteerAndEventToComon(VolunteerAndEvent volunteerAndEvent)
+        internal static Common.VolunteerAndEvent CastVolunteerAndEventToComon(VolunteerAndEvent vae)
         {
             return new Common.VolunteerAndEvent()
             {
-                Id = volunteerAndEvent.Id,
-                IdEvent = volunteerAndEvent.IdEvent,
-                IdVolunteer = volunteerAndEvent.IdVolunteer,
-                IdCategory = volunteerAndEvent.IdCategory,
-                dateAdded = volunteerAndEvent.dateAdded,
-                Comments = volunteerAndEvent.Comments
-            };
+                Id = vae.Id,
+                Category = CastCategoryToCommon(vae.Categories),
+                Event = CastEventToComon(vae.Events),
+                Volunteer = CastVolunteerToComon(vae.Volunteers),
+                Comments = vae.Comments,
+                DateAdded = vae.dateAdded
+            }; 
         }
 
-        internal static Common.OrganizationAndFamily CastOrganizationAndFamilyToComon(OrganizationAndFamily organizationAndFamily)
+        internal static Common.OrganizationAndFamily CastOrganizationAndFamilyToComon(OrganizationAndFamily oaf)
         {
             return new Common.OrganizationAndFamily()
             {
-                Id = organizationAndFamily.Id,
-                IdOrganization = organizationAndFamily.IdOrganization,
-                IdFamily = organizationAndFamily.IdFamily,
-                IdCategory = organizationAndFamily.IdCategory,
-                DateAdded = organizationAndFamily.dateAdded,
-                Comments = organizationAndFamily.Comments
+                Id= oaf.Id,
+                Category =CastCategoryToCommon (oaf.Categories),
+                Family =CastFamilyToComon( oaf.Families),
+                Organization =CastOrganizationToComon( oaf.Organization),
+                Comments =oaf.Comments,
+                DateAdded= oaf.dateAdded
             };
-
         }
 
-        internal static Common.VolunteerAndFamily CastVolunteerAndFamilyToComon(VolunteerAndFamily g)
+        internal static Common.VolunteerAndFamily CastVolunteerAndFamilyToComon(VolunteerAndFamily vaf)
         {
             return new Common.VolunteerAndFamily()
             {
-                Id = g.Id,
-                IdVolunteer = g.IdVolunteer,
-                IdFamily = g.IdFamily,
-                IdCategory = g.IdCategory,
-                dateAdded = g.dateAdded,
-                Comments = g.Comments
-            };
+                Id = vaf.Id,
+                Category = Mapper.CastCategoryToCommon(vaf.Categories),
+                Family = Mapper.CastFamilyToComon(vaf.Families),
+                Volunteer = Mapper.CastVolunteerToComon(vaf.Volunteers),
+                Comments = vaf.Comments,
+                DateAdded = vaf.dateAdded
+            }; 
         }
 
         public static Family CastFamilyToComon(Families family)
@@ -228,19 +251,20 @@ namespace Dal
         {
             return new User()
             {
-                Id=user.Id,
-                isVolunteer=user.isVolunteer,
-                Password=user.Password,
-                UserName=user.UserName
+                Id = user.Id,
+                isVolunteer = user.isVolunteer,
+                Password = user.Password,
+                UserName = user.UserName
             };
-        } public static Common.User CastUserToComon(User user)
+        }
+        public static Common.User CastUserToComon(User user)
         {
             return new Common.User()
             {
-                Id=user.Id,
-                isVolunteer=user.isVolunteer,
-                Password=user.Password,
-                UserName=user.UserName
+                Id = user.Id,
+                isVolunteer = user.isVolunteer,
+                Password = user.Password,
+                UserName = user.UserName
             };
         }
     }

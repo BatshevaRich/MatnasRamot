@@ -87,7 +87,7 @@ namespace Dal
             }
         }
            
-        public static void RemoveFamily(int id)//need to delete all relations in tables in db
+        public static void RemoveFamily(int id)
         {
             using (dbRamotEntities db = new dbRamotEntities())
             {
@@ -121,10 +121,10 @@ namespace Dal
             List<Volunteer> volunteers  = new List<Volunteer>();
             using (dbRamotEntities db = new dbRamotEntities())
             {
-                var f = db.VolunteerAndFamily.Where(g => g.IdFamily == id).Select(g => g.IdVolunteer).ToArray();
+                var f = db.VolunteerAndFamily.Where(g => g.IdFamily == id).Select(g => g.Volunteers).ToArray();
                 foreach (var i in f)
                 {
-                    volunteers.Add(Mapper.CastVolunteerToComon(db.Volunteers.Find(i)));
+                    volunteers.Add(Mapper.CastVolunteerToComon(i));
                 }
 
             }

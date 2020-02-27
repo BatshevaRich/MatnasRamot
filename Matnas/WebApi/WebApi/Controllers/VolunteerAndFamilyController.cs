@@ -5,12 +5,13 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Common;
+
 namespace WebApi.Controllers
 {
     public class VolunteerAndFamilyController : ApiController
     {
         // GET: api/VolunteerAndFamily
-        public IEnumerable<VolunteerAndFamily> Get()
+        public IEnumerable<Common.VolunteerAndFamily> Get()
         {
             return Bll.VolunteerAndFamilyManager.GetVolunteerAndFamilys();
         }
@@ -22,9 +23,9 @@ namespace WebApi.Controllers
         }
 
         // POST: api/VolunteerAndFamily
-        public void Post(VolunteerAndFamily newvolunteerAndFamily)
+        public void Post([FromBody]VolunteerAndFamily value)
         {
-            Bll.VolunteerAndFamilyManager.AddVolunteerAndFamily(newvolunteerAndFamily);
+            Bll.VolunteerAndFamilyManager.AddVolunteerAndFamily(value);
         }
 
         // PUT: api/VolunteerAndFamily/5
