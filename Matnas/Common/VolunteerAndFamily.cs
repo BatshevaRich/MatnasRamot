@@ -9,11 +9,11 @@ namespace Common
     public class VolunteerAndFamily
     {
         public int Id { get; set; }
-        public int IdFamily { get; set; }
-        public int IdVolunteer { get; set; }
-        public Nullable<int> IdCategory { get; set; }
+        public Family Family { get; set; }
+        public Volunteer Volunteer { get; set; }
+        public Category Category { get; set; }
         public string Comments { get; set; }
-        public Nullable<System.DateTime> dateAdded { get; set; }
+        public Nullable<System.DateTime> DateAdded { get; set; }
 
     }
 }

@@ -9,9 +9,9 @@ namespace Common
     public class OrganizationAndFamily
     {
         public int Id { get; set; }
-        public int IdFamily { get; set; }
-        public int IdOrganization { get; set; }
-        public Nullable<int> IdCategory { get; set; }
+        public Family Family { get; set; }
+        public Organization Organization { get; set; }
+        public Category Category { get; set; }
         public string Comments { get; set; }
         public Nullable<System.DateTime> DateAdded { get; set; }
     }
