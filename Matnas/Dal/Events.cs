@@ -23,7 +23,7 @@ namespace Dal
     
         public int Id { get; set; }
         public string description { get; set; }
-        public Nullable<System.DateTime> DateAdded { get; set; }
+        public Nullable<System.DateTime> dateAdded { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<VolunteerAndEvent> VolunteerAndEvent { get; set; }
