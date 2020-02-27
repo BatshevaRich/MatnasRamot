@@ -74,17 +74,42 @@ namespace Dal
 
         internal static Common.VolunteerAndEvent CastVolunteerAndEventToComon(VolunteerAndEvent volunteerAndEvent)
         {
-            throw new NotImplementedException();
+            return new Common.VolunteerAndEvent()
+            {
+                Id = volunteerAndEvent.Id,
+                IdEvent = volunteerAndEvent.IdEvent,
+                IdVolunteer = volunteerAndEvent.IdVolunteer,
+                IdCategory = volunteerAndEvent.IdCategory,
+                dateAdded = volunteerAndEvent.dateAdded,
+                Comments = volunteerAndEvent.Comments
+            };
         }
 
         internal static Common.OrganizationAndFamily CastOrganizationAndFamilyToComon(OrganizationAndFamily organizationAndFamily)
         {
-            throw new NotImplementedException();
+            return new Common.OrganizationAndFamily()
+            {
+                Id = organizationAndFamily.Id,
+                IdOrganization = organizationAndFamily.IdOrganization,
+                IdFamily = organizationAndFamily.IdFamily,
+                IdCategory = organizationAndFamily.IdCategory,
+                DateAdded = organizationAndFamily.dateAdded,
+                Comments = organizationAndFamily.Comments
+            };
+
         }
 
         internal static Common.VolunteerAndFamily CastVolunteerAndFamilyToComon(VolunteerAndFamily g)
         {
-            throw new NotImplementedException();
+            return new Common.VolunteerAndFamily()
+            {
+                Id = g.Id,
+                IdVolunteer = g.IdVolunteer,
+                IdFamily = g.IdFamily,
+                IdCategory = g.IdCategory,
+                dateAdded = g.dateAdded,
+                Comments = g.Comments
+            };
         }
 
         public static Family CastFamilyToComon(Families family)
@@ -140,7 +165,7 @@ namespace Dal
         {
             return new Events()
             {
-                DateAdded = eventt.DateAdded,
+                dateAdded = eventt.DateAdded,
                 description = eventt.Description,
                 Id = eventt.Id
             };
@@ -149,7 +174,7 @@ namespace Dal
         {
             return new Event()
             {
-                DateAdded = eventt.DateAdded,
+                DateAdded = eventt.dateAdded,
                 Description = eventt.description,
                 Id = eventt.Id
             };
