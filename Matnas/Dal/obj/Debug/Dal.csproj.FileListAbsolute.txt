@@ -25,17 +25,3 @@ D:\פנינה בולבין\מסמכים\הנדסאים\Matnas\Dal\bin\Debug\Comm
 D:\פנינה בולבין\מסמכים\הנדסאים\Matnas\Dal\bin\Debug\EntityFramework.xml
 D:\פנינה בולבין\מסמכים\הנדסאים\Matnas\Dal\bin\Debug\EntityFramework.SqlServer.xml
 D:\פנינה בולבין\מסמכים\הנדסאים\Matnas\Dal\obj\Debug\Dal.csproj.CopyComplete
-C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Dal\bin\Debug\Dal.dll.config
-C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Dal\bin\Debug\Dal.dll
-C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Dal\bin\Debug\Dal.pdb
-C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Dal\bin\Debug\Common.dll
-C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Dal\bin\Debug\EntityFramework.dll
-C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Dal\bin\Debug\EntityFramework.SqlServer.dll
-C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Dal\bin\Debug\Common.pdb
-C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Dal\bin\Debug\EntityFramework.xml
-C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Dal\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Dal\obj\Debug\Dal.csprojAssemblyReference.cache
-C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Dal\obj\Debug\Dal.csproj.CoreCompileInputs.cache
-C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Dal\obj\Debug\Dal.csproj.CopyComplete
-C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Dal\obj\Debug\Dal.dll
-C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Dal\obj\Debug\Dal.pdb

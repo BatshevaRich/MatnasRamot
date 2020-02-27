@@ -27,7 +27,6 @@ D:\פנינה בולבין\מסמכים\הנדסאים\Matnas\UI\bin\Debug\Bll.p
 D:\פנינה בולבין\מסמכים\הנדסאים\Matnas\UI\bin\Debug\Common.pdb
 D:\פנינה בולבין\מסמכים\הנדסאים\Matnas\UI\bin\Debug\Dal.pdb
 D:\פנינה בולבין\מסמכים\הנדסאים\Matnas\UI\bin\Debug\Dal.dll.config
-D:\פנינה בולבין\מסמכים\הנדסאים\Matnas\UI\bin\Debug\EntityFramework.xml
 D:\פנינה בולבין\מסמכים\הנדסאים\Matnas\UI\obj\Debug\UI.csprojAssemblyReference.cache
 D:\פנינה בולבין\מסמכים\הנדסאים\Matnas\UI\obj\Debug\UI.Form1.resources
 D:\פנינה בולבין\מסמכים\הנדסאים\Matnas\UI\obj\Debug\UI.Properties.Resources.resources
@@ -36,25 +35,3 @@ D:\פנינה בולבין\מסמכים\הנדסאים\Matnas\UI\obj\Debug\UI.cs
 D:\פנינה בולבין\מסמכים\הנדסאים\Matnas\UI\obj\Debug\UI.csproj.CopyComplete
 D:\פנינה בולבין\מסמכים\הנדסאים\Matnas\UI\obj\Debug\UI.exe
 D:\פנינה בולבין\מסמכים\הנדסאים\Matnas\UI\obj\Debug\UI.pdb
-D:\פנינה בולבין\מסמכים\הנדסאים\Matnas\UI\bin\Debug\dbRamot.mdf
-D:\פנינה בולבין\מסמכים\הנדסאים\Matnas\UI\bin\Debug\dbRamot_log.ldf
-C:\Users\owner\Desktop\Matnas\UI\bin\Debug\UI.exe.config
-C:\Users\owner\Desktop\Matnas\UI\bin\Debug\UI.exe
-C:\Users\owner\Desktop\Matnas\UI\bin\Debug\UI.pdb
-C:\Users\owner\Desktop\Matnas\UI\bin\Debug\Bll.dll
-C:\Users\owner\Desktop\Matnas\UI\bin\Debug\Common.dll
-C:\Users\owner\Desktop\Matnas\UI\bin\Debug\Dal.dll
-C:\Users\owner\Desktop\Matnas\UI\bin\Debug\Bll.pdb
-C:\Users\owner\Desktop\Matnas\UI\bin\Debug\Common.pdb
-C:\Users\owner\Desktop\Matnas\UI\bin\Debug\Dal.pdb
-C:\Users\owner\Desktop\Matnas\UI\bin\Debug\Dal.dll.config
-C:\Users\owner\Desktop\Matnas\UI\obj\Debug\UI.csprojAssemblyReference.cache
-C:\Users\owner\Desktop\Matnas\UI\obj\Debug\UI.Form1.resources
-C:\Users\owner\Desktop\Matnas\UI\obj\Debug\UI.Properties.Resources.resources
-C:\Users\owner\Desktop\Matnas\UI\obj\Debug\UI.csproj.GenerateResource.cache
-C:\Users\owner\Desktop\Matnas\UI\obj\Debug\UI.csproj.CoreCompileInputs.cache
-C:\Users\owner\Desktop\Matnas\UI\obj\Debug\UI.csproj.CopyComplete
-C:\Users\owner\Desktop\Matnas\UI\obj\Debug\UI.exe
-C:\Users\owner\Desktop\Matnas\UI\obj\Debug\UI.pdb
-C:\Users\owner\Desktop\Matnas\UI\bin\Debug\dbRamot.mdf
-C:\Users\owner\Desktop\Matnas\UI\bin\Debug\dbRamot_log.ldf
