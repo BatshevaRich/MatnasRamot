@@ -70,5 +70,10 @@ namespace WebApi.Controllers
         {
             return Bll.VolunteerManager.GetEvents(id);
         }
+        [Route("api/volunteer/familyandcategory")]
+        public IEnumerable<Volunteer> GetVolunteersByCategoryAndFamily(int idFamily, [FromBody] Category category)
+        {
+            return Bll.VolunteerManager.GetVolunteersByCategoryAndFamily(idFamily, category);
+        }
     }
 }
