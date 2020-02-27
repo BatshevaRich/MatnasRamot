@@ -58,7 +58,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="description" Type="nvarchar" MaxLength="50" />
-          <Property Name="DateAdded" Type="date" />
+          <Property Name="dateAdded" Type="date" />
         </EntityType>
         <EntityType Name="Families">
           <Key>
@@ -110,7 +110,7 @@
           <Property Name="IdOrganization" Type="int" Nullable="false" />
           <Property Name="IdCategory" Type="int" />
           <Property Name="Comments" Type="nvarchar" MaxLength="50" />
-          <Property Name="DateAdded" Type="date" />
+          <Property Name="dateAdded" Type="date" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -130,7 +130,7 @@
           <Property Name="IdVolunteer" Type="int" Nullable="false" />
           <Property Name="IdCategory" Type="int" />
           <Property Name="Comments" Type="nvarchar" MaxLength="50" />
-          <Property Name="DateAdded" Type="date" />
+          <Property Name="dateAdded" Type="date" />
         </EntityType>
         <EntityType Name="VolunteerAndFamily">
           <Key>
@@ -141,7 +141,7 @@
           <Property Name="IdVolunteer" Type="int" Nullable="false" />
           <Property Name="IdCategory" Type="int" />
           <Property Name="Comments" Type="nvarchar" MaxLength="50" />
-          <Property Name="DateAdded" Type="date" />
+          <Property Name="dateAdded" Type="date" />
         </EntityType>
         <EntityType Name="Volunteers">
           <Key>
@@ -545,7 +545,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DateAdded" Type="DateTime" Precision="0" />
+          <Property Name="dateAdded" Type="DateTime" Precision="0" />
           <NavigationProperty Name="VolunteerAndEvent" Relationship="Self.event" FromRole="Events" ToRole="VolunteerAndEvent" />
           <NavigationProperty Name="Categories" Relationship="Self.CategoriesForEvents" FromRole="Events" ToRole="Categories" />
         </EntityType>
@@ -606,7 +606,7 @@
           <Property Name="IdOrganization" Type="Int32" Nullable="false" />
           <Property Name="IdCategory" Type="Int32" />
           <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DateAdded" Type="DateTime" Precision="0" />
+          <Property Name="dateAdded" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Categories" Relationship="Self.categoriesPerVolunteeringO" FromRole="OrganizationAndFamily" ToRole="Categories" />
           <NavigationProperty Name="Families" Relationship="Self.familyO" FromRole="OrganizationAndFamily" ToRole="Families" />
           <NavigationProperty Name="Organization" Relationship="Self.OrganizationF" FromRole="OrganizationAndFamily" ToRole="Organization" />
@@ -629,7 +629,7 @@
           <Property Name="IdVolunteer" Type="Int32" Nullable="false" />
           <Property Name="IdCategory" Type="Int32" />
           <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DateAdded" Type="DateTime" Precision="0" />
+          <Property Name="dateAdded" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Categories" Relationship="Self.categoriesPerVolunteeringEvent" FromRole="VolunteerAndEvent" ToRole="Categories" />
           <NavigationProperty Name="Events" Relationship="Self.event" FromRole="VolunteerAndEvent" ToRole="Events" />
           <NavigationProperty Name="Volunteers" Relationship="Self.volunteerEvent" FromRole="VolunteerAndEvent" ToRole="Volunteers" />
@@ -643,7 +643,7 @@
           <Property Name="IdVolunteer" Type="Int32" Nullable="false" />
           <Property Name="IdCategory" Type="Int32" />
           <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DateAdded" Type="DateTime" Precision="0" />
+          <Property Name="dateAdded" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Categories" Relationship="Self.categoriesPerVolunteering" FromRole="VolunteerAndFamily" ToRole="Categories" />
           <NavigationProperty Name="Families" Relationship="Self.family" FromRole="VolunteerAndFamily" ToRole="Families" />
           <NavigationProperty Name="Volunteers" Relationship="Self.volunteer" FromRole="VolunteerAndFamily" ToRole="Volunteers" />
@@ -889,7 +889,7 @@
               <MappingFragment StoreEntitySet="Events">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="dateAdded" ColumnName="dateAdded" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -945,7 +945,7 @@
                 <ScalarProperty Name="IdOrganization" ColumnName="IdOrganization" />
                 <ScalarProperty Name="IdCategory" ColumnName="IdCategory" />
                 <ScalarProperty Name="Comments" ColumnName="Comments" />
-                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="dateAdded" ColumnName="dateAdded" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -967,7 +967,7 @@
                 <ScalarProperty Name="IdVolunteer" ColumnName="IdVolunteer" />
                 <ScalarProperty Name="IdCategory" ColumnName="IdCategory" />
                 <ScalarProperty Name="Comments" ColumnName="Comments" />
-                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="dateAdded" ColumnName="dateAdded" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -979,7 +979,7 @@
                 <ScalarProperty Name="IdVolunteer" ColumnName="IdVolunteer" />
                 <ScalarProperty Name="IdCategory" ColumnName="IdCategory" />
                 <ScalarProperty Name="Comments" ColumnName="Comments" />
-                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="dateAdded" ColumnName="dateAdded" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

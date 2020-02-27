@@ -93,7 +93,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -101,7 +103,10 @@
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\FamilyController.cs" />
     <Compile Include="Controllers\GroupController.cs" />
+    <Compile Include="Controllers\OrganizationAndFamilyController.cs" />
     <Compile Include="Controllers\OrganizationController.cs" />
+    <Compile Include="Controllers\VolunteerAndEventController.cs" />
+    <Compile Include="Controllers\VolunteerAndFamilyController.cs" />
     <Compile Include="Controllers\VolunteerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

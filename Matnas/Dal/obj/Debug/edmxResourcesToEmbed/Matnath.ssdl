@@ -53,7 +53,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="description" Type="nvarchar" MaxLength="50" />
-    <Property Name="DateAdded" Type="date" />
+    <Property Name="dateAdded" Type="date" />
   </EntityType>
   <EntityType Name="Families">
     <Key>
@@ -105,7 +105,7 @@
     <Property Name="IdOrganization" Type="int" Nullable="false" />
     <Property Name="IdCategory" Type="int" />
     <Property Name="Comments" Type="nvarchar" MaxLength="50" />
-    <Property Name="DateAdded" Type="date" />
+    <Property Name="dateAdded" Type="date" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -125,7 +125,7 @@
     <Property Name="IdVolunteer" Type="int" Nullable="false" />
     <Property Name="IdCategory" Type="int" />
     <Property Name="Comments" Type="nvarchar" MaxLength="50" />
-    <Property Name="DateAdded" Type="date" />
+    <Property Name="dateAdded" Type="date" />
   </EntityType>
   <EntityType Name="VolunteerAndFamily">
     <Key>
@@ -136,7 +136,7 @@
     <Property Name="IdVolunteer" Type="int" Nullable="false" />
     <Property Name="IdCategory" Type="int" />
     <Property Name="Comments" Type="nvarchar" MaxLength="50" />
-    <Property Name="DateAdded" Type="date" />
+    <Property Name="dateAdded" Type="date" />
   </EntityType>
   <EntityType Name="Volunteers">
     <Key>

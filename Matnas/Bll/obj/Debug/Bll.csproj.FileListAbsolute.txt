@@ -25,20 +25,7 @@ D:\פנינה בולבין\מסמכים\הנדסאים\Matnas\Bll\obj\Debug\Bll.
 D:\פנינה בולבין\מסמכים\הנדסאים\Matnas\Bll\obj\Debug\Bll.csproj.CopyComplete
 D:\פנינה בולבין\מסמכים\הנדסאים\Matnas\Bll\obj\Debug\Bll.dll
 D:\פנינה בולבין\מסמכים\הנדסאים\Matnas\Bll\obj\Debug\Bll.pdb
-C:\Users\owner\Desktop\merge\Matnas\Bll\bin\Debug\Bll.dll
-C:\Users\owner\Desktop\merge\Matnas\Bll\bin\Debug\Bll.pdb
-C:\Users\owner\Desktop\merge\Matnas\Bll\bin\Debug\Common.dll
-C:\Users\owner\Desktop\merge\Matnas\Bll\bin\Debug\Dal.dll
-C:\Users\owner\Desktop\merge\Matnas\Bll\bin\Debug\EntityFramework.dll
-C:\Users\owner\Desktop\merge\Matnas\Bll\bin\Debug\Common.pdb
-C:\Users\owner\Desktop\merge\Matnas\Bll\bin\Debug\Dal.pdb
-C:\Users\owner\Desktop\merge\Matnas\Bll\bin\Debug\Dal.dll.config
-C:\Users\owner\Desktop\merge\Matnas\Bll\bin\Debug\EntityFramework.xml
-C:\Users\owner\Desktop\merge\Matnas\Bll\obj\Debug\Bll.csprojAssemblyReference.cache
-C:\Users\owner\Desktop\merge\Matnas\Bll\obj\Debug\Bll.csproj.CoreCompileInputs.cache
-C:\Users\owner\Desktop\merge\Matnas\Bll\obj\Debug\Bll.csproj.CopyComplete
-C:\Users\owner\Desktop\merge\Matnas\Bll\obj\Debug\Bll.dll
-C:\Users\owner\Desktop\merge\Matnas\Bll\obj\Debug\Bll.pdb
+C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Bll\bin\Debug\EntityFramework.xml
 C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Bll\bin\Debug\Bll.dll
 C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Bll\bin\Debug\Bll.pdb
 C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Bll\bin\Debug\Common.dll
@@ -47,7 +34,6 @@ C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Bll\bin\Debug\EntityFramework
 C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Bll\bin\Debug\Common.pdb
 C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Bll\bin\Debug\Dal.pdb
 C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Bll\bin\Debug\Dal.dll.config
-C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Bll\bin\Debug\EntityFramework.xml
 C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Bll\obj\Debug\Bll.csprojAssemblyReference.cache
 C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Bll\obj\Debug\Bll.csproj.CoreCompileInputs.cache
 C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Bll\obj\Debug\Bll.csproj.CopyComplete
