@@ -7,11 +7,17 @@
     <div class="form-group">
       <!-- <label></label> do ngif from families or volunteers, show id of chosen one -->
       <h1>hello</h1>
+      <select class="selectpicker"
+      [ngModel]="selectedCategory"
+      (ngModelChange)="onChangeCtegory($event)"
+      name="selcategory" > <option [ngValue]="i" *ngFor="let i of categories">{{ i.Name}}</option></select>
+      <br>
       <select
       class="selectpicker"
         [ngModel]="selectedFamily"
         (ngModelChange)="onChangeFamily($event)"
-        name="sel"
+        name="selectFamily"
+        *ngIf="idVolunteer && families"
       >
         <option [ngValue]="i" *ngFor="let i of families">{{ i.LastName}},{{i.Address }}</option>
       </select>
@@ -20,7 +26,8 @@
       class="selectpicker"
         [ngModel]="selectedVolunteer"
         (ngModelChange)="onChangeVolunteer($event)"
-        name="sel1"
+        name="seectedVolunteer"
+        *ngIf="idFamily && volunteers"
       >
         <option [ngValue]="i" *ngFor="let i of volunteers">{{
           i | json

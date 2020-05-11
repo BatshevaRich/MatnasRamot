@@ -17,6 +17,12 @@ export class FamilyService {
     console.log(this.http.get<Family[]>(this.path));
     return this.http.get<Family[]>(this.path);
   }
+
+  getFamiliesByVolunteer(id: number): Observable<Family[]> {
+    console.log(this.http.get<Family[]>(this.path)); // also bring categories
+    return this.http.get<Family[]>(baseURL + 'VolunteerAndFamily/' + id);
+  }
+
   getFamily(id: number): Observable<Family> {
     return this.http.get<Family>(this.path + '/' + id);
   }
@@ -26,7 +32,7 @@ export class FamilyService {
     const newFamily = new Family(52, 'dgfgg', null, null, null, null, null, null, null, null, null, null, null);
 
     this.http
-      .post(this.path, newFamily)
+      .post(this.path, family)
       .subscribe(data => {
         console.log(data);
       });

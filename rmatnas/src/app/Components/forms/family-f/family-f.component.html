@@ -161,16 +161,16 @@
       </label>
       <br />
     </div>
+    <app-choose-category (select)="selectCategories($event)"></app-choose-category>
     <button
       class="btn btn-primary"
       type="submit"
-      [disabled]="familyForm.invalid"
-    >
+      
+    ><!-- [disabled]="familyForm.invalid" -->
       להוספת המשפחה
     </button>
   </form>
   <span *ngIf="familyForm.submitted">
     {{ familyForm.value | json }}
   </span>
-  <app-choose-category (select)="selectCategories($event)"></app-choose-category>
 </div>

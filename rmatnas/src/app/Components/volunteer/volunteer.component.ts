@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Volunteer } from '../../Classes/Volunteer';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
@@ -12,22 +12,21 @@ import { VolunteerService } from 'src/app/services/volunteer.service';
 export class VolunteerComponent implements OnInit, OnDestroy {
   volunteer: Volunteer;
   id: number;
-
+  @Input() vId: number;
   mySubscription: Subscription;
   constructor(public vs: VolunteerService, public ARS: ActivatedRoute) {
-   this.mySubscription = ARS.params.subscribe((args) => {
-      this.id = args.volunteerId;
-      vs.getVolunteer(this.id).subscribe(v => {
-        this.volunteer = v;
-      });
-      this.mySubscription.unsubscribe(); });
+    this.volunteer = new Volunteer('..', '..', '..', '..', '..', '1999');
   }
 
   ngOnDestroy(): void {
     this.mySubscription.unsubscribe();
+
   }
 
   ngOnInit() {
+    this.vs.getVolunteer(this.vId).subscribe(v => {
+        this.volunteer = v;
+      });
   }
 
 }

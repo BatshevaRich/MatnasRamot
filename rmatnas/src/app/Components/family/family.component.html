@@ -22,7 +22,7 @@
               <h4>מפנה: {{ family.Reference }}</h4>
               <h4>סיבת ההפניה: {{ family.Reason }}</h4>
               קטגוריות:
-              <!-- <app-category
+               <!-- <app-category
                 *ngFor="let c of categories"
                 [category]="c"
               ></app-category> -->
@@ -36,37 +36,39 @@
         <nav class="navbar navbar-expand-md static-top">
           <div dir="rtl" class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav nav-tabs">
-              <li class="nav-item active ">
+              <li class="nav-item active " (click)="chooseTab='volunteers'">
                 <a
-                  class="nav-link"
-                  routerLink="volunteers"
+                  class="nav-link">
+                  <!-- routerLink="volunteers"
                   routerLinkActive="activeLink"
-                >
+                 -->
                   <h3>מתנדבות</h3></a
                 >
               </li>
-              <li class="nav-item">
+              <li class="nav-item" (click)="chooseTab='organizations'">
                 <a
                   class="nav-link"
-                  routerLink="organizations"
-                  routerLinkActive="activeLink"
-                >
+                  >
+                <!-- routerLink="organizations"
+                  routerLinkActive="activeLink" -->
                   <h3>ארגונים</h3></a
                 >
               </li>
-              <li class="nav-item ">
+              <li class="nav-item " (click)="chooseTab='events'">
                 <a
                   class="nav-link"
-                  routerLink="events"
-                  routerLinkActive="activeLink"
-                >
+                  
+                ><!-- routerLink="events"
+                  routerLinkActive="activeLink" -->
                   <h3>ארועים</h3></a
                 >
               </li>
             </ul>
           </div>
         </nav>
-        <router-outlet></router-outlet>
+        <app-all-volunteers *ngIf="chooseTab=='volunteers'"></app-all-volunteers>
+        <app-all-organizations *ngIf="chooseTab=='organizations'"></app-all-organizations>
+        <app-all-events *ngIf="chooseTab=='events'"></app-all-events>
       </div>
     </div>
   </div>

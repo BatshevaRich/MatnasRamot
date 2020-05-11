@@ -10,18 +10,18 @@ export class VolunteerAndFamilyService {
 
   constructor(private http: HttpClient) { }
   path = baseURL + '/VolunteerAndFamily/';
-  getVolunteerings(): Observable<VolunteerAndFamily[]> {
+  public getVolunteerings(): Observable<VolunteerAndFamily[]> {
     return this.http.get<VolunteerAndFamily[]>(this.path);
   }
-  getVolunteering(id: number): Observable<VolunteerAndFamily> {
+  public getVolunteering(id: number): Observable<VolunteerAndFamily> {
     return this.http.get<VolunteerAndFamily>(this.path + id);
   }
-  addVolunteering(volunteering: VolunteerAndFamily) {
+  public addVolunteering(volunteering: VolunteerAndFamily) {
     this.http.post(this.path, volunteering).subscribe(data => {
       console.log(data);
     });
   }
-  removeVolunteering(id: number) {
+  public removeVolunteering(id: number) {
     this.http.delete(this.path + id).subscribe(data => {
       console.log(data);
     });

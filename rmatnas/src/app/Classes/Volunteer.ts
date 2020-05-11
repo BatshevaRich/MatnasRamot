@@ -8,10 +8,10 @@ export class Volunteer {
     Age: string;
     Comments: string;
     IsActive: boolean;
-
-// tslint:disable-next-line: max-line-length
-    constructor(id: number, Name: string, telephone: string, pelephone: string, email: string, address: string, birthdate: string) {
-        this.Id = id;
+    //////////////////// look up optional params
+    // tslint:disable-next-line: max-line-length
+    constructor(Name: string, telephone: string, pelephone: string, email: string, address: string, birthdate: string) {
+        // this.Id = id;
         this.Name = Name;
         this.Telephone = telephone;
         this.Pelephone = pelephone;
@@ -20,5 +20,11 @@ export class Volunteer {
         this.Age = birthdate;
         this.IsActive = true;
     }
+
+    public CalculateAge() {
+        debugger;
+        const birthday = new Date(this.Age);
+        const timeDiff = Math.abs(Date.now() - birthday.getTime());
+        return Math.floor((timeDiff / (1000 * 3600 * 24)) / 365.25);
+    }
 }
-    

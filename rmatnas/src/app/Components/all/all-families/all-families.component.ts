@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Family } from '../../../Classes/Family';
 import { FamilyService } from 'src/app/services/family.service';
 @Component({
@@ -8,14 +8,23 @@ import { FamilyService } from 'src/app/services/family.service';
 })
 export class AllFamiliesComponent implements OnInit {
   families: Family[] = [];
-
+  @Input() vId: number;
   search = '';
   constructor(public fs: FamilyService) { }
 
+  inp = false;
   ngOnInit() {
-    this.fs.getFamilies().subscribe(data => {
-      this.families = data;
-    });
+    if (this.vId) {
+      this.inp = true;
+      this.fs.getFamiliesByVolunteer(this.vId).subscribe(data => {
+        this.families = data;
+        console.log(data);
+      });
+     } else {
+      this.fs.getFamilies().subscribe(data => {
+        this.families = data;
+      });
+    }
   }
 
   delete(f: number) {

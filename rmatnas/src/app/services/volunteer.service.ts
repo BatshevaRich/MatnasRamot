@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Volunteer } from '../Classes/Volunteer';
 import { baseURL } from '../../environments/environment';
+import { Category } from '../Classes/Category';
 @Injectable({
   providedIn: 'root'
 })
@@ -18,14 +19,9 @@ export class VolunteerService {
     );
   }
   addVolunteer(volunteer: Volunteer) {
-    // const head = {params: new HttpParams().set ('newVolunteer','volunteer')};
-    const s = volunteer.Age;
-    volunteer = new Volunteer(52, 'dgfgg', null, null, null, null, s);
-    this.http
-      .post(this.path, volunteer)
-      .subscribe(data => {
-        console.log(data);
-      });
+    // returns id to be updated in table
+    return this.http
+      .post(this.path, volunteer).toPromise().then(res => res);
   }
   updateVolunteer(volunteer: Volunteer) {
     // const head={params:new HttpParams() ('newVolunteer',volunteer)};
@@ -37,5 +33,8 @@ export class VolunteerService {
   removeVolunteer(id: number) {
     // const head={params:new HttpParams() ('newVolunteer',volunteer)};
     this.http.delete(this.path + '/' + id).subscribe(x => console.log(x));
+  }
+  getVolunteersByCategoryAndFamily(idFamily: number, category: Category): Observable<Volunteer[]> {
+    return this.http.get<Volunteer[]>(this.path + '/familyandcategory/' + idFamily + '&category=' + category);
   }
 }

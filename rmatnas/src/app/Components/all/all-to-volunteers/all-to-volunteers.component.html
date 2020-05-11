@@ -1,0 +1,19 @@
+<p>all-to-volunteers works!</p>
+<div class="card-body">
+  <div *ngFor="let v of families" class="list-group-flush text-right">
+    <p>{{ v.LastName }}</p>
+    <a
+      style="background-color:#e27216d9"
+      routerLink="/list/family/{{ v.Id }}"
+      class="list-group-item list-group-item-info"
+      >לפרטים</a
+    >
+    <input
+      type="button"
+      style="background-color:#bf0000b0"
+      (click)="delete(v.Id)"
+      value="הסרה"
+      class="list-group-item list-group-item-info"
+    />
+  </div>
+</div>
