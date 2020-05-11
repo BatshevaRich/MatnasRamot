@@ -10,6 +10,7 @@ import { VolunteerService } from 'src/app/services/volunteer.service';
   styleUrls: ['./volunteer.component.css']
 })
 export class VolunteerComponent implements OnInit, OnDestroy {
+  chooseTab: string;
   volunteer: Volunteer;
   id: number;
   @Input() vId: number;

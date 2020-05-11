@@ -11,7 +11,7 @@ namespace Dal
     {
         public static Families CastFamily(Family family)
         {
-            return new Families()
+            return family == null? null: new Families()
             {
                 Id = family.Id,
                 FirstNameFather = family.FirstNameFather,
@@ -31,7 +31,7 @@ namespace Dal
 
         internal static VolunteerAndEvent CastVolunteerAndEvent(Common.VolunteerAndEvent vae)
         {
-           return new VolunteerAndEvent()
+           return vae == null? null:  new VolunteerAndEvent()
            {
                Id=vae.Id,
                Categories =CastCategory( vae.Category),
@@ -44,7 +44,7 @@ namespace Dal
 
         internal static OrganizationAndFamily CastOrganizationAndFamily(Common.OrganizationAndFamily oaf)
         {
-            return new OrganizationAndFamily()
+            return oaf == null? null: new OrganizationAndFamily()
             {
                 Id = oaf.Id,
                 Categories = CastCategory(oaf.Category),
@@ -57,7 +57,7 @@ namespace Dal
 
         internal static VolunteerAndFamily CastVolunteerAndFamily(Common.VolunteerAndFamily vaf)
         {
-            return new VolunteerAndFamily()
+            return vaf == null? null: new VolunteerAndFamily()
             {
                 Id = vaf.Id,
                 Categories =Mapper.CastCategory( vaf.Category),
@@ -70,7 +70,7 @@ namespace Dal
 
         internal static Organization CastOrganization(Common.Organization organization)
         {
-            return new Organization()
+            return organization == null? null: new Organization()
             {
                 Id = organization.Id,
                 Name = organization.Name,
@@ -84,7 +84,7 @@ namespace Dal
 
         internal static Common.Organization CastOrganizationToComon(Organization organization)
         {
-            return new Common.Organization()
+            return organization == null? null: new Common.Organization()
             {
                 Id = organization.Id,
                 Name = organization.Name,
@@ -98,7 +98,7 @@ namespace Dal
 
         internal static Common.VolunteerAndEvent CastVolunteerAndEventToComon(VolunteerAndEvent vae)
         {
-            return new Common.VolunteerAndEvent()
+            return vae == null? null: new Common.VolunteerAndEvent()
             {
                 Id = vae.Id,
                 Category = CastCategoryToCommon(vae.Categories),
@@ -111,7 +111,7 @@ namespace Dal
 
         internal static Common.OrganizationAndFamily CastOrganizationAndFamilyToComon(OrganizationAndFamily oaf)
         {
-            return new Common.OrganizationAndFamily()
+            return oaf == null? null: new Common.OrganizationAndFamily()
             {
                 Id= oaf.Id,
                 Category =CastCategoryToCommon (oaf.Categories),
@@ -124,7 +124,7 @@ namespace Dal
 
         internal static Common.VolunteerAndFamily CastVolunteerAndFamilyToComon(VolunteerAndFamily vaf)
         {
-            return new Common.VolunteerAndFamily()
+            return vaf == null? null: new Common.VolunteerAndFamily()
             {
                 Id = vaf.Id,
                 Category = Mapper.CastCategoryToCommon(vaf.Categories),
@@ -137,7 +137,7 @@ namespace Dal
 
         public static Family CastFamilyToComon(Families family)
         {
-            return new Family()
+            return family == null? null: new Family()
             {
                 Id = family.Id,
                 FirstNameFather = family.FirstNameFather,
@@ -157,7 +157,7 @@ namespace Dal
 
         public static Categories CastCategory(Category category)
         {
-            return new Categories
+            return category == null? null: new Categories
             {
                 Id = category.Id,
                 Name = category.Name
@@ -165,7 +165,7 @@ namespace Dal
         }
         public static Category CastCategoryToCommon(Categories category)
         {
-            return new Category
+            return category == null ? null: new Category
             {
                 Id = category.Id,
                 Name = category.Name
@@ -173,7 +173,7 @@ namespace Dal
         }
         public static Group CastGroupToComon(Groups group)
         {
-            return new Group()
+            return group == null? null: new Group()
             {
                 Id = group.Id,
                 Address = group.Address,
@@ -186,7 +186,7 @@ namespace Dal
         }
         public static Events CastEvent(Event eventt)
         {
-            return new Events()
+            return eventt == null? null: new Events()
             {
                 dateAdded = eventt.DateAdded,
                 description = eventt.Description,
@@ -195,7 +195,7 @@ namespace Dal
         }
         public static Event CastEventToComon(Events eventt)
         {
-            return new Event()
+            return eventt == null? null: new Event()
             {
                 DateAdded = eventt.dateAdded,
                 Description = eventt.description,
@@ -204,7 +204,7 @@ namespace Dal
         }
         public static Volunteers CastVolunteer(Volunteer volunteer)
         {
-            return new Volunteers()
+            return volunteer == null ? null: new Volunteers()
             {
                 Id = volunteer.Id,
                 Address = volunteer.Address,
@@ -220,7 +220,7 @@ namespace Dal
         }
         public static Volunteer CastVolunteerToComon(Volunteers volunteer)
         {
-            return new Volunteer()
+            return volunteer == null? null: new Volunteer()
             {
                 Id = volunteer.Id,
                 Address = volunteer.Address,
@@ -236,7 +236,7 @@ namespace Dal
         }
         public static Groups CastGroup(Group group)
         {
-            return new Groups()
+            return group == null? null: new Groups()
             {
                 Id = group.Id,
                 Address = group.Address,
@@ -249,7 +249,7 @@ namespace Dal
         }
         public static User CastUser(Common.User user)
         {
-            return new User()
+            return user == null ? null : new User()
             {
                 Id = user.Id,
                 isVolunteer = user.isVolunteer,
@@ -259,7 +259,7 @@ namespace Dal
         }
         public static Common.User CastUserToComon(User user)
         {
-            return new Common.User()
+            return user == null? null: new Common.User()
             {
                 Id = user.Id,
                 isVolunteer = user.isVolunteer,

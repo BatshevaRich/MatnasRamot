@@ -9,9 +9,9 @@ namespace Bll
 {
     public static class VolunteerManager
     {
-        public static void AddVolunteer(Volunteer volunteer)
+        public static int AddVolunteer(Volunteer volunteer)
         {
-            Dal.VolunteerManager.AddVolunteer(volunteer);
+            return Dal.VolunteerManager.AddVolunteer(volunteer);
         }
         public static void RemoveVolunteer(Volunteer volunteer)
         {

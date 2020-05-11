@@ -9,14 +9,18 @@ namespace Dal
 {
     public static class VolunteerManager
     {
-        public static void AddVolunteer(Volunteer volunteer)
+        public static int AddVolunteer(Volunteer volunteer)
         {
+            int x = 0;
             Volunteers v = Mapper.CastVolunteer(volunteer);
             using (dbRamotEntities db = new dbRamotEntities())
             {
                 db.Volunteers.Add(v);
+
                 db.SaveChanges();
+                x = db.Volunteers.Local[0].Id;
             }
+            return x;
         }
         public static void RemoveVolunteer(Volunteer volunteer)
         {
@@ -77,8 +81,8 @@ namespace Dal
         {
             using (dbRamotEntities db = new dbRamotEntities())
             {
-                var volunteersDb= db.Volunteers.Where(v=> v.Categories.Any(c=>c.Name==category.Name) && !v.VolunteerAndFamily.Any(vf=> vf.IdFamily==idFamily));
-                List<Volunteer> volunteers =new List<Volunteer>();
+                var volunteersDb = db.Volunteers.Where(v => v.Categories.Any(c => c.Name == category.Name) && !v.VolunteerAndFamily.Any(vf => vf.IdFamily == idFamily));
+                List<Volunteer> volunteers = new List<Volunteer>();
                 foreach (var v in volunteersDb)
                 {
                     volunteers.Add(Mapper.CastVolunteerToComon(v));
@@ -118,15 +122,15 @@ namespace Dal
         public static IEnumerable<Family> GetFamilies(int id)
         {
             List<Family> families = new List<Family>();
-              using (dbRamotEntities db = new dbRamotEntities())
-                {    
-                var f = db.VolunteerAndFamily.Where(g => g.IdVolunteer == id).Select(g=>g.IdFamily).ToArray();
+            using (dbRamotEntities db = new dbRamotEntities())
+            {
+                var f = db.VolunteerAndFamily.Where(g => g.IdVolunteer == id).Select(g => g.IdFamily).ToArray();
                 foreach (var i in f)
                 {
                     families.Add(Mapper.CastFamilyToComon(db.Families.Find(i)));
                 }
-                
-                }
+
+            }
             return families;
         }
         public static IEnumerable<Event> GetEvents(int id)
@@ -153,7 +157,7 @@ namespace Dal
                 {
                     var s = g.Volunteers.ToList();
                     if (s.Contains(v))
-                       groups.Add(Mapper.CastGroupToComon(g));
+                        groups.Add(Mapper.CastGroupToComon(g));
                 }
             }
             return groups;

@@ -23,9 +23,9 @@ namespace WebApi.Controllers
         }
 
         // POST: api/Volunteer
-        public void Post(Volunteer newVolunteer)
+        public int Post(Volunteer newVolunteer)
         {
-            Bll.VolunteerManager.AddVolunteer(newVolunteer);
+            return Bll.VolunteerManager.AddVolunteer(newVolunteer);
         }
 
         // PUT: api/Volunteer/5
