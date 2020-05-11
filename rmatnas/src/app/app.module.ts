@@ -36,7 +36,7 @@ import { AddVGComponent } from './Components/forms/add/add-vg/add-vg.component';
 import { AddFOComponent } from './Components/forms/add/add-fo/add-fo.component';
 import { CategoryFComponent } from './Components/forms/category-f/category-f.component';
 import { AllToVolunteersComponent } from './Components/all/all-to-volunteers/all-to-volunteers.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+//import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ModuleWithProviders} from '@angular/core';
 import { MAT_LABEL_GLOBAL_OPTIONS, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatIconRegistry } from '@angular/material/icon';
@@ -225,11 +225,14 @@ export const routeList: Routes = [
     MatToolbarModule,
     MatTooltipModule,
     MatIconModule,
-    FontAwesomeModule
-    // Ng2SmartTableModule
+    // FontAwesomeModule
   ],
 
   providers: [DataServiceService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(matIconRegistry: MatIconRegistry) {
+    matIconRegistry.registerFontClassAlias('fontawesome', 'fa');
+  }
+ }

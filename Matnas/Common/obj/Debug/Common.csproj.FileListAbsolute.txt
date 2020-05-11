@@ -9,3 +9,9 @@ D:\פנינה בולבין\מסמכים\הנדסאים\Matnas\Common\obj\Debug\C
 D:\פנינה בולבין\מסמכים\הנדסאים\Matnas\Common\obj\Debug\Common.dll
 D:\פנינה בולבין\מסמכים\הנדסאים\Matnas\Common\obj\Debug\Common.pdb
 D:\פנינה בולבין\מסמכים\הנדסאים\Matnas\Common\obj\Debug\Common.csprojAssemblyReference.cache
+C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Common\bin\Debug\Common.dll
+C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Common\bin\Debug\Common.pdb
+C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Common\obj\Debug\Common.csprojAssemblyReference.cache
+C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
+C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Common\obj\Debug\Common.dll
+C:\Users\owner\Documents\GitHub\MatnasRamot\Matnas\Common\obj\Debug\Common.pdb
