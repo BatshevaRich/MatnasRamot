@@ -31,7 +31,6 @@
     "glyphicons": "^0.2.0",
     "jquery": "^3.4.1",
     "ng2-completer": "^3.0.3",
-    "ng2-smart-table": "1.1.0",
     "ngx-bootstrap": "^5.2.0",
     "node-sass": "^4.11.0",
     "popper": "^1.0.1",
@@ -43,7 +42,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.800.6",
-    "@angular/cli": "^8.3.13",
+    "@angular/cli": "^9.1.6",
     "@angular/compiler-cli": "~8.0.1",
     "@angular/language-service": "~8.0.1",
     "@types/jasmine": "^3.3.16",
