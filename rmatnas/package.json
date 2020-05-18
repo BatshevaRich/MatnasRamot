@@ -29,7 +29,7 @@
     "bootstrap": "^4.3.1",
     "font-awesome": "^4.7.0",
     "glyphicons": "^0.2.0",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "ng2-completer": "^3.0.3",
     "ngx-bootstrap": "^5.2.0",
     "node-sass": "^4.11.0",
