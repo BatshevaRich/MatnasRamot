@@ -14,7 +14,7 @@ export class VolunteerFComponent implements OnInit {
   constructor(public vs: VolunteerService) {
   }
 
-  @ViewChild('volunteerForm', { static: false }) mytemplateForm: NgForm;
+  @ViewChild('volunteerForm') mytemplateForm: NgForm;
 
   ngOnInit() {
   }
