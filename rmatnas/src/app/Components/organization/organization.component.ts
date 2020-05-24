@@ -19,13 +19,17 @@ export class OrganizationComponent implements OnInit, OnDestroy {
     this.mySubscription = ARS.params.subscribe((args) => {
       this.Id = args.organizationId;
       this.organization = ds.getOrganization(this.Id);
+      if (this.mySubscription) {
       this.mySubscription.unsubscribe();
+    }
     });
   }
   ngOnInit() {
   }
   ngOnDestroy(): void {
-    this.mySubscription.unsubscribe();
+    if (this.mySubscription) {
+      this.mySubscription.unsubscribe();
+    }
   }
 
 }

@@ -38,5 +38,11 @@ export class VolunteerFComponent implements OnInit {
     // this.mytemplateForm.form.value.Age = '0';
     // this.mytemplateForm.form.value.Address = 'default';
     this.newVolunteer = new Volunteer('default', '000000000', '000000000', 'default@ddd', 'default', '0');
+
+  ngOnDestroy() {
+    if (this.mySubscription) {
+      this.mySubscription.unsubscribe();
+    }
+  }
   }
 }

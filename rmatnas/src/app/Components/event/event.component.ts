@@ -21,13 +21,17 @@ export class EventComponent implements OnInit, OnDestroy {
       es.getEvent(this.id).subscribe(e => {
         this.event = e;
       });
+      if (this.mySubscription) {
       this.mySubscription.unsubscribe();
+    }
     });
   }
   ngOnInit() {
   }
   ngOnDestroy(): void {
-    this.mySubscription.unsubscribe();
+    if (this.mySubscription) {
+      this.mySubscription.unsubscribe();
+    }
   }
 
 }

@@ -20,7 +20,9 @@ export class VolunteerComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.mySubscription.unsubscribe();
+    if (this.mySubscription) {
+      this.mySubscription.unsubscribe();
+    }
 
   }
 

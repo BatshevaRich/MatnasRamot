@@ -46,4 +46,9 @@ export class FamilyFComponent implements OnInit {
   selectCategories(e) {
  this.categories = e;
   }
+  ngOnDestroy() {
+    if (this.mySubscription) {
+      this.mySubscription.unsubscribe();
+    }
+  }
 }

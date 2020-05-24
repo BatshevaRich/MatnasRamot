@@ -23,7 +23,9 @@ export class ChooseCategoryComponent implements OnInit, OnDestroy {
   ngOnInit() {
   }
   ngOnDestroy() {
-    this.mySubscription.unsubscribe();
+    if (this.mySubscription) {
+      this.mySubscription.unsubscribe();
+    }
   }
   add(c: Category) {
     if (this.categoriesSelected.includes(c)) {

@@ -20,12 +20,16 @@ export class VolunteerFamilyComponent implements OnInit {
       vs.getVolunteering(this.id).subscribe(v => {
         this.volunteerfamily = v;
       });
-      this.mySubscription.unsubscribe(); });
+      if (this.mySubscription) {
+      this.mySubscription.unsubscribe();
+    } });
   }
 
   // tslint:disable-next-line: use-lifecycle-interface
   ngOnDestroy(): void {
-    this.mySubscription.unsubscribe();
+    if (this.mySubscription) {
+      this.mySubscription.unsubscribe();
+    }
   }
 
   ngOnInit() {
