@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Common;
-
+using Newtonsoft.Json.Linq;
 namespace WebApi.Controllers
 {
     public class VolunteerController : ApiController
@@ -23,9 +23,11 @@ namespace WebApi.Controllers
         }
 
         // POST: api/Volunteer
-        public int Post(Volunteer newVolunteer)
+        public int Post([FromBody] JObject data)
         {
-            return Bll.VolunteerManager.AddVolunteer(newVolunteer);
+            Volunteer newVolunteer = data["volunteer"].ToObject<Volunteer>();
+            Category[] category = data["categories"].ToObject<Category[]>();
+            return Bll.VolunteerManager.AddVolunteer(newVolunteer, category);
         }
 
         // PUT: api/Volunteer/5
@@ -46,7 +48,7 @@ namespace WebApi.Controllers
             return Bll.VolunteerManager.GetCategories(id);
         }
         [Route("api/addCategoryToVolunteer")]
-        public void AddCategory(int id, [FromBody] Category category)
+        public void AddCategory(int id, [FromBody] Category[] category)
         {
             Bll.VolunteerManager.AddCategory(id, category);
         }

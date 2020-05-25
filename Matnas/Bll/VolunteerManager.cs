@@ -9,9 +9,9 @@ namespace Bll
 {
     public static class VolunteerManager
     {
-        public static int AddVolunteer(Volunteer volunteer)
+        public static int AddVolunteer(Volunteer volunteer, Category[] category)
         {
-            return Dal.VolunteerManager.AddVolunteer(volunteer);
+            return Dal.VolunteerManager.AddVolunteer(volunteer, category);
         }
         public static void RemoveVolunteer(Volunteer volunteer)
         {
@@ -45,7 +45,7 @@ namespace Bll
             Dal.VolunteerManager.RemoveCategotyFromVolunteer(id, category);
         }
 
-        public static void AddCategory(int id, Category category)
+        public static void AddCategory(int id, Category[] category)
         {
             Dal.VolunteerManager.AddCategotyToVolunteer(id, category);
         }

@@ -9,17 +9,24 @@ namespace Dal
 {
     public static class VolunteerManager
     {
-        public static int AddVolunteer(Volunteer volunteer)
+        public static int AddVolunteer(Volunteer volunteer, Category[] category)
         {
             int x = 0;
             Volunteers v = Mapper.CastVolunteer(volunteer);
             using (dbRamotEntities db = new dbRamotEntities())
             {
                 db.Volunteers.Add(v);
-
+                foreach (var item in category)
+                {
+                    var test = Mapper.CastCategory(item);
+                    v.Categories.Add(Mapper.CastCategory(item));
+                    // db.SaveChanges();
+                }
                 db.SaveChanges();
                 x = db.Volunteers.Local[0].Id;
             }
+
+            AddCategotyToVolunteer(x, category);
             return x;
         }
         public static void RemoveVolunteer(Volunteer volunteer)
@@ -99,14 +106,20 @@ namespace Dal
             }
         }
 
-        public static void AddCategotyToVolunteer(int id, Category category)
+        public static void AddCategotyToVolunteer(int id, Category[] category)
         {
 
             using (dbRamotEntities db = new dbRamotEntities())
             {
                 Volunteers v = db.Volunteers.Find(id);
-                v.Categories.Add(Mapper.CastCategory(category));
-                db.SaveChanges();
+                foreach (var item in category)
+                {
+                    var test = Mapper.CastCategory(item);
+
+                    v.Categories.Add(Mapper.CastCategory(item));
+                    db.SaveChanges();
+                }
+
             }
         }
         public static void RemoveCategotyFromVolunteer(int id, Category category)

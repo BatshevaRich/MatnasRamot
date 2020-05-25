@@ -18,10 +18,13 @@ export class VolunteerService {
       this.path + '/' + id
     );
   }
-  addVolunteer(volunteer: Volunteer) {
+  addVolunteer(volunteer: Volunteer, categories: Category[]) {
     // returns id to be updated in table
+    var myData = {};
+    myData.volunteer = volunteer
+    myData.categories = categories
     return this.http
-      .post(this.path, volunteer).toPromise().then(res => res);
+      .post(this.path, myData).toPromise().then(res => res);
   }
   updateVolunteer(volunteer: Volunteer) {
     // const head={params:new HttpParams() ('newVolunteer',volunteer)};
@@ -36,5 +39,14 @@ export class VolunteerService {
   }
   getVolunteersByCategoryAndFamily(idFamily: number, category: Category): Observable<Volunteer[]> {
     return this.http.get<Volunteer[]>(this.path + '/familyandcategory/' + idFamily + '&category=' + category);
+  }
+  getCategoriesOfVolunteer(id: number) {
+    return this.http.get<Category[]>(baseURL + 'CategoryVolunteer/' + id);
+  }
+  addCategoriesToVolunteer(id: number, categories: Category[]) {
+    return this.http.get(baseURL + 'CategoryVolunteer/' + id + '&category=' + categories);
+  }
+  getVolunteersForFamily(fId: number): Observable<Volunteer[]> {
+    return this.http.get<Volunteer[]>(this.path + '/volunteerfamily/' + fId );
   }
 }
