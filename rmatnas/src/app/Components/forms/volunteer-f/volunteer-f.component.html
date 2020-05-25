@@ -1,5 +1,6 @@
 <div dir="rtl">
-  <h2 mat-dialog-title>הוספת מתנדבת</h2>
+  <h2 *ngIf="!data.update" mat-dialog-title>הוספת מתנדבת</h2>
+  <h2 *ngIf="data.update" mat-dialog-title>עדכון מתנדבת</h2>
   <mat-dialog-content>
     <form (ngSubmit)="submitForm(volunteerForm)" class="text-right" #volunteerForm="ngForm">
       <div class="form-group">
@@ -43,7 +44,9 @@
       </div>
       <div mat-dialog-actions>
       <button mat-button mat-dialog-close class="btn btn-primary" [mat-dialog-close]="token" type="submit" [disabled]="volunteerForm.invalid">
-        להוספת המתנדבת
+        <span *ngIf="!data.update" mat-dialog-title>להוספת המתנדבת</span>
+
+        <span *ngIf="data.update" mat-dialog-title>לעדכון המתנדבת</span>
       </button>
     </div>
     </form>

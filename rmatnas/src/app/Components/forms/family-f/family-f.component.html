@@ -1,5 +1,6 @@
 <div dir="rtl">
-  <h2 mat-dialog-title>הוספת משפחה</h2>
+  <h2 *ngIf="!data.update" mat-dialog-title>הוספת משפחה</h2>
+  <h2 *ngIf="data.update" mat-dialog-title>עדכון משפחה</h2>
   <mat-dialog-content >
   <form
     (ngSubmit)="submitForm(familyForm)"
@@ -170,8 +171,10 @@
       class="btn btn-primary"
       type="submit"
       
-    ><!-- [disabled]="familyForm.invalid" -->
-      להוספת המשפחה
+    >
+    <span *ngIf="!data.update" mat-dialog-title>להוספת המשפחה</span>
+
+        <span *ngIf="data.update" mat-dialog-title>לעדכון המשפחה</span>
     </button></div>
   </form>
 </mat-dialog-content>

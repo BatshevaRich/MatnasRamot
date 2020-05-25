@@ -6,6 +6,8 @@ import { ActivatedRoute } from '@angular/router';
 import { OnDestroy } from '@angular/core';
 import { FamilyService } from 'src/app/services/family.service';
 import { Category } from 'src/app/Classes/Category';
+import { FamilyFComponent } from '../forms/family-f/family-f.component';
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-family',
   templateUrl: './family.component.html',
@@ -29,7 +31,7 @@ export class FamilyComponent implements OnInit, OnDestroy {
   mySubscription2: Subscription;
   @Input() fId: number;
   chooseTab: string;
-  constructor(public fs: FamilyService, public ARS: ActivatedRoute) {
+  constructor(public fs: FamilyService, public ARS: ActivatedRoute, public dialog: MatDialog) {
 
     // this.mySubscription = ARS.params.subscribe((args) => {
     //   this.id = args.familyId;
@@ -55,5 +57,17 @@ export class FamilyComponent implements OnInit, OnDestroy {
       this.mySubscription.unsubscribe();
     }
     // this.mySubscription2.unsubscribe();
+  }
+
+  FamilyopenDialog() {
+    const dialogRef = this.dialog.open(FamilyFComponent, {
+      data: {
+        dataKey: this.family,
+        update: true,
+        id: this.family.Id
+      }
+    });
+    dialogRef.afterClosed().subscribe(res => {
+    });
   }
 }

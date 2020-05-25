@@ -16,16 +16,22 @@ export class AppComponent {
 
   }
   VolunteeropenDialog() {
-    const dialogRef = this.dialog.open(VolunteerFComponent);
-
+    const dialogRef = this.dialog.open(VolunteerFComponent, {
+      data: {
+        dataKey: null,
+        update: false
+      }
+    });
     dialogRef.afterClosed().subscribe(res => {
-      debugger
-      console.log(res)
     });
   }
   FamilyopenDialog() {
-    const dialogRef = this.dialog.open(FamilyFComponent);
-
+    const dialogRef = this.dialog.open(FamilyFComponent, {
+      data: {
+        dataKey: null,
+        update: false
+      }
+    });
     dialogRef.afterClosed().subscribe(result => {
     });
   }

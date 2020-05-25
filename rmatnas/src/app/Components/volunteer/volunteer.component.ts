@@ -5,6 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { DataServiceService } from '../../Services/data-service.service';
 import { VolunteerService } from 'src/app/services/volunteer.service';
 import { Category } from 'src/app/Classes/Category';
+import { MatDialog } from '@angular/material/dialog';
+import { VolunteerFComponent } from '../forms/volunteer-f/volunteer-f.component';
 @Component({
   selector: 'app-volunteer',
   templateUrl: './volunteer.component.html',
@@ -17,7 +19,7 @@ export class VolunteerComponent implements OnInit, OnDestroy {
   id: number;
   @Input() vId: number;
   mySubscription: Subscription;
-  constructor(public vs: VolunteerService, public ARS: ActivatedRoute) {
+  constructor(public vs: VolunteerService, public ARS: ActivatedRoute, public dialog: MatDialog) {
     this.volunteer = new Volunteer('..', '..', '..', '..', '..', '1999');
   }
 
@@ -35,6 +37,18 @@ export class VolunteerComponent implements OnInit, OnDestroy {
         this.categories = c;
         console.log(c);
       });
+    });
+  }
+
+  VolunteeropenDialog() {
+    const dialogRef = this.dialog.open(VolunteerFComponent, {
+      data: {
+        dataKey: this.volunteer,
+        update: true,
+        id: this.volunteer.Id
+      }
+    });
+    dialogRef.afterClosed().subscribe(res => {
     });
   }
 

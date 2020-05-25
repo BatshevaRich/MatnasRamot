@@ -7,7 +7,6 @@
             <h4>משפחת: {{ family.LastName }}</h4>
           </div>
           <div class="card-body">
-            <h5 class="card-title">פרטים</h5>
             <div class="card-text">
               <p>שם פרטי אב: {{ family.FirstNameFather }}</p>
               <p>שם פרטי אם: {{ family.FirstNameMother }}</p>
@@ -25,7 +24,7 @@
               </div>
             </div>
             <p class="card-text"></p>
-            <button class="btn btn-primary">לעריכת הפרטים</button>
+            <button class="btn btn-primary" (click)="FamilyopenDialog()">לעריכת הפרטים</button>
           </div>
         </div>
       </div>

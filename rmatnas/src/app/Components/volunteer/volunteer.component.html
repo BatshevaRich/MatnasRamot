@@ -7,7 +7,6 @@
             <h4>שם: {{ volunteer.Name }}</h4>
           </div>
           <div class="card-body">
-            <h5 class="card-title">פרטים</h5>
             <div class="card-text">
               <p>טלפון: {{ volunteer.Telephone }}</p>
               <p>פלאפון: {{ volunteer.Pelephone | phone }}</p>
@@ -19,7 +18,7 @@
               </div>
             </div>
             <p class="card-text"></p>
-            <button class="btn btn-primary">לעריכת הפרטים</button>
+            <button class="btn btn-primary" (click)="VolunteeropenDialog()">לעריכת הפרטים</button>
           </div>
         </div>
       </div>
