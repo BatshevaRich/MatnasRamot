@@ -35,4 +35,14 @@ export class AppComponent {
     dialogRef.afterClosed().subscribe(result => {
     });
   }
+  ToVolunteeropenDialog() {
+    const dialogRef = this.dialog.open(FamilyFComponent, {
+      data: {
+        dataKey: null,
+        update: false
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
 }

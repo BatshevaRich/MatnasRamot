@@ -12,10 +12,12 @@
           <li class="nav-item">
             <a class="nav-link" routerLink="/main" routerLinkActive="activeLink" >ראשי</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/list/volunteer-family" routerLinkActive="activeLink"
-              style="color: purple">התנדבויות</a>
-          </li>
+          <button mat-button [matMenuTriggerFor]="menuT" style="font-size: x-large; color: purple;">התנדבויות</button>
+          <mat-menu #menuT="matMenu">
+            <button mat-menu-item class="nav-link" [routerLink]="'/list/vaf'"
+              routerLinkActive="activeLink"><i class="fa fa-list"></i> כל ההתנדבויות</button>
+            <button mat-menu-item (click)="VolunteeropenDialog()"><i class="fa fa-user-plus"> הוספה</i></button>
+          </mat-menu>
 
           <button mat-button [matMenuTriggerFor]="menu" style="font-size: x-large; color: #bf0000b0;">מתנדבות</button>
           <mat-menu #menu="matMenu">

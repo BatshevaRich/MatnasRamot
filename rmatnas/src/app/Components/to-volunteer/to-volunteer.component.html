@@ -1,1 +1,22 @@
-<p>to-volunteer works!</p>
+<div dir="rtl" class="text-right" style="padding-top: 3%">
+    <div class="container">
+      <div class="row">
+          <div class="card">
+            <div class="card-header">
+              <h4>התנדבות</h4>
+            </div>
+            <div class="card-body">
+              <div class="card-text">
+                <p>קטגוריה: {{ toVolunteer.Category.Name }}</p>
+                <p>מתנדבת: {{ toVolunteer.Volunteer.Name }}</p>
+                <p>משפחה: {{ toVolunteer.Family.LastName }}</p>
+                <p>תאריך: {{ toVolunteer.DateAdded | date:"MMMM dd yyyy" }}</p>
+                <p>הערות: {{ toVolunteer.Comments }}</p>
+              </div>
+              <p class="card-text"></p>
+              <button class="btn btn-primary" >לעריכת הפרטים</button>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>

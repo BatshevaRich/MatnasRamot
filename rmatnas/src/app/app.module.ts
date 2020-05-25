@@ -37,7 +37,7 @@ import { AddFOComponent } from './Components/forms/add/add-fo/add-fo.component';
 import { CategoryFComponent } from './Components/forms/category-f/category-f.component';
 import { AllToVolunteersComponent } from './Components/all/all-to-volunteers/all-to-volunteers.component';
 //import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ModuleWithProviders} from '@angular/core';
+import { ModuleWithProviders } from '@angular/core';
 import { MAT_LABEL_GLOBAL_OPTIONS, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -74,6 +74,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatDividerModule } from '@angular/material/divider';
+import { ToVolunteerComponent } from './Components/to-volunteer/to-volunteer.component';
 
 export const routeList: Routes = [
   { path: '', component: /*VolunteerFComponent*/ HomeComponent },
@@ -83,6 +84,14 @@ export const routeList: Routes = [
   {
     path: 'list',
     children: [
+      {
+        path: 'vaf', component: AllToVolunteersComponent,
+        children: [
+          { path: ':vId/volunteers', component: AllFamiliesComponent },
+          { path: ':vId/families', component: AllOrganizationsComponent },
+          { path: ':vId/events', component: AllEventsComponent }
+        ]
+      },
       {
         path: 'volunteers', component: AllVolunteersComponent,
         children: [
@@ -100,8 +109,7 @@ export const routeList: Routes = [
         ]
       },
       {
-        path: 'volunteer/:volunteerId',
-        component: VolunteerComponent,
+        path: 'volunteer/:volunteerId', component: VolunteerComponent,
         children: [
           { path: 'families', component: AllFamiliesComponent },
           { path: 'organizations', component: AllOrganizationsComponent },
@@ -181,7 +189,7 @@ export const routeList: Routes = [
     AddVGComponent,
     AddFOComponent,
     AllToVolunteersComponent,
-    // ToVolunteerComponent,
+    ToVolunteerComponent,
     CategoryFComponent
   ],
   imports: [
@@ -243,4 +251,4 @@ export class AppModule {
   constructor(matIconRegistry: MatIconRegistry) {
     matIconRegistry.registerFontClassAlias('fontawesome', 'fa');
   }
- }
+}
