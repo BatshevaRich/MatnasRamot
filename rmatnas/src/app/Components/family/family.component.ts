@@ -12,8 +12,17 @@ import { Category } from 'src/app/Classes/Category';
   styleUrls: ['./family.component.css']
 })
 export class FamilyComponent implements OnInit, OnDestroy {
-  // tslint:disable-next-line: max-line-length
-  family: Family = new Family(1, 'default', 'default', 'hgfds', '87654687465', '6785468654', '687465654', 'default', 'default@dk', 'default', 0, 'default', 'default');
+  family: Family = new Family('fathername',
+  'mothername',
+  'lastname',
+  '0',
+  '0',
+  '0',
+  'address',
+  'status',
+  2,
+  'reason',
+  'reference');
   mySubscription: Subscription;
   id: number;
   categories: Category[] = [];
@@ -35,10 +44,10 @@ export class FamilyComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.fs.getFamily(this.fId).subscribe(f => {
       this.family = f;
-      this.fs.getCategoriesOfFamily(this.fId).subscribe(c => {
-        this.categories = c;
-        console.log(c);
-      });
+      // this.fs.getCategoriesOfFamily(this.fId).subscribe(c => {
+      //   this.categories = c;
+      //   console.log(c);
+      // });
     });
   }
   ngOnDestroy(): void {

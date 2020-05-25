@@ -29,7 +29,17 @@ export class AddVFComponent implements OnInit {
   }
   ngOnInit() {
     this.categories.push(new Category());
-    this.families.push(new Family(1, 'default', 'default', 'hgfds', '87654687465', '6785468654', '687465654', 'default', 'default@dk', 'default', 0, 'default', 'default'));
+    this.families.push(new Family('fathername',
+    'mothername',
+    'lastname',
+    '0',
+    '0',
+    '0',
+    'address',
+    'status',
+    2,
+    'reason',
+    'reference'));
     // this.volunteers.push(new Volunteer());
   }
   onChangeFamily(newValue) {

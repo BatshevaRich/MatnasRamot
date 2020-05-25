@@ -30,6 +30,7 @@ namespace WebApi.Controllers
             return Bll.VolunteerManager.AddVolunteer(newVolunteer, category);
         }
 
+        [HttpPut]
         // PUT: api/Volunteer/5
         public void Put(int id, [FromBody]Volunteer value)
         {

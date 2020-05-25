@@ -20,9 +20,9 @@ export class VolunteerService {
   }
   addVolunteer(volunteer: Volunteer, categories: Category[]) {
     // returns id to be updated in table
-    var myData = {};
-    myData.volunteer = volunteer
-    myData.categories = categories
+    const myData =  {} as any;
+    myData.volunteer = volunteer;
+    myData.categories = categories;
     return this.http
       .post(this.path, myData).toPromise().then(res => res);
   }

@@ -26,16 +26,15 @@ export class FamilyService {
   getFamily(id: number): Observable<Family> {
     return this.http.get<Family>(this.path + '/' + id);
   }
-  addFamily(family: Family) {
-    // const head = {params: new HttpParams().set ('newFamily','Family')};
-    const s = family;
-    const newFamily = new Family(52, 'dgfgg', null, null, null, null, null, null, null, null, null, null, null);
 
-    this.http
-      .post(this.path, family)
-      .subscribe(data => {
-        console.log(data);
-      });
+  addFamily(family: Family, categories: Category[]) {
+    const myData =  {} as any;
+    myData.family = family;
+    myData.categories = categories;
+    debugger
+    return this.http
+      .post(this.path, myData)
+      .toPromise().then(res => res);
   }
   updateFamily(family: Family) {
     // const head={params:new HttpParams() ('newFamily',Family)};

@@ -27,14 +27,21 @@ export class ChooseCategoryComponent implements OnInit, OnDestroy {
       this.mySubscription.unsubscribe();
     }
   }
-  add(c: Category) {
-    if (this.categoriesSelected.includes(c)) {
-      this.categoriesSelected = this.categoriesSelected.filter(co => co.Id !== c.Id);
+  add(event, c: Category) {
+    if (event.currentTarget.checked) {
+      if (this.categoriesSelected.includes(c)) {
+        this.categoriesSelected = this.categoriesSelected.filter(co => co.Id !== c.Id);
+        this.selectc.emit(this.categoriesSelected);
+      } else {
+        this.categoriesSelected.push(c);
+        this.selectc.emit(this.categoriesSelected);
+      }
     } else {
-      this.categoriesSelected.push(c);
+      const index: number = this.categoriesSelected.indexOf(c);
+      if (index !== -1) {
+        this.categoriesSelected.splice(index, 1);
+        this.selectc.emit(this.categoriesSelected);
+      }
     }
-  }
-  finishCheck() {
-    this.selectc.emit(this.categoriesSelected);
   }
 }

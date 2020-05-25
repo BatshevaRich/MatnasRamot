@@ -172,7 +172,6 @@ export class DataServiceService {
     f2.PelephoneMother = f.PelephoneMother;
     f2.Telephone = f.Telephone;
     f2.Address = f.Address;
-    f2.Email = f.Email;
     f2.NumChildren = f.NumChildren;
     f2.Status = f.Status;
     f2.Reference = f.Reference;

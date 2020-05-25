@@ -22,7 +22,6 @@ export class Volunteer {
     }
 
     public CalculateAge() {
-        debugger;
         const birthday = new Date(this.Age);
         const timeDiff = Math.abs(Date.now() - birthday.getTime());
         return Math.floor((timeDiff / (1000 * 3600 * 24)) / 365.25);

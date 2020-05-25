@@ -16,21 +16,19 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class FamilyFComponent implements OnInit {
   // tslint:disable-next-line: max-line-length
   newFamily: Family = new Family(
-    1,
-    'ברירת מחדל',
-    'ברירת מחדל',
-    'ברירת מחדל',
+    
+    'fathername',
+    'mothername',
+    'lastname',
     '0',
     '0',
     '0',
-    'ברירת מחדל',
-    'aaa@a',
-    'ברירת מחדל',
+    'address',
+    'status',
     2,
-    'לל',
-    'לל'
+    'reason',
+    'reference'
   );
-  mySubscription: Subscription;
   id: number;
   categories: Category[] = [];
   constructor(public fs: FamilyService, private cs: CategoryService, private dialogRef: MatDialogRef<FamilyFComponent>) {
@@ -46,8 +44,12 @@ export class FamilyFComponent implements OnInit {
       f.reset();
   }
   selectCategories(e) {
- this.categories = e;
+    this.categoriesSelected = [];
+    e.forEach(element => {
+      this.add(element)
+    });
   }
+
   ngOnDestroy() {
     if (this.mySubscription) {
       this.mySubscription.unsubscribe();

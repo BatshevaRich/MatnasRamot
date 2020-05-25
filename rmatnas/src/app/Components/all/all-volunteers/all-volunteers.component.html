@@ -8,7 +8,7 @@
               <!-- <input type="text" placeholder="לחיפוש..." [(ngModel)]="search" /> -->
               <mat-form-field>
                 <mat-label>Filter</mat-label>
-                <input matInput (keyup)="applyFilter($event)">
+                <input matInput (keyup)="applyFilter($event.target.value)">
               </mat-form-field>
             </div>
           </div>

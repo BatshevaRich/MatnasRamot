@@ -45,11 +45,11 @@ export class AllFamiliesComponent implements OnInit, AfterViewInit {
   inp = false;
 
   constructor(public fs: FamilyService, private changeDetectorRefs: ChangeDetectorRef) {
-
+    this.dataSource.filterPredicate =
+      (data: Details, filter: string) => data.LastName.indexOf(filter) !== -1;
   }
   ngOnInit() {
     if (this.fId) {
-      debugger
       this.inp = true;
       this.fs.getFamiliesByVolunteer(this.fId).subscribe(data => {
         ///TODO: check if empty results, if empty- do not display table
@@ -83,5 +83,11 @@ export class AllFamiliesComponent implements OnInit, AfterViewInit {
   delete(f: number) {
     this.fs.removeFamily(f);
     this.families = this.families.filter(fo => fo.Id !== f);
+  }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
   }
 }

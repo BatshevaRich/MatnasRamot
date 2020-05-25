@@ -19,7 +19,7 @@
           appBorder
         />
       </label>
-      <span class="spn">      </span>
+      <span class="spn">   -   </span>
       <label>
         שם פרטי אם:
         <input
@@ -44,7 +44,7 @@
           required
         />
       </label>
-      <br />
+      <!-- <br />
       <label>
         מייל:
         <input
@@ -57,7 +57,7 @@
           [(ngModel)]="newFamily.Email"
           name="Email"
         />
-      </label>
+      </label> -->
       <br />
       <label>
         פלאפון אב:
@@ -163,7 +163,7 @@
       </label>
       <br />
     </div>
-    <app-choose-category (select)="selectCategories($event)"></app-choose-category>
+    <app-choose-category (selectc)="selectCategories($event)"></app-choose-category>
     <div mat-dialog-actions>
     <button
     mat-button mat-dialog-close

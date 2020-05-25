@@ -64,10 +64,17 @@ export class VolunteerFComponent implements OnInit {
     }
   }
   add(c: Category) {
-    if (this.categoriesSelected.includes(c)) {
-      this.categoriesSelected = this.categoriesSelected.filter(co => co.Id !== c.Id);
-    } else {
+    if (!this.categoriesSelected.includes(c)) {
+    //   this.categoriesSelected = this.categoriesSelected.filter(co => co.Id !== c.Id);
+    // } else {
       this.categoriesSelected.push(c);
     }
   }
+
+  selectCategories(e) {
+    this.categoriesSelected = [];
+    e.forEach(element => {
+      this.add(element)
+    });
+     }
 }

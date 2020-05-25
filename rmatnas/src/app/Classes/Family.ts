@@ -7,15 +7,14 @@ export class Family {
     PelephoneFather: string;
     PelephoneMother: string;
     Address: string;
-    Email: string;
+    // Email: string;
     Status: string;
     NumChildren: number;
     Reference: string;
     Reason: string;
 
     // tslint:disable-next-line: max-line-length
-    constructor(id: number, fatherName: string, motherName: string, lastName: string, telephone: string, pfather: string, pmother: string, address: string, email: string, status: string, nChildren: number, reason: string, reference: string) {
-        this.Id = id;
+    constructor(fatherName: string, motherName: string, lastName: string, telephone: string, pfather: string, pmother: string, address: string, status: string, nChildren: number, reason: string, reference: string) {
         this.FirstNameFather = fatherName;
         this.FirstNameMother = motherName;
         this.LastName = lastName;
@@ -23,7 +22,7 @@ export class Family {
         this.PelephoneFather = pfather;
         this.PelephoneMother = pmother;
         this.Address = address;
-        this.Email = email;
+        // this.Email = email;
         this.Status = status;
         this.NumChildren = nChildren;
         this.Reference = reference;

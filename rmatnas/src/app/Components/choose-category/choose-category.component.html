@@ -1,63 +1,12 @@
-<!-- <span *ngFor="let c of categories"> -->
-<!-- <input  type="checkbox"  (click)="add(c)" [title]="c.Name"> -->
-<!-- <div class="checkbox">
-    <label
-      ><input type="checkbox" (click)="add(c)" [title]="c.Name" />{{
-        c.Name
-      }}</label>
-  </div> -->
-<!-- <span *ngFor="let c of categories">
-  <div class="checkbox">
-    <label>
-      <input type="checkbox" value="" (click)="add(c)" [title]="c.Name" />
-      <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
-      {{ c.Name }}
-    </label>
-  </div>
-</span> -->
 <form action="#">
   <span *ngFor="let c of categories; let i=index">
     <p>
-      <input type="checkbox" (click)="add(c)" [id]="c.Id" />
+      <input type="checkbox" (change)="add($event, c)" [id]="c.Id" />
       <label  [for]="c.Id">***{{ c.Name }}</label>
-
     </p>
     <br>
   </span>
- <!-- style="float: left; width: 20%; text-align: left;" -->
 </form>
-<!-- style="float: right; width: 75%; text-align: right;" -->
-  <!-- <p>
-    <input type="checkbox" id="test1" />
-    <label for="test1">Red</label>
-  </p>
-  <p>
-    <input type="checkbox" id="test2" checked="checked" />
-    <label for="test2">Yellow</label>
-  </p>
-  <p>
-    <input type="checkbox" id="test3" checked="checked" disabled="disabled" />
-    <label for="test3">Green</label>
-  </p>
-    <p>
-      <input type="checkbox" id="test4" disabled="disabled" />
-      <label for="test4">Brown</label>
-  </p>
-
-
-<br>
-<div class="container">
-  <h2>קטגוריות</h2>
-  <br />
-  <span *ngFor="let c of categories">
-    <label><span>{{ c.Name }}</span>     
-      <input type="checkbox" (click)="add(c)">
-      <span class="checkmark pull-left" ></span>
-    </label>
-    <br>
-  </span>
-</div> -->
 <br />
-<button class="btn btn-primary" (click)="finishCheck()">אישור</button>
 <br />
 <br />

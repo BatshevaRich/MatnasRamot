@@ -9,9 +9,9 @@ namespace Bll
 {
     public static class FamilyManager
     {
-        public static void AddFamily(Family family)
+        public static int AddFamily(Family family, Category[] categories)
         {
-            Dal.FamilyManager.AddFamily(family);
+            return Dal.FamilyManager.AddFamily(family, categories);
         }
         public static void RemoveFamily(Family family)
         {

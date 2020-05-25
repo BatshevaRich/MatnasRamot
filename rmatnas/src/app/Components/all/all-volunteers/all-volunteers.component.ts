@@ -43,24 +43,25 @@ export class AllVolunteersComponent implements OnInit, AfterViewInit {
   inp: boolean;
 
   constructor(public vs: VolunteerService, private changeDetectorRefs: ChangeDetectorRef) {
+    this.dataSource.filterPredicate =
+      (data: Details, filter: string) => data.Name.indexOf(filter) !== -1;
     if (this.vId) {
-      debugger
       this.inp = true;
       this.vs.getVolunteersForFamily(this.vId).subscribe(data => {
-      /// TODO: check if empty results, if empty- do not display table
-      this.volunteers = data;
-      this.dataSource.data = data;
-      console.log(this.dataSource);
-      this.resultsLength = this.dataSource.data.length;
-    });
+        /// TODO: check if empty results, if empty- do not display table
+        this.volunteers = data;
+        this.dataSource.data = data;
+        console.log(this.dataSource);
+        this.resultsLength = this.dataSource.data.length;
+      });
     } else {
-    this.vs.getVolunteers().subscribe((volunteers: Volunteer[]) => {
-      this.volunteers = volunteers;
-      this.dataSource.data = volunteers;
-      console.log(this.dataSource);
-      this.resultsLength = this.dataSource.data.length;
-    });
-  }
+      this.vs.getVolunteers().subscribe((volunteers: Volunteer[]) => {
+        this.volunteers = volunteers;
+        this.dataSource.data = volunteers;
+        console.log(this.dataSource);
+        this.resultsLength = this.dataSource.data.length;
+      });
+    }
   }
 
   ngOnInit(): void {
@@ -89,10 +90,10 @@ export class AllVolunteersComponent implements OnInit, AfterViewInit {
     return Math.floor((timeDiff / (1000 * 3600 * 24)) / 365.25);
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
     this.dataSource.filter = filterValue;
-    this.dataSource.data = this.dataSource.filteredData;
   }
 
 }

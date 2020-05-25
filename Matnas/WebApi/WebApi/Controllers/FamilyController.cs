@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using Common;
+using Newtonsoft.Json.Linq;
 
 namespace WebApi.Controllers
 {
@@ -40,9 +41,11 @@ namespace WebApi.Controllers
         }
 
         // POST: api/Family
-        public void Post([FromBody]Family family)
+        public int Post([FromBody] JObject data)
         {
-            Bll.FamilyManager.AddFamily(family);
+            Family newFamily = data["family"].ToObject<Family>();
+            Category[] category = data["categories"].ToObject<Category[]>();
+            return Bll.FamilyManager.AddFamily(newFamily, category);
         }
 
         // PUT: api/Family/5

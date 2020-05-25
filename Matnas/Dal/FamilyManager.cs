@@ -9,14 +9,28 @@ namespace Dal
 {
     public static class  FamilyManager
     {
-        public static void AddFamily(Family family)
+        public static int AddFamily(Family family, Category[] categories)
         {
+            int x = 0;
+            Family newFamily = null;
             Families f = Mapper.CastFamily(family);
-            using (dbRamotEntities db=new dbRamotEntities())
+            using (dbRamotEntities db = new dbRamotEntities())
             {
                 db.Families.Add(f);
+                foreach (var item in categories)
+                {
+                    var test = Mapper.CastCategory(item);
+                    f.Categories.Add(Mapper.CastCategory(item));
+                    // db.SaveChanges();
+                }
                 db.SaveChanges();
+                x = db.Families.Local[0].Id;
+                newFamily = Mapper.CastFamilyToComon(db.Families.Local[0]);
             }
+
+            AddCategoriesToFamily(newFamily, categories);
+            return x;
+
         }
         public static void RemoveFamily(Family family)
         {

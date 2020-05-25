@@ -37,16 +37,9 @@
         <br />
         <label> תאריך לידה:</label>
         <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-          type="date" [(ngModel)]="newVolunteer.Age" name="Age" />
-        <br />
-        <span *ngFor="let c of categories; let i=index">
-          <p>
-            <input type="checkbox" (click)="add(c)" [id]="c.Id" />
-            <label [for]="c.Id">***{{ c.Name }}</label>
-
-          </p>
-          <br>
-        </span>
+          type="date" [ngModel] ="newVolunteer.Age | date:'yyyy-MM-dd'" (ngModelChange)="newVolunteer.Age = $event" name="Age" />
+<br>
+        <app-choose-category (selectc)="selectCategories($event)"></app-choose-category>
       </div>
       <div mat-dialog-actions>
       <button mat-button mat-dialog-close class="btn btn-primary" [mat-dialog-close]="token" type="submit" [disabled]="volunteerForm.invalid">
