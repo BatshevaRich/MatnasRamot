@@ -4,7 +4,7 @@
       <div class="col-4">
         <div class="card">
           <div class="card-header">
-            <h4>משפחת: {{ family.LastName }}</h4>
+            <h4>משפחת {{ family.LastName }}</h4>
           </div>
           <div class="card-body">
             <div class="card-text">
@@ -50,7 +50,7 @@
             </ul>
           </div>
         </nav>
-        <app-all-volunteers *ngIf="chooseTab=='volunteers'" [vId]="fId"></app-all-volunteers>
+        <app-all-volunteers *ngIf="chooseTab=='volunteers'" [vId]="vId"></app-all-volunteers>
         <app-all-organizations *ngIf="chooseTab=='organizations'"></app-all-organizations>
         <app-all-events *ngIf="chooseTab=='events'"></app-all-events>
       </div>

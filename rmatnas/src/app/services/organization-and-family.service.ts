@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { OrganizationAndFamily } from '../classes/OrganizationAndFamily';
+import { OrganizationAndFamily } from '../Classes/OrganizationAndFamily';
 import { baseURL } from 'src/environments/environment';
 
 @Injectable({

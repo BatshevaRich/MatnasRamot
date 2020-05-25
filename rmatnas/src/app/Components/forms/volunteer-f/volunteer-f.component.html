@@ -38,17 +38,18 @@
         <br />
         <label> תאריך לידה:</label>
         <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-          type="date" [ngModel] ="newVolunteer.Age | date:'yyyy-MM-dd'" (ngModelChange)="newVolunteer.Age = $event" name="Age" />
-<br>
+          type="date" [ngModel]="newVolunteer.Age | date:'yyyy-MM-dd'" (ngModelChange)="newVolunteer.Age = $event"
+          name="Age" />
+        <br>
         <app-choose-category (selectc)="selectCategories($event)"></app-choose-category>
       </div>
       <div mat-dialog-actions>
-      <button mat-button mat-dialog-close class="btn btn-primary" [mat-dialog-close]="token" type="submit" [disabled]="volunteerForm.invalid">
-        <span *ngIf="!data.update" mat-dialog-title>להוספת המתנדבת</span>
-
-        <span *ngIf="data.update" mat-dialog-title>לעדכון המתנדבת</span>
-      </button>
-    </div>
+        <button mat-button mat-dialog-close class="btn btn-primary" [mat-dialog-close]="token" type="submit"
+          [disabled]="volunteerForm.invalid">
+          <span *ngIf="!data.update" mat-dialog-title>להוספת המתנדבת</span>
+          <span *ngIf="data.update" mat-dialog-title>לעדכון המתנדבת</span>
+        </button>
+      </div>
     </form>
     <br />
   </mat-dialog-content>

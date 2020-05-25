@@ -4,15 +4,15 @@
       <div class="col-4">
         <div class="card">
           <div class="card-header">
-            <h4>שם: {{ volunteer.Name }}</h4>
+            <h4>שם: {{ myvolunteer.Name }}</h4>
           </div>
           <div class="card-body">
             <div class="card-text">
-              <p>טלפון: {{ volunteer.Telephone }}</p>
-              <p>פלאפון: {{ volunteer.Pelephone | phone }}</p>
-              <p>כתובת: {{ volunteer.Address }}</p>
-              <p>מייל: {{ volunteer.Email }}</p>
-              <p>יום הולדת: {{ volunteer.Age | date:"MMMM dd yyyy" }}</p>
+              <p>טלפון: {{ myvolunteer.Telephone }}</p>
+              <p>פלאפון: {{ myvolunteer.Pelephone | phone }}</p>
+              <p>כתובת: {{ myvolunteer.Address }}</p>
+              <p>מייל: {{ myvolunteer.Email }}</p>
+              <p>יום הולדת: {{ myvolunteer.Age | date:"MMMM dd yyyy" }}</p>
               <div *ngFor="let c of categories">
                 {{c.Name}}
               </div>
@@ -44,7 +44,7 @@
             </ul>
           </div>
         </nav>
-        <app-all-families *ngIf="chooseTab=='families'" [fId]="vId"></app-all-families>
+        <app-all-families *ngIf="chooseTab=='families'" [vId]="vId"></app-all-families>
         <app-all-organizations *ngIf="chooseTab=='organizations'"></app-all-organizations>
         <app-all-events *ngIf="chooseTab=='events'"></app-all-events>
       </div>

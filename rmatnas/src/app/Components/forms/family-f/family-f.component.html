@@ -1,181 +1,83 @@
 <div dir="rtl">
   <h2 *ngIf="!data.update" mat-dialog-title>הוספת משפחה</h2>
   <h2 *ngIf="data.update" mat-dialog-title>עדכון משפחה</h2>
-  <mat-dialog-content >
-  <form
-    (ngSubmit)="submitForm(familyForm)"
-    class="text-right"
-    #familyForm="ngForm"
-  >
-    <div class="form-group">
-      <label>
-        שם פרטי אב:
-        <input
-          class="form-control form-control-sm"
-          aria-label="Small"
-          aria-describedby="inputGroup-sizing-sm"
-          [(ngModel)]="newFamily.FirstNameFather"
-          name="FirstNameFather"
-          required
-          appBorder
-        />
-      </label>
-      <span class="spn">   -   </span>
-      <label>
-        שם פרטי אם:
-        <input
-          class="form-control form-control-sm"
-          aria-label="Small"
-          aria-describedby="inputGroup-sizing-sm"
-          [(ngModel)]="newFamily.FirstNameMother"
-          name="FirstNameMother"
-          required
-          appBorder
-        />
-      </label>
-      <br />
-      <label>
-        שם משפחה:
-        <input
-          class="form-control form-control-sm"
-          aria-label="Small"
-          aria-describedby="inputGroup-sizing-sm"
-          [(ngModel)]="newFamily.LastName"
-          name="LastName"
-          required
-        />
-      </label>
-      <!-- <br />
-      <label>
-        מייל:
-        <input
-          class="form-control form-control-sm"
-          aria-label="Small"
-          aria-describedby="inputGroup-sizing-sm"
-          email
-          type="email"
-          appBorder
-          [(ngModel)]="newFamily.Email"
-          name="Email"
-        />
-      </label> -->
-      <br />
-      <label>
-        פלאפון אב:
-        <input
-          class="form-control form-control-sm"
-          aria-label="Small"
-          aria-describedby="inputGroup-sizing-sm"
-          appBorder
-          appPhoneMask
-          [(ngModel)]="newFamily.PelephoneFather"
-          name="PelephoneFather"
-        />
-      </label>
-      <span class="spn">      </span>
-      <label>
-        פלאפון אם:
-        <input
-          class="form-control form-control-sm"
-          aria-label="Small"
-          aria-describedby="inputGroup-sizing-sm"
-          appPhoneMask
-          appBorder
-          [(ngModel)]="newFamily.PelephoneMother"
-          name="PelephoneMother"
-        />
-      </label>
-      <br />
-      <label>
-        טלפון:
-        <input
-          class="form-control form-control-sm"
-          aria-label="Small"
-          aria-describedby="inputGroup-sizing-sm"
-          appBorder
-          appPhoneMask
-          [(ngModel)]="newFamily.Telephone"
-          name="Telephone"
-        />
-      </label>
-      <br />
-      <label>
-        כתובת:
-        <input
-          class="form-control form-control-sm"
-          aria-label="Small"
-          aria-describedby="inputGroup-sizing-sm"
-          appBorder
-          [(ngModel)]="newFamily.Address"
-          name="Address"
-        />
-      </label>
-      <br />
-      <label>
-        סיבה:
-        <input
-          class="form-control form-control-sm"
-          aria-label="Small"
-          aria-describedby="inputGroup-sizing-sm"
-          appBorder
-          [(ngModel)]="newFamily.Reason"
-          name="Reason"
-        />
-      </label>
-      <br />
-      <label>
-        גורם מפנה:
-        <input
-          class="form-control form-control-sm"
-          aria-label="Small"
-          aria-describedby="inputGroup-sizing-sm"
-          appBorder
-          [(ngModel)]="newFamily.Reference"
-          name="Reference"
-        />
-      </label>
-      <br />
-      <label>
-        מספר ילדים:
-        <input
-          class="form-control form-control-sm"
-          aria-label="Small"
-          type="number"
-          aria-describedby="inputGroup-sizing-sm"
-          appBorder
-          [(ngModel)]="newFamily.NumChildren"
-          name="NumChildren"
-          type="number"
-          min="0"
-          max="20"
-        />
-      </label>
-      <br />
-      <label>
-        סטטוס:
-        <input
-          class="form-control form-control-sm"
-          aria-label="Small"
-          aria-describedby="inputGroup-sizing-sm"
-          appBorder
-          [(ngModel)]="newFamily.Status"
-          name="Status"
-        />
-      </label>
-      <br />
-    </div>
-    <app-choose-category (selectc)="selectCategories($event)"></app-choose-category>
-    <div mat-dialog-actions>
-    <button
-    mat-button mat-dialog-close
-      class="btn btn-primary"
-      type="submit"
-      
-    >
-    <span *ngIf="!data.update" mat-dialog-title>להוספת המשפחה</span>
-
-        <span *ngIf="data.update" mat-dialog-title>לעדכון המשפחה</span>
-    </button></div>
-  </form>
-</mat-dialog-content>
+  <mat-dialog-content>
+    <form (ngSubmit)="submitForm(familyForm)" class="text-right" #familyForm="ngForm">
+      <div class="form-group">
+        <label>
+          שם פרטי אב:
+          <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+            [(ngModel)]="newFamily.FirstNameFather" name="FirstNameFather" required appBorder />
+        </label>
+        <span class="spn"> - </span>
+        <label>
+          שם פרטי אם:
+          <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+            [(ngModel)]="newFamily.FirstNameMother" name="FirstNameMother" required appBorder />
+        </label>
+        <br />
+        <label>
+          שם משפחה:
+          <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+            [(ngModel)]="newFamily.LastName" name="LastName" required />
+        </label>
+        <br />
+        <label>
+          פלאפון אב:
+          <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+            appBorder appPhoneMask [(ngModel)]="newFamily.PelephoneFather" name="PelephoneFather" />
+        </label>
+        <span class="spn"> </span>
+        <label>
+          פלאפון אם:
+          <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+            appPhoneMask appBorder [(ngModel)]="newFamily.PelephoneMother" name="PelephoneMother" />
+        </label>
+        <br />
+        <label>
+          טלפון:
+          <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+            appBorder appPhoneMask [(ngModel)]="newFamily.Telephone" name="Telephone" />
+        </label>
+        <br />
+        <label>
+          כתובת:
+          <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+            appBorder [(ngModel)]="newFamily.Address" name="Address" />
+        </label>
+        <br />
+        <label>
+          סיבה:
+          <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+            appBorder [(ngModel)]="newFamily.Reason" name="Reason" />
+        </label>
+        <br />
+        <label>
+          גורם מפנה:
+          <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+            appBorder [(ngModel)]="newFamily.Reference" name="Reference" />
+        </label>
+        <br />
+        <label>
+          מספר ילדים:
+          <input class="form-control form-control-sm" aria-label="Small" type="number"
+            aria-describedby="inputGroup-sizing-sm" appBorder [(ngModel)]="newFamily.NumChildren" name="NumChildren"
+            type="number" min="0" max="20" />
+        </label>
+        <br />
+        <label>
+          סטטוס:
+          <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+            appBorder [(ngModel)]="newFamily.Status" name="Status" />
+        </label>
+        <br />
+      </div>
+      <app-choose-category (selectc)="selectCategories($event)"></app-choose-category>
+      <div mat-dialog-actions>
+        <button mat-button mat-dialog-close class="btn btn-primary" type="submit">
+          <span *ngIf="!data.update" mat-dialog-title>להוספת המשפחה</span>
+          <span *ngIf="data.update" mat-dialog-title>לעדכון המשפחה</span>
+        </button></div>
+    </form>
+  </mat-dialog-content>
 </div>

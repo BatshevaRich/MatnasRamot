@@ -45,6 +45,8 @@ export class AllVolunteersComponent implements OnInit, AfterViewInit {
   constructor(public vs: VolunteerService, private changeDetectorRefs: ChangeDetectorRef) {
     this.dataSource.filterPredicate =
       (data: Details, filter: string) => data.Name.indexOf(filter) !== -1;
+  }
+  ngOnInit(): void {
     if (this.vId) {
       this.inp = true;
       this.vs.getVolunteersForFamily(this.vId).subscribe(data => {
@@ -58,15 +60,11 @@ export class AllVolunteersComponent implements OnInit, AfterViewInit {
       this.vs.getVolunteers().subscribe((volunteers: Volunteer[]) => {
         this.volunteers = volunteers;
         this.dataSource.data = volunteers;
-        console.log(this.dataSource);
         this.resultsLength = this.dataSource.data.length;
       });
     }
   }
 
-  ngOnInit(): void {
-
-  }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
@@ -76,8 +74,8 @@ export class AllVolunteersComponent implements OnInit, AfterViewInit {
     this.volunteers = this.volunteers.filter(vo => vo.Id !== v);
   }
 
-  newVolunteer(volunteer) {
-    this.volunteers.push(volunteer);
+  newVolunteer(myvolunteer) {
+    this.volunteers.push(myvolunteer);
     this.dataSource.data = this.volunteers as unknown as MatTableDataSource<Details>[];
     console.log(this.dataSource);
     this.table.renderRows();

@@ -41,7 +41,7 @@ export class AllFamiliesComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource();
   search = '';
   resultsLength = 0;
-  @Input() fId: number;
+  @Input() vId: number;
   inp = false;
 
   constructor(public fs: FamilyService, private changeDetectorRefs: ChangeDetectorRef) {
@@ -49,9 +49,9 @@ export class AllFamiliesComponent implements OnInit, AfterViewInit {
       (data: Details, filter: string) => data.LastName.indexOf(filter) !== -1;
   }
   ngOnInit() {
-    if (this.fId) {
+    if (this.vId) {
       this.inp = true;
-      this.fs.getFamiliesByVolunteer(this.fId).subscribe(data => {
+      this.fs.getFamiliesByVolunteer(this.vId).subscribe(data => {
         ///TODO: check if empty results, if empty- do not display table
         this.families = data;
         this.dataSource.data = data;

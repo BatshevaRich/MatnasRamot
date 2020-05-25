@@ -18,23 +18,23 @@ export class VolunteerService {
       this.path + '/' + id
     );
   }
-  addVolunteer(volunteer: Volunteer, categories: Category[]) {
+  addVolunteer(myvolunteer: Volunteer, categories: Category[]) {
     // returns id to be updated in table
     const myData =  {} as any;
-    myData.volunteer = volunteer;
+    myData.volunteer = myvolunteer;
     myData.categories = categories;
     return this.http
       .post(this.path, myData).toPromise().then(res => res);
   }
-  updateVolunteer(volunteer: Volunteer) {
-    // const head={params:new HttpParams() ('newVolunteer',volunteer)};
+  updateVolunteer(myvolunteer: Volunteer) {
+    // const head={params:new HttpParams() ('newVolunteer',myvolunteer)};
     this.http.put(
-      this.path + '/' + volunteer.Id,
-      volunteer
+      this.path + '/' + myvolunteer.Id,
+      myvolunteer
     ).subscribe(x => console.log(x));
   }
   removeVolunteer(id: number) {
-    // const head={params:new HttpParams() ('newVolunteer',volunteer)};
+    // const head={params:new HttpParams() ('newVolunteer',myvolunteer)};
     this.http.delete(this.path + '/' + id).subscribe(x => console.log(x));
   }
   getVolunteersByCategoryAndFamily(idFamily: number, category: Category): Observable<Volunteer[]> {

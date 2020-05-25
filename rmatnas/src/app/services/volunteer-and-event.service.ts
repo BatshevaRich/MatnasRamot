@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { VolunteerAndEvent } from '../classes/VolunteerAndEvent';
+import { VolunteerAndEvent } from '../Classes/VolunteerAndEvent';
 import { baseURL } from 'src/environments/environment';
 
 @Injectable({

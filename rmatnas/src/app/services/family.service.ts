@@ -31,7 +31,6 @@ export class FamilyService {
     const myData =  {} as any;
     myData.family = family;
     myData.categories = categories;
-    debugger
     return this.http
       .post(this.path, myData)
       .toPromise().then(res => res);

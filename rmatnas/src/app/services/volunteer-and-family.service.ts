@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { VolunteerAndFamily } from '../classes/VolunteerAndFamily';
+import { VolunteerAndFamily } from '../Classes/VolunteerAndFamily';
 import { baseURL} from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ import { baseURL} from '../../environments/environment';
 export class VolunteerAndFamilyService {
 
   constructor(private http: HttpClient) { }
-  path = baseURL + '/VolunteerAndFamily/';
+  path = baseURL + 'VolunteerAndFamily/';
   public getVolunteerings(): Observable<VolunteerAndFamily[]> {
     return this.http.get<VolunteerAndFamily[]>(this.path);
   }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { VolunteerAndFamily } from 'src/app/classes/VolunteerAndFamily';
+import { VolunteerAndFamily } from 'src/app/Classes/VolunteerAndFamily';
 import { Subscription } from 'rxjs';
 import { VolunteerAndFamilyService } from 'src/app/services/volunteer-and-family.service';
 import { ActivatedRoute } from '@angular/router';

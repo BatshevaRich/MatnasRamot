@@ -14,13 +14,13 @@ import { VolunteerFComponent } from '../forms/volunteer-f/volunteer-f.component'
 })
 export class VolunteerComponent implements OnInit, OnDestroy {
   chooseTab: string;
-  volunteer: Volunteer;
+  myvolunteer: Volunteer;
   categories: Category[] = [];
   id: number;
   @Input() vId: number;
   mySubscription: Subscription;
   constructor(public vs: VolunteerService, public ARS: ActivatedRoute, public dialog: MatDialog) {
-    this.volunteer = new Volunteer('..', '..', '..', '..', '..', '1999');
+    this.myvolunteer = new Volunteer('..', '..', '..', '..', '..', '1999');
   }
 
   ngOnDestroy(): void {
@@ -32,7 +32,7 @@ export class VolunteerComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.vs.getVolunteer(this.vId).subscribe(v => {
-      this.volunteer = v;
+      this.myvolunteer = v;
       this.vs.getCategoriesOfVolunteer(this.vId).subscribe(c => {
         this.categories = c;
         console.log(c);
@@ -43,9 +43,9 @@ export class VolunteerComponent implements OnInit, OnDestroy {
   VolunteeropenDialog() {
     const dialogRef = this.dialog.open(VolunteerFComponent, {
       data: {
-        dataKey: this.volunteer,
+        dataKey: this.myvolunteer,
         update: true,
-        id: this.volunteer.Id
+        id: this.myvolunteer.Id
       }
     });
     dialogRef.afterClosed().subscribe(res => {

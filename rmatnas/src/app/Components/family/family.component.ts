@@ -29,7 +29,7 @@ export class FamilyComponent implements OnInit, OnDestroy {
   id: number;
   categories: Category[] = [];
   mySubscription2: Subscription;
-  @Input() fId: number;
+  @Input() vId: number;
   chooseTab: string;
   constructor(public fs: FamilyService, public ARS: ActivatedRoute, public dialog: MatDialog) {
 
@@ -44,7 +44,7 @@ export class FamilyComponent implements OnInit, OnDestroy {
     // });
   }
   ngOnInit() {
-    this.fs.getFamily(this.fId).subscribe(f => {
+    this.fs.getFamily(this.vId).subscribe(f => {
       this.family = f;
       // this.fs.getCategoriesOfFamily(this.fId).subscribe(c => {
       //   this.categories = c;
