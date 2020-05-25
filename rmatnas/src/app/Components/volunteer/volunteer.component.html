@@ -14,6 +14,9 @@
               <p>כתובת: {{ volunteer.Address }}</p>
               <p>מייל: {{ volunteer.Email }}</p>
               <p>יום הולדת: {{ volunteer.Age | date:"MMMM dd yyyy" }}</p>
+              <div *ngFor="let c of categories">
+                {{c.Name}}
+              </div>
             </div>
             <p class="card-text"></p>
             <button class="btn btn-primary">לעריכת הפרטים</button>
@@ -42,7 +45,7 @@
             </ul>
           </div>
         </nav>
-        <app-all-families *ngIf="chooseTab=='families'" [vId]="vId"></app-all-families>
+        <app-all-families *ngIf="chooseTab=='families'" [fId]="vId"></app-all-families>
         <app-all-organizations *ngIf="chooseTab=='organizations'"></app-all-organizations>
         <app-all-events *ngIf="chooseTab=='events'"></app-all-events>
       </div>

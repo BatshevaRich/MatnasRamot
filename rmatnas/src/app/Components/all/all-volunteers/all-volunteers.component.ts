@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ChangeDetectorRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef, AfterViewInit, Input } from '@angular/core';
 import { Volunteer } from '../../../Classes/Volunteer';
 import { VolunteerService } from 'src/app/services/volunteer.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
@@ -30,7 +30,30 @@ export interface Details {
   ],
 })
 export class AllVolunteersComponent implements OnInit, AfterViewInit {
+
+  @ViewChild(MatTable) table: MatTable<any>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  displayedColumns = ['Name', 'Address', 'Pelephone', 'Email', 'Age', 'IsActive'];
+  expandedElement: Details | null;
+  volunteers: any;
+  dataSource = new MatTableDataSource();
+  search = '';
+  resultsLength = 0;
+  @Input() vId: number;
+  inp: boolean;
+
   constructor(public vs: VolunteerService, private changeDetectorRefs: ChangeDetectorRef) {
+    if (this.vId) {
+      debugger
+      this.inp = true;
+      this.vs.getVolunteersForFamily(this.vId).subscribe(data => {
+      /// TODO: check if empty results, if empty- do not display table
+      this.volunteers = data;
+      this.dataSource.data = data;
+      console.log(this.dataSource);
+      this.resultsLength = this.dataSource.data.length;
+    });
+    } else {
     this.vs.getVolunteers().subscribe((volunteers: Volunteer[]) => {
       this.volunteers = volunteers;
       this.dataSource.data = volunteers;
@@ -38,17 +61,8 @@ export class AllVolunteersComponent implements OnInit, AfterViewInit {
       this.resultsLength = this.dataSource.data.length;
     });
   }
-  // dataSource = new MatTableDataSource<Details>();
-  @ViewChild(MatTable) table: MatTable<any>;
+  }
 
-  displayedColumns = ['Name', 'Address', 'Pelephone', 'Email', 'Age', 'IsActive'];
-  expandedElement: Details | null;
-  // volunteers: Volunteer[] = [];
-  volunteers: any;
-  dataSource = new MatTableDataSource();
-  search = '';
-  resultsLength = 0;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
   ngOnInit(): void {
 
   }

@@ -92,6 +92,14 @@ export const routeList: Routes = [
         ]
       },
       {
+        path: 'families', component: AllFamiliesComponent,
+        children: [
+          { path: ':vId/volunteers', component: AllVolunteersComponent },
+          { path: ':vId/organizations', component: AllOrganizationsComponent },
+          { path: ':vId/events', component: AllEventsComponent }
+        ]
+      },
+      {
         path: 'volunteer/:volunteerId',
         component: VolunteerComponent,
         children: [

@@ -1,4 +1,6 @@
 <div dir="rtl">
+  <h2 mat-dialog-title>הוספת משפחה</h2>
+  <mat-dialog-content >
   <form
     (ngSubmit)="submitForm(familyForm)"
     class="text-right"
@@ -17,7 +19,7 @@
           appBorder
         />
       </label>
-      <span class="spn">   &   </span>
+      <span class="spn">      </span>
       <label>
         שם פרטי אם:
         <input
@@ -69,7 +71,7 @@
           name="PelephoneFather"
         />
       </label>
-      <br />
+      <span class="spn">      </span>
       <label>
         פלאפון אם:
         <input
@@ -162,15 +164,15 @@
       <br />
     </div>
     <app-choose-category (select)="selectCategories($event)"></app-choose-category>
+    <div mat-dialog-actions>
     <button
+    mat-button mat-dialog-close
       class="btn btn-primary"
       type="submit"
       
     ><!-- [disabled]="familyForm.invalid" -->
       להוספת המשפחה
-    </button>
+    </button></div>
   </form>
-  <span *ngIf="familyForm.submitted">
-    {{ familyForm.value | json }}
-  </span>
+</mat-dialog-content>
 </div>

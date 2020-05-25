@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { DataServiceService } from '../../Services/data-service.service';
 import { VolunteerService } from 'src/app/services/volunteer.service';
+import { Category } from 'src/app/Classes/Category';
 @Component({
   selector: 'app-volunteer',
   templateUrl: './volunteer.component.html',
@@ -12,6 +13,7 @@ import { VolunteerService } from 'src/app/services/volunteer.service';
 export class VolunteerComponent implements OnInit, OnDestroy {
   chooseTab: string;
   volunteer: Volunteer;
+  categories: Category[] = [];
   id: number;
   @Input() vId: number;
   mySubscription: Subscription;
@@ -28,8 +30,12 @@ export class VolunteerComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.vs.getVolunteer(this.vId).subscribe(v => {
-        this.volunteer = v;
+      this.volunteer = v;
+      this.vs.getCategoriesOfVolunteer(this.vId).subscribe(c => {
+        this.categories = c;
+        console.log(c);
       });
+    });
   }
 
 }

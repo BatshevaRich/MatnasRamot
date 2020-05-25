@@ -1,91 +1,45 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="position:relative; min-height:100%">
   <div dir="rtl" class="content">
-    <nav
-      class="navbar navbar-expand-md bg-dark navbar-dark static-top"
-      style="font-size: x-large; height:50px;"
-    >
+    <nav class="navbar navbar-expand-md bg-dark static-top" style="font-size: x-large; height:50px;">
       <a class="navbar-brand" routerLink="/main">מתנס מעלה רמות</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarCollapse"
-        aria-controls="navbarCollapse"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div dir="rtl" class="collapse navbar-collapse " id="navbarCollapse">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a
-              class="nav-link"
-              routerLink="/main"
-              routerLinkActive="activeLink"
-              style="color: white"
-              >ראשי</a
-            >
+            <a class="nav-link" routerLink="/main" routerLinkActive="activeLink" >ראשי</a>
           </li>
           <li class="nav-item">
-            <a
-              class="nav-link"
-              routerLink="/list/volunteer-family"
-              routerLinkActive="activeLink"
-              style="color: purple"
-              >התנדבויות</a
-            >
+            <a class="nav-link" routerLink="/list/volunteer-family" routerLinkActive="activeLink"
+              style="color: purple">התנדבויות</a>
+          </li>
+
+          <button mat-button [matMenuTriggerFor]="menu" style="font-size: x-large; color: #bf0000b0;">מתנדבות</button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item class="nav-link" [routerLink]="'/list/volunteers'"
+              routerLinkActive="activeLink"><i class="fa fa-list"></i> כל המתנדבות</button>
+            <button mat-menu-item (click)="VolunteeropenDialog()"><i class="fa fa-user-plus"> הוספה</i></button>
+          </mat-menu>
+          <button mat-button [matMenuTriggerFor]="menuF" style="font-size: x-large;color: #e27216d9;">משפחות</button>
+          <mat-menu #menuF="matMenu">
+            <button mat-menu-item class="nav-link" [routerLink]="'/list/families'"
+              routerLinkActive="activeLink"><i class="fa fa-list"></i> כל המשפחות</button>
+            <button mat-menu-item (click)="FamilyopenDialog()"><i class="fa fa-user-plus"> הוספה</i></button>
+          </mat-menu>
+          <li class="nav-item">
+            <a style="color:#dabd03b0" class="nav-link" routerLink="/list/organizations" routerLinkActive="activeLink">
+              ארגונים</a>
           </li>
           <li class="nav-item">
-            <a
-              style="color:#bf0000b0"
-              class="nav-link"
-              routerLink="/list/volunteers"
-              routerLinkActive="activeLink"
-            >
-              מתנדבות</a
-            >
+            <a style="color:#62da03b0" class="nav-link" routerLink="/list/events" routerLinkActive="activeLink">
+              ארועים</a>
           </li>
           <li class="nav-item">
-            <a
-              style="color:#e27216d9"
-              class="nav-link"
-              routerLink="/list/families"
-              routerLinkActive="activeLink"
-            >
-              משפחות</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              style="color:#dabd03b0"
-              class="nav-link"
-              routerLink="/list/organizations"
-              routerLinkActive="activeLink"
-            >
-              ארגונים</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              style="color:#62da03b0"
-              class="nav-link"
-              routerLink="/list/events"
-              routerLinkActive="activeLink"
-            >
-              ארועים</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              style="color:#03bfdab0"
-              class="nav-link"
-              routerLink="/list/tasks"
-              routerLinkActive="activeLink"
-            >
-              מטלות</a
-            >
+            <a style="color:#03bfdab0" class="nav-link" routerLink="/list/tasks" routerLinkActive="activeLink">
+              מטלות</a>
           </li>
         </ul>
       </div>
@@ -98,6 +52,5 @@
   <br>
   <br>
   <br>
-  <app-footer class="footer"  
-    ></app-footer>
+  <app-footer class="footer"></app-footer>
 </div>

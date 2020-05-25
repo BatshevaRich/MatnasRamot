@@ -1,93 +1,59 @@
 <div dir="rtl">
-  <form
-    (ngSubmit)="submitForm(volunteerForm)"
-    class="text-right"
-    #volunteerForm="ngForm"
-  >
-    <div class="form-group">
-      <label>
-       שם :
-        <input
-        [ngClass]="newVolunteer.Name.length > 1 ? '' : 'tooShort'"
-          class="form-control form-control-sm"
-          aria-label="Small"
-          aria-describedby="inputGroup-sizing-sm"
-          [(ngModel)]="newVolunteer.Name"
-          name="Name"
-          required
-        />
-      </label>
-      <br />
-      <br />
-      <label>
-        מייל:
-        <input
-          class="form-control form-control-sm"
-          aria-label="Small"
-          type="email"
-          aria-describedby="inputGroup-sizing-sm"
-          email
-          [(ngModel)]="newVolunteer.Email"
-          name="Email"
-        />
-      </label>
-      <br />
-      <label>
-        טלפון:
-        <input
-          class="form-control form-control-sm"
-          aria-label="Small"
-          aria-describedby="inputGroup-sizing-sm"
-          appPhoneMask
-          [(ngModel)]="newVolunteer.Pelephone"
-          name="Pelephone"
-        />
-      </label>
-      <br />
-      <label>
-        פלאפון:
-        <input
-          class="form-control form-control-sm"
-          aria-label="Small"
-          aria-describedby="inputGroup-sizing-sm"
-          appPhoneMask
-          [(ngModel)]="newVolunteer.Telephone"
-          name="Telephone"
-        />
-      </label>
-      <br />
-      <label>
-        כתובת:
-        <input
-          class="form-control form-control-sm"
-          aria-label="Small"
-          aria-describedby="inputGroup-sizing-sm"
-          [(ngModel)]="newVolunteer.Address"
-          name="Address"
-        />
-      </label>
-      <br />
-      <label> תאריך לידה:</label>
-      <input
-        class="form-control form-control-sm"
-        aria-label="Small"
-        aria-describedby="inputGroup-sizing-sm"
-        type="date"
-        [(ngModel)]="newVolunteer.Age"
-        name="Age"
-      />
-      <br />
+  <h2 mat-dialog-title>הוספת מתנדבת</h2>
+  <mat-dialog-content>
+    <form (ngSubmit)="submitForm(volunteerForm)" class="text-right" #volunteerForm="ngForm">
+      <div class="form-group">
+        <label>
+          שם :
+          <input [ngClass]="newVolunteer.Name.length > 1 ? '' : 'tooShort'" class="form-control form-control-sm"
+            aria-label="Small" aria-describedby="inputGroup-sizing-sm" [(ngModel)]="newVolunteer.Name" name="Name"
+            required />
+        </label>
+        <br />
+        <br />
+        <label>
+          מייל:
+          <input class="form-control form-control-sm" aria-label="Small" type="email"
+            aria-describedby="inputGroup-sizing-sm" email [(ngModel)]="newVolunteer.Email" name="Email" />
+        </label>
+        <br />
+        <label>
+          טלפון:
+          <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+            appPhoneMask [(ngModel)]="newVolunteer.Pelephone" name="Pelephone" />
+        </label>
+        <br />
+        <label>
+          פלאפון:
+          <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+            appPhoneMask [(ngModel)]="newVolunteer.Telephone" name="Telephone" />
+        </label>
+        <br />
+        <label>
+          כתובת:
+          <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+            [(ngModel)]="newVolunteer.Address" name="Address" />
+        </label>
+        <br />
+        <label> תאריך לידה:</label>
+        <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+          type="date" [(ngModel)]="newVolunteer.Age" name="Age" />
+        <br />
+        <span *ngFor="let c of categories; let i=index">
+          <p>
+            <input type="checkbox" (click)="add(c)" [id]="c.Id" />
+            <label [for]="c.Id">***{{ c.Name }}</label>
+
+          </p>
+          <br>
+        </span>
+      </div>
+      <div mat-dialog-actions>
+      <button mat-button mat-dialog-close class="btn btn-primary" [mat-dialog-close]="token" type="submit" [disabled]="volunteerForm.invalid">
+        להוספת המתנדבת
+      </button>
     </div>
-    <button
-      class="btn btn-primary"
-      type="submit"
-      [disabled]="volunteerForm.invalid"
-    >
-      להוספת המתנדב
-    </button>
-  </form>
-  <span *ngIf="volunteerForm.submitted">
-    {{ volunteerForm.value | json }}
-  </span>
-  <br />
+    </form>
+    <br />
+  </mat-dialog-content>
 </div>
