@@ -18,7 +18,7 @@ export class VolunteerFComponent implements OnInit {
   // @Output() selectc: EventEmitter<Category[]> = new EventEmitter<Category[]>();
   categoriesSelected: Category[] = [];
   @Output() addedVolunteer: EventEmitter<Volunteer> = new EventEmitter<Volunteer>();
-  newVolunteer: Volunteer = new Volunteer('default', '000000000', '000000000', 'default@ddd', 'default', '1999-01-01');
+  newVolunteer: Volunteer = new Volunteer('default', '000000000', '000000000', 'default@ddd', 'default', '1999-01-01', false);
   constructor(public vs: VolunteerService, private cs: CategoryService, private dialogRef: MatDialogRef<VolunteerFComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
     this.mySubscription = cs.getCategories().subscribe(data => {
       this.categories = data;
@@ -54,7 +54,7 @@ export class VolunteerFComponent implements OnInit {
           this.dialogRef.close(this.token);
         });
       this.mytemplateForm.resetForm();
-      this.newVolunteer = new Volunteer('default', '000000000', '000000000', 'default@ddd', 'default', '1999-01-01');
+      this.newVolunteer = new Volunteer('default', '000000000', '000000000', 'default@ddd', 'default', '1999-01-01', false);
     }
   }
 

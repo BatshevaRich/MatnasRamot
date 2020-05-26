@@ -28,7 +28,7 @@ export class ToVolunteerComponent implements OnInit {
       2,
       'reason',
       'reference'),
-    new Volunteer('default', '000000000', '000000000', 'default@ddd', 'default', '1999-01-01'),
+    new Volunteer('default', '000000000', '000000000', 'default@ddd', 'default', '1999-01-01', false),
     new Category(), 'default', '1999-01-01'
   );
   id: number;

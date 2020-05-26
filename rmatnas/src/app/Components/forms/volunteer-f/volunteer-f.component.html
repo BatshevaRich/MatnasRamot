@@ -44,8 +44,7 @@
         <app-choose-category (selectc)="selectCategories($event)"></app-choose-category>
       </div>
       <div mat-dialog-actions>
-        <button mat-button mat-dialog-close class="btn btn-primary" [mat-dialog-close]="token" type="submit"
-          [disabled]="volunteerForm.invalid">
+        <button mat-button mat-dialog-close class="btn btn-primary" [mat-dialog-close]="token" type="submit">
           <span *ngIf="!data.update" mat-dialog-title>להוספת המתנדבת</span>
           <span *ngIf="data.update" mat-dialog-title>לעדכון המתנדבת</span>
         </button>

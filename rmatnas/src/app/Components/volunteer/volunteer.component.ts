@@ -20,7 +20,7 @@ export class VolunteerComponent implements OnInit, OnDestroy {
   @Input() vId: number;
   mySubscription: Subscription;
   constructor(public vs: VolunteerService, public ARS: ActivatedRoute, public dialog: MatDialog) {
-    this.myvolunteer = new Volunteer('..', '..', '..', '..', '..', '1999');
+    this.myvolunteer = new Volunteer('..', '..', '..', '..', '..', '1999', false);
   }
 
   ngOnDestroy(): void {
