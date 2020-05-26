@@ -13,7 +13,7 @@ import { AddVFComponent } from './Components/forms/add/add-vf/add-vf.component';
 })
 export class AppComponent {
   title = 'endproject';
-  constructor(public dialog: MatDialog){
+  constructor(public dialog: MatDialog) {
 
   }
   VolunteeropenDialog() {
@@ -38,6 +38,8 @@ export class AppComponent {
   }
   ToVolunteeropenDialog() {
     const dialogRef = this.dialog.open(AddVFComponent, {
+      height: '75%',
+      width: '75%',
       data: {
         dataKey: null,
         update: false

@@ -13,7 +13,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./add-vf.component.css']
 })
 export class AddVFComponent implements OnInit {
-
   @Input() idFamily: number;
   @Input() idVolunteer: number;
   families: Family[] = [];
@@ -22,40 +21,44 @@ export class AddVFComponent implements OnInit {
   categories: Category[] = [];
   comments: string;
   dateAdded: Date;
-  selectedFamily: Family;
-  selectedVolunteer: Volunteer;
+  selectedFamily: Family = null;
+  selectedVolunteer: Volunteer = null;
   selectedCategory: Category;
-  constructor(private fs: FamilyService, private vs: VolunteerService, private dialogRef: MatDialogRef<AddVFComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.vs.getVolunteers().subscribe(res=>{
-      this.volunteers = res;console.log(this.volunteers);
+  constructor(private fs: FamilyService, private vs: VolunteerService,
+              private dialogRef: MatDialogRef<AddVFComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) {
+    this.vs.getVolunteers().subscribe(res => {
+      this.volunteers = res;
+      this.volunteers = this.volunteers.filter(v => v.IsActive);
+      console.log(this.volunteers);
     })
-    this.fs.getFamilies().subscribe(res=>{
-      this.families = res;console.log(this.families);
+    this.fs.getFamilies().subscribe(res => {
+      this.families = res;
+      console.log(this.families);
     });
-    
+
   }
   ngOnInit() {
     this.categories.push(new Category());
     this.families.push(new Family('fathername',
-    'mothername',
-    'lastname',
-    '0',
-    '0',
-    '0',
-    'address',
-    'status',
-    2,
-    'reason',
-    'reference'));
+      'mothername',
+      'lastname',
+      '0',
+      '0',
+      '0',
+      'address',
+      'status',
+      2,
+      'reason',
+      'reference'));
     // this.volunteers.push(new Volunteer());
   }
   onChangeFamily(newValue) {
     console.log(newValue);
     this.idVolunteer = this.selectedVolunteer.Id;
   }
-  onChangeVolunteer(newValue) {
-    console.log(newValue);
-    this.idFamily = this.selectedFamily.Id;
+  volunteerChanged($event){
+    debugger
   }
   onChangeCtegory($event) {
     if (this.idFamily) {
@@ -65,5 +68,8 @@ export class AddVFComponent implements OnInit {
       // this.fs.getFamiliesByCategoryAndVolunteer().subscribe(data =>
       //   this.families = data);
     }
+  }
+  submitForm(f) {
+
   }
 }
