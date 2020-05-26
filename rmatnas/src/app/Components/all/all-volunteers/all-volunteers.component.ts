@@ -4,6 +4,9 @@ import { VolunteerService } from 'src/app/services/volunteer.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
+import { ConfirmDialogModel, ConfirmDialogComponent } from '../../forms/confirm-dialog/confirm-dialog.component';
+import { MatDialog } from '@angular/material';
+import { Observable } from 'rxjs';
 // import { DialogBoxComponent } from './dialog-box/dialog-box.component';
 export interface Details {
   Id: number;
@@ -41,8 +44,9 @@ export class AllVolunteersComponent implements OnInit, AfterViewInit {
   resultsLength = 0;
   @Input() vId: number;
   inp: boolean;
+  result = '';
 
-  constructor(public vs: VolunteerService, private changeDetectorRefs: ChangeDetectorRef) {
+  constructor(public vs: VolunteerService, private changeDetectorRefs: ChangeDetectorRef, public dialog: MatDialog) {
     this.dataSource.filterPredicate =
       (data: Details, filter: string) => data.Name.indexOf(filter) !== -1;
   }
@@ -69,13 +73,31 @@ export class AllVolunteersComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  delete(elm) {
-    this.vs.removeVolunteer(elm.Id);
-    this.dataSource.data = this.dataSource.data
-      .filter(i => i !== elm);
-      // .map((i, idx) => (i.position = (idx + 1), i));
+  delete(event, elm) {
+    this.confirmDialog().subscribe(res => {
+      this.result = res;
+      if (res) {
+        this.vs.removeVolunteer(elm.Id);
+        this.dataSource.data = this.dataSource.data
+          .filter(i => i !== elm);
+        // .map((i, idx) => (i.position = (idx + 1), i));
+      }
+    });
   }
 
+  confirmDialog(): Observable<any> {
+    const message = `מחיקה זו היא לצמיתות! האם תרצי להמשיך?`;
+
+    const dialogData = new ConfirmDialogModel('מחיקת מתנדבת', message);
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: '75%',
+      data: dialogData
+    });
+
+    return dialogRef.afterClosed();
+
+  }
   newVolunteer(myvolunteer) {
     this.volunteers.push(myvolunteer);
     this.dataSource.data = this.volunteers as unknown as MatTableDataSource<Details>[];
