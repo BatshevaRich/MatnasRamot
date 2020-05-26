@@ -1,10 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Inject } from '@angular/core';
 import { Family } from 'src/app/Classes/Family';
 import { Volunteer } from 'src/app/Classes/Volunteer';
 import { Category } from 'src/app/Classes/Category';
 import { CategoryService } from 'src/app/services/category.service';
 import { FamilyService } from 'src/app/services/family.service';
 import { VolunteerService } from 'src/app/services/volunteer.service';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-vf',
@@ -24,8 +25,14 @@ export class AddVFComponent implements OnInit {
   selectedFamily: Family;
   selectedVolunteer: Volunteer;
   selectedCategory: Category;
-  constructor(private fs: FamilyService, private vs: VolunteerService) {
-
+  constructor(private fs: FamilyService, private vs: VolunteerService, private dialogRef: MatDialogRef<AddVFComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
+    this.vs.getVolunteers().subscribe(res=>{
+      this.volunteers = res;console.log(this.volunteers);
+    })
+    this.fs.getFamilies().subscribe(res=>{
+      this.families = res;console.log(this.families);
+    });
+    
   }
   ngOnInit() {
     this.categories.push(new Category());
