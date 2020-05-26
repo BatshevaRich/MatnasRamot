@@ -14,6 +14,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class VolunteerFComponent implements OnInit {
   categories: Category[] = [];
+  categoriesOfVolunteer: Category[] = [];
   mySubscription: Subscription;
   // @Output() selectc: EventEmitter<Category[]> = new EventEmitter<Category[]>();
   categoriesSelected: Category[] = [];
@@ -35,6 +36,11 @@ export class VolunteerFComponent implements OnInit {
   ngOnInit() {
     if (this.data.update) {
       this.newVolunteer = this.data.dataKey;
+      this.vs.getCategoriesOfVolunteer(this.newVolunteer.Id).subscribe(res =>{
+        this.categoriesOfVolunteer =  this.categoriesOfVolunteer.concat(res as Category[]);
+        debugger;
+
+      })
     }
     console.log(this.data);
   }
