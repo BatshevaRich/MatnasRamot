@@ -33,7 +33,7 @@ export class AllVolunteersComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatTable) table: MatTable<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  displayedColumns = ['Name', 'Address', 'Pelephone', 'Email', 'Age', 'IsActive'];
+  displayedColumns = ['Name', 'Address', 'Pelephone', 'Email', 'Age', 'IsActive', 'columndelete'];
   expandedElement: Details | null;
   volunteers: any;
   dataSource = new MatTableDataSource();
@@ -69,9 +69,11 @@ export class AllVolunteersComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  delete(v: number) {
-    this.vs.removeVolunteer(v);
-    this.volunteers = this.volunteers.filter(vo => vo.Id !== v);
+  delete(elm) {
+    this.vs.removeVolunteer(elm.Id);
+    this.dataSource.data = this.dataSource.data
+      .filter(i => i !== elm);
+      // .map((i, idx) => (i.position = (idx + 1), i));
   }
 
   newVolunteer(myvolunteer) {
