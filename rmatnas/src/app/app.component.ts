@@ -13,39 +13,8 @@ import { AddVFComponent } from './Components/forms/add/add-vf/add-vf.component';
 })
 export class AppComponent {
   title = 'endproject';
-  constructor(public dialog: MatDialog) {
+  constructor() {
 
   }
-  VolunteeropenDialog() {
-    const dialogRef = this.dialog.open(VolunteerFComponent, {
-      data: {
-        dataKey: null,
-        update: false
-      }
-    });
-    dialogRef.afterClosed().subscribe(res => {
-    });
-  }
-  FamilyopenDialog() {
-    const dialogRef = this.dialog.open(FamilyFComponent, {
-      data: {
-        dataKey: null,
-        update: false
-      }
-    });
-    dialogRef.afterClosed().subscribe(result => {
-    });
-  }
-  ToVolunteeropenDialog() {
-    const dialogRef = this.dialog.open(AddVFComponent, {
-      height: '75%',
-      width: '75%',
-      data: {
-        dataKey: null,
-        update: false
-      }
-    });
-    dialogRef.afterClosed().subscribe(result => {
-    });
-  }
+  
 }

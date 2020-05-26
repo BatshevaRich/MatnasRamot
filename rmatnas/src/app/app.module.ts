@@ -76,6 +76,7 @@ import { MatTreeModule } from '@angular/material/tree';
 import { MatDividerModule } from '@angular/material/divider';
 import { ToVolunteerComponent } from './Components/to-volunteer/to-volunteer.component';
 import { ConfirmDialogComponent } from './Components/forms/confirm-dialog/confirm-dialog.component';
+import { HeaderComponent } from './Components/UI/header/header.component';
 
 export const routeList: Routes = [
   { path: '', component: /*VolunteerFComponent*/ HomeComponent },
@@ -192,7 +193,8 @@ export const routeList: Routes = [
     AllToVolunteersComponent,
     ToVolunteerComponent,
     CategoryFComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
