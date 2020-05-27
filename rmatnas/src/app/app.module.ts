@@ -77,7 +77,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { ToVolunteerComponent } from './Components/to-volunteer/to-volunteer.component';
 import { ConfirmDialogComponent } from './Components/forms/confirm-dialog/confirm-dialog.component';
 import { HeaderComponent } from './Components/UI/header/header.component';
-
+import { MatTableExporterModule } from 'mat-table-exporter';
 export const routeList: Routes = [
   { path: '', component: /*VolunteerFComponent*/ HomeComponent },
   { path: 'main', component: /*VolunteerFComponent*/ HomeComponent },
@@ -245,6 +245,7 @@ export const routeList: Routes = [
     MatToolbarModule,
     MatTooltipModule,
     MatIconModule,
+    MatTableExporterModule
     // FontAwesomeModule
   ],
 
