@@ -9,6 +9,8 @@
                 (click)="exportDirective.exportTable('xlsx', {fileName:'מתנדבות', sheet: 'מתנדבות', Props: {Author: 'Matnas'}})">Custom
                 Export</button>
               <!-- <button mat-raised-button color="primary"
+                (click)="exporter.exportTable('xlsx', {fileName:'מתנדבות', sheet: 'מתנדבות', Props: {Author: 'Matnas'}})">export</button> -->
+              <!-- <button mat-raised-button color="primary" (click)="exportAsExcel()">Export as Excel</button> -->
               <mat-form-field>
                 <mat-label>Filter</mat-label>
                 <input matInput (keyup)="applyFilter($event.target.value)">
@@ -45,13 +47,8 @@
               <ng-container matColumnDef="IsActive">
                 <th mat-header-cell *matHeaderCellDef> פעילה? </th>
                 <td mat-cell *matCellDef="let element">
-                  <div *ngIf="element.IsActive">
-                    <i class="fa fa-check"></i>
-                  </div>
-                  <div *ngIf="!element.IsActive">
-                    <i class="fa fa-times"></i>
-                  </div>
-                  </td>
+                  <mat-slide-toggle [checked]="element.IsActive" [disabled]="true"></mat-slide-toggle>
+                </td>
               </ng-container>
               <ng-container matColumnDef="columndelete">
                 <th mat-header-cell *matHeaderCellDef>מחיקה </th>

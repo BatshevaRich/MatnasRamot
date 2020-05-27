@@ -38,9 +38,7 @@ export class VolunteerFComponent implements OnInit {
       this.newVolunteer = this.data.dataKey;
       this.vs.getCategoriesOfVolunteer(this.newVolunteer.Id).subscribe(res =>{
         this.categoriesOfVolunteer =  this.categoriesOfVolunteer.concat(res as Category[]);
-        debugger;
-
-      })
+      });
     }
     console.log(this.data);
   }
@@ -48,15 +46,14 @@ export class VolunteerFComponent implements OnInit {
     if (this.data.update) {
       this.newVolunteer.Id = this.data.id;
       this.vs.updateVolunteer(this.newVolunteer);
-    }
-    else {
+    } else {
       this.vs.addVolunteer(this.newVolunteer, this.categoriesSelected)
         .then(t => {
           this.token = t as number;
           /////////////////////// need to find out about safe casting in ts
           this.newVolunteer.Id = this.token;
           this.categoriesSelected = [];
-          //this.addedVolunteer.emit(this.newVolunteer);
+          // this.addedVolunteer.emit(this.newVolunteer);
           this.dialogRef.close(this.token);
         });
       this.mytemplateForm.resetForm();
@@ -71,8 +68,8 @@ export class VolunteerFComponent implements OnInit {
   }
   add(c: Category) {
     if (!this.categoriesSelected.includes(c)) {
-    //   this.categoriesSelected = this.categoriesSelected.filter(co => co.Id !== c.Id);
-    // } else {
+      //   this.categoriesSelected = this.categoriesSelected.filter(co => co.Id !== c.Id);
+      // } else {
       this.categoriesSelected.push(c);
     }
   }
@@ -80,7 +77,7 @@ export class VolunteerFComponent implements OnInit {
   selectCategories(e) {
     this.categoriesSelected = [];
     e.forEach(element => {
-      this.add(element)
+      this.add(element);
     });
-     }
+  }
 }
