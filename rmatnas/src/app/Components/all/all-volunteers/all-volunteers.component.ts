@@ -7,6 +7,7 @@ import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../../forms/confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material';
 import { Observable } from 'rxjs';
+import { CustomExporter } from 'src/app/Classes/custom-exporter';
 // import { DialogBoxComponent } from './dialog-box/dialog-box.component';
 export interface Details {
   Id: number;
@@ -45,12 +46,14 @@ export class AllVolunteersComponent implements OnInit, AfterViewInit {
   @Input() vId: number;
   inp: boolean;
   result = '';
+  customExporter: CustomExporter;
 
   constructor(public vs: VolunteerService, private changeDetectorRefs: ChangeDetectorRef, public dialog: MatDialog) {
     this.dataSource.filterPredicate =
       (data: Details, filter: string) => data.Name.indexOf(filter) !== -1;
   }
   ngOnInit(): void {
+    this.customExporter = new CustomExporter();
     if (this.vId) {
       this.inp = true;
       this.vs.getVolunteersForFamily(this.vId).subscribe(data => {
