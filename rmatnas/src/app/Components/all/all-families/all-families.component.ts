@@ -52,7 +52,7 @@ export class AllFamiliesComponent implements OnInit, AfterViewInit {
     if (this.vId) {
       this.inp = true;
       this.fs.getFamiliesByVolunteer(this.vId).subscribe(data => {
-        ///TODO: check if empty results, if empty- do not display table
+        /// TODO: check if empty results, if empty- do not display table
         this.families = data;
         this.dataSource.data = data;
         console.log(this.dataSource);

@@ -28,7 +28,7 @@ export class FamilyService {
   }
 
   addFamily(family: Family, categories: Category[]) {
-    const myData =  {} as any;
+    const myData = {} as any;
     myData.family = family;
     myData.categories = categories;
     return this.http

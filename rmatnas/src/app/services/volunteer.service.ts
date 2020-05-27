@@ -20,7 +20,7 @@ export class VolunteerService {
   }
   addVolunteer(myvolunteer: Volunteer, categories: Category[]) {
     // returns id to be updated in table
-    const myData =  {} as any;
+    const myData = {} as any;
     myData.volunteer = myvolunteer;
     myData.categories = categories;
     return this.http
@@ -47,6 +47,6 @@ export class VolunteerService {
     return this.http.get(baseURL + 'CategoryVolunteer/' + id + '&category=' + categories);
   }
   getVolunteersForFamily(fId: number): Observable<Volunteer[]> {
-    return this.http.get<Volunteer[]>(this.path + '/volunteerfamily/' + fId );
+    return this.http.get<Volunteer[]>(this.path + '/volunteerfamily/' + fId);
   }
 }

@@ -5,9 +5,7 @@ export class VolunteerAndEvent {
     IdCategory: number;
     Comments: string;
     dateAdded: string;
-    /**
-     *
-     */
+
     constructor(id: number, idEvent: number, idVolunteer: number, idCategory: number, comments: string, dateAdded: string) {
         this.Id = id;
         this.Comments = comments;
