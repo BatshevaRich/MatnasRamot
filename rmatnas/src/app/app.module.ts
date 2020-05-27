@@ -78,87 +78,8 @@ import { ToVolunteerComponent } from './Components/to-volunteer/to-volunteer.com
 import { ConfirmDialogComponent } from './Components/forms/confirm-dialog/confirm-dialog.component';
 import { HeaderComponent } from './Components/UI/header/header.component';
 import { MatTableExporterModule } from 'mat-table-exporter';
-export const routeList: Routes = [
-  { path: '', component: /*VolunteerFComponent*/ HomeComponent },
-  { path: 'main', component: /*VolunteerFComponent*/ HomeComponent },
-  { path: 'addvf', component: /*VolunteerFComponent*/ AddVFComponent },
+import { RoutingModule } from './routing.module';
 
-  {
-    path: 'list',
-    children: [
-      {
-        path: 'vaf', component: AllToVolunteersComponent,
-        children: [
-          { path: ':vId/volunteers', component: AllFamiliesComponent },
-          { path: ':vId/families', component: AllOrganizationsComponent },
-          { path: ':vId/events', component: AllEventsComponent }
-        ]
-      },
-      {
-        path: 'volunteers', component: AllVolunteersComponent,
-        children: [
-          { path: ':vId/families', component: AllFamiliesComponent },
-          { path: ':vId/organizations', component: AllOrganizationsComponent },
-          { path: ':vId/events', component: AllEventsComponent }
-        ]
-      },
-      {
-        path: 'families', component: AllFamiliesComponent,
-        children: [
-          { path: ':vId/volunteers', component: AllVolunteersComponent },
-          { path: ':vId/organizations', component: AllOrganizationsComponent },
-          { path: ':vId/events', component: AllEventsComponent }
-        ]
-      },
-      {
-        path: 'volunteer/:volunteerId', component: VolunteerComponent,
-        children: [
-          { path: 'families', component: AllFamiliesComponent },
-          { path: 'organizations', component: AllOrganizationsComponent },
-          { path: 'events', component: AllEventsComponent }
-        ]
-      },
-      { path: 'add-volunteer', component: VolunteerFComponent },
-      { path: 'report-volunteer', component: VolunteerComponent },
-      { path: 'families', component: AllFamiliesComponent },
-      {
-        path: 'family/:familyId',
-        component: FamilyComponent,
-        children: [
-          { path: 'volunteers', component: AllVolunteersComponent },
-          { path: 'organizations', component: AllOrganizationsComponent },
-          { path: 'events', component: AllEventsComponent }
-        ]
-      },
-      { path: 'add-family', component: FamilyFComponent },
-      { path: 'report-family', component: FamilyComponent },
-      { path: 'events', component: AllEventsComponent },
-      {
-        path: 'event/:eventId',
-        component: EventComponent,
-        children: [
-          { path: 'families', component: AllFamiliesComponent },
-          { path: 'organizations', component: AllOrganizationsComponent },
-          { path: 'volunteers', component: AllVolunteersComponent }
-        ]
-      },
-      { path: 'add-event', component: EventFComponent },
-      { path: 'organizations', component: AllOrganizationsComponent },
-      { path: 'tasks', component: AllTasksComponent },
-      { path: 'task/:taskId', component: MyTaskComponent },
-      {
-        path: 'organization/:organizationId',
-        component: OrganizationComponent,
-        children: [
-          { path: 'families', component: AllFamiliesComponent },
-          { path: 'volunteers', component: AllVolunteersComponent },
-          { path: 'events', component: AllEventsComponent }
-        ]
-      },
-      { path: 'add-organization', component: OrganizationFComponent }
-    ]
-  }
-];
 @NgModule({
   declarations: [
     AppComponent,
@@ -199,7 +120,7 @@ export const routeList: Routes = [
   imports: [
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot(routeList),
+    RoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,

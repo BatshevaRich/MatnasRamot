@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, AfterViewInit } from '@angular/core';
 import { VolunteerService } from 'src/app/services/volunteer.service';
 import { Volunteer } from 'src/app/Classes/Volunteer';
 import { VolunteerAndFamilyService } from 'src/app/services/volunteer-and-family.service';
@@ -21,7 +21,7 @@ import { MatPaginator } from '@angular/material/paginator';
     ]),
   ],
 })
-export class AllToVolunteersComponent implements OnInit {
+export class AllToVolunteersComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatTable) table: MatTable<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -36,7 +36,8 @@ export class AllToVolunteersComponent implements OnInit {
   volunteerings: VolunteerAndFamily[] = [];
   families: Family[] = [];
 
-  constructor(public fs: FamilyService, public vfs: VolunteerAndFamilyService) {
+  constructor(public fs: FamilyService,
+              public vfs: VolunteerAndFamilyService) {
     this.dataSource.filterPredicate =
       (data: Details, filter: string) => data.NameVolunteer.indexOf(filter) !== -1;
    }

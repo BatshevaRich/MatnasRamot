@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, ViewChild, Inject } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, ViewChild, Inject, OnDestroy } from '@angular/core';
 import { Volunteer } from '../../../Classes/Volunteer';
 import { DataServiceService } from '../../../Services/data-service.service';
 import { VolunteerService } from 'src/app/services/volunteer.service';
@@ -12,7 +12,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   templateUrl: './volunteer-f.component.html',
   styleUrls: ['./volunteer-f.component.css']
 })
-export class VolunteerFComponent implements OnInit {
+export class VolunteerFComponent implements OnInit, OnDestroy {
   categories: Category[] = [];
   categoriesOfVolunteer: Category[] = [];
   mySubscription: Subscription;
@@ -20,10 +20,13 @@ export class VolunteerFComponent implements OnInit {
   categoriesSelected: Category[] = [];
   @Output() addedVolunteer: EventEmitter<Volunteer> = new EventEmitter<Volunteer>();
   newVolunteer: Volunteer = new Volunteer('default', '000000000', '000000000', 'default@ddd', 'default', '1999-01-01', false);
-  constructor(public vs: VolunteerService, private cs: CategoryService, private dialogRef: MatDialogRef<VolunteerFComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.mySubscription = cs.getCategories().subscribe(data => {
-      this.categories = data;
-      console.log(data);
+  constructor(public vs: VolunteerService,
+              private cs: CategoryService,
+              private dialogRef: MatDialogRef<VolunteerFComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) {
+    this.mySubscription = cs.getCategories().subscribe(res => {
+      this.categories = res;
+      console.log(res);
     });
   }
 
@@ -36,8 +39,8 @@ export class VolunteerFComponent implements OnInit {
   ngOnInit() {
     if (this.data.update) {
       this.newVolunteer = this.data.dataKey;
-      this.vs.getCategoriesOfVolunteer(this.newVolunteer.Id).subscribe(res =>{
-        this.categoriesOfVolunteer =  this.categoriesOfVolunteer.concat(res as Category[]);
+      this.vs.getCategoriesOfVolunteer(this.newVolunteer.Id).subscribe(res => {
+        this.categoriesOfVolunteer = this.categoriesOfVolunteer.concat(res as Category[]);
       });
     }
     console.log(this.data);

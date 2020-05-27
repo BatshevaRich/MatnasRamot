@@ -15,34 +15,26 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class FamilyComponent implements OnInit, OnDestroy {
   family: Family = new Family('fathername',
-  'mothername',
-  'lastname',
-  '0',
-  '0',
-  '0',
-  'address',
-  'status',
-  2,
-  'reason',
-  'reference');
+    'mothername',
+    'lastname',
+    '0',
+    '0',
+    '0',
+    'address',
+    'status',
+    2,
+    'reason',
+    'reference');
   mySubscription: Subscription;
   id: number;
   categories: Category[] = [];
   mySubscription2: Subscription;
   @Input() vId: number;
   chooseTab: string;
-  constructor(public fs: FamilyService, public ARS: ActivatedRoute, public dialog: MatDialog) {
+  constructor(public fs: FamilyService,
+              public ARS: ActivatedRoute,
+              public dialog: MatDialog) { }
 
-    // this.mySubscription = ARS.params.subscribe((args) => {
-    //   this.id = args.familyId;
-    //   fs.getFamily(this.id).subscribe(d => {
-    //     this.family = d;
-    //     this.mySubscription2 = this.fs.getCategoriesOfFamily(this.family.Id).subscribe(data => {
-    //   this.categories = data;
-    // });
-    //   });
-    // });
-  }
   ngOnInit() {
     this.fs.getFamily(this.vId).subscribe(f => {
       this.family = f;
@@ -56,7 +48,6 @@ export class FamilyComponent implements OnInit, OnDestroy {
     if (this.mySubscription) {
       this.mySubscription.unsubscribe();
     }
-    // this.mySubscription2.unsubscribe();
   }
 
   FamilyopenDialog() {
