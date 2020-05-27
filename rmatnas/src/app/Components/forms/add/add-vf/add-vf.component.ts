@@ -58,7 +58,6 @@ export class AddVFComponent implements OnInit {
     this.idVolunteer = this.selectedVolunteer.Id;
   }
   volunteerChanged($event){
-    debugger
   }
   onChangeCtegory($event) {
     if (this.idFamily) {
