@@ -42,7 +42,6 @@ import { ConfirmDialogComponent } from './Components/forms/confirm-dialog/confir
 import { HeaderComponent } from './Components/UI/header/header.component';
 import { RoutingModule } from './routing.module';
 import { MaterialModule } from './material.module';
-import { MatTableExporterModule } from 'mat-table-exporter';
 @NgModule({
   declarations: [
     AppComponent,
