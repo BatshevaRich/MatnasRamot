@@ -40,9 +40,9 @@
                       element == expandedElement ? 'expanded' : 'collapsed'
                     ">
                     <div class="example-element-description">
-                      <app-to-volunteer [vId] = "element.Id"></app-to-volunteer>
-                      <app-volunteer [vId] = "element.IdVolunteer"></app-volunteer>
-                      <app-family [vId] = "element.IdFamily"></app-family>
+                      <app-to-volunteer [vId]="element.Id"></app-to-volunteer>
+                      <app-volunteer [vId]="element.IdVolunteer"></app-volunteer>
+                      <app-family [vId]="element.IdFamily"></app-family>
 
                       <!-- <app-myvolunteer [vId]="element.Id"></app-myvolunteer> -->
                       <span class="example-element-description-attribution">
@@ -58,7 +58,8 @@
                 "></tr>
               <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
             </table>
-            <mat-paginator class="marginless-paginator-range-label" #paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+            <mat-paginator class="marginless-paginator-range-label" #paginator [pageSizeOptions]="[5, 10, 20]"
+              showFirstLastButtons></mat-paginator>
             <div *ngIf="!resultsLength">
               <div class="text-center">
                 <i class="fa fa-spinner fa-spin" style="font-size:60px"></i> <br />
