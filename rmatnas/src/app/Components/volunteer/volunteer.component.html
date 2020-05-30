@@ -13,8 +13,18 @@
               <p>כתובת: {{ myvolunteer.Address }}</p>
               <p>מייל: {{ myvolunteer.Email }}</p>
               <p>יום הולדת: {{ myvolunteer.Age | date:"MMMM dd yyyy" }}</p>
+              <p>פעילה: 
+                <span *ngIf="myvolunteer.IsActive">
+                  <i class="fa fa-check"></i>
+                </span>
+                <span *ngIf="!myvolunteer.IsActive">
+                  <i class="fa fa-times"></i>
+                </span>
+              </p>
+              <header>קטגוריות</header>
               <div *ngFor="let c of categories">
-                {{c.Name}}
+                <li>
+                {{c.Name}}</li>
               </div>
             </div>
             <p class="card-text"></p>
