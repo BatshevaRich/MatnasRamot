@@ -47,7 +47,13 @@
               <ng-container matColumnDef="IsActive">
                 <th mat-header-cell *matHeaderCellDef> פעילה? </th>
                 <td mat-cell *matCellDef="let element">
-                  <mat-slide-toggle [checked]="element.IsActive" [disabled]="true"></mat-slide-toggle>
+                  <div *ngIf="element.IsActive">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div *ngIf="!element.IsActive">
+                    <i class="fa fa-times"></i>
+                  </div>
+                   <!-- <mat-slide-toggle [checked]="element.IsActive" [disabled]="true"></mat-slide-toggle> -->
                 </td>
               </ng-container>
               <ng-container matColumnDef="columndelete">
