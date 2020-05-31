@@ -17,9 +17,16 @@ namespace WebApi.Controllers
         }
 
         // GET: api/VolunteerAndFamily/5
-        public VolunteerAndFamily Get(int id)
+        public IEnumerable<Family> Get(int id)
         {
-            return Bll.VolunteerAndFamilyManager.GetVolunteerAndFamily(id);
+            return Bll.VolunteerAndFamilyManager.GetVolunteerAndFamilyForVolunteer(id);
+        }
+
+        [Route("api/VolunteerAndFamily/Getvf/{fId}")]
+        [HttpGet]
+        public IEnumerable<Volunteer> Getvf(int fId)
+        {
+            return Bll.VolunteerAndFamilyManager.GetVolunteerAndFamilyForFamily(fId);
         }
 
         // POST: api/VolunteerAndFamily

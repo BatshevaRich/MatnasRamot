@@ -47,6 +47,6 @@ export class VolunteerService {
     return this.http.get(baseURL + 'CategoryVolunteer/' + id + '&category=' + categories);
   }
   getVolunteersForFamily(fId: number): Observable<Volunteer[]> {
-    return this.http.get<Volunteer[]>(this.path + '/volunteerfamily/' + fId);
+    return this.http.get<Volunteer[]>(baseURL + 'VolunteerAndFamily/Getvf/' + fId);
   }
 }

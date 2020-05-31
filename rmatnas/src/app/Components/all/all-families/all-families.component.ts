@@ -37,7 +37,7 @@ export class AllFamiliesComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   displayedColumns = ['LastName', 'Address', 'Telephone', 'NumChildren', 'Status', 'Reference'];
   expandedElement: Details | null;
-  families: any;
+  families: Family[] = [];
   dataSource = new MatTableDataSource();
   search = '';
   resultsLength = 0;
@@ -51,8 +51,9 @@ export class AllFamiliesComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     if (this.vId) {
       this.inp = true;
-      this.fs.getFamiliesByVolunteer(this.vId).subscribe(data => {
+      this.fs.getFamiliesByVolunteer(this.vId).subscribe((data: Family[]) => {
         /// TODO: check if empty results, if empty- do not display table
+        debugger
         this.families = data;
         this.dataSource.data = data;
         console.log(this.dataSource);
