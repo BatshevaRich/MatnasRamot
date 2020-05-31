@@ -91,17 +91,14 @@ export class AllVolunteersComponent implements OnInit, AfterViewInit {
 
   confirmDialog(): Observable<any> {
     const message = `מחיקה זו היא לצמיתות! האם תרצי להמשיך?`;
-
     const dialogData = new ConfirmDialogModel('מחיקת מתנדבת', message);
-
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       maxWidth: '75%',
       data: dialogData
     });
-
     return dialogRef.afterClosed();
-
   }
+  
   newVolunteer(myvolunteer) {
     this.volunteers.push(myvolunteer);
     this.dataSource.data = this.volunteers as unknown as MatTableDataSource<Details>[];
