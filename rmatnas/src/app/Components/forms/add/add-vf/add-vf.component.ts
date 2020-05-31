@@ -39,7 +39,7 @@ export class AddVFComponent implements OnInit {
 
   }
   ngOnInit() {
-    this.categories.push(new Category());
+    this.categories.push(new Category(1, 'hello'));
     this.families.push(new Family('fathername',
       'mothername',
       'lastname',
