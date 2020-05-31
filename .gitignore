@@ -1,2 +1,23 @@
 
 *.config
+*.cache
+*.dll
+*.exe
+*.pdb
+/build/
+*.suo
+*.user
+_ReSharper.*/
+*.sdf
+*.opensdf
+*.tlog
+*.log
+*.xml
+*.cache
+*.rsp
+*.targets
+*.cache
+*.cache
+Matnas/.vs/Matnas/v16/.suo
+*.mdf
+Matnas/.vs/Matnas/v16/.suo
