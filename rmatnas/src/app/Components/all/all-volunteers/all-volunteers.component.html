@@ -60,7 +60,7 @@
               <ng-container *ngIf="!vId" matColumnDef="columndelete">
                 <th mat-header-cell *matHeaderCellDef>מחיקה </th>
                 <td mat-cell *matCellDef="let element">
-                  <mat-icon style="color: #bf0000b0;" (click)="delete(element)"><i class="fa fa-trash"></i></mat-icon>
+                  <mat-icon style="color: #bf0000b0;" (click)="delete(element, element)"><i class="fa fa-trash"></i></mat-icon>
                 </td>
               </ng-container>
               <ng-container matColumnDef="expandedDetail">
