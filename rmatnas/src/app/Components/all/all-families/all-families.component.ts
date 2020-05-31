@@ -4,6 +4,9 @@ import { FamilyService } from 'src/app/services/family.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
+import { Observable } from 'rxjs';
+import { ConfirmDialogModel, ConfirmDialogComponent } from '../../forms/confirm-dialog/confirm-dialog.component';
+import { MatDialog } from '@angular/material';
 
 export interface Details {
   Id: number;
@@ -35,7 +38,7 @@ export class AllFamiliesComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatTable) table: MatTable<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  displayedColumns = ['LastName', 'Address', 'Telephone', 'NumChildren', 'Status', 'Reference'];
+  displayedColumns = ['LastName', 'Address', 'Telephone', 'NumChildren', 'Status', 'Reference', 'columndelete'];
   expandedElement: Details | null;
   families: Family[] = [];
   dataSource = new MatTableDataSource();
@@ -43,17 +46,18 @@ export class AllFamiliesComponent implements OnInit, AfterViewInit {
   resultsLength = 0;
   @Input() vId: number;
   inp = false;
+  result = '';
 
-  constructor(public fs: FamilyService, private changeDetectorRefs: ChangeDetectorRef) {
+  constructor(public fs: FamilyService, private changeDetectorRefs: ChangeDetectorRef, public dialog: MatDialog) {
     this.dataSource.filterPredicate =
       (data: Details, filter: string) => data.LastName.indexOf(filter) !== -1;
   }
   ngOnInit() {
     if (this.vId) {
+      this.displayedColumns = ['LastName', 'Address', 'Telephone', 'NumChildren', 'Status', 'Reference'];
       this.inp = true;
       this.fs.getFamiliesByVolunteer(this.vId).subscribe((data: Family[]) => {
         /// TODO: check if empty results, if empty- do not display table
-        debugger
         this.families = data;
         this.dataSource.data = data;
         console.log(this.dataSource);
@@ -81,14 +85,32 @@ export class AllFamiliesComponent implements OnInit, AfterViewInit {
     this.changeDetectorRefs.detectChanges();
   }
 
-  delete(f: number) {
-    this.fs.removeFamily(f);
-    this.families = this.families.filter(fo => fo.Id !== f);
-  }
-
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
     this.dataSource.filter = filterValue;
+  }
+
+  delete(event, elm) {
+    this.confirmDialog().subscribe(res => {
+      this.result = res;
+      if (res) {
+        this.fs.removeFamily(elm.Id);
+        this.dataSource.data = this.dataSource.data
+          .filter(i => i !== elm);
+        // .map((i, idx) => (i.position = (idx + 1), i));
+      }
+    });
+  }
+
+  confirmDialog(): Observable<any> {
+    const message = `מחיקה זו היא לצמיתות! האם תרצי להמשיך?`;
+    const dialogData = new ConfirmDialogModel('מחיקת מתנדבת', message);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: '75%',
+      data: dialogData
+    });
+    return dialogRef.afterClosed();
+
   }
 }
