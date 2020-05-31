@@ -48,6 +48,15 @@ namespace Dal
                 return vafs;
             }
         }
+
+        public static Common.VolunteerAndFamily GetVolunteerAndFamily(int id)
+        {
+            using (dbRamotEntities db = new dbRamotEntities())
+            {//////////////////////////////////////////////////////////////
+                return Mapper.CastVolunteerAndFamilyToComon(db.VolunteerAndFamily.Find(id));
+
+            }
+        }
         public static IEnumerable<Common.Family> GetVolunteerAndFamilyForVolunteer(int id)
         {
             using (dbRamotEntities db = new dbRamotEntities())

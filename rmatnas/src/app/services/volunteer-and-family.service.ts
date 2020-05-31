@@ -14,7 +14,7 @@ export class VolunteerAndFamilyService {
     return this.http.get<VolunteerAndFamily[]>(this.path);
   }
   public getVolunteering(id: number): Observable<VolunteerAndFamily> {
-    return this.http.get<VolunteerAndFamily>(this.path + id);
+    return this.http.get<VolunteerAndFamily>(this.path + 'Getvaf/' + id);
   }
   public addVolunteering(volunteering: VolunteerAndFamily) {
     this.http.post(this.path, volunteering).subscribe(data => {

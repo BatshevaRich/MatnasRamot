@@ -11,9 +11,9 @@ namespace WebApi.Controllers
     public class VolunteerController : ApiController
     {
         // GET: api/Volunteer
-        public IEnumerable<Volunteer> Get()
+        public IHttpActionResult Get()
         {
-            return Bll.VolunteerManager.GetVolunteers();
+            return Ok(Bll.VolunteerManager.GetVolunteers());
         }
 
         // GET: api/Volunteer/5
