@@ -17,9 +17,9 @@ namespace Bll
         {
             Dal.VolunteerManager.RemoveVolunteer(volunteer);
         }
-        public static void UpdateVolunteer(Volunteer volunteer)
+        public static void UpdateVolunteer(Volunteer volunteer, Category[] categories)
         {
-            Dal.VolunteerManager.UpdateVolunteer(volunteer);
+            Dal.VolunteerManager.UpdateVolunteer(volunteer, categories);
         }
         public static IEnumerable<Volunteer> GetVolunteers()
         {

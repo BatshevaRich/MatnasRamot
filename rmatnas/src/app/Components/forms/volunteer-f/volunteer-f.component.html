@@ -50,7 +50,9 @@
         <span *ngIf="!newVolunteer.IsActive">
           <i class="fa fa-times"></i>
         </span> -->
-        <app-choose-category [chosenC]="categoriesOfVolunteer" (selectc)="selectCategories($event)">
+        <app-choose-category *ngIf="!data.update" [chosenC]="categoriesOfVolunteer" (selectc)="selectCategoriesNew($event)">
+        </app-choose-category>
+        <app-choose-category *ngIf="data.update" [chosenC]="categoriesOfVolunteer" (selectc)="selectCategoriesUpdate($event)">
         </app-choose-category>
       </div>
       <div mat-dialog-actions>

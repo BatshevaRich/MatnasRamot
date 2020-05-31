@@ -32,9 +32,11 @@ namespace WebApi.Controllers
 
         [HttpPut]
         // PUT: api/Volunteer/5
-        public void Put(int id, [FromBody]Volunteer value)
+        public void Put([FromBody] JObject data)
         {
-            Bll.VolunteerManager.UpdateVolunteer(value);
+            Volunteer newVolunteer = data["volunteer"].ToObject<Volunteer>();
+            Category[] category = data["categories"].ToObject<Category[]>();
+            Bll.VolunteerManager.UpdateVolunteer(newVolunteer, category);
         }
 
         // DELETE: api/Volunteer/5

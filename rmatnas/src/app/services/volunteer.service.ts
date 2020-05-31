@@ -26,11 +26,13 @@ export class VolunteerService {
     return this.http
       .post(this.path, myData).toPromise().then(res => res);
   }
-  updateVolunteer(myvolunteer: Volunteer) {
+  updateVolunteer(myvolunteer: Volunteer, categoriesSelected: Category[]) {
     // const head={params:new HttpParams() ('newVolunteer',myvolunteer)};
+    const myData = {} as any;
+    myData.volunteer = myvolunteer;
+    myData.categories = categoriesSelected;
     this.http.put(
-      this.path + '/' + myvolunteer.Id,
-      myvolunteer
+      this.path, myData
     ).subscribe(x => console.log(x));
   }
   removeVolunteer(id: number) {

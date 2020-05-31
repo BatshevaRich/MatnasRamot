@@ -45,10 +45,12 @@ export class VolunteerComponent implements OnInit, OnDestroy {
       data: {
         dataKey: this.myvolunteer,
         update: true,
-        id: this.myvolunteer.Id
+        id: this.myvolunteer.Id,
+        chosenC: this.categories
       }
     });
     dialogRef.afterClosed().subscribe(res => {
+      debugger
     });
   }
 

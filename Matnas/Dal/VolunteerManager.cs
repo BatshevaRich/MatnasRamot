@@ -15,18 +15,17 @@ namespace Dal
             Volunteers v = Mapper.CastVolunteer(volunteer);
             using (dbRamotEntities db = new dbRamotEntities())
             {
-                db.Volunteers.Add(v);
                 foreach (var item in category)
                 {
                     var test = Mapper.CastCategory(item);
-                    v.Categories.Add(Mapper.CastCategory(item));
-                    // db.SaveChanges();
+                    v.Categories.Add(test);
                 }
+                db.Volunteers.Add(v);
                 db.SaveChanges();
                 x = db.Volunteers.Local[0].Id;
             }
 
-            AddCategotyToVolunteer(x, category);
+            //AddCategotyToVolunteer(x, category);
             return x;
         }
         public static void RemoveVolunteer(Volunteer volunteer)
@@ -38,11 +37,11 @@ namespace Dal
                 db.SaveChanges();
             }
         }
-        public static void UpdateVolunteer(Volunteer volunteer)
+        public static void UpdateVolunteer(Volunteer volunteer, Category[] categories)
         {
             Volunteers v = Mapper.CastVolunteer(volunteer);
             using (dbRamotEntities db = new dbRamotEntities())
-            {
+            {/////////////////////////////////need to fix categories!
                 db.Entry<Volunteers>(db.Set<Volunteers>().Find(v.Id)).CurrentValues.SetValues(v);
                 db.SaveChanges();
             }
@@ -51,7 +50,7 @@ namespace Dal
         public static void RemoveVolunteer(int id)
         {
             using (dbRamotEntities db = new dbRamotEntities())
-            {
+            {/////////////need to remove categories first- foreign key problem
                 db.Volunteers.Remove(db.Volunteers.Find(id));
                 db.SaveChanges();
             }
