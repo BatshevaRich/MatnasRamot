@@ -55,6 +55,7 @@ export class AllVolunteersComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.customExporter = new CustomExporter();
     if (this.vId) {
+      this.displayedColumns = ['Name', 'Address', 'Pelephone', 'Email', 'Age', 'IsActive'];
       this.inp = true;
       this.vs.getVolunteersForFamily(this.vId).subscribe(data => {
         /// TODO: check if empty results, if empty- do not display table
