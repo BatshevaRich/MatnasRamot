@@ -17,9 +17,9 @@ namespace Bll
         {
             Dal.FamilyManager.RemoveFamily(family);
         }
-        public static void UpdateFamily(Family family)
+        public static void UpdateFamily(Family family, Category[] categories)
         {
-            Dal.FamilyManager.UpdateFamily(family);
+            Dal.FamilyManager.UpdateFamily(family, categories);
         }
         public static IEnumerable<Family> GetFamilies()
         {

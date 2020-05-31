@@ -72,7 +72,7 @@
         </label>
         <br />
       </div>
-      <app-choose-category (selectc)="selectCategories($event)"></app-choose-category>
+      <app-choose-category [chosenC]="categoriesOfFamily" (selectc)="selectCategories($event)"></app-choose-category>
       <div mat-dialog-actions>
         <button mat-button mat-dialog-close class="btn btn-primary" type="submit">
           <span *ngIf="!data.update" mat-dialog-title>להוספת המשפחה</span>

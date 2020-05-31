@@ -48,10 +48,13 @@ namespace WebApi.Controllers
             return Bll.FamilyManager.AddFamily(newFamily, category);
         }
 
-        // PUT: api/Family/5
-        public void Put(int id, [FromBody]Family family)
+        [HttpPut]
+        // PUT: api/Volunteer/5
+        public void Put([FromBody] JObject data)
         {
-            Bll.FamilyManager.UpdateFamily(family);
+            Family newFamily = data["family"].ToObject<Family>();
+            Category[] category = data["categories"].ToObject<Category[]>();
+            Bll.FamilyManager.UpdateFamily(newFamily, category);
         }
         [HttpDelete]
         // DELETE: api/Family/5

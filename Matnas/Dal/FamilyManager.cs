@@ -41,8 +41,8 @@ namespace Dal
                 db.SaveChanges();
             }
         }
-        public static void UpdateFamily(Family family)
-        {
+        public static void UpdateFamily(Family family, Category[] categories)
+        {////////////////////////////////////////////////////////////////
             Families f = Mapper.CastFamily(family);
             using (dbRamotEntities db=new dbRamotEntities())
             {

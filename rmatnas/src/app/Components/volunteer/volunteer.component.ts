@@ -50,7 +50,6 @@ export class VolunteerComponent implements OnInit, OnDestroy {
       }
     });
     dialogRef.afterClosed().subscribe(res => {
-      debugger
     });
   }
 

@@ -35,9 +35,14 @@ export class FamilyService {
       .post(this.path, myData)
       .toPromise().then(res => res);
   }
-  updateFamily(family: Family) {
+  updateFamily(family: Family, categoriesSelected: Category[]) {
     // const head={params:new HttpParams() ('newFamily',Family)};
-    this.http.put(this.path + '/' + family.Id, family).subscribe(x => console.log(x));
+    const myData = {} as any;
+    myData.family = family;
+    myData.categories = categoriesSelected;
+    this.http.put(
+      this.path, myData
+    ).subscribe(x => console.log(x));
   }
   removeFamily(id: number) {
     // const head={params:new HttpParams() ('newFamily',Family)};
