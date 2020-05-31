@@ -1,12 +1,5 @@
-<form action="#">
-  <span *ngFor="let c of categories; let i=index">
-    <p>
-      <input type="checkbox" (change)="add($event, c)" [id]="c.Id" />
-      <label  [for]="c.Id">***{{ c.Name }}</label>
-    </p>
+  <br>
+  <span *ngFor="let c of arr; let i=index">
+      <mat-checkbox [(ngModel)]="c.checked" (change)="add($event, c)" [id]="c.id" >{{ c.name }}</mat-checkbox>
     <br>
   </span>
-</form>
-<br />
-<br />
-<br />
