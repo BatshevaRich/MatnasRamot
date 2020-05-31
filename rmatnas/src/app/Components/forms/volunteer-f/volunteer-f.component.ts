@@ -61,13 +61,6 @@ export class VolunteerFComponent implements OnInit, OnDestroy {
       this.mySubscription.unsubscribe();
     }
   }
-  add(c: Category) {
-    if (!this.categoriesSelected.includes(c)) {
-      //   this.categoriesSelected = this.categoriesSelected.filter(co => co.Id !== c.Id);
-      // } else {
-      this.categoriesSelected.push(c);
-    }
-  }
 
   selectCategories(e) {
     this.categoriesSelected = [];

@@ -11,7 +11,8 @@ import { Subscription } from 'rxjs';
 export class ChooseCategoryComponent implements OnInit, OnDestroy {
   categories: Category[] = [];
   mySubscription: Subscription;
-  @Output() selectc: EventEmitter<{ checked: boolean, id: number, name: string }[]> = new EventEmitter<{ checked: boolean, id: number, name: string }[]>();
+  @Output() selectc: EventEmitter<{ checked: boolean, id: number, name: string }[]>
+  = new EventEmitter<{ checked: boolean, id: number, name: string }[]>();
   @Input() chosenC: Category[] = [];
   categoriesSelected: Category[] = [];
   arr: Array<{ checked: boolean, id: number, name: string }> = [];

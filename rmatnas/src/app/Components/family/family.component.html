@@ -19,8 +19,10 @@
               <p>מספר ילדים: {{ family.NumChildren }}</p>
               <p>מפנה: {{ family.Reference }}</p>
               <p>סיבת ההפניה: {{ family.Reason }}</p>
+              <header>קטגוריות</header>
               <div *ngFor="let c of categories">
-                {{c.Name}}
+                <li>
+                {{c.Name}}</li>
               </div>
             </div>
             <p class="card-text"></p>

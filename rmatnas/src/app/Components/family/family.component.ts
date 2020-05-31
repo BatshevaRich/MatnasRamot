@@ -55,7 +55,8 @@ export class FamilyComponent implements OnInit, OnDestroy {
       data: {
         dataKey: this.family,
         update: true,
-        id: this.family.Id
+        id: this.family.Id,
+        chosenC: this.categories
       }
     });
     dialogRef.afterClosed().subscribe(res => {

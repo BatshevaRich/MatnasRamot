@@ -20,6 +20,7 @@ export class FamilyFComponent implements OnInit, OnDestroy {
   mySubscription: Subscription;
   categoriesSelected: Category[] = [];
   @ViewChild('familyForm') mytemplateForm: NgForm;
+  categoriesOfFamily: Category[] = [];
   newFamily: Family = new Family(
 
     'fathername',
@@ -45,15 +46,16 @@ export class FamilyFComponent implements OnInit, OnDestroy {
     });
   }
   ngOnInit() {
+
     if (this.data.update) {
       this.newFamily = this.data.dataKey;
+      this.categoriesOfFamily = this.data.chosenC;
     }
-    console.log(this.data);
   }
   submitForm(f) {
     if (this.data.update) {
       this.newFamily.Id = this.data.id;
-      this.fs.updateFamily(this.newFamily);
+      this.fs.updateFamily(this.newFamily, this.categoriesSelected);
     } else {
       this.fs.addFamily(this.newFamily, this.categoriesSelected)
         .then(t => {
@@ -79,18 +81,12 @@ export class FamilyFComponent implements OnInit, OnDestroy {
 
   }
 
-  add(c: Category) {
-    if (!this.categoriesSelected.includes(c)) {
-      //   this.categoriesSelected = this.categoriesSelected.filter(co => co.Id !== c.Id);
-      // } else {
-      this.categoriesSelected.push(c);
-    }
-  }
-
   selectCategories(e) {
     this.categoriesSelected = [];
     e.forEach(element => {
-      this.add(element);
+      if (element.checked) {
+        this.categoriesSelected.push(new Category(element.id, element.name));
+      }
     });
   }
 
