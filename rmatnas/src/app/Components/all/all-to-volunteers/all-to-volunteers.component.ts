@@ -8,6 +8,9 @@ import { FamilyService } from 'src/app/services/family.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatDialog } from '@angular/material';
+import { Observable } from 'rxjs';
+import { ConfirmDialogModel, ConfirmDialogComponent } from '../../forms/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-all-to-volunteers',
@@ -25,7 +28,7 @@ export class AllToVolunteersComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatTable) table: MatTable<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  displayedColumns = ['NameVolunteer', 'NameFamily', 'Category', 'PelephoneVolunteer'];
+  displayedColumns = ['NameVolunteer', 'NameFamily', 'Category', 'PelephoneVolunteer', 'columndelete'];
   expandedElement: Details | null;
   allvolunteerings: Details[] = [];
   dataSource = new MatTableDataSource();
@@ -35,9 +38,11 @@ export class AllToVolunteersComponent implements OnInit, AfterViewInit {
   inp: boolean;
   volunteerings: VolunteerAndFamily[] = [];
   families: Family[] = [];
+  result = '';
 
   constructor(public fs: FamilyService,
-              public vfs: VolunteerAndFamilyService) {
+              public vfs: VolunteerAndFamilyService,
+              public dialog: MatDialog) {
     this.dataSource.filterPredicate =
       (data: Details, filter: string) => data.NameVolunteer.indexOf(filter) !== -1;
    }
@@ -81,6 +86,28 @@ export class AllToVolunteersComponent implements OnInit, AfterViewInit {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
     this.dataSource.filter = filterValue;
+  }
+
+  delete(event, elm) {
+    this.confirmDialog().subscribe(res => {
+      this.result = res;
+      if (res) {
+        this.vfs.removeVolunteering(elm.Id);
+        this.dataSource.data = this.dataSource.data
+          .filter(i => i !== elm);
+        // .map((i, idx) => (i.position = (idx + 1), i));
+      }
+    });
+  }
+
+  confirmDialog(): Observable<any> {
+    const message = `מחיקה זו היא לצמיתות! האם תרצי להמשיך?`;
+    const dialogData = new ConfirmDialogModel('מחיקת מתנדבת', message);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: '75%',
+      data: dialogData
+    });
+    return dialogRef.afterClosed();
   }
 
 }
