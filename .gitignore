@@ -19,3 +19,5 @@ _ReSharper.*/
 *.cache
 *.cache
 Matnas/.vs/Matnas/v16/.suo
+*.mdf
+Matnas/.vs/Matnas/v16/.suo
