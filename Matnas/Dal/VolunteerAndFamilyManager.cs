@@ -71,7 +71,7 @@ namespace Dal
             using (dbRamotEntities db = new dbRamotEntities())
             {//////////////////////////////////////////////////////////////
                 var query = from vf in db.VolunteerAndFamily
-                            where vf.Volunteers.Id == id
+                            where vf.Families.Id == id
                             select vf;
                 List<Common.Volunteer> volunteers = new List<Common.Volunteer>();
                 foreach (var item in query.AsEnumerable())
