@@ -40,9 +40,19 @@ namespace WebApi.Controllers
         }
 
         // DELETE: api/Volunteer/5
-        public void Delete(int id)
+        public HttpResponseMessage Delete(int id)
         {
-            Bll.VolunteerManager.RemoveVolunteer(id);
+            try
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, new Exception("Error saving volunteer in database"));
+                // Bll.VolunteerManager.RemoveVolunteer(id);
+                
+            }
+            catch (Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, e);
+            }
+            
         }
        
         [Route("api/categoriesOfVolunteer")]

@@ -33,7 +33,15 @@ namespace Bll
 
         public static void RemoveVolunteer(int id)
         {
-            Dal.VolunteerManager.RemoveVolunteer(id);
+            try
+            {
+                Dal.VolunteerManager.RemoveVolunteer(id);
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
         }
 
         public static IEnumerable<Category> GetCategories(int id)
