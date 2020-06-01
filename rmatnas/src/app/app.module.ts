@@ -36,7 +36,6 @@ import { AddFOComponent } from './Components/forms/add/add-fo/add-fo.component';
 import { CategoryFComponent } from './Components/forms/category-f/category-f.component';
 import { AllToVolunteersComponent } from './Components/all/all-to-volunteers/all-to-volunteers.component';
 import { MatIconRegistry } from '@angular/material/icon';
-import { MatTableExporterModule } from 'mat-table-exporter';
 import { ToVolunteerComponent } from './Components/to-volunteer/to-volunteer.component';
 import { ConfirmDialogComponent } from './Components/forms/confirm-dialog/confirm-dialog.component';
 import { HeaderComponent } from './Components/UI/header/header.component';
@@ -89,7 +88,6 @@ import { DatePipe } from '@angular/common';
     HttpClientModule,
     FormsModule,
     MaterialModule,
-    MatTableExporterModule,
     FlexLayoutModule
   ],
   providers: [DatePipe],
