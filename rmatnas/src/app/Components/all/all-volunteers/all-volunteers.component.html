@@ -1,96 +1,82 @@
-<div style="padding: 2%;">
-  <div class="row">
-    <div class="col">
-      <div dir="rtl" class="card">
-        <div class="card-header">
-          <div class="row">
-            <div class="col">
-              <mat-form-field>
-                <mat-label>חיפוש שם</mat-label>
-                <input matInput (keyup)="applyFilter($event.target.value)">
-              </mat-form-field>
-              &nbsp;&nbsp;&nbsp;
-              <button mat-fab *ngIf="!vId" color="" aria-label="Example icon button with a bookmark icon"
-                (click)="exportTableToExcel()">
-                <mat-icon><img src="../../../../assets/img/icons8-microsoft-excel-30.png" alt="image"></mat-icon>
-              </button>
-            </div>
-          </div>
+<div style="padding: 1%;">
+  <mat-card-header dir="rtl">
+    <mat-form-field>
+      <mat-label>חיפוש שם</mat-label>
+      <input matInput (keyup)="applyFilter($event.target.value)">
+    </mat-form-field>
+    &nbsp;&nbsp;&nbsp;
+    <button mat-fab *ngIf="!vId" color="" aria-label="Example icon button with a bookmark icon"
+      (click)="exportTableToExcel()">
+      <mat-icon><img src="../../../../assets/img/icons8-microsoft-excel-30.png" alt="image"></mat-icon>
+    </button>
+  </mat-card-header>
+  <br>
+  <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+    <ng-container matColumnDef="Name">
+      <th mat-header-cell *matHeaderCellDef> שם </th>
+      <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Address">
+      <th mat-header-cell *matHeaderCellDef> כתובת </th>
+      <td mat-cell *matCellDef="let element"> {{element.Address}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Pelephone">
+      <th mat-header-cell *matHeaderCellDef> פלאפון </th>
+      <td mat-cell *matCellDef="let element"> {{element.Pelephone}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Email">
+      <th mat-header-cell *matHeaderCellDef> מייל </th>
+      <td mat-cell *matCellDef="let element"> {{element.Email}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Age">
+      <th mat-header-cell *matHeaderCellDef> גיל </th>
+      <td mat-cell *matCellDef="let element"> {{CalculateAge(element)}} </td>
+    </ng-container>
+    <ng-container matColumnDef="IsActive">
+      <th mat-header-cell *matHeaderCellDef> פעילה? </th>
+      <td mat-cell *matCellDef="let element">
+        <div *ngIf="element.IsActive">
+          <i class="fa fa-check"></i>
         </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <div class="example-table-container">
-            <table mat-table matTableExporter [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
-              <ng-container matColumnDef="Name">
-                <th mat-header-cell *matHeaderCellDef> שם </th>
-                <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
-              </ng-container>
-              <ng-container matColumnDef="Address">
-                <th mat-header-cell *matHeaderCellDef> כתובת </th>
-                <td mat-cell *matCellDef="let element"> {{element.Address}} </td>
-              </ng-container>
-              <ng-container matColumnDef="Pelephone">
-                <th mat-header-cell *matHeaderCellDef> פלאפון </th>
-                <td mat-cell *matCellDef="let element"> {{element.Pelephone}} </td>
-              </ng-container>
-              <ng-container matColumnDef="Email">
-                <th mat-header-cell *matHeaderCellDef> מייל </th>
-                <td mat-cell *matCellDef="let element"> {{element.Email}} </td>
-              </ng-container>
-              <ng-container matColumnDef="Age">
-                <th mat-header-cell *matHeaderCellDef> גיל </th>
-                <td mat-cell *matCellDef="let element"> {{CalculateAge(element)}} </td>
-              </ng-container>
-              <ng-container matColumnDef="IsActive">
-                <th mat-header-cell *matHeaderCellDef> פעילה? </th>
-                <td mat-cell *matCellDef="let element">
-                  <div *ngIf="element.IsActive">
-                    <i class="fa fa-check"></i>
-                  </div>
-                  <div *ngIf="!element.IsActive">
-                    <i class="fa fa-times"></i>
-                  </div>
-                </td>
-              </ng-container>
-              <ng-container *ngIf="!vId" matColumnDef="columndelete">
-                <th mat-header-cell *matHeaderCellDef>מחיקה </th>
-                <td mat-cell *matCellDef="let element">
-                  <mat-icon style="color: #bf0000b0;" (click)="delete(element, element)"><i class="fa fa-trash"></i>
-                  </mat-icon>
-                </td>
-              </ng-container>
-              <ng-container matColumnDef="expandedDetail">
-                <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
-                  <div class="example-element-detail" [@detailExpand]="
+        <div *ngIf="!element.IsActive">
+          <i class="fa fa-times"></i>
+        </div>
+        <!-- <mat-slide-toggle [checked]="element.IsActive" [disabled]="true"></mat-slide-toggle> -->
+      </td>
+    </ng-container>
+    <ng-container *ngIf="!vId" matColumnDef="columndelete">
+      <th mat-header-cell *matHeaderCellDef>מחיקה </th>
+      <td mat-cell *matCellDef="let element">
+        <mat-icon style="color: #bf0000b0;" (click)="delete(element, element)"><i class="fa fa-trash"></i>
+        </mat-icon>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+        <div class="example-element-detail" [@detailExpand]="
                       element == expandedElement ? 'expanded' : 'collapsed'
                     ">
-                    <div class="example-element-description">
-                      <app-volunteer [vId]="element.Id"></app-volunteer>
-                      <span class="example-element-description-attribution">
-                      </span>
-                    </div>
-                  </div>
-                </td>
-              </ng-container>
-              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let element; columns: displayedColumns" class="example-element-row"
-                [class.example-expanded-row]="expandedElement === element" (click)="vId ? null: 
+          <div class="example-element-description">
+            <app-volunteer [vId]="element.Id"></app-volunteer>
+            <span class="example-element-description-attribution">
+            </span>
+          </div>
+        </div>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let element; columns: displayedColumns" class="example-element-row"
+      [class.example-expanded-row]="expandedElement === element" (click)="vId ? null: 
                   expandedElement = expandedElement === element ? null : element
                 "></tr>
-              <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-            </table>
-            <mat-paginator class="marginless-paginator-range-label" #paginator [pageSizeOptions]="[5, 10, 20]"
-              showFirstLastButtons></mat-paginator>
-            <div *ngIf="!resultsLength">
-              <div class="text-center">
-                <i class="fa fa-spinner fa-spin" style="font-size:60px"></i> <br />
-              </div>
-            </div>
-          </div>
-          <router-outlet></router-outlet>
-        </div>
-      </div>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+  </table>
+  <mat-paginator class="marginless-paginator-range-label" #paginator [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons></mat-paginator>
+  <div *ngIf="!resultsLength">
+    <div class="text-center">
+      <i class="fa fa-spinner fa-spin" style="font-size:60px"></i> <br />
     </div>
   </div>
+  <router-outlet></router-outlet>
 </div>

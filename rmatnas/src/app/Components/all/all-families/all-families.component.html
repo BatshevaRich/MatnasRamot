@@ -1,90 +1,73 @@
-<div style="padding: 2%">
-  <div class="row">
-    <div class="col">
-      <div dir="rtl" class="card">
-        <div class="card-header">
-          <div class="row">
-            <div class="col">
-              <mat-form-field>
-                <mat-label>חיפוש שם</mat-label>
-                <input matInput (keyup)="applyFilter($event.target.value)">
-              </mat-form-field>
-              &nbsp;&nbsp;&nbsp;
-              <button mat-fab *ngIf="!vId" color="" aria-label="Example icon button with a bookmark icon"
-                (click)="exportTableToExcel()">
-                <mat-icon><img src="../../../../assets/img/icons8-microsoft-excel-30.png" alt="image"></mat-icon>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <div class="example-table-container">
-            <table mat-table multiTemplateDataRows [dataSource]="dataSource" class="mat-elevation-z8">
-              <ng-container matColumnDef="LastName">
-                <th mat-header-cell *matHeaderCellDef> שם משפחה </th>
-                <td mat-cell *matCellDef="let element"> {{element.LastName}} </td>
-              </ng-container>
-              <ng-container matColumnDef="Address">
-                <th mat-header-cell *matHeaderCellDef> <i class="fa fa-map-marker"></i> </th>
-                <td mat-cell *matCellDef="let element"> {{element.Address}} </td>
-              </ng-container>
-              <ng-container matColumnDef="Telephone">
-                <th mat-header-cell *matHeaderCellDef> <i class="fa fa-phone"></i> </th>
-                <td mat-cell *matCellDef="let element"> {{element.Telephone}} </td>
-              </ng-container>
-              <ng-container matColumnDef="NumChildren">
-                <th mat-header-cell *matHeaderCellDef> מס' ילדים </th>
-                <td mat-cell *matCellDef="let element"> {{element.NumChildren}} </td>
-              </ng-container>
-              <ng-container matColumnDef="Status">
-                <th mat-header-cell *matHeaderCellDef> סטטוס </th>
-                <td mat-cell *matCellDef="let element"> {{element.Status}} </td>
-              </ng-container>
-              <ng-container matColumnDef="Reference">
-                <th mat-header-cell *matHeaderCellDef> הפניה </th>
-                <td mat-cell *matCellDef="let element"> {{element.Reference}} </td>
-              </ng-container>
-              <ng-container *ngIf="!vId" matColumnDef="columndelete">
-                <th mat-header-cell *matHeaderCellDef>מחיקה </th>
-                <td mat-cell *matCellDef="let element">
-                  <mat-icon style="color: #e27216d9;" (click)="delete(element, element)"><i class="fa fa-trash"></i></mat-icon>
-                </td>
-              </ng-container>
-              <ng-container matColumnDef="expandedDetail">
-                <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
-                  <div class="example-element-detail" [@detailExpand]="
+<div style="padding: 1%;">
+  <mat-card-header dir="rtl">
+    <mat-form-field>
+      <mat-label>חיפוש שם</mat-label>
+      <input matInput (keyup)="applyFilter($event.target.value)">
+    </mat-form-field>
+    &nbsp;&nbsp;&nbsp;
+    <button mat-fab *ngIf="!vId" color="" aria-label="Example icon button with a bookmark icon"
+      (click)="exportTableToExcel()">
+      <mat-icon><img src="../../../../assets/img/icons8-microsoft-excel-30.png" alt="image"></mat-icon>
+    </button>
+  </mat-card-header>
+  <br>
+  <table mat-table multiTemplateDataRows [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="LastName">
+      <th mat-header-cell *matHeaderCellDef> שם משפחה </th>
+      <td mat-cell *matCellDef="let element"> {{element.LastName}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Address">
+      <th mat-header-cell *matHeaderCellDef> <i class="fa fa-map-marker"></i> </th>
+      <td mat-cell *matCellDef="let element"> {{element.Address}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Telephone">
+      <th mat-header-cell *matHeaderCellDef> <i class="fa fa-phone"></i> </th>
+      <td mat-cell *matCellDef="let element"> {{element.Telephone}} </td>
+    </ng-container>
+    <ng-container matColumnDef="NumChildren">
+      <th mat-header-cell *matHeaderCellDef> מס' ילדים </th>
+      <td mat-cell *matCellDef="let element"> {{element.NumChildren}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Status">
+      <th mat-header-cell *matHeaderCellDef> סטטוס </th>
+      <td mat-cell *matCellDef="let element"> {{element.Status}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Reference">
+      <th mat-header-cell *matHeaderCellDef> הפניה </th>
+      <td mat-cell *matCellDef="let element"> {{element.Reference}} </td>
+    </ng-container>
+    <ng-container *ngIf="!vId" matColumnDef="columndelete">
+      <th mat-header-cell *matHeaderCellDef>מחיקה </th>
+      <td mat-cell *matCellDef="let element">
+        <mat-icon style="color: #e27216d9;" (click)="delete(element, element)"><i class="fa fa-trash"></i></mat-icon>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+        <div class="example-element-detail" [@detailExpand]="
                       element == expandedElement ? 'expanded' : 'collapsed'
                     ">
-                    <div class="example-element-description">
-                      <app-family [vId]="element.Id"></app-family>
-                      <span class="example-element-description-attribution">
-                      </span>
-                    </div>
-                  </div>
-                </td>
-              </ng-container>
-              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let element; columns: displayedColumns" class="example-element-row"
-                [class.example-expanded-row]="expandedElement === element" (click)="vId ? null: 
+          <div class="example-element-description">
+            <app-family [vId]="element.Id"></app-family>
+            <span class="example-element-description-attribution">
+            </span>
+          </div>
+        </div>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let element; columns: displayedColumns" class="example-element-row"
+      [class.example-expanded-row]="expandedElement === element" (click)="vId ? null: 
                   expandedElement = expandedElement === element ? null : element
                 "></tr>
-              <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-            </table>
-            <mat-paginator class="marginless-paginator-range-label" #paginator [pageSizeOptions]="[5, 10, 20]"
-              showFirstLastButtons></mat-paginator>
-            <div *ngIf="dataSource.data.length == 0">
-              <div class="text-center">
-                <i class="fa fa-spinner fa-spin" style="font-size:60px"></i> <br />
-              </div>
-            </div>
-            <mat-toolbar color="primary" *ngIf="dataSource.data.length == 0">No records found message</mat-toolbar>
-          </div>
-          <router-outlet></router-outlet>
-        </div>
-      </div>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+  </table>
+  <mat-paginator class="marginless-paginator-range-label" #paginator [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons></mat-paginator>
+  <div *ngIf="!resultsLength">
+    <div class="text-center">
+      <i class="fa fa-spinner fa-spin" style="font-size:60px"></i> <br />
     </div>
   </div>
+  <router-outlet></router-outlet>
 </div>
-<br />

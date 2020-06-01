@@ -1,61 +1,50 @@
 <div dir="rtl" class="text-right" style="padding-top: 3%">
-  <div class="container">
-    <div class="row">
-      <div class="col-4">
-        <div class="card">
-          <div class="card-header">
-            <h4>משפחת {{ family.LastName }}</h4>
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3%" fxLayoutAlign="center">
+    <div fxFlex="25%">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"><i class="fa fa-user" style="size: 7x;"></i></div>
+          <mat-card-title>משפחת {{ family.LastName }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="card-body">
+          <p>שם פרטי אב: {{ family.FirstNameFather }}</p>
+          <p>שם פרטי אם: {{ family.FirstNameMother }}</p>
+          <p>שם משפחה: {{ family.LastName }}</p>
+          <p>טלפון: {{ family.Telephone }}</p>
+          <p>פלאפון אב: {{ family.PelephoneFather | phone }}</p>
+          <p>פלאפון אם: {{ family.PelephoneMother | phone }}</p>
+          <p>כתובת: {{ family.Address }}</p>
+          <p>סטטוס: {{ family.Status }}</p>
+          <p>מספר ילדים: {{ family.NumChildren }}</p>
+          <p>מפנה: {{ family.Reference }}</p>
+          <p>סיבת ההפניה: {{ family.Reason }}</p>
+          <header>קטגוריות</header>
+          <div *ngFor="let c of categories">
+            <li>
+              {{c.Name}}</li>
           </div>
-          <div class="card-body">
-            <div class="card-text">
-              <p>שם פרטי אב: {{ family.FirstNameFather }}</p>
-              <p>שם פרטי אם: {{ family.FirstNameMother }}</p>
-              <p>שם משפחה: {{ family.LastName }}</p>
-              <p>טלפון: {{ family.Telephone }}</p>
-              <p>פלאפון אב: {{ family.PelephoneFather | phone }}</p>
-              <p>פלאפון אם: {{ family.PelephoneMother | phone }}</p>
-              <p>כתובת: {{ family.Address }}</p>
-              <p>סטטוס: {{ family.Status }}</p>
-              <p>מספר ילדים: {{ family.NumChildren }}</p>
-              <p>מפנה: {{ family.Reference }}</p>
-              <p>סיבת ההפניה: {{ family.Reason }}</p>
-              <header>קטגוריות</header>
-              <div *ngFor="let c of categories">
-                <li>
-                {{c.Name}}</li>
-              </div>
-            </div>
-            <p class="card-text"></p>
-            <button class="btn btn-primary" (click)="FamilyopenDialog()">לעריכת הפרטים</button>
-          </div>
-        </div>
-      </div>
-      <div dir="rtl" class="col-8 card">
-        <nav class="navbar navbar-expand-md static-top">
-          <div dir="rtl" class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav nav-tabs">
-              <li class="nav-item active " (click)="chooseTab='volunteers'">
-                <a class="nav-link">
-                  <h3>מתנדבות</h3>
-                </a>
-              </li>
-              <li class="nav-item" (click)="chooseTab='organizations'">
-                <a class="nav-link">
-                  <h3>ארגונים</h3>
-                </a>
-              </li>
-              <li class="nav-item " (click)="chooseTab='events'">
-                <a class="nav-link">
-                  <h3>ארועים</h3>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </nav>
-        <app-all-volunteers *ngIf="chooseTab=='volunteers'" [vId]="vId"></app-all-volunteers>
-        <app-all-organizations *ngIf="chooseTab=='organizations'"></app-all-organizations>
-        <app-all-events *ngIf="chooseTab=='events'"></app-all-events>
-      </div>
+          <mat-card-actions>
+            <button mat-raised-button class="example-action-button" (click)="FamilyopenDialog()">לעריכת
+              הפרטים</button>
+          </mat-card-actions>
+
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div fxFlex="70%">
+      <button hidden (click)="tabs.selectedIndex = 0">RESET</button>
+      <mat-tab-group #tabs>
+        <mat-tab></mat-tab> <!-- ADDITIONAL TAB -->
+        <mat-tab label="מתנדבות">
+          <app-all-volunteers [vId]="vId"></app-all-volunteers>
+        </mat-tab>
+        <mat-tab label="ארגונים">
+          <app-all-organizations></app-all-organizations>
+        </mat-tab>
+        <mat-tab label="ארועים">
+          <app-all-events></app-all-events>
+        </mat-tab>
+      </mat-tab-group>
     </div>
   </div>
 </div>
