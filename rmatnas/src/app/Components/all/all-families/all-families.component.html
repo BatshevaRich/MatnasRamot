@@ -24,16 +24,16 @@
       <th mat-header-cell *matHeaderCellDef> <i class="fa fa-phone"></i> </th>
       <td mat-cell *matCellDef="let element"> {{element.Telephone}} </td>
     </ng-container>
-    <ng-container matColumnDef="NumChildren" mat-sort-header>
-      <th mat-header-cell *matHeaderCellDef> מס' ילדים </th>
+    <ng-container matColumnDef="NumChildren"  >
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> מס' ילדים </th>
       <td mat-cell *matCellDef="let element"> {{element.NumChildren}} </td>
     </ng-container>
     <ng-container matColumnDef="Status">
       <th mat-header-cell *matHeaderCellDef> סטטוס </th>
       <td mat-cell *matCellDef="let element"> {{element.Status}} </td>
     </ng-container>
-    <ng-container matColumnDef="Reference" mat-sort-header>
-      <th mat-header-cell *matHeaderCellDef> הפניה </th>
+    <ng-container matColumnDef="Reference">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> הפניה </th>
       <td mat-cell *matCellDef="let element"> {{element.Reference}} </td>
     </ng-container>
     <ng-container *ngIf="!vId" matColumnDef="columndelete">
