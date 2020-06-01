@@ -7,8 +7,6 @@ import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../../forms/confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material';
 import { Observable } from 'rxjs';
-import { CustomExporter } from 'src/app/Classes/custom-exporter';
-// import { DialogBoxComponent } from './dialog-box/dialog-box.component';
 export interface Details {
   Id: number;
   Name: string;
@@ -35,6 +33,14 @@ export interface Details {
 })
 export class AllVolunteersComponent implements OnInit, AfterViewInit {
 
+  constructor(public vs: VolunteerService,
+              private changeDetectorRefs: ChangeDetectorRef,
+              public dialog: MatDialog,
+              private datePipe: DatePipe) {
+    this.dataSource.filterPredicate =
+      (data: Details, filter: string) => data.Name.indexOf(filter) !== -1;
+  }
+
   @ViewChild(MatTable) table: MatTable<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   displayedColumns = ['Name', 'Address', 'Pelephone', 'Email', 'Age', 'IsActive', 'columndelete'];
@@ -46,14 +52,8 @@ export class AllVolunteersComponent implements OnInit, AfterViewInit {
   @Input() vId: number;
   inp: boolean;
   result = '';
-  customExporter: CustomExporter;
 
-  constructor(public vs: VolunteerService, private changeDetectorRefs: ChangeDetectorRef, public dialog: MatDialog) {
-    this.dataSource.filterPredicate =
-      (data: Details, filter: string) => data.Name.indexOf(filter) !== -1;
-  }
   ngOnInit(): void {
-    this.customExporter = new CustomExporter();
     if (this.vId) {
       this.displayedColumns = ['Name', 'Address', 'Pelephone', 'Email', 'Age', 'IsActive'];
       this.inp = true;
@@ -98,7 +98,7 @@ export class AllVolunteersComponent implements OnInit, AfterViewInit {
     });
     return dialogRef.afterClosed();
   }
-  
+
   newVolunteer(myvolunteer) {
     this.volunteers.push(myvolunteer);
     this.dataSource.data = this.volunteers as unknown as MatTableDataSource<Details>[];

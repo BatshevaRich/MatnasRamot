@@ -43,6 +43,7 @@ import { HeaderComponent } from './Components/UI/header/header.component';
 import { RoutingModule } from './routing.module';
 import { MaterialModule } from './material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { DatePipe } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -91,7 +92,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatTableExporterModule,
     FlexLayoutModule
   ],
-  providers: [DataServiceService],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule {
