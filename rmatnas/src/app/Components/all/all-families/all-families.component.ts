@@ -7,6 +7,7 @@ import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../../forms/confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material';
+import * as XLSX from 'xlsx';
 
 export interface Details {
   Id: number;
@@ -48,7 +49,9 @@ export class AllFamiliesComponent implements OnInit, AfterViewInit {
   inp = false;
   result = '';
 
-  constructor(public fs: FamilyService, private changeDetectorRefs: ChangeDetectorRef, public dialog: MatDialog) {
+  constructor(public fs: FamilyService,
+              private changeDetectorRefs: ChangeDetectorRef,
+              public dialog: MatDialog) {
     this.dataSource.filterPredicate =
       (data: Details, filter: string) => data.LastName.indexOf(filter) !== -1;
   }
@@ -111,6 +114,25 @@ export class AllFamiliesComponent implements OnInit, AfterViewInit {
       data: dialogData
     });
     return dialogRef.afterClosed();
+  }
 
+  public exportTableToExcel() {
+    const data = this.families.map(x => ({
+      שם_משפחה: x.LastName,
+      אבא: x.FirstNameFather,
+      אמא: x.FirstNameMother,
+      כתובת: x.Address,
+      טלפון: x.Telephone,
+      פלאפון_אבא: x.PelephoneFather,
+      פלאפון_אמא: x.PelephoneMother,
+      מספר_ילדים: x.NumChildren,
+      סטטוס: x.Status,
+      הפניה: x.Reference,
+      סיבה: x.Reason
+    }));
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.json_to_sheet(data);
+    XLSX.utils.book_append_sheet(wb, ws, 'משפחות');
+    XLSX.writeFile(wb, `משפחות.xlsx`);
   }
 }
