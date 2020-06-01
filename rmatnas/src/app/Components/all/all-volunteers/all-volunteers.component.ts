@@ -7,6 +7,9 @@ import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../../forms/confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material';
 import { Observable } from 'rxjs';
+import * as XLSX from 'xlsx';
+import { DatePipe} from '@angular/common';
+
 export interface Details {
   Id: number;
   Name: string;
@@ -117,6 +120,23 @@ export class AllVolunteersComponent implements OnInit, AfterViewInit {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
     this.dataSource.filter = filterValue;
+  }
+
+  public exportTableToExcel() {
+    const data = this.volunteers.map(x => ({
+      שם: x.Name,
+      כתובת: x.Address,
+      טלפון: x.Telephone,
+      פלאפון: x.Pelephone,
+      מייל: x.Email,
+      תאריך_לידה: this.datePipe.transform(x.Age, 'dd/mm/yyyy'),
+      פעילה: x.IsActive === true ? 'כן' : 'לא',
+      הערות: x.Comments
+    }));
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.json_to_sheet(data);
+    XLSX.utils.book_append_sheet(wb, ws, 'מתנדבות');
+    XLSX.writeFile(wb, `מתנדבות.xlsx`);
   }
 
 }
