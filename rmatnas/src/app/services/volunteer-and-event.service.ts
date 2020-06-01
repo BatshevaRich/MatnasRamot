@@ -20,12 +20,10 @@ export class VolunteerAndEventService {
   addVolunteering(volunteering: VolunteerAndEvent) {
 
     this.http.post(this.path, volunteering).subscribe(data => {
-      console.log(data);
     });
   }
   removeVolunteering(id: number) {
     this.http.delete(this.path + id).subscribe(data => {
-      console.log(data);
     });
   }
 }

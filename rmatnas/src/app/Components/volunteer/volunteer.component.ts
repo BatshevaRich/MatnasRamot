@@ -35,7 +35,6 @@ export class VolunteerComponent implements OnInit, OnDestroy {
       this.myvolunteer = v;
       this.vs.getCategoriesOfVolunteer(this.vId).subscribe(c => {
         this.categories = c;
-        console.log(c);
       });
     });
   }

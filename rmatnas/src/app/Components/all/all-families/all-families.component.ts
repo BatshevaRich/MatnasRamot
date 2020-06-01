@@ -63,14 +63,12 @@ export class AllFamiliesComponent implements OnInit, AfterViewInit {
         /// TODO: check if empty results, if empty- do not display table
         this.families = data;
         this.dataSource.data = data;
-        console.log(this.dataSource);
         this.resultsLength = this.dataSource.data.length;
       });
     } else {
       this.fs.getFamilies().subscribe((data: Family[]) => {
         this.families = data;
         this.dataSource.data = data;
-        console.log(this.dataSource);
         this.resultsLength = this.dataSource.data.length;
       });
     }
@@ -83,7 +81,6 @@ export class AllFamiliesComponent implements OnInit, AfterViewInit {
   newFamily(family) {
     this.families.push(family);
     this.dataSource.data = this.families as unknown as MatTableDataSource<Details>[];
-    console.log(this.dataSource);
     this.table.renderRows();
     this.changeDetectorRefs.detectChanges();
   }

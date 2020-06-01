@@ -18,12 +18,10 @@ export class VolunteerAndFamilyService {
   }
   public addVolunteering(volunteering: VolunteerAndFamily) {
     this.http.post(this.path, volunteering).subscribe(data => {
-      console.log(data);
     });
   }
   public removeVolunteering(id: number) {
     this.http.delete(this.path + id).subscribe(data => {
-      console.log(data);
     });
   }
 }

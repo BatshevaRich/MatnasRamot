@@ -14,12 +14,10 @@ export class FamilyService {
   constructor(private http: HttpClient) { }
 
   getFamilies(): Observable<Family[]> {
-    console.log(this.http.get<Family[]>(this.path));
     return this.http.get<Family[]>(this.path);
   }
 
   getFamiliesByVolunteer(id: number): Observable<Family[]> {
-    console.log(this.http.get<Family[]>(this.path)); // also bring categories
     return this.http.get<Family[]>(baseURL + 'VolunteerAndFamily/' + id);
   }
 
@@ -42,11 +40,11 @@ export class FamilyService {
     myData.categories = categoriesSelected;
     this.http.put(
       this.path, myData
-    ).subscribe(x => console.log(x));
+    ).subscribe();
   }
   removeFamily(id: number) {
     // const head={params:new HttpParams() ('newFamily',Family)};
-    this.http.delete(this.path + '/' + id).subscribe(x => console.log(x));
+    this.http.delete(this.path + '/' + id).subscribe();
   }
   getCategoriesOfFamily(id: number): Observable<Category[]> {
     return this.http.get<Category[]>(this.path + '/' + id);

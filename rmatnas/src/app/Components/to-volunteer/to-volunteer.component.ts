@@ -45,7 +45,6 @@ export class ToVolunteerComponent implements OnInit {
 
   ngOnInit() {
     this.vs.getVolunteering(this.vId).subscribe((v: VolunteerAndFamily) => {
-      console.log(v);
       this.toVolunteer = v;
     });
   }

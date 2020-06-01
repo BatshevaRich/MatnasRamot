@@ -63,12 +63,10 @@ export class AllToVolunteersComponent implements OnInit, AfterViewInit {
         item.IdFamily = element.Family.Id;
       });
       this.dataSource.data = this.allvolunteerings;
-      console.log(res);
     });
     // if (this.vId) {
     //   this.fs.getFamiliesByVolunteer(this.vId).subscribe(data=>{
     //     this.families = data;
-    //     console.log(data);
     //   })
     //  }
     // else {

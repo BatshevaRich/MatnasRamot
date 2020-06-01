@@ -42,7 +42,6 @@ export class FamilyFComponent implements OnInit, OnDestroy {
               @Inject(MAT_DIALOG_DATA) public data: any) {
     this.mySubscription = cs.getCategories().subscribe(res => {
       this.categories = res;
-      console.log(res);
     });
   }
   ngOnInit() {

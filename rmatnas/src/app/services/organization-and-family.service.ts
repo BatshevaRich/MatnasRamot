@@ -21,12 +21,10 @@ export class OrganizationAndFamilyService {
   addVolunteering(volunteering: OrganizationAndFamily) {
 
     this.http.post(this.path, volunteering).subscribe(data => {
-      console.log(data);
     });
   }
   removeVolunteering(id: number) {
     this.http.delete(this.path + id).subscribe(data => {
-      console.log(data);
     });
   }
 }

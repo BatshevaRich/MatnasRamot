@@ -33,11 +33,11 @@ export class VolunteerService {
     myData.categories = categoriesSelected;
     this.http.put(
       this.path, myData
-    ).subscribe(x => console.log(x));
+    ).subscribe();
   }
   removeVolunteer(id: number) {
     // const head={params:new HttpParams() ('newVolunteer',myvolunteer)};
-    this.http.delete(this.path + '/' + id).subscribe(x => console.log(x));
+    this.http.delete(this.path + '/' + id).subscribe();
   }
   getVolunteersByCategoryAndFamily(idFamily: number, category: Category): Observable<Volunteer[]> {
     return this.http.get<Volunteer[]>(this.path + '/familyandcategory/' + idFamily + '&category=' + category);

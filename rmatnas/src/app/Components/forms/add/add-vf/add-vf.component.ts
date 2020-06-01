@@ -30,11 +30,9 @@ export class AddVFComponent implements OnInit {
     this.vs.getVolunteers().subscribe(res => {
       this.volunteers = res;
       this.volunteers = this.volunteers.filter(v => v.IsActive);
-      console.log(this.volunteers);
     });
     this.fs.getFamilies().subscribe(res => {
       this.families = res;
-      console.log(this.families);
     });
 
   }
@@ -54,7 +52,6 @@ export class AddVFComponent implements OnInit {
     // this.volunteers.push(new Volunteer());
   }
   onChangeFamily(newValue) {
-    console.log(newValue);
     this.idVolunteer = this.selectedVolunteer.Id;
   }
   volunteerChanged($event) {
