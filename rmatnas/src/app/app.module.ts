@@ -42,6 +42,7 @@ import { ConfirmDialogComponent } from './Components/forms/confirm-dialog/confir
 import { HeaderComponent } from './Components/UI/header/header.component';
 import { RoutingModule } from './routing.module';
 import { MaterialModule } from './material.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 @NgModule({
   declarations: [
     AppComponent,
@@ -87,7 +88,8 @@ import { MaterialModule } from './material.module';
     HttpClientModule,
     FormsModule,
     MaterialModule,
-    MatTableExporterModule
+    MatTableExporterModule,
+    FlexLayoutModule
   ],
   providers: [DataServiceService],
   bootstrap: [AppComponent]
