@@ -5,7 +5,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../../forms/confirm-dialog/confirm-dialog.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSort } from '@angular/material';
 import { Observable } from 'rxjs';
 import * as XLSX from 'xlsx';
 import { DatePipe } from '@angular/common';
@@ -40,10 +40,10 @@ export class AllVolunteersComponent implements OnInit, AfterViewInit {
               private changeDetectorRefs: ChangeDetectorRef,
               public dialog: MatDialog,
               private datePipe: DatePipe) {
-    this.dataSource.filterPredicate =
-      (data: Details, filter: string) => data.Name.indexOf(filter) !== -1;
+    // this.dataSource.filterPredicate =
+    //   (data: Details, filter: string) => data.Name.indexOf(filter) !== -1;
   }
-
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   displayedColumns = ['Name', 'Address', 'Pelephone', 'Email', 'Age', 'IsActive', 'columndelete'];
@@ -91,6 +91,7 @@ export class AllVolunteersComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   delete(event, elm) {

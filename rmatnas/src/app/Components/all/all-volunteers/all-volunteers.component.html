@@ -11,9 +11,9 @@
     </button>
   </mat-card-header>
   <br>
-  <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows class="mat-elevation-z8">
     <ng-container matColumnDef="Name">
-      <th mat-header-cell *matHeaderCellDef> שם </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> שם </th>
       <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
     </ng-container>
     <ng-container matColumnDef="Address">
@@ -29,11 +29,11 @@
       <td mat-cell *matCellDef="let element"> {{element.Email}} </td>
     </ng-container>
     <ng-container matColumnDef="Age">
-      <th mat-header-cell *matHeaderCellDef> גיל </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> גיל </th>
       <td mat-cell *matCellDef="let element"> {{CalculateAge(element)}} </td>
     </ng-container>
     <ng-container matColumnDef="IsActive">
-      <th mat-header-cell *matHeaderCellDef> פעילה? </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> פעילה? </th>
       <td mat-cell *matCellDef="let element">
         <div *ngIf="element.IsActive">
           <i class="fa fa-check"></i>

@@ -52,7 +52,15 @@ namespace Dal
             using (dbRamotEntities db = new dbRamotEntities())
             {/////////////need to remove categories first- foreign key problem
                 db.Volunteers.Remove(db.Volunteers.Find(id));
-                db.SaveChanges();
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+                
             }
         }
 
