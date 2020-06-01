@@ -1,6 +1,6 @@
 <div dir="rtl" class="text-right" style="padding-top: 3%">
-  <div class="row">
-    <div class="col-3">
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="5%" fxLayoutAlign="center">
+    <div fxFlex="25%">
       <mat-card class="example-card">
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"><i class="fa fa-user" style="size: 7x;"></i></div>
@@ -33,7 +33,7 @@
         </mat-card-content>
       </mat-card>
     </div>
-    <div class="col-8">
+    <div fxFlex="75%">
       <button hidden (click)="tabs.selectedIndex = 0">RESET</button>
       <mat-tab-group #tabs>
         <mat-tab></mat-tab> <!-- ADDITIONAL TAB -->
@@ -49,3 +49,4 @@
       </mat-tab-group>
     </div>
   </div>
+</div>
