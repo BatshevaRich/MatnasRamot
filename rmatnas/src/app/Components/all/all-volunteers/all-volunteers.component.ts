@@ -8,7 +8,7 @@ import { ConfirmDialogModel, ConfirmDialogComponent } from '../../forms/confirm-
 import { MatDialog } from '@angular/material';
 import { Observable } from 'rxjs';
 import * as XLSX from 'xlsx';
-import { DatePipe} from '@angular/common';
+import { DatePipe } from '@angular/common';
 
 export interface Details {
   Id: number;
@@ -60,20 +60,33 @@ export class AllVolunteersComponent implements OnInit, AfterViewInit {
     if (this.vId) {
       this.displayedColumns = ['Name', 'Address', 'Pelephone', 'Email', 'Age', 'IsActive'];
       this.inp = true;
-      this.vs.getVolunteersForFamily(this.vId).subscribe(data => {
+      this.vs.getVolunteersForFamily(this.vId).subscribe((data: Volunteer[]) => {
         /// TODO: check if empty results, if empty- do not display table
+        data = this.trimResultsFromDB(data);
         this.volunteers = data;
         this.dataSource.data = data;
-        console.log(this.dataSource);
         this.resultsLength = this.dataSource.data.length;
       });
     } else {
       this.vs.getVolunteers().subscribe((volunteers: Volunteer[]) => {
+        volunteers = this.trimResultsFromDB(volunteers);
         this.volunteers = volunteers;
         this.dataSource.data = volunteers;
         this.resultsLength = this.dataSource.data.length;
       });
     }
+  }
+
+  trimResultsFromDB(volunteers: Volunteer[]) {
+    for (const volunteer of volunteers) {
+      volunteer.Name = volunteer.Name.trim();
+      volunteer.Address == null ? volunteer.Address = '' : volunteer.Address = volunteer.Address.trim();
+      volunteer.Telephone == null ? volunteer.Telephone = '' : volunteer.Telephone = volunteer.Telephone.trim();
+      volunteer.Pelephone == null ? volunteer.Pelephone = '' : volunteer.Pelephone = volunteer.Pelephone.trim();
+      volunteer.Email == null ? volunteer.Email = '' : volunteer.Email = volunteer.Email.trim();
+      volunteer.Comments == null ? volunteer.Comments = '' : volunteer.Comments = volunteer.Comments.trim();
+    }
+    return volunteers;
   }
 
   ngAfterViewInit() {
@@ -105,7 +118,6 @@ export class AllVolunteersComponent implements OnInit, AfterViewInit {
   newVolunteer(myvolunteer) {
     this.volunteers.push(myvolunteer);
     this.dataSource.data = this.volunteers as unknown as MatTableDataSource<Details>[];
-    console.log(this.dataSource);
     this.table.renderRows();
     this.changeDetectorRefs.detectChanges();
   }

@@ -61,17 +61,35 @@ export class AllFamiliesComponent implements OnInit, AfterViewInit {
       this.inp = true;
       this.fs.getFamiliesByVolunteer(this.vId).subscribe((data: Family[]) => {
         /// TODO: check if empty results, if empty- do not display table
+        data = this.trimResultsFromDB(data);
         this.families = data;
         this.dataSource.data = data;
         this.resultsLength = this.dataSource.data.length;
       });
     } else {
       this.fs.getFamilies().subscribe((data: Family[]) => {
+        data = this.trimResultsFromDB(data);
         this.families = data;
         this.dataSource.data = data;
         this.resultsLength = this.dataSource.data.length;
       });
     }
+  }
+
+  trimResultsFromDB(families: Family[]) {
+    for (const family of families) {
+      family.LastName = family.LastName.trim();
+      family.FirstNameFather = family.FirstNameFather.trim();
+      family.FirstNameMother = family.FirstNameMother.trim();
+      family.Address == null ? family.Address = '' : family.Address = family.Address.trim();
+      family.Telephone == null ? family.Telephone = '' : family.Telephone = family.Telephone.trim();
+      family.PelephoneFather == null ? family.PelephoneFather = '' : family.PelephoneFather = family.PelephoneFather.trim();
+      family.PelephoneMother == null ? family.PelephoneMother = '' : family.PelephoneMother = family.PelephoneMother.trim();
+      family.Status == null ? family.Status = '' : family.Status = family.Status.trim();
+      family.Reference == null ? family.Reference = '' : family.Reference = family.Reference.trim();
+      family.Reason == null ? family.Reason = '' : family.Reason = family.Reason.trim();
+    }
+    return families;
   }
 
   ngAfterViewInit() {
