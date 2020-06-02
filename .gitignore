@@ -23,10 +23,5 @@ Matnas/.vs/Matnas/v16/.suo
 Matnas/.vs/Matnas/v16/.suo
 *.cache
 *.txt
-packages
-Matnas/packages/EntityFramework.6.1.3/Content/App.config.transform
-Matnas/Dal/obj/Debug/edmxResourcesToEmbed/Matnath.ssdl
-Matnas/Dal/obj/Debug/edmxResourcesToEmbed/Matnath.msl
-Matnas/Dal/obj/Debug/edmxResourcesToEmbed/Matnath.csdl
-Matnas/Dal/obj/Debug/Dal.csproj.CopyComplete
-Matnas/Bll/obj/Debug/Bll.csproj.CopyComplete
+Matnas/packages
+Matnas/WebApi/packages
