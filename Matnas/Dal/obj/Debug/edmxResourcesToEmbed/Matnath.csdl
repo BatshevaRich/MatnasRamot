@@ -1,0 +1,349 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dbRamotModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Categories">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="VolunteerAndFamily" Relationship="Self.categoriesPerVolunteering" FromRole="Categories" ToRole="VolunteerAndFamily" />
+    <NavigationProperty Name="VolunteerAndEvent" Relationship="Self.categoriesPerVolunteeringEvent" FromRole="Categories" ToRole="VolunteerAndEvent" />
+    <NavigationProperty Name="OrganizationAndFamily" Relationship="Self.categoriesPerVolunteeringO" FromRole="Categories" ToRole="OrganizationAndFamily" />
+    <NavigationProperty Name="Events" Relationship="Self.CategoriesForEvents" FromRole="Categories" ToRole="Events" />
+    <NavigationProperty Name="Families" Relationship="Self.CategoriesForFamily" FromRole="Categories" ToRole="Families" />
+    <NavigationProperty Name="Groups" Relationship="Self.CategoriesForGroup" FromRole="Categories" ToRole="Groups" />
+    <NavigationProperty Name="Organization" Relationship="Self.CategoriesForOrganization" FromRole="Categories" ToRole="Organization" />
+    <NavigationProperty Name="Volunteers" Relationship="Self.CategoriesForVolunteer" FromRole="Categories" ToRole="Volunteers" />
+  </EntityType>
+  <EntityType Name="Events">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="dateAdded" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="VolunteerAndEvent" Relationship="Self.event" FromRole="Events" ToRole="VolunteerAndEvent" />
+    <NavigationProperty Name="Categories" Relationship="Self.CategoriesForEvents" FromRole="Events" ToRole="Categories" />
+  </EntityType>
+  <EntityType Name="Families">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstNameFather" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="FirstNameMother" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Telephone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="PelephoneFather" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="PelephoneMother" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Status" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="NumChildren" Type="Int32" Nullable="false" />
+    <Property Name="Reference" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="VolunteerAndFamily" Relationship="Self.family" FromRole="Families" ToRole="VolunteerAndFamily" />
+    <NavigationProperty Name="OrganizationAndFamily" Relationship="Self.familyO" FromRole="Families" ToRole="OrganizationAndFamily" />
+    <NavigationProperty Name="Categories" Relationship="Self.CategoriesForFamily" FromRole="Families" ToRole="Categories" />
+  </EntityType>
+  <EntityType Name="Groups">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Contact" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Categories" Relationship="Self.CategoriesForGroup" FromRole="Groups" ToRole="Categories" />
+    <NavigationProperty Name="Volunteers" Relationship="Self.VolunteersInGroup" FromRole="Groups" ToRole="Volunteers" />
+  </EntityType>
+  <EntityType Name="Organization">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Contact" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="OrganizationAndFamily" Relationship="Self.OrganizationF" FromRole="Organization" ToRole="OrganizationAndFamily" />
+    <NavigationProperty Name="Categories" Relationship="Self.CategoriesForOrganization" FromRole="Organization" ToRole="Categories" />
+  </EntityType>
+  <EntityType Name="OrganizationAndFamily">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="IdFamily" Type="Int32" Nullable="false" />
+    <Property Name="IdOrganization" Type="Int32" Nullable="false" />
+    <Property Name="IdCategory" Type="Int32" />
+    <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="dateAdded" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Categories" Relationship="Self.categoriesPerVolunteeringO" FromRole="OrganizationAndFamily" ToRole="Categories" />
+    <NavigationProperty Name="Families" Relationship="Self.familyO" FromRole="OrganizationAndFamily" ToRole="Families" />
+    <NavigationProperty Name="Organization" Relationship="Self.OrganizationF" FromRole="OrganizationAndFamily" ToRole="Organization" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="isVolunteer" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VolunteerAndEvent">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="IdEvent" Type="Int32" Nullable="false" />
+    <Property Name="IdVolunteer" Type="Int32" Nullable="false" />
+    <Property Name="IdCategory" Type="Int32" />
+    <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="dateAdded" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Categories" Relationship="Self.categoriesPerVolunteeringEvent" FromRole="VolunteerAndEvent" ToRole="Categories" />
+    <NavigationProperty Name="Events" Relationship="Self.event" FromRole="VolunteerAndEvent" ToRole="Events" />
+    <NavigationProperty Name="Volunteers" Relationship="Self.volunteerEvent" FromRole="VolunteerAndEvent" ToRole="Volunteers" />
+  </EntityType>
+  <EntityType Name="VolunteerAndFamily">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="IdFamily" Type="Int32" Nullable="false" />
+    <Property Name="IdVolunteer" Type="Int32" Nullable="false" />
+    <Property Name="IdCategory" Type="Int32" />
+    <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="dateAdded" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Categories" Relationship="Self.categoriesPerVolunteering" FromRole="VolunteerAndFamily" ToRole="Categories" />
+    <NavigationProperty Name="Families" Relationship="Self.family" FromRole="VolunteerAndFamily" ToRole="Families" />
+    <NavigationProperty Name="Volunteers" Relationship="Self.volunteer" FromRole="VolunteerAndFamily" ToRole="Volunteers" />
+  </EntityType>
+  <EntityType Name="Volunteers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="Telephone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Pelephone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+    <Property Name="Age" Type="DateTime" Precision="3" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <NavigationProperty Name="VolunteerAndEvent" Relationship="Self.volunteerEvent" FromRole="Volunteers" ToRole="VolunteerAndEvent" />
+    <NavigationProperty Name="VolunteerAndFamily" Relationship="Self.volunteer" FromRole="Volunteers" ToRole="VolunteerAndFamily" />
+    <NavigationProperty Name="Categories" Relationship="Self.CategoriesForVolunteer" FromRole="Volunteers" ToRole="Categories" />
+    <NavigationProperty Name="Groups" Relationship="Self.VolunteersInGroup" FromRole="Volunteers" ToRole="Groups" />
+  </EntityType>
+  <Association Name="categoriesPerVolunteering">
+    <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+    <End Role="VolunteerAndFamily" Type="Self.VolunteerAndFamily" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VolunteerAndFamily">
+        <PropertyRef Name="IdCategory" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="categoriesPerVolunteeringEvent">
+    <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+    <End Role="VolunteerAndEvent" Type="Self.VolunteerAndEvent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VolunteerAndEvent">
+        <PropertyRef Name="IdCategory" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="categoriesPerVolunteeringO">
+    <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+    <End Role="OrganizationAndFamily" Type="Self.OrganizationAndFamily" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrganizationAndFamily">
+        <PropertyRef Name="IdCategory" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="event">
+    <End Role="Events" Type="Self.Events" Multiplicity="1" />
+    <End Role="VolunteerAndEvent" Type="Self.VolunteerAndEvent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Events">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VolunteerAndEvent">
+        <PropertyRef Name="IdEvent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="family">
+    <End Role="Families" Type="Self.Families" Multiplicity="1" />
+    <End Role="VolunteerAndFamily" Type="Self.VolunteerAndFamily" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Families">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VolunteerAndFamily">
+        <PropertyRef Name="IdFamily" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="familyO">
+    <End Role="Families" Type="Self.Families" Multiplicity="1" />
+    <End Role="OrganizationAndFamily" Type="Self.OrganizationAndFamily" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Families">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrganizationAndFamily">
+        <PropertyRef Name="IdFamily" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="OrganizationF">
+    <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+    <End Role="OrganizationAndFamily" Type="Self.OrganizationAndFamily" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organization">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrganizationAndFamily">
+        <PropertyRef Name="IdOrganization" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="volunteerEvent">
+    <End Role="Volunteers" Type="Self.Volunteers" Multiplicity="1" />
+    <End Role="VolunteerAndEvent" Type="Self.VolunteerAndEvent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Volunteers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VolunteerAndEvent">
+        <PropertyRef Name="IdVolunteer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="volunteer">
+    <End Role="Volunteers" Type="Self.Volunteers" Multiplicity="1" />
+    <End Role="VolunteerAndFamily" Type="Self.VolunteerAndFamily" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Volunteers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VolunteerAndFamily">
+        <PropertyRef Name="IdVolunteer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CategoriesForEvents">
+    <End Role="Categories" Type="Self.Categories" Multiplicity="*" />
+    <End Role="Events" Type="Self.Events" Multiplicity="*" />
+  </Association>
+  <Association Name="CategoriesForFamily">
+    <End Role="Families" Type="Self.Families" Multiplicity="*" />
+    <End Role="Categories" Type="Self.Categories" Multiplicity="*" />
+  </Association>
+  <Association Name="CategoriesForGroup">
+    <End Role="Categories" Type="Self.Categories" Multiplicity="*" />
+    <End Role="Groups" Type="Self.Groups" Multiplicity="*" />
+  </Association>
+  <Association Name="CategoriesForOrganization">
+    <End Role="Categories" Type="Self.Categories" Multiplicity="*" />
+    <End Role="Organization" Type="Self.Organization" Multiplicity="*" />
+  </Association>
+  <Association Name="CategoriesForVolunteer">
+    <End Role="Volunteers" Type="Self.Volunteers" Multiplicity="*" />
+    <End Role="Categories" Type="Self.Categories" Multiplicity="*" />
+  </Association>
+  <Association Name="VolunteersInGroup">
+    <End Role="Volunteers" Type="Self.Volunteers" Multiplicity="*" />
+    <End Role="Groups" Type="Self.Groups" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="dbRamotEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Categories" EntityType="Self.Categories" />
+    <EntitySet Name="Events" EntityType="Self.Events" />
+    <EntitySet Name="Families" EntityType="Self.Families" />
+    <EntitySet Name="Groups" EntityType="Self.Groups" />
+    <EntitySet Name="Organization" EntityType="Self.Organization" />
+    <EntitySet Name="OrganizationAndFamily" EntityType="Self.OrganizationAndFamily" />
+    <EntitySet Name="User" EntityType="Self.User" />
+    <EntitySet Name="VolunteerAndEvent" EntityType="Self.VolunteerAndEvent" />
+    <EntitySet Name="VolunteerAndFamily" EntityType="Self.VolunteerAndFamily" />
+    <EntitySet Name="Volunteers" EntityType="Self.Volunteers" />
+    <AssociationSet Name="categoriesPerVolunteering" Association="Self.categoriesPerVolunteering">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="VolunteerAndFamily" EntitySet="VolunteerAndFamily" />
+    </AssociationSet>
+    <AssociationSet Name="categoriesPerVolunteeringEvent" Association="Self.categoriesPerVolunteeringEvent">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="VolunteerAndEvent" EntitySet="VolunteerAndEvent" />
+    </AssociationSet>
+    <AssociationSet Name="categoriesPerVolunteeringO" Association="Self.categoriesPerVolunteeringO">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="OrganizationAndFamily" EntitySet="OrganizationAndFamily" />
+    </AssociationSet>
+    <AssociationSet Name="event" Association="Self.event">
+      <End Role="Events" EntitySet="Events" />
+      <End Role="VolunteerAndEvent" EntitySet="VolunteerAndEvent" />
+    </AssociationSet>
+    <AssociationSet Name="family" Association="Self.family">
+      <End Role="Families" EntitySet="Families" />
+      <End Role="VolunteerAndFamily" EntitySet="VolunteerAndFamily" />
+    </AssociationSet>
+    <AssociationSet Name="familyO" Association="Self.familyO">
+      <End Role="Families" EntitySet="Families" />
+      <End Role="OrganizationAndFamily" EntitySet="OrganizationAndFamily" />
+    </AssociationSet>
+    <AssociationSet Name="OrganizationF" Association="Self.OrganizationF">
+      <End Role="Organization" EntitySet="Organization" />
+      <End Role="OrganizationAndFamily" EntitySet="OrganizationAndFamily" />
+    </AssociationSet>
+    <AssociationSet Name="volunteerEvent" Association="Self.volunteerEvent">
+      <End Role="Volunteers" EntitySet="Volunteers" />
+      <End Role="VolunteerAndEvent" EntitySet="VolunteerAndEvent" />
+    </AssociationSet>
+    <AssociationSet Name="volunteer" Association="Self.volunteer">
+      <End Role="Volunteers" EntitySet="Volunteers" />
+      <End Role="VolunteerAndFamily" EntitySet="VolunteerAndFamily" />
+    </AssociationSet>
+    <AssociationSet Name="CategoriesForEvents" Association="Self.CategoriesForEvents">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="Events" EntitySet="Events" />
+    </AssociationSet>
+    <AssociationSet Name="CategoriesForFamily" Association="Self.CategoriesForFamily">
+      <End Role="Families" EntitySet="Families" />
+      <End Role="Categories" EntitySet="Categories" />
+    </AssociationSet>
+    <AssociationSet Name="CategoriesForGroup" Association="Self.CategoriesForGroup">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="Groups" EntitySet="Groups" />
+    </AssociationSet>
+    <AssociationSet Name="CategoriesForOrganization" Association="Self.CategoriesForOrganization">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="Organization" EntitySet="Organization" />
+    </AssociationSet>
+    <AssociationSet Name="CategoriesForVolunteer" Association="Self.CategoriesForVolunteer">
+      <End Role="Volunteers" EntitySet="Volunteers" />
+      <End Role="Categories" EntitySet="Categories" />
+    </AssociationSet>
+    <AssociationSet Name="VolunteersInGroup" Association="Self.VolunteersInGroup">
+      <End Role="Volunteers" EntitySet="Volunteers" />
+      <End Role="Groups" EntitySet="Groups" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
