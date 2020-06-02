@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Family } from '../Classes/Family';
 import { baseURL } from '../../environments/environment';
 import { Category } from '../Classes/Category';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -48,5 +49,8 @@ export class FamilyService {
   }
   getCategoriesOfFamily(id: number): Observable<Category[]> {
     return this.http.get<Category[]>(this.path + '/' + id);
+  }
+  getFamiliesByCategoryAndVolunteer(idCategory: number, idVolunteer): Observable<Family[]> {
+    return this.http.get<Family[]>(this.path + '/familiesbycategory/' + idCategory, {headers: {Authorization: idVolunteer.toString()}});
   }
 }

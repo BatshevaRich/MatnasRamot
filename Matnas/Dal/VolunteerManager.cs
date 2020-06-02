@@ -91,6 +91,20 @@ namespace Dal
             }
         }
 
+        public static IEnumerable<Volunteer> GetVolunteersByCategory(int idCategory)
+        {
+            using (dbRamotEntities db = new dbRamotEntities())
+            {
+                var volunteersDb = db.Volunteers.Where(v => v.Categories.Any(c => c.Id == idCategory));
+                List<Volunteer> volunteers = new List<Volunteer>();
+                foreach (var v in volunteersDb)
+                {
+                    volunteers.Add(Mapper.CastVolunteerToComon(v));
+                }
+                return volunteers;
+            }
+        }
+
         public static IEnumerable<Volunteer> GetVolunteersByCategoryAndFamily(int idFamily, Category category)
         {
             using (dbRamotEntities db = new dbRamotEntities())
