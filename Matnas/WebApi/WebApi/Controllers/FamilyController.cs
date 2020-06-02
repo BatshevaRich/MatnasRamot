@@ -19,7 +19,7 @@ namespace WebApi.Controllers
         {
             return Bll.FamilyManager.GetFamilies();
         }
-        [Route("api/categoriesOfFamily")]
+        [Route("categoriesOfFamily/{id}")]
         public IEnumerable<Category> GetCategories(int id)
         {
             return Bll.FamilyManager.GetCategories(id);
@@ -75,7 +75,7 @@ namespace WebApi.Controllers
         
         [Route("familiesbycategory/{id}")]
         [HttpGet]
-        public IEnumerable<Family> GetFamiliesByCategoryAndVolunteer(int id)
+        public IEnumerable<Volunteer> GetFamiliesByCategoryAndVolunteer(int id)
         {
             int idVolunteer = 0;
             var re = Request;
@@ -86,7 +86,7 @@ namespace WebApi.Controllers
                 idVolunteer = int.Parse(headers.GetValues("Authorization").First());
             }
 
-            return Bll.FamilyManager.GetFamiliesByCategoryAndVolunteer(id, idVolunteer);
+            return Bll.VolunteerManager.GetVolunteersByCategoryAndFamily(id, idVolunteer);
         }
     }
 }

@@ -85,11 +85,29 @@ namespace WebApi.Controllers
         {
             return Bll.VolunteerManager.GetEvents(id);
         }
-        [Route("api/volunteer/familyandcategory")]
-        public IEnumerable<Volunteer> GetVolunteersByCategoryAndFamily(int idFamily, [FromBody] Category category)
+        //[Route("api/volunteer/familyandcategory")]
+        //public IEnumerable<Volunteer> GetVolunteersByCategoryAndFamily(int idFamily, [FromBody] Category category)
+        //{
+        //    return Bll.VolunteerManager.GetVolunteersByCategoryAndFamily(idFamily, category);
+        //}
+
+        [Route("api/volunteer/volunteersbyfac/{id}")]
+        [HttpGet]
+        public IEnumerable<Volunteer> GetVolunteersByCategoryAndFamily(int id)
         {
-            return Bll.VolunteerManager.GetVolunteersByCategoryAndFamily(idFamily, category);
+            int idFamily = 0;
+            var re = Request;
+            var headers = re.Headers;
+
+            if (headers.Contains("Authorization"))
+            {
+                idFamily = int.Parse(headers.GetValues("Authorization").First());
+            }
+
+            return Bll.VolunteerManager.GetVolunteersByCategoryAndFamily(idFamily, id);
         }
+
+
 
         [Route("api/volunteer/volunteersbycategory/{idCategory}")]
         public IEnumerable<Volunteer> GetVolunteersByCategory(int idCategory)

@@ -70,9 +70,9 @@ namespace Bll
             return Dal.VolunteerManager.GetEvents(id);
         }
 
-        public static IEnumerable<Volunteer> GetVolunteersByCategoryAndFamily(int idFamily, Category category)
+        public static IEnumerable<Volunteer> GetVolunteersByCategoryAndFamily(int idFamily,int idCategory)
         {
-            return Dal.VolunteerManager.GetVolunteersByCategoryAndFamily(idFamily, category);
+            return Dal.VolunteerManager.GetVolunteersByCategoryAndFamily(idFamily, idCategory);
         }
 
         public static IEnumerable<Volunteer> GetVolunteersByCategory(int idCategory)
