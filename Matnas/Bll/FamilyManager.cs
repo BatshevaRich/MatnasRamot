@@ -66,5 +66,10 @@ namespace Bll
         {
             return Dal.FamilyManager.GetOrganizations(id);
         }
+
+        public static IEnumerable<Family> GetFamiliesByCategoryAndVolunteer(int idCategory, int idVolunteer)
+        {
+            return Dal.FamilyManager.GetFamiliesByCategoryAndVolunteer(idCategory, idVolunteer);
+        }
     }
 }

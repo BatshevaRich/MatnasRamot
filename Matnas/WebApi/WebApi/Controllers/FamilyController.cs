@@ -72,5 +72,21 @@ namespace WebApi.Controllers
         {
             return Bll.FamilyManager.GetOrganizations(id);
         }
+        
+        [Route("familiesbycategory/{id}")]
+        [HttpGet]
+        public IEnumerable<Family> GetFamiliesByCategoryAndVolunteer(int id)
+        {
+            int idVolunteer = 0;
+            var re = Request;
+            var headers = re.Headers;
+
+            if (headers.Contains("Authorization"))
+            {
+                idVolunteer = int.Parse(headers.GetValues("Authorization").First());
+            }
+
+            return Bll.FamilyManager.GetFamiliesByCategoryAndVolunteer(id, idVolunteer);
+        }
     }
 }
