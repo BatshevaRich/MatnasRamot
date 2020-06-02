@@ -3,6 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { VolunteerAndFamily } from '../Classes/VolunteerAndFamily';
 import { baseURL } from '../../environments/environment';
+import { Volunteer } from '../Classes/Volunteer';
+import { Family } from '../Classes/Family';
+import { Category } from '../Classes/Category';
 @Injectable({
   providedIn: 'root'
 })
@@ -23,5 +26,11 @@ export class VolunteerAndFamilyService {
   public removeVolunteering(id: number) {
     this.http.delete(this.path + id).subscribe(data => {
     });
+  }
+
+  addVolunteerAction(myvolunteer: Volunteer, myfamily: Family, category: Category) {
+    const vaf: VolunteerAndFamily  = new VolunteerAndFamily(myfamily, myvolunteer, category, '', new Date().toISOString());
+    return this.http
+      .post(this.path, vaf).toPromise().then(res => res);
   }
 }

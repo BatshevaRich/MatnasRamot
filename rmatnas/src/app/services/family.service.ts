@@ -48,7 +48,7 @@ export class FamilyService {
     this.http.delete(this.path + '/' + id).subscribe();
   }
   getCategoriesOfFamily(id: number): Observable<Category[]> {
-    return this.http.get<Category[]>(this.path + '/' + id);
+    return this.http.get<Category[]>(this.path + '/categoriesOfFamily/' + id);
   }
   getFamiliesByCategoryAndVolunteer(idCategory: number, idVolunteer): Observable<Family[]> {
     return this.http.get<Family[]>(this.path + '/familiesbycategory/' + idCategory, {headers: {Authorization: idVolunteer.toString()}});
