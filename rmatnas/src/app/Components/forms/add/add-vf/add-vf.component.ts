@@ -24,7 +24,9 @@ export class AddVFComponent implements OnInit {
   selectedFamily: Family = null;
   selectedVolunteer: Volunteer = null;
   selectedCategory: Category;
-  constructor(private fs: FamilyService, private vs: VolunteerService,
+  constructor(private fs: FamilyService,
+              private vs: VolunteerService,
+              private cs: CategoryService,
               private dialogRef: MatDialogRef<AddVFComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) {
     this.vs.getVolunteers().subscribe(res => {
@@ -34,10 +36,12 @@ export class AddVFComponent implements OnInit {
     this.fs.getFamilies().subscribe(res => {
       this.families = res;
     });
+    this.cs.getCategories().subscribe(res => {
+      this.categories = res;
+    });
 
   }
   ngOnInit() {
-    this.categories.push(new Category(1, 'hello'));
     this.families.push(new Family('fathername',
       'mothername',
       'lastname',
@@ -55,15 +59,23 @@ export class AddVFComponent implements OnInit {
     this.idVolunteer = this.selectedVolunteer.Id;
   }
   volunteerChanged($event) {
+    this.fs.getFamiliesByCategoryAndVolunteer(this.selectedCategory.Id, this.selectedVolunteer.Id).subscribe(res => {
+      this.families = res;
+    });
   }
   onChangeCtegory($event) {
-    if (this.idFamily) {
-      this.vs.getVolunteersByCategoryAndFamily(this.idFamily, this.selectedCategory).subscribe(data =>
-        this.volunteers = data);
-    } else {
-      // this.fs.getFamiliesByCategoryAndVolunteer().subscribe(data =>
-      //   this.families = data);
-    }
+    this.selectedVolunteer = null;
+    this.selectedFamily = null;
+    this.vs.getVolunteersByCategory(this.selectedCategory.Id).subscribe(res => {
+      this.volunteers = res;
+    });
+    // if (this.idFamily) {
+    //   this.vs.getVolunteersByCategoryAndFamily(this.idFamily, this.selectedCategory).subscribe(data =>
+    //     this.volunteers = data);
+    // } else {
+    //   // this.fs.getFamiliesByCategoryAndVolunteer().subscribe(data =>
+    //   //   this.families = data);
+    // }
   }
   submitForm(f) {
 
