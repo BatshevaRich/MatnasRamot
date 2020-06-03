@@ -1,65 +1,75 @@
-<div dir="rtl">
-  <h2 *ngIf="!data.update" mat-dialog-title>הוספת מתנדבת</h2>
-  <h2 *ngIf="data.update" mat-dialog-title>עדכון מתנדבת</h2>
+<span dir="rtl">
+  <mat-toolbar style="width: 100% !important; z-index: 2;" color="">
+    <span *ngIf="!data.update" mat-dialog-title>הוספת מתנדבת</span>
+    <span *ngIf="data.update" mat-dialog-title>עדכון מתנדבת</span>
+  </mat-toolbar>
   <mat-dialog-content>
     <form (ngSubmit)="submitForm(volunteerForm)" class="text-right" #volunteerForm="ngForm">
       <div class="form-group">
-        <label>
-          שם :
-          <input [ngClass]="newVolunteer.Name.length > 1 ? '' : 'tooShort'" class="form-control form-control-sm"
-            aria-label="Small" aria-describedby="inputGroup-sizing-sm" [(ngModel)]="newVolunteer.Name" name="Name"
-            required />
-        </label>
+        <mat-form-field appearance="outline">
+          <mat-hint>שם</mat-hint>
+          <input matInput maxlength="10" [(ngModel)]="newVolunteer.Name" name="Name" required>
+          <mat-icon matPrefix>person</mat-icon>
+        </mat-form-field>
+        <br />
+        <mat-form-field appearance="outline">
+          <mat-hint>מייל</mat-hint>
+          <input matInput placeholder="volunteer@example.com" required email [(ngModel)]="newVolunteer.Email"
+            name="Email">
+          <mat-icon matPrefix>email</mat-icon>
+          <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <br />
+        <mat-form-field appearance="outline">
+          <mat-hint>טלפון</mat-hint>
+          <input matInput placeholder="050-525-2525" appPhoneMask [(ngModel)]="newVolunteer.Telephone" name="Telephone">
+          <mat-icon matPrefix>phone</mat-icon>
+        </mat-form-field>
+        <br />
+        <mat-form-field appearance="outline">
+          <mat-hint>פלאפון</mat-hint>
+          <input matInput placeholder="050-525-2525" required [(ngModel)]="newVolunteer.Pelephone" name="Pelephone">
+          <mat-icon matPrefix>phone</mat-icon>
+        </mat-form-field>
+        <br />
+        <mat-form-field appearance="outline">
+          <mat-hint>כתובת</mat-hint>
+          <input matInput [(ngModel)]="newVolunteer.Address" name="Address">
+          <mat-icon matPrefix>location_city</mat-icon>
+        </mat-form-field>
+        <br />
+        <mat-form-field appearance="outline">
+          <mat-hint>תאריך לידה</mat-hint>
+          <input matInput [matDatepicker]="picker1" [ngModel]="newVolunteer.Age | date:'yyyy-MM-dd'"
+            (ngModelChange)="newVolunteer.Age = $event" name="Age">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
         <br />
         <br />
-        <label>
-          מייל:
-          <input class="form-control form-control-sm" aria-label="Small" type="email"
-            aria-describedby="inputGroup-sizing-sm" email [(ngModel)]="newVolunteer.Email" name="Email" />
-        </label>
-        <br />
-        <label>
-          טלפון:
-          <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-            appPhoneMask [(ngModel)]="newVolunteer.Pelephone" name="Pelephone" />
-        </label>
-        <br />
-        <label>
-          פלאפון:
-          <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-            appPhoneMask [(ngModel)]="newVolunteer.Telephone" name="Telephone" />
-        </label>
-        <br />
-        <label>
-          כתובת:
-          <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-            [(ngModel)]="newVolunteer.Address" name="Address" />
-        </label>
-        <br />
-        <label> תאריך לידה:</label>
-        <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-          type="date" [ngModel]="newVolunteer.Age | date:'yyyy-MM-dd'" (ngModelChange)="newVolunteer.Age = $event"
-          name="Age" />
-        <br>
-        <label>פעילה?</label>
+        <mat-hint>פעילה?</mat-hint>
         <mat-slide-toggle name="isActive" [ngModel]="newVolunteer.IsActive" [checked]="newVolunteer.IsActive"
-          (ngModelChange)="newVolunteer.IsActive = !newVolunteer.IsActive">פעילה</mat-slide-toggle>
-        <!-- <span *ngIf="newVolunteer.IsActive">
-          <i class="fa fa-check"></i>
-        </span>
-        <span *ngIf="!newVolunteer.IsActive">
-          <i class="fa fa-times"></i>
-        </span> -->
+          (ngModelChange)="newVolunteer.IsActive = !newVolunteer.IsActive"></mat-slide-toggle>
+        <br />
+        <br />
+        <h5>קטגוריות</h5>
         <app-choose-category [chosenC]="categoriesOfVolunteer" (selectc)="selectCategories($event)">
         </app-choose-category>
       </div>
-      <div mat-dialog-actions>
-        <button mat-button mat-dialog-close class="btn btn-primary" [mat-dialog-close]="token" type="submit">
-          <span *ngIf="!data.update" mat-dialog-title>להוספת המתנדבת</span>
-          <span *ngIf="data.update" mat-dialog-title>לעדכון המתנדבת</span>
+      <br />
+      <mat-form-field class="example-full-width">
+        <mat-hint>הערות</mat-hint>
+        <textarea matInput [(ngModel)]="newVolunteer.Comments" name="Comments"></textarea>
+        <mat-icon matSuffix>comment</mat-icon>
+      </mat-form-field>
+      <mat-dialog-actions align="end">
+        <button mat-button mat-raised-button mat-dialog-close>ביטול</button>
+        <button mat-button mat-raised-button [mat-dialog-close]="token" type="submit">
+          <span *ngIf="!data.update">הוספה</span>
+          <span *ngIf="data.update">עדכון</span>
         </button>
-      </div>
+      </mat-dialog-actions>
     </form>
     <br />
   </mat-dialog-content>
-</div>
+</span>

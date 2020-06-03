@@ -1,4 +1,3 @@
-  <br>
   <span *ngFor="let c of arr; let i=index">
       <mat-checkbox [(ngModel)]="c.checked" (change)="add($event, c)" [id]="c.id" >{{ c.name }}</mat-checkbox>
     <br>

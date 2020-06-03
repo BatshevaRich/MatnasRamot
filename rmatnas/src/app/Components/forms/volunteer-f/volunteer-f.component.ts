@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter, Output, ViewChild, Inject, OnDestroy } from '@angular/core';
 import { Volunteer } from '../../../Classes/Volunteer';
 import { VolunteerService } from 'src/app/services/volunteer.service';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormControl, Validators } from '@angular/forms';
 import { Category } from 'src/app/Classes/Category';
 import { Subscription } from 'rxjs';
 import { CategoryService } from 'src/app/services/category.service';
@@ -17,10 +17,11 @@ export class VolunteerFComponent implements OnInit, OnDestroy {
   mySubscription: Subscription;
   // @Output() selectc: EventEmitter<Category[]> = new EventEmitter<Category[]>();
   @ViewChild('volunteerForm') mytemplateForm: NgForm;
+  email = new FormControl('', [Validators.required, Validators.email]);
   token = 0;
   categoriesSelected: Category[] = [];
   @Output() addedVolunteer: EventEmitter<Volunteer> = new EventEmitter<Volunteer>();
-  newVolunteer: Volunteer = new Volunteer('default', '000000000', '000000000', 'default@ddd', 'default', '1999-01-01', false);
+  newVolunteer: Volunteer = new Volunteer('default', '000000000', '000000000', 'volunteer@example.com', 'default', '1999-01-01', true);
   constructor(public vs: VolunteerService,
               private cs: CategoryService,
               private dialogRef: MatDialogRef<VolunteerFComponent>,
@@ -69,5 +70,11 @@ export class VolunteerFComponent implements OnInit, OnDestroy {
         this.categoriesSelected.push(new Category(element.id, element.name));
       }
     });
+  }
+
+  getErrorMessage() {
+    if (this.email.hasError('required')) {
+      return 'הערך שהוזן אינו תקני';
+    }
   }
 }
