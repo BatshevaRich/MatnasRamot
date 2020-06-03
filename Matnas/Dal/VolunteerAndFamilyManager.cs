@@ -48,11 +48,47 @@ namespace Dal
                 return vafs;
             }
         }
+
         public static Common.VolunteerAndFamily GetVolunteerAndFamily(int id)
         {
             using (dbRamotEntities db = new dbRamotEntities())
-            {
+            {//////////////////////////////////////////////////////////////
                 return Mapper.CastVolunteerAndFamilyToComon(db.VolunteerAndFamily.Find(id));
+
+            }
+        }
+        public static IEnumerable<Common.Family> GetVolunteerAndFamilyForVolunteer(int id)
+        {
+            using (dbRamotEntities db = new dbRamotEntities())
+            {//////////////////////////////////////////////////////////////
+                var query = from vf in db.VolunteerAndFamily
+                            where vf.Volunteers.Id == id
+                            select vf;
+                List<Common.Family> families = new List<Common.Family>();
+                foreach (var item in query.AsEnumerable())
+                {
+                    families.Add(Mapper.CastVolunteerAndFamilyToComon(item).Family);
+                }
+                return families;
+                //return Mapper.CastVolunteerAndFamilyToComon(query.First()).Family;
+
+            }
+        }
+
+        public static IEnumerable<Common.Volunteer> GetVolunteerAndFamilyForFamily(int id)
+        {
+            using (dbRamotEntities db = new dbRamotEntities())
+            {//////////////////////////////////////////////////////////////
+                var query = from vf in db.VolunteerAndFamily
+                            where vf.Families.Id == id
+                            select vf;
+                List<Common.Volunteer> volunteers = new List<Common.Volunteer>();
+                foreach (var item in query.AsEnumerable())
+                {
+                    volunteers.Add(Mapper.CastVolunteerAndFamilyToComon(item).Volunteer);
+                }
+                return volunteers;
+                //return Mapper.CastVolunteerAndFamilyToComon(query.First()).Family;
 
             }
         }

@@ -5,10 +5,11 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../../forms/confirm-dialog/confirm-dialog.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSort } from '@angular/material';
 import { Observable } from 'rxjs';
-import { CustomExporter } from 'src/app/Classes/custom-exporter';
-// import { DialogBoxComponent } from './dialog-box/dialog-box.component';
+import * as XLSX from 'xlsx';
+import { DatePipe } from '@angular/common';
+
 export interface Details {
   Id: number;
   Name: string;
@@ -35,6 +36,14 @@ export interface Details {
 })
 export class AllVolunteersComponent implements OnInit, AfterViewInit {
 
+  constructor(public vs: VolunteerService,
+              private changeDetectorRefs: ChangeDetectorRef,
+              public dialog: MatDialog,
+              private datePipe: DatePipe) {
+    // this.dataSource.filterPredicate =
+    //   (data: Details, filter: string) => data.Name.indexOf(filter) !== -1;
+  }
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   displayedColumns = ['Name', 'Address', 'Pelephone', 'Email', 'Age', 'IsActive', 'columndelete'];
@@ -46,25 +55,21 @@ export class AllVolunteersComponent implements OnInit, AfterViewInit {
   @Input() vId: number;
   inp: boolean;
   result = '';
-  customExporter: CustomExporter;
 
-  constructor(public vs: VolunteerService, private changeDetectorRefs: ChangeDetectorRef, public dialog: MatDialog) {
-    this.dataSource.filterPredicate =
-      (data: Details, filter: string) => data.Name.indexOf(filter) !== -1;
-  }
   ngOnInit(): void {
-    this.customExporter = new CustomExporter();
     if (this.vId) {
+      this.displayedColumns = ['Name', 'Address', 'Pelephone', 'Email', 'Age', 'IsActive'];
       this.inp = true;
-      this.vs.getVolunteersForFamily(this.vId).subscribe(data => {
+      this.vs.getVolunteersForFamily(this.vId).subscribe((data: Volunteer[]) => {
         /// TODO: check if empty results, if empty- do not display table
+        data = this.trimResultsFromDB(data);
         this.volunteers = data;
         this.dataSource.data = data;
-        console.log(this.dataSource);
         this.resultsLength = this.dataSource.data.length;
       });
     } else {
       this.vs.getVolunteers().subscribe((volunteers: Volunteer[]) => {
+        volunteers = this.trimResultsFromDB(volunteers);
         this.volunteers = volunteers;
         this.dataSource.data = volunteers;
         this.resultsLength = this.dataSource.data.length;
@@ -72,8 +77,21 @@ export class AllVolunteersComponent implements OnInit, AfterViewInit {
     }
   }
 
+  trimResultsFromDB(volunteers: Volunteer[]) {
+    for (const volunteer of volunteers) {
+      volunteer.Name = volunteer.Name.trim();
+      volunteer.Address == null ? volunteer.Address = '' : volunteer.Address = volunteer.Address.trim();
+      volunteer.Telephone == null ? volunteer.Telephone = '' : volunteer.Telephone = volunteer.Telephone.trim();
+      volunteer.Pelephone == null ? volunteer.Pelephone = '' : volunteer.Pelephone = volunteer.Pelephone.trim();
+      volunteer.Email == null ? volunteer.Email = '' : volunteer.Email = volunteer.Email.trim();
+      volunteer.Comments == null ? volunteer.Comments = '' : volunteer.Comments = volunteer.Comments.trim();
+    }
+    return volunteers;
+  }
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   delete(event, elm) {
@@ -90,21 +108,17 @@ export class AllVolunteersComponent implements OnInit, AfterViewInit {
 
   confirmDialog(): Observable<any> {
     const message = `מחיקה זו היא לצמיתות! האם תרצי להמשיך?`;
-
     const dialogData = new ConfirmDialogModel('מחיקת מתנדבת', message);
-
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       maxWidth: '75%',
       data: dialogData
     });
-
     return dialogRef.afterClosed();
-
   }
+
   newVolunteer(myvolunteer) {
     this.volunteers.push(myvolunteer);
     this.dataSource.data = this.volunteers as unknown as MatTableDataSource<Details>[];
-    console.log(this.dataSource);
     this.table.renderRows();
     this.changeDetectorRefs.detectChanges();
   }
@@ -119,6 +133,23 @@ export class AllVolunteersComponent implements OnInit, AfterViewInit {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
     this.dataSource.filter = filterValue;
+  }
+
+  public exportTableToExcel() {
+    const data = this.volunteers.map(x => ({
+      שם: x.Name,
+      כתובת: x.Address,
+      טלפון: x.Telephone,
+      פלאפון: x.Pelephone,
+      מייל: x.Email,
+      תאריך_לידה: this.datePipe.transform(x.Age, 'dd/mm/yyyy'),
+      פעילה: x.IsActive === true ? 'כן' : 'לא',
+      הערות: x.Comments
+    }));
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.json_to_sheet(data);
+    XLSX.utils.book_append_sheet(wb, ws, 'מתנדבות');
+    XLSX.writeFile(wb, `מתנדבות.xlsx`);
   }
 
 }

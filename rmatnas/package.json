@@ -16,6 +16,7 @@
     "@angular/common": "^9.1.9",
     "@angular/compiler": "^9.1.9",
     "@angular/core": "^9.1.9",
+    "@angular/flex-layout": "^9.0.0-beta.31",
     "@angular/forms": "^9.1.9",
     "@angular/material": "^8.2.3",
     "@angular/platform-browser": "^9.1.9",
@@ -35,7 +36,6 @@
     "glyphicons": "^0.2.0",
     "jquery": ">=3.5.0",
     "kind-of": "^6.0.3",
-    "mat-table-exporter": "^9.0.2",
     "material-design-icons": "^3.0.1",
     "ng2-completer": "^3.0.3",
     "ngx-bootstrap": "^5.6.1",
@@ -45,6 +45,7 @@
     "rxjs": "~6.5.5",
     "rxjs-compat": "^6.5.5",
     "tslib": "^1.13.0",
+    "xlsx": "^0.16.1",
     "zone.js": "~0.10.3"
   },
   "devDependencies": {

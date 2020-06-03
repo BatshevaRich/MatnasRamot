@@ -17,9 +17,9 @@ namespace Bll
         {
             Dal.FamilyManager.RemoveFamily(family);
         }
-        public static void UpdateFamily(Family family)
+        public static void UpdateFamily(Family family, Category[] categories)
         {
-            Dal.FamilyManager.UpdateFamily(family);
+            Dal.FamilyManager.UpdateFamily(family, categories);
         }
         public static IEnumerable<Family> GetFamilies()
         {
@@ -65,6 +65,11 @@ namespace Bll
         public static IEnumerable<Common.Organization> GetOrganizations(int id)
         {
             return Dal.FamilyManager.GetOrganizations(id);
+        }
+
+        public static IEnumerable<Family> GetFamiliesByCategoryAndVolunteer(int idCategory, int idVolunteer)
+        {
+            return Dal.FamilyManager.GetFamiliesByCategoryAndVolunteer(idCategory, idVolunteer);
         }
     }
 }

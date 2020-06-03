@@ -21,7 +21,6 @@ export class DataServiceService {
   constructor(private http: HttpClient) {
     this.getVolunteersFromServer();
     this.getFamiliesFromServer();
-    console.log('ds ctor called');
     
     /* this.volunteers.push(
       new Volunteer(

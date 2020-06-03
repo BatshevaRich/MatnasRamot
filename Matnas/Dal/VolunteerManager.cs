@@ -15,18 +15,17 @@ namespace Dal
             Volunteers v = Mapper.CastVolunteer(volunteer);
             using (dbRamotEntities db = new dbRamotEntities())
             {
-                db.Volunteers.Add(v);
                 foreach (var item in category)
                 {
                     var test = Mapper.CastCategory(item);
-                    v.Categories.Add(Mapper.CastCategory(item));
-                    // db.SaveChanges();
+                    v.Categories.Add(test);
                 }
+                db.Volunteers.Add(v);
                 db.SaveChanges();
                 x = db.Volunteers.Local[0].Id;
             }
 
-            AddCategotyToVolunteer(x, category);
+            //AddCategotyToVolunteer(x, category);
             return x;
         }
         public static void RemoveVolunteer(Volunteer volunteer)
@@ -38,11 +37,11 @@ namespace Dal
                 db.SaveChanges();
             }
         }
-        public static void UpdateVolunteer(Volunteer volunteer)
+        public static void UpdateVolunteer(Volunteer volunteer, Category[] categories)
         {
             Volunteers v = Mapper.CastVolunteer(volunteer);
             using (dbRamotEntities db = new dbRamotEntities())
-            {
+            {/////////////////////////////////need to fix categories!
                 db.Entry<Volunteers>(db.Set<Volunteers>().Find(v.Id)).CurrentValues.SetValues(v);
                 db.SaveChanges();
             }
@@ -51,9 +50,17 @@ namespace Dal
         public static void RemoveVolunteer(int id)
         {
             using (dbRamotEntities db = new dbRamotEntities())
-            {
+            {/////////////need to remove categories first- foreign key problem
                 db.Volunteers.Remove(db.Volunteers.Find(id));
-                db.SaveChanges();
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+                
             }
         }
 
@@ -84,11 +91,25 @@ namespace Dal
             }
         }
 
-        public static IEnumerable<Volunteer> GetVolunteersByCategoryAndFamily(int idFamily, Category category)
+        public static IEnumerable<Volunteer> GetVolunteersByCategory(int idCategory)
         {
             using (dbRamotEntities db = new dbRamotEntities())
             {
-                var volunteersDb = db.Volunteers.Where(v => v.Categories.Any(c => c.Name == category.Name) && !v.VolunteerAndFamily.Any(vf => vf.IdFamily == idFamily));
+                var volunteersDb = db.Volunteers.Where(v => v.Categories.Any(c => c.Id == idCategory));
+                List<Volunteer> volunteers = new List<Volunteer>();
+                foreach (var v in volunteersDb)
+                {
+                    volunteers.Add(Mapper.CastVolunteerToComon(v));
+                }
+                return volunteers;
+            }
+        }
+
+        public static IEnumerable<Volunteer> GetVolunteersByCategoryAndFamily(int idFamily, int idCategory)
+        {
+            using (dbRamotEntities db = new dbRamotEntities())
+            {
+                var volunteersDb = db.Volunteers.Where(v => v.Categories.Any(c => c.Id == idCategory) && !v.VolunteerAndFamily.Any(vf => vf.IdFamily == idFamily));
                 List<Volunteer> volunteers = new List<Volunteer>();
                 foreach (var v in volunteersDb)
                 {

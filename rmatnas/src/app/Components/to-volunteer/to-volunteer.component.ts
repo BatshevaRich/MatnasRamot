@@ -29,7 +29,7 @@ export class ToVolunteerComponent implements OnInit {
       'reason',
       'reference'),
     new Volunteer('default', '000000000', '000000000', 'default@ddd', 'default', '1999-01-01', false),
-    new Category(), 'default', '1999-01-01'
+    new Category(1, 'hello'), 'default', '1999-01-01'
   );
   id: number;
   @Input() vId: number;
@@ -45,7 +45,6 @@ export class ToVolunteerComponent implements OnInit {
 
   ngOnInit() {
     this.vs.getVolunteering(this.vId).subscribe((v: VolunteerAndFamily) => {
-      console.log(v);
       this.toVolunteer = v;
     });
   }

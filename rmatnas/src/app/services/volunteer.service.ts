@@ -20,25 +20,27 @@ export class VolunteerService {
   }
   addVolunteer(myvolunteer: Volunteer, categories: Category[]) {
     // returns id to be updated in table
-    const myData =  {} as any;
+    const myData = {} as any;
     myData.volunteer = myvolunteer;
     myData.categories = categories;
     return this.http
       .post(this.path, myData).toPromise().then(res => res);
   }
-  updateVolunteer(myvolunteer: Volunteer) {
+  updateVolunteer(myvolunteer: Volunteer, categoriesSelected: Category[]) {
     // const head={params:new HttpParams() ('newVolunteer',myvolunteer)};
+    const myData = {} as any;
+    myData.volunteer = myvolunteer;
+    myData.categories = categoriesSelected;
     this.http.put(
-      this.path + '/' + myvolunteer.Id,
-      myvolunteer
-    ).subscribe(x => console.log(x));
+      this.path, myData
+    ).subscribe();
   }
   removeVolunteer(id: number) {
     // const head={params:new HttpParams() ('newVolunteer',myvolunteer)};
-    this.http.delete(this.path + '/' + id).subscribe(x => console.log(x));
+    this.http.delete(this.path + '/' + id).subscribe();
   }
-  getVolunteersByCategoryAndFamily(idFamily: number, category: Category): Observable<Volunteer[]> {
-    return this.http.get<Volunteer[]>(this.path + '/familyandcategory/' + idFamily + '&category=' + category);
+  getVolunteersByCategoryAndFamily(idFamily: number, id: number): Observable<Volunteer[]> {
+    return this.http.get<Volunteer[]>(this.path + '/volunteersbyfac/' + id, {headers: {Authorization: idFamily.toString()}});
   }
   getCategoriesOfVolunteer(id: number) {
     return this.http.get<Category[]>(baseURL + 'CategoryVolunteer/' + id);
@@ -47,6 +49,9 @@ export class VolunteerService {
     return this.http.get(baseURL + 'CategoryVolunteer/' + id + '&category=' + categories);
   }
   getVolunteersForFamily(fId: number): Observable<Volunteer[]> {
-    return this.http.get<Volunteer[]>(this.path + '/volunteerfamily/' + fId );
+    return this.http.get<Volunteer[]>(baseURL + 'VolunteerAndFamily/Getvf/' + fId);
+  }
+  getVolunteersByCategory(idCategory: number): Observable<Volunteer[]> {
+    return this.http.get<Volunteer[]>(this.path + '/volunteersbycategory/' + idCategory);
   }
 }

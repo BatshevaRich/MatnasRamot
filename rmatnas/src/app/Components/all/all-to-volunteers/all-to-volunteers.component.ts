@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, AfterViewInit } from '@angular/core';
 import { VolunteerService } from 'src/app/services/volunteer.service';
 import { Volunteer } from 'src/app/Classes/Volunteer';
 import { VolunteerAndFamilyService } from 'src/app/services/volunteer-and-family.service';
@@ -8,6 +8,9 @@ import { FamilyService } from 'src/app/services/family.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatDialog } from '@angular/material';
+import { Observable } from 'rxjs';
+import { ConfirmDialogModel, ConfirmDialogComponent } from '../../forms/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-all-to-volunteers',
@@ -21,11 +24,11 @@ import { MatPaginator } from '@angular/material/paginator';
     ]),
   ],
 })
-export class AllToVolunteersComponent implements OnInit {
+export class AllToVolunteersComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatTable) table: MatTable<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  displayedColumns = ['NameVolunteer', 'NameFamily', 'Category', 'PelephoneVolunteer'];
+  displayedColumns = ['NameVolunteer', 'NameFamily', 'Category', 'PelephoneVolunteer', 'columndelete'];
   expandedElement: Details | null;
   allvolunteerings: Details[] = [];
   dataSource = new MatTableDataSource();
@@ -35,8 +38,11 @@ export class AllToVolunteersComponent implements OnInit {
   inp: boolean;
   volunteerings: VolunteerAndFamily[] = [];
   families: Family[] = [];
+  result = '';
 
-  constructor(public fs: FamilyService, public vfs: VolunteerAndFamilyService) {
+  constructor(public fs: FamilyService,
+              public vfs: VolunteerAndFamilyService,
+              public dialog: MatDialog) {
     this.dataSource.filterPredicate =
       (data: Details, filter: string) => data.NameVolunteer.indexOf(filter) !== -1;
    }
@@ -57,12 +63,10 @@ export class AllToVolunteersComponent implements OnInit {
         item.IdFamily = element.Family.Id;
       });
       this.dataSource.data = this.allvolunteerings;
-      console.log(res);
     });
     // if (this.vId) {
     //   this.fs.getFamiliesByVolunteer(this.vId).subscribe(data=>{
     //     this.families = data;
-    //     console.log(data);
     //   })
     //  }
     // else {
@@ -80,6 +84,28 @@ export class AllToVolunteersComponent implements OnInit {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
     this.dataSource.filter = filterValue;
+  }
+
+  delete(event, elm) {
+    this.confirmDialog().subscribe(res => {
+      this.result = res;
+      if (res) {
+        this.vfs.removeVolunteering(elm.Id);
+        this.dataSource.data = this.dataSource.data
+          .filter(i => i !== elm);
+        // .map((i, idx) => (i.position = (idx + 1), i));
+      }
+    });
+  }
+
+  confirmDialog(): Observable<any> {
+    const message = `מחיקה זו היא לצמיתות! האם תרצי להמשיך?`;
+    const dialogData = new ConfirmDialogModel('מחיקת מתנדבת', message);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: '75%',
+      data: dialogData
+    });
+    return dialogRef.afterClosed();
   }
 
 }

@@ -17,9 +17,9 @@ namespace Bll
         {
             Dal.VolunteerManager.RemoveVolunteer(volunteer);
         }
-        public static void UpdateVolunteer(Volunteer volunteer)
+        public static void UpdateVolunteer(Volunteer volunteer, Category[] categories)
         {
-            Dal.VolunteerManager.UpdateVolunteer(volunteer);
+            Dal.VolunteerManager.UpdateVolunteer(volunteer, categories);
         }
         public static IEnumerable<Volunteer> GetVolunteers()
         {
@@ -33,7 +33,15 @@ namespace Bll
 
         public static void RemoveVolunteer(int id)
         {
-            Dal.VolunteerManager.RemoveVolunteer(id);
+            try
+            {
+                Dal.VolunteerManager.RemoveVolunteer(id);
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
         }
 
         public static IEnumerable<Category> GetCategories(int id)
@@ -62,9 +70,14 @@ namespace Bll
             return Dal.VolunteerManager.GetEvents(id);
         }
 
-        public static IEnumerable<Volunteer> GetVolunteersByCategoryAndFamily(int idFamily, Category category)
+        public static IEnumerable<Volunteer> GetVolunteersByCategoryAndFamily(int idFamily,int idCategory)
         {
-            return Dal.VolunteerManager.GetVolunteersByCategoryAndFamily(idFamily, category);
+            return Dal.VolunteerManager.GetVolunteersByCategoryAndFamily(idFamily, idCategory);
+        }
+
+        public static IEnumerable<Volunteer> GetVolunteersByCategory(int idCategory)
+        {
+            return Dal.VolunteerManager.GetVolunteersByCategory(idCategory);
         }
     }
 }

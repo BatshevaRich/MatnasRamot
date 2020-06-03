@@ -18,11 +18,20 @@ namespace Bll
             Dal.VolunteerAndFamilyManager.UpdateVolunteerAndFamily(volunteerAndFamily);
         }
 
+        public static IEnumerable<Family> GetVolunteerAndFamilyForVolunteer(int id)
+        {
+            return Dal.VolunteerAndFamilyManager.GetVolunteerAndFamilyForVolunteer(id);
+        }
+
         public static VolunteerAndFamily GetVolunteerAndFamily(int id)
         {
             return Dal.VolunteerAndFamilyManager.GetVolunteerAndFamily(id);
         }
 
+        public static IEnumerable<Volunteer> GetVolunteerAndFamilyForFamily(int id)
+        {
+            return Dal.VolunteerAndFamilyManager.GetVolunteerAndFamilyForFamily(id);
+        }
         public static IEnumerable<VolunteerAndFamily> GetVolunteerAndFamilys()
         {
             return Dal.VolunteerAndFamilyManager.GetVolunteerAndFamilies();

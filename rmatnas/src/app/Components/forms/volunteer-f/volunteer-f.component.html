@@ -41,7 +41,17 @@
           type="date" [ngModel]="newVolunteer.Age | date:'yyyy-MM-dd'" (ngModelChange)="newVolunteer.Age = $event"
           name="Age" />
         <br>
-        <app-choose-category (selectc)="selectCategories($event)"></app-choose-category>
+        <label>פעילה?</label>
+        <mat-slide-toggle name="isActive" [ngModel]="newVolunteer.IsActive" [checked]="newVolunteer.IsActive"
+          (ngModelChange)="newVolunteer.IsActive = !newVolunteer.IsActive">פעילה</mat-slide-toggle>
+        <!-- <span *ngIf="newVolunteer.IsActive">
+          <i class="fa fa-check"></i>
+        </span>
+        <span *ngIf="!newVolunteer.IsActive">
+          <i class="fa fa-times"></i>
+        </span> -->
+        <app-choose-category [chosenC]="categoriesOfVolunteer" (selectc)="selectCategories($event)">
+        </app-choose-category>
       </div>
       <div mat-dialog-actions>
         <button mat-button mat-dialog-close class="btn btn-primary" [mat-dialog-close]="token" type="submit">

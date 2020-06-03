@@ -6,6 +6,7 @@ import { CategoryService } from 'src/app/services/category.service';
 import { FamilyService } from 'src/app/services/family.service';
 import { VolunteerService } from 'src/app/services/volunteer.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { VolunteerAndFamilyService } from 'src/app/services/volunteer-and-family.service';
 
 @Component({
   selector: 'app-add-vf',
@@ -17,59 +18,88 @@ export class AddVFComponent implements OnInit {
   @Input() idVolunteer: number;
   families: Family[] = [];
   volunteers: Volunteer[] = [];
-  // @Input()
   categories: Category[] = [];
   comments: string;
   dateAdded: Date;
   selectedFamily: Family = null;
   selectedVolunteer: Volunteer = null;
   selectedCategory: Category;
-  constructor(private fs: FamilyService, private vs: VolunteerService,
-              private dialogRef: MatDialogRef<AddVFComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor(private fs: FamilyService,
+    private vs: VolunteerService,
+    private cs: CategoryService,
+    private vaf: VolunteerAndFamilyService,
+    private dialogRef: MatDialogRef<AddVFComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
     this.vs.getVolunteers().subscribe(res => {
       this.volunteers = res;
       this.volunteers = this.volunteers.filter(v => v.IsActive);
-      console.log(this.volunteers);
-    })
+    });
     this.fs.getFamilies().subscribe(res => {
       this.families = res;
-      console.log(this.families);
     });
+    this.cs.getCategories().subscribe(res => {
+      this.categories = res;
+    });
+  }
 
+  ngOnInit() { }
+
+  onChangeFamily(newValue, tab) {
+    if (tab === 3) {
+      this.selectedCategory = null;
+      this.selectedVolunteer = null;
+      this.selectedFamily != null ? this.fs.getCategoriesOfFamily(this.selectedFamily.Id)
+        .subscribe(res => {
+          this.categories = res;
+        }) : this.selectedFamily = null;
+    }
   }
-  ngOnInit() {
-    this.categories.push(new Category());
-    this.families.push(new Family('fathername',
-      'mothername',
-      'lastname',
-      '0',
-      '0',
-      '0',
-      'address',
-      'status',
-      2,
-      'reason',
-      'reference'));
-    // this.volunteers.push(new Volunteer());
+
+  volunteerChanged($event, tab) {
+    if (tab === 1) {
+      this.selectedFamily = null;
+      this.selectedVolunteer != null ? this.fs.getFamiliesByCategoryAndVolunteer(this.selectedCategory.Id, this.selectedVolunteer.Id)
+        .subscribe(res => {
+          this.families = res;
+        }) : this.selectedVolunteer = null;
+    }
+    if (tab === 2) {
+      this.selectedFamily = null;
+      this.selectedCategory = null;
+      this.selectedVolunteer != null ? this.vs.getCategoriesOfVolunteer(this.selectedVolunteer.Id)
+        .subscribe(res => {
+          this.categories = res;
+        }) : this.selectedVolunteer = null;
+    }
+    if (tab === 3) {
+
+    }
   }
-  onChangeFamily(newValue) {
-    console.log(newValue);
-    this.idVolunteer = this.selectedVolunteer.Id;
-  }
-  volunteerChanged($event){
-    debugger
-  }
-  onChangeCtegory($event) {
-    if (this.idFamily) {
-      this.vs.getVolunteersByCategoryAndFamily(this.idFamily, this.selectedCategory).subscribe(data =>
-        this.volunteers = data);
-    } else {
-      // this.fs.getFamiliesByCategoryAndVolunteer().subscribe(data =>
-      //   this.families = data);
+  onChangeCtegory($event, tab) {
+    if (tab === 1) {
+      this.selectedVolunteer = null;
+      this.selectedFamily = null;
+      this.selectedCategory != null ? this.vs.getVolunteersByCategory(this.selectedCategory.Id)
+        .subscribe(res => {
+          this.volunteers = res;
+        }) : this.selectedCategory = null;
+    }
+    if (tab === 2) {
+      this.selectedFamily = null;
+      this.selectedCategory != null ? this.fs.getFamiliesByCategoryAndVolunteer(this.selectedCategory.Id, this.selectedVolunteer.Id)
+        .subscribe(res => {
+          this.families = res;
+        }) : this.selectedCategory = null;
+    }
+    if (tab === 3) {
+      this.selectedVolunteer = null;
+      this.selectedCategory != null ? this.vs.getVolunteersByCategoryAndFamily(this.selectedFamily.Id, this.selectedCategory.Id)
+      .subscribe(res => {
+        this.volunteers = res;
+      }) : this.selectedCategory = null;
     }
   }
   submitForm(f) {
-
+    this.vaf.addVolunteerAction(this.selectedVolunteer, this.selectedFamily, this.selectedCategory);
   }
 }

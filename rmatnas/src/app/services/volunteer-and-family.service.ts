@@ -2,7 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { VolunteerAndFamily } from '../Classes/VolunteerAndFamily';
-import { baseURL} from '../../environments/environment';
+import { baseURL } from '../../environments/environment';
+import { Volunteer } from '../Classes/Volunteer';
+import { Family } from '../Classes/Family';
+import { Category } from '../Classes/Category';
 @Injectable({
   providedIn: 'root'
 })
@@ -14,16 +17,20 @@ export class VolunteerAndFamilyService {
     return this.http.get<VolunteerAndFamily[]>(this.path);
   }
   public getVolunteering(id: number): Observable<VolunteerAndFamily> {
-    return this.http.get<VolunteerAndFamily>(this.path + id);
+    return this.http.get<VolunteerAndFamily>(this.path + 'Getvaf/' + id);
   }
   public addVolunteering(volunteering: VolunteerAndFamily) {
     this.http.post(this.path, volunteering).subscribe(data => {
-      console.log(data);
     });
   }
   public removeVolunteering(id: number) {
     this.http.delete(this.path + id).subscribe(data => {
-      console.log(data);
     });
+  }
+
+  addVolunteerAction(myvolunteer: Volunteer, myfamily: Family, category: Category) {
+    const vaf: VolunteerAndFamily  = new VolunteerAndFamily(myfamily, myvolunteer, category, '', new Date().toISOString());
+    return this.http
+      .post(this.path, vaf).toPromise().then(res => res);
   }
 }

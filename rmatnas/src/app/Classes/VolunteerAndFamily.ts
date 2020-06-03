@@ -9,9 +9,7 @@ export class VolunteerAndFamily {
     Category: Category;
     Comments: string;
     DateAdded: string;
-    /**
-     *
-     */
+
     constructor(family: Family, myvolunteer: Volunteer, category: Category, comments: string, dateAdded: string) {
         this.Comments = comments;
         this.Category = category;

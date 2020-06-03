@@ -11,9 +11,9 @@ namespace WebApi.Controllers
     public class VolunteerController : ApiController
     {
         // GET: api/Volunteer
-        public IEnumerable<Volunteer> Get()
+        public IHttpActionResult Get()
         {
-            return Bll.VolunteerManager.GetVolunteers();
+            return Ok(Bll.VolunteerManager.GetVolunteers());
         }
 
         // GET: api/Volunteer/5
@@ -32,15 +32,27 @@ namespace WebApi.Controllers
 
         [HttpPut]
         // PUT: api/Volunteer/5
-        public void Put(int id, [FromBody]Volunteer value)
+        public void Put([FromBody] JObject data)
         {
-            Bll.VolunteerManager.UpdateVolunteer(value);
+            Volunteer newVolunteer = data["volunteer"].ToObject<Volunteer>();
+            Category[] category = data["categories"].ToObject<Category[]>();
+            Bll.VolunteerManager.UpdateVolunteer(newVolunteer, category);
         }
 
         // DELETE: api/Volunteer/5
-        public void Delete(int id)
+        public HttpResponseMessage Delete(int id)
         {
-            Bll.VolunteerManager.RemoveVolunteer(id);
+            try
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, new Exception("Error saving volunteer in database"));
+                // Bll.VolunteerManager.RemoveVolunteer(id);
+                
+            }
+            catch (Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, e);
+            }
+            
         }
        
         [Route("api/categoriesOfVolunteer")]
@@ -73,10 +85,34 @@ namespace WebApi.Controllers
         {
             return Bll.VolunteerManager.GetEvents(id);
         }
-        [Route("api/volunteer/familyandcategory")]
-        public IEnumerable<Volunteer> GetVolunteersByCategoryAndFamily(int idFamily, [FromBody] Category category)
+        //[Route("api/volunteer/familyandcategory")]
+        //public IEnumerable<Volunteer> GetVolunteersByCategoryAndFamily(int idFamily, [FromBody] Category category)
+        //{
+        //    return Bll.VolunteerManager.GetVolunteersByCategoryAndFamily(idFamily, category);
+        //}
+
+        [Route("api/volunteer/volunteersbyfac/{id}")]
+        [HttpGet]
+        public IEnumerable<Volunteer> GetVolunteersByCategoryAndFamily(int id)
         {
-            return Bll.VolunteerManager.GetVolunteersByCategoryAndFamily(idFamily, category);
+            int idFamily = 0;
+            var re = Request;
+            var headers = re.Headers;
+
+            if (headers.Contains("Authorization"))
+            {
+                idFamily = int.Parse(headers.GetValues("Authorization").First());
+            }
+
+            return Bll.VolunteerManager.GetVolunteersByCategoryAndFamily(idFamily, id);
+        }
+
+
+
+        [Route("api/volunteer/volunteersbycategory/{idCategory}")]
+        public IEnumerable<Volunteer> GetVolunteersByCategory(int idCategory)
+        {
+            return Bll.VolunteerManager.GetVolunteersByCategory(idCategory);
         }
     }
 }

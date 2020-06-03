@@ -4,6 +4,10 @@ import { FamilyService } from 'src/app/services/family.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
+import { Observable } from 'rxjs';
+import { ConfirmDialogModel, ConfirmDialogComponent } from '../../forms/confirm-dialog/confirm-dialog.component';
+import { MatDialog, MatSort } from '@angular/material';
+import * as XLSX from 'xlsx';
 
 export interface Details {
   Id: number;
@@ -32,62 +36,119 @@ export interface Details {
   ],
 })
 export class AllFamiliesComponent implements OnInit, AfterViewInit {
-
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  displayedColumns = ['LastName', 'Address', 'Telephone', 'NumChildren', 'Status', 'Reference'];
+  displayedColumns = ['LastName', 'Address', 'Telephone', 'NumChildren', 'Status', 'Reference', 'columndelete'];
   expandedElement: Details | null;
-  families: any;
+  families: Family[] = [];
   dataSource = new MatTableDataSource();
   search = '';
   resultsLength = 0;
   @Input() vId: number;
   inp = false;
+  result = '';
 
-  constructor(public fs: FamilyService, private changeDetectorRefs: ChangeDetectorRef) {
+  constructor(public fs: FamilyService,
+              private changeDetectorRefs: ChangeDetectorRef,
+              public dialog: MatDialog) {
     this.dataSource.filterPredicate =
       (data: Details, filter: string) => data.LastName.indexOf(filter) !== -1;
   }
   ngOnInit() {
     if (this.vId) {
+      this.displayedColumns = ['LastName', 'Address', 'Telephone', 'NumChildren', 'Status', 'Reference'];
       this.inp = true;
-      this.fs.getFamiliesByVolunteer(this.vId).subscribe(data => {
-        ///TODO: check if empty results, if empty- do not display table
+      this.fs.getFamiliesByVolunteer(this.vId).subscribe((data: Family[]) => {
+        /// TODO: check if empty results, if empty- do not display table
+        data = this.trimResultsFromDB(data);
         this.families = data;
         this.dataSource.data = data;
-        console.log(this.dataSource);
         this.resultsLength = this.dataSource.data.length;
       });
     } else {
       this.fs.getFamilies().subscribe((data: Family[]) => {
+        data = this.trimResultsFromDB(data);
         this.families = data;
         this.dataSource.data = data;
-        console.log(this.dataSource);
         this.resultsLength = this.dataSource.data.length;
       });
     }
   }
 
+  trimResultsFromDB(families: Family[]) {
+    for (const family of families) {
+      family.LastName = family.LastName.trim();
+      family.FirstNameFather = family.FirstNameFather.trim();
+      family.FirstNameMother = family.FirstNameMother.trim();
+      family.Address == null ? family.Address = '' : family.Address = family.Address.trim();
+      family.Telephone == null ? family.Telephone = '' : family.Telephone = family.Telephone.trim();
+      family.PelephoneFather == null ? family.PelephoneFather = '' : family.PelephoneFather = family.PelephoneFather.trim();
+      family.PelephoneMother == null ? family.PelephoneMother = '' : family.PelephoneMother = family.PelephoneMother.trim();
+      family.Status == null ? family.Status = '' : family.Status = family.Status.trim();
+      family.Reference == null ? family.Reference = '' : family.Reference = family.Reference.trim();
+      family.Reason == null ? family.Reason = '' : family.Reason = family.Reason.trim();
+    }
+    return families;
+  }
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   newFamily(family) {
     this.families.push(family);
     this.dataSource.data = this.families as unknown as MatTableDataSource<Details>[];
-    console.log(this.dataSource);
     this.table.renderRows();
     this.changeDetectorRefs.detectChanges();
-  }
-
-  delete(f: number) {
-    this.fs.removeFamily(f);
-    this.families = this.families.filter(fo => fo.Id !== f);
   }
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
     this.dataSource.filter = filterValue;
+  }
+
+  delete(event, elm) {
+    this.confirmDialog().subscribe(res => {
+      this.result = res;
+      if (res) {
+        this.fs.removeFamily(elm.Id);
+        this.dataSource.data = this.dataSource.data
+          .filter(i => i !== elm);
+        // .map((i, idx) => (i.position = (idx + 1), i));
+      }
+    });
+  }
+
+  confirmDialog(): Observable<any> {
+    const message = `מחיקה זו היא לצמיתות! האם תרצי להמשיך?`;
+    const dialogData = new ConfirmDialogModel('מחיקת מתנדבת', message);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: '75%',
+      data: dialogData
+    });
+    return dialogRef.afterClosed();
+  }
+
+  public exportTableToExcel() {
+    const data = this.families.map(x => ({
+      שם_משפחה: x.LastName,
+      אבא: x.FirstNameFather,
+      אמא: x.FirstNameMother,
+      כתובת: x.Address,
+      טלפון: x.Telephone,
+      פלאפון_אבא: x.PelephoneFather,
+      פלאפון_אמא: x.PelephoneMother,
+      מספר_ילדים: x.NumChildren,
+      סטטוס: x.Status,
+      הפניה: x.Reference,
+      סיבה: x.Reason
+    }));
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.json_to_sheet(data);
+    XLSX.utils.book_append_sheet(wb, ws, 'משפחות');
+    XLSX.writeFile(wb, `משפחות.xlsx`);
   }
 }

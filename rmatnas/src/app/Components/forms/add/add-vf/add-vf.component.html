@@ -1,92 +1,128 @@
-<div dir="rtl">
-  <form (ngSubmit)="submitForm(addedform)" class="text-right" #addedform="ngForm">
-    <div class="form-group">
-      <!-- <label></label> do ngif from families or volunteers, show id of chosen one -->
-      <h1>התנדבות חדשה</h1>
-      <mat-tab-group animationDuration="0ms" mat-stretch-tabs class="example-stretched-tabs">
-        <mat-tab label="משפחה למתנדבת">
-          <mat-form-field>
-            <mat-label>לבחירת מתנדבת</mat-label>
-            <mat-select [(value)]="selectedVolunteer" (selectionChange)="volunteerChanged(selectedVolunteer)">
-              <mat-option>None</mat-option>
-              <div *ngFor="let v of volunteers">
-                <mat-option [value]="v">{{v.Name}}, {{v.Pelephone}}</mat-option>
-              </div>
-            </mat-select>
-          </mat-form-field>
-          <div *ngIf="selectedVolunteer">
-            <mat-form-field>
-              <mat-label>לבחירת משפחה</mat-label>
-              <mat-select [(value)]="selectedFamily">
-                <mat-option>None</mat-option>
-                <div *ngFor="let f of families">
-                  <mat-option value="v">{{f.LastName}}, {{f.FirstNameFather}} & {{f.FirstNameMother}}, {{f.Telephone}}
-                  </mat-option>
-                </div>
-              </mat-select>
-            </mat-form-field>
-          </div>
-          <div class="col-4">
+<form (ngSubmit)="submitForm(addedform)" class="text-right" #addedform="ngForm" dir="rtl">
+  <!-- <label></label> do ngif from families or volunteers, show id of chosen one -->
+  <mat-toolbar>
+    <span>התנדבות חדשה</span>
+    <span class="example-spacer"></span><button mat-raised-button type="submit">
+      <span *ngIf="selectedCategory && selectedFamily && selectedVolunteer">שמירה</span>
+    </button>
+  </mat-toolbar>
 
-            <div *ngIf="selectedVolunteer">
-              <div class="card">
-                <div class="card-header">
-                  <h4>שם: {{ selectedVolunteer.Name }}</h4>
-                </div>
-                <div class="card-body">
-                  <div class="card-text">
-                    <p>טלפון: {{ selectedVolunteer.Telephone }}</p>
-                    <p>פלאפון: {{ selectedVolunteer.Pelephone | phone }}</p>
-                    <p>כתובת: {{ selectedVolunteer.Address }}</p>
-                    <p>מייל: {{ selectedVolunteer.Email }}</p>
-                    <p>יום הולדת: {{ selectedVolunteer.Age | date:"MMMM dd yyyy" }}</p>
-                    <div *ngFor="let c of categories">
-                      {{c.Name}}
-                    </div>
-                  </div>
-                  <p class="card-text"></p>
-                </div>
-              </div>
-              <!-- <app-volunteer [vId]="selectedVolunteer.Id"></app-volunteer> -->
+  <mat-tab-group>
+    <mat-tab label="לפי קטגוריה">
+      <mat-form-field>
+        <mat-label>לבחירת קטגוריה</mat-label>
+        <mat-select [(value)]="selectedCategory" (selectionChange)="onChangeCtegory(selectedCategory, 1)">
+          <mat-option>None</mat-option>
+          <div *ngFor="let c of categories">
+            <mat-option [value]="c">{{c.Name}}</mat-option>
+          </div>
+        </mat-select>
+      </mat-form-field>
+      &nbsp;
+      <mat-form-field *ngIf="selectedCategory">
+        <mat-label>לבחירת מתנדבת</mat-label>
+        <mat-select [(value)]="selectedVolunteer" (selectionChange)="volunteerChanged(selectedVolunteer, 1)">
+          <mat-option>None</mat-option>
+          <div *ngFor="let v of volunteers">
+            <mat-option [value]="v">{{v.Name}}, {{v.Pelephone}}</mat-option>
+          </div>
+        </mat-select>
+      </mat-form-field>
+      &nbsp;
+      <mat-form-field *ngIf="selectedVolunteer && selectedCategory">
+        <mat-label>לבחירת משפחה</mat-label>
+        <mat-select [(value)]="selectedFamily" (selectionChange)="onChangeFamily(selectedFamily, 1)">
+          <mat-option>None</mat-option>
+          <div *ngFor="let f of families">
+            <mat-option [value]="f">{{f.LastName}}, {{f.FirstNameFather}} & {{f.FirstNameMother}}, {{f.Telephone}}
+            </mat-option>
+          </div>
+        </mat-select>
+      </mat-form-field>
+      <div *ngIf="selectedVolunteer">
+        <div class="card">
+          <div class="card-header">
+            <h4>שם: {{ selectedVolunteer.Name }}</h4>
+          </div>
+          <div class="card-body">
+            <p>טלפון: {{ selectedVolunteer.Telephone }}</p>
+            <p>פלאפון: {{ selectedVolunteer.Pelephone | phone }}</p>
+            <p>כתובת: {{ selectedVolunteer.Address }}</p>
+            <p>מייל: {{ selectedVolunteer.Email }}</p>
+            <p>יום הולדת: {{ selectedVolunteer.Age | date:"MMMM dd yyyy" }}</p>
+            <div *ngFor="let c of categories">
+              {{c.Name}}
             </div>
           </div>
-        </mat-tab>
+        </div>
+      </div>
+    </mat-tab>
 
+    <mat-tab label="לפי מתנדבת">
+      <mat-form-field>
+        <mat-label>לבחירת מתנדבת</mat-label>
+        <mat-select [(value)]="selectedVolunteer" (selectionChange)="volunteerChanged(selectedVolunteer, 2)">
+          <mat-option>None</mat-option>
+          <div *ngFor="let v of volunteers">
+            <mat-option [value]="v">{{v.Name}}, {{v.Pelephone}}</mat-option>
+          </div>
+        </mat-select>
+      </mat-form-field>
+      &nbsp;
+      <mat-form-field *ngIf="selectedVolunteer">
+        <mat-label>לבחירת קטגוריה</mat-label>
+        <mat-select [(value)]="selectedCategory" (selectionChange)="onChangeCtegory(selectedCategory, 2)">
+          <mat-option>None</mat-option>
+          <div *ngFor="let c of categories">
+            <mat-option [value]="c">{{c.Name}}</mat-option>
+          </div>
+        </mat-select>
+      </mat-form-field>
+      &nbsp;
+      <mat-form-field *ngIf="selectedCategory && selectedVolunteer">
+        <mat-label>לבחירת משפחה</mat-label>
+        <mat-select [(value)]="selectedFamily" (selectionChange)="onChangeFamily(selectedFamily, 2)">
+          <mat-option>None</mat-option>
+          <div *ngFor="let f of families">
+            <mat-option [value]="f">{{f.LastName}}, {{f.FirstNameFather}} & {{f.FirstNameMother}}, {{f.Telephone}}
+            </mat-option>
+          </div>
+        </mat-select>
+      </mat-form-field>
+    </mat-tab>
 
-
-        <mat-tab label="מתנדבת למשפחה">Content 2</mat-tab>
-      </mat-tab-group>
-
-
-
-
-
-
-
-
-
-
-
-    </div>
-
-    <!-- <select class="selectpicker" [ngModel]="selectedCategory" (ngModelChange)="onChangeCtegory($event)"
-        name="selcategory">
-        <option [ngValue]="i" *ngFor="let i of categories">{{ i.Name}}</option>
-      </select>
-      <br>
-      <select class="selectpicker" (ngModelChange)="onChangeFamily($event)" name="selectFamily">
-        <option [ngValue]="i" *ngFor="let i of families">{{ i.LastName}},{{i.Address }}</option>
-      </select>
-      <br>
-      <select class="selectpicker" (ngModelChange)="onChangeVolunteer($event)" name="seectedVolunteer">
-        <option [ngValue]="i" *ngFor="let i of volunteers">{{
-          i | json
-        }}</option>
-      </select>
-    <button class="btn btn-primary" type="submit">שמירה</button> -->
-  </form>
-  <br />
-  <br />
-  <br />
-  <br />
-</div>
+    <mat-tab label="לפי משפחה">
+      <mat-form-field>
+        <mat-label>לבחירת משפחה</mat-label>
+        <mat-select [(value)]="selectedFamily" (selectionChange)="onChangeFamily(selectedFamily, 3)">
+          <mat-option>None</mat-option>
+          <div *ngFor="let f of families">
+            <mat-option [value]="f">{{f.LastName}}, {{f.FirstNameFather}} & {{f.FirstNameMother}}, {{f.Telephone}}
+            </mat-option>
+          </div>
+        </mat-select>
+      </mat-form-field>
+      &nbsp;
+      <mat-form-field *ngIf="selectedFamily">
+        <mat-label>לבחירת קטגוריה</mat-label>
+        <mat-select [(value)]="selectedCategory" (selectionChange)="onChangeCtegory(selectedCategory, 3)">
+          <mat-option>None</mat-option>
+          <div *ngFor="let c of categories">
+            <mat-option [value]="c">{{c.Name}}</mat-option>
+          </div>
+        </mat-select>
+      </mat-form-field>
+      &nbsp;
+      <mat-form-field *ngIf="selectedFamily && selectedCategory">
+        <mat-label>לבחירת מתנדבת</mat-label>
+        <mat-select [(value)]="selectedVolunteer" (selectionChange)="volunteerChanged(selectedVolunteer, 3)">
+          <mat-option>None</mat-option>
+          <div *ngFor="let v of volunteers">
+            <mat-option [value]="v">{{v.Name}}, {{v.Pelephone}}</mat-option>
+          </div>
+        </mat-select>
+      </mat-form-field>
+    </mat-tab>
+  </mat-tab-group>
+</form>
+<br />

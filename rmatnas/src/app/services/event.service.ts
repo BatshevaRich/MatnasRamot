@@ -19,17 +19,14 @@ export class EventService {
   }
   addEvent(event: Eventt) {
 
-   this.http.post(this.path, event).subscribe(data => {
-     console.log(data); });
+   this.http.post(this.path, event).subscribe(data => { });
   }
   updateEvent(event: Eventt) {
    this.http.put(this.path + event.Id, event).subscribe(data => {
-     console.log(data);
    });
   }
   removeEvent(id: number) {
    this.http.delete(this.path + id).subscribe(data => {
-     console.log(data);
    });
   }
   getCategoriesOfEvent(id: number): Observable<Category[]> {

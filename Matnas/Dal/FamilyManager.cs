@@ -41,8 +41,8 @@ namespace Dal
                 db.SaveChanges();
             }
         }
-        public static void UpdateFamily(Family family)
-        {
+        public static void UpdateFamily(Family family, Category[] categories)
+        {////////////////////////////////////////////////////////////////
             Families f = Mapper.CastFamily(family);
             using (dbRamotEntities db=new dbRamotEntities())
             {
@@ -158,6 +158,20 @@ namespace Dal
                 }
             }
             return organizations;
+        }
+
+        public static IEnumerable<Family> GetFamiliesByCategoryAndVolunteer(int idCategory, int idVolunteer)
+        {
+            using (dbRamotEntities db = new dbRamotEntities())
+            {
+                var familiesDb = db.Families.Where(f => f.Categories.Any(c => c.Id == idCategory) && !f.VolunteerAndFamily.Any(vf => vf.IdVolunteer == idVolunteer));
+                List<Family> families = new List<Family>();
+                foreach (var f in familiesDb)
+                {
+                    families.Add(Mapper.CastFamilyToComon(f));
+                }
+                return families;
+            }
         }
     }
 }

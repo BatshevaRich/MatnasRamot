@@ -27,15 +27,15 @@ export class GroupService {
     this.http
       .post(this.path, newOrganization)
       .subscribe(data => {
-        console.log(data);
+        
       });
   }
   updateOrganization(organization: Organization) {
     // const head={params:new HttpParams() ('newOrganization',Organization)};
-    this.http.put(this.path + '/' + organization.Id, organization).subscribe(x => console.log(x));
+    this.http.put(this.path + '/' + organization.Id, organization).subscribe();
   }
   removeOrganization(Id: number) {
     // const head={params:new HttpParams() ('newOrganization',Organization)};
-    this.http.delete(this.path + '/' + Id).subscribe(x => console.log(x));
+    this.http.delete(this.path + '/' + Id).subscribe();
   }
 }

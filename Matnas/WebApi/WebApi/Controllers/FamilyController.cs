@@ -19,7 +19,7 @@ namespace WebApi.Controllers
         {
             return Bll.FamilyManager.GetFamilies();
         }
-        [Route("api/categoriesOfFamily")]
+        [Route("categoriesOfFamily/{id}")]
         public IEnumerable<Category> GetCategories(int id)
         {
             return Bll.FamilyManager.GetCategories(id);
@@ -48,10 +48,13 @@ namespace WebApi.Controllers
             return Bll.FamilyManager.AddFamily(newFamily, category);
         }
 
-        // PUT: api/Family/5
-        public void Put(int id, [FromBody]Family family)
+        [HttpPut]
+        // PUT: api/Volunteer/5
+        public void Put([FromBody] JObject data)
         {
-            Bll.FamilyManager.UpdateFamily(family);
+            Family newFamily = data["family"].ToObject<Family>();
+            Category[] category = data["categories"].ToObject<Category[]>();
+            Bll.FamilyManager.UpdateFamily(newFamily, category);
         }
         [HttpDelete]
         // DELETE: api/Family/5
@@ -68,6 +71,22 @@ namespace WebApi.Controllers
         public IEnumerable<Organization> GetOrganizations(int id)
         {
             return Bll.FamilyManager.GetOrganizations(id);
+        }
+        
+        [Route("familiesbycategory/{id}")]
+        [HttpGet]
+        public IEnumerable<Volunteer> GetFamiliesByCategoryAndVolunteer(int id)
+        {
+            int idVolunteer = 0;
+            var re = Request;
+            var headers = re.Headers;
+
+            if (headers.Contains("Authorization"))
+            {
+                idVolunteer = int.Parse(headers.GetValues("Authorization").First());
+            }
+
+            return Bll.VolunteerManager.GetVolunteersByCategoryAndFamily(id, idVolunteer);
         }
     }
 }

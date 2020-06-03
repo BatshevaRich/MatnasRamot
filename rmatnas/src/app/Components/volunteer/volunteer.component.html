@@ -1,53 +1,52 @@
-<div dir="rtl" class="text-right" style="padding-top: 3%">
-  <div class="container">
-    <div class="row">
-      <div class="col-4">
-        <div class="card">
-          <div class="card-header">
-            <h4>שם: {{ myvolunteer.Name }}</h4>
+<div dir="rtl" class="text-right" style="padding-top: 1%">
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3%" fxLayoutAlign="center">
+    <div fxFlex="20%">
+      <mat-card>
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"><i class="fa fa-user" style="size: 7x;"></i></div>
+          <mat-card-title>{{ myvolunteer.Name }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>טלפון: {{ myvolunteer.Telephone }}</p>
+          <p>פלאפון: {{ myvolunteer.Pelephone | phone }}</p>
+          <p>כתובת: {{ myvolunteer.Address }}</p>
+          <p>מייל: {{ myvolunteer.Email }}</p>
+          <p>יום הולדת: {{ myvolunteer.Age | date:"MMMM dd yyyy" }}</p>
+          <p>פעילה:
+            <span *ngIf="myvolunteer.IsActive">
+              <i class="fa fa-check"></i>
+            </span>
+            <span *ngIf="!myvolunteer.IsActive">
+              <i class="fa fa-times"></i>
+            </span>
+          </p>
+          <header>קטגוריות</header>
+          <div *ngFor="let c of categories">
+            <li>
+              {{c.Name}}</li>
           </div>
-          <div class="card-body">
-            <div class="card-text">
-              <p>טלפון: {{ myvolunteer.Telephone }}</p>
-              <p>פלאפון: {{ myvolunteer.Pelephone | phone }}</p>
-              <p>כתובת: {{ myvolunteer.Address }}</p>
-              <p>מייל: {{ myvolunteer.Email }}</p>
-              <p>יום הולדת: {{ myvolunteer.Age | date:"MMMM dd yyyy" }}</p>
-              <div *ngFor="let c of categories">
-                {{c.Name}}
-              </div>
-            </div>
-            <p class="card-text"></p>
-            <button class="btn btn-primary" (click)="VolunteeropenDialog()">לעריכת הפרטים</button>
-          </div>
-        </div>
-      </div>
-      <div dir="rtl" class="col-8 card">
-        <nav class="navbar navbar-expand-md static-top">
-          <div dir="rtl" class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav nav-tabs">
-              <li class="nav-item active " (click)="chooseTab='families'">
-                <a class="nav-link">
-                  <h3>משפחות</h3>
-                </a>
-              </li>
-              <li class="nav-item" (click)="chooseTab='organizations'">
-                <a class="nav-link">
-                  <h3>ארגונים</h3>
-                </a>
-              </li>
-              <li class="nav-item " (click)="chooseTab='events'">
-                <a class="nav-link">
-                  <h3>ארועים</h3>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </nav>
-        <app-all-families *ngIf="chooseTab=='families'" [vId]="vId"></app-all-families>
-        <app-all-organizations *ngIf="chooseTab=='organizations'"></app-all-organizations>
-        <app-all-events *ngIf="chooseTab=='events'"></app-all-events>
-      </div>
+          <mat-card-actions>
+            <button mat-raised-button (click)="VolunteeropenDialog()">לעריכת
+              הפרטים</button>
+          </mat-card-actions>
+
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div fxFlex="75%">
+      <button hidden (click)="tabs.selectedIndex = 0">RESET</button>
+      <mat-tab-group #tabs>
+        <mat-tab></mat-tab> <!-- ADDITIONAL TAB -->
+        <mat-tab label="משפחות">
+          <app-all-families [vId]="vId"></app-all-families>
+        </mat-tab>
+        <mat-tab label="ארגונים">
+          <app-all-organizations></app-all-organizations>
+        </mat-tab>
+        <mat-tab label="ארועים">
+          <app-all-events></app-all-events>
+        </mat-tab>
+      </mat-tab-group>
     </div>
   </div>
 </div>
