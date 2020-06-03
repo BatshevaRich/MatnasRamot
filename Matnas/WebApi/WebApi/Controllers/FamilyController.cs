@@ -75,7 +75,7 @@ namespace WebApi.Controllers
         
         [Route("familiesbycategory/{id}")]
         [HttpGet]
-        public IEnumerable<Volunteer> GetFamiliesByCategoryAndVolunteer(int id)
+        public IEnumerable<Family> GetFamiliesByCategoryAndVolunteer(int id)
         {
             int idVolunteer = 0;
             var re = Request;
@@ -86,7 +86,7 @@ namespace WebApi.Controllers
                 idVolunteer = int.Parse(headers.GetValues("Authorization").First());
             }
 
-            return Bll.VolunteerManager.GetVolunteersByCategoryAndFamily(id, idVolunteer);
+            return Bll.FamilyManager.GetFamiliesByCategoryAndVolunteer(id, idVolunteer);
         }
     }
 }
