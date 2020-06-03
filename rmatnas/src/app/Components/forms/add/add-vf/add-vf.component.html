@@ -1,13 +1,18 @@
-<form (ngSubmit)="submitForm(addedform)" class="text-right" #addedform="ngForm" dir="rtl">
+<form (ngSubmit)="submitForm()" class="tabs-wrapper text-right" dir="rtl">
   <!-- <label></label> do ngif from families or volunteers, show id of chosen one -->
   <mat-toolbar>
     <span>התנדבות חדשה</span>
-    <span class="example-spacer"></span><button mat-raised-button type="submit">
+    <span class="example-spacer"></span>
+    <button mat-raised-button (click)="refresh()" type="button">
+      <span><mat-icon>refresh</mat-icon></span>
+    </button>
+    <span class="example-spacer"></span>
+    <button mat-raised-button type="submit">
       <span *ngIf="selectedCategory && selectedFamily && selectedVolunteer">שמירה</span>
     </button>
   </mat-toolbar>
-
-  <mat-tab-group>
+<div>
+  <mat-tab-group mat-stretch-tabs="always" #tabs>
     <mat-tab label="לפי קטגוריה">
       <mat-form-field>
         <mat-label>לבחירת קטגוריה</mat-label>
@@ -123,6 +128,6 @@
         </mat-select>
       </mat-form-field>
     </mat-tab>
-  </mat-tab-group>
+  </mat-tab-group></div>
 </form>
 <br />

@@ -25,11 +25,17 @@ export class AddVFComponent implements OnInit {
   selectedVolunteer: Volunteer = null;
   selectedCategory: Category;
   constructor(private fs: FamilyService,
-    private vs: VolunteerService,
-    private cs: CategoryService,
-    private vaf: VolunteerAndFamilyService,
-    private dialogRef: MatDialogRef<AddVFComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
+              private vs: VolunteerService,
+              private cs: CategoryService,
+              private vaf: VolunteerAndFamilyService,
+              private dialogRef: MatDialogRef<AddVFComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) {
+    this.refresh();
+  }
+  refresh() {
+    this.selectedCategory = null;
+    this.selectedFamily = null;
+    this.selectedVolunteer = null;
     this.vs.getVolunteers().subscribe(res => {
       this.volunteers = res;
       this.volunteers = this.volunteers.filter(v => v.IsActive);

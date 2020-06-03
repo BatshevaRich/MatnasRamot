@@ -39,7 +39,7 @@ export class HeaderComponent implements OnInit {
   ToVolunteeropenDialog() {
     const dialogRef = this.dialog.open(AddVFComponent, {
       height: '75%',
-      width: '75%',
+      width: '100vh',
       data: {
         dataKey: null,
         update: false
