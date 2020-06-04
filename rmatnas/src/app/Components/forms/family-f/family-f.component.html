@@ -1,83 +1,91 @@
-<div dir="rtl">
-  <h2 *ngIf="!data.update" mat-dialog-title>הוספת משפחה</h2>
-  <h2 *ngIf="data.update" mat-dialog-title>עדכון משפחה</h2>
+<span dir="rtl">
+  <mat-toolbar style="width: 100% !important; z-index: 2;" color="">
+    <span *ngIf="!data.update" mat-dialog-title>הוספת משפחה</span>
+    <span *ngIf="data.update" mat-dialog-title>עדכון משפחה</span>
+  </mat-toolbar>
   <mat-dialog-content>
     <form (ngSubmit)="submitForm(familyForm)" class="text-right" #familyForm="ngForm">
       <div class="form-group">
-        <label>
-          שם פרטי אב:
-          <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-            [(ngModel)]="newFamily.FirstNameFather" name="FirstNameFather" required appBorder />
-        </label>
-        <span class="spn"> - </span>
-        <label>
-          שם פרטי אם:
-          <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-            [(ngModel)]="newFamily.FirstNameMother" name="FirstNameMother" required appBorder />
-        </label>
+        <mat-form-field appearance="outline">
+          <mat-hint>שם</mat-hint>
+          <input matInput maxlength="10" [(ngModel)]="newFamily.FirstNameFather" name="FirstNameFather" required>
+          <mat-icon matPrefix>person</mat-icon>
+        </mat-form-field>
         <br />
-        <label>
-          שם משפחה:
-          <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-            [(ngModel)]="newFamily.LastName" name="LastName" required />
-        </label>
+        <mat-form-field appearance="outline">
+          <mat-hint>שם</mat-hint>
+          <input matInput maxlength="10" [(ngModel)]="newFamily.FirstNameMother" name="FirstNameMother" required>
+          <mat-icon matPrefix>person</mat-icon>
+        </mat-form-field>
         <br />
-        <label>
-          פלאפון אב:
-          <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-            appBorder appPhoneMask [(ngModel)]="newFamily.PelephoneFather" name="PelephoneFather" />
-        </label>
-        <span class="spn"> </span>
-        <label>
-          פלאפון אם:
-          <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-            appPhoneMask appBorder [(ngModel)]="newFamily.PelephoneMother" name="PelephoneMother" />
-        </label>
+        <mat-form-field appearance="outline">
+          <mat-hint>שם</mat-hint>
+          <input matInput maxlength="20" [(ngModel)]="newFamily.LastName" name="LastName" required>
+          <mat-icon matPrefix>person</mat-icon>
+        </mat-form-field>
         <br />
-        <label>
-          טלפון:
-          <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-            appBorder appPhoneMask [(ngModel)]="newFamily.Telephone" name="Telephone" />
-        </label>
+        <mat-form-field appearance="outline">
+          <mat-hint>טלפון</mat-hint>
+          <input matInput placeholder="050-525-2525" appPhoneMask [(ngModel)]="newFamily.Telephone" name="Telephone">
+          <mat-icon matPrefix>phone</mat-icon>
+        </mat-form-field>
         <br />
-        <label>
-          כתובת:
-          <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-            appBorder [(ngModel)]="newFamily.Address" name="Address" />
-        </label>
+        <mat-form-field appearance="outline">
+          <mat-hint>פלאפון אב</mat-hint>
+          <input matInput placeholder="050-525-2525" required [(ngModel)]="newFamily.PelephoneFather"
+            name="PelephoneFather">
+          <mat-icon matPrefix>phone</mat-icon>
+        </mat-form-field>
         <br />
-        <label>
-          סיבה:
-          <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-            appBorder [(ngModel)]="newFamily.Reason" name="Reason" />
-        </label>
+        <mat-form-field appearance="outline">
+          <mat-hint>פלאפון אם</mat-hint>
+          <input matInput placeholder="050-525-2525" required [(ngModel)]="newFamily.PelephoneMother"
+            name="PelephoneMother">
+          <mat-icon matPrefix>phone</mat-icon>
+        </mat-form-field>
         <br />
-        <label>
-          גורם מפנה:
-          <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-            appBorder [(ngModel)]="newFamily.Reference" name="Reference" />
-        </label>
+        <mat-form-field appearance="outline">
+          <mat-hint>כתובת</mat-hint>
+          <input matInput [(ngModel)]="newFamily.Address" name="Address">
+          <mat-icon matPrefix>location_city</mat-icon>
+        </mat-form-field>
         <br />
-        <label>
-          מספר ילדים:
-          <input class="form-control form-control-sm" aria-label="Small" type="number"
-            aria-describedby="inputGroup-sizing-sm" appBorder [(ngModel)]="newFamily.NumChildren" name="NumChildren"
-            type="number" min="0" max="20" />
-        </label>
+        <mat-form-field appearance="outline">
+          <mat-hint>גורם מפנה</mat-hint>
+          <input matInput maxlength="10" [(ngModel)]="newFamily.Reference" name="Reference">
+          <mat-icon matPrefix>person</mat-icon>
+        </mat-form-field>
         <br />
-        <label>
-          סטטוס:
-          <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-            appBorder [(ngModel)]="newFamily.Status" name="Status" />
-        </label>
+        <mat-form-field appearance="outline">
+          <mat-hint>מספר ילדים</mat-hint>
+          <input [(ngModel)]="newFamily.NumChildren" name="NumChildren" type="number" min="0" max="20" matInput>
+        </mat-form-field>
+        <br />
+        <mat-form-field appearance="outline">
+          <mat-hint>סטטוס</mat-hint>
+          <input matInput maxlength="10" [(ngModel)]="newFamily.Status" name="Status">
+          <mat-icon matPrefix>person</mat-icon>
+        </mat-form-field>
+        <br />
+        <mat-form-field appearance="outline" class="example-full-width">
+          <mat-hint>סיבה</mat-hint>
+          <textarea matInput [(ngModel)]="newFamily.Reason" name="Reason"></textarea>
+          <mat-icon matSuffix>comment</mat-icon>
+        </mat-form-field>
+        <br />
+        <h5>קטגוריות</h5>
+        <app-choose-category [chosenC]="categoriesOfFamily" (selectc)="selectCategories($event)">
+        </app-choose-category>
         <br />
       </div>
-      <app-choose-category [chosenC]="categoriesOfFamily" (selectc)="selectCategories($event)"></app-choose-category>
-      <div mat-dialog-actions>
-        <button mat-button mat-dialog-close class="btn btn-primary" type="submit">
-          <span *ngIf="!data.update" mat-dialog-title>להוספת המשפחה</span>
-          <span *ngIf="data.update" mat-dialog-title>לעדכון המשפחה</span>
-        </button></div>
+      <mat-dialog-actions align="end">
+        <button mat-button mat-raised-button mat-dialog-close>ביטול</button>
+        <button mat-button mat-raised-button [mat-dialog-close] type="submit">
+          <span *ngIf="!data.update">הוספה</span>
+          <span *ngIf="data.update">עדכון</span>
+        </button>
+      </mat-dialog-actions>
     </form>
+    <br />
   </mat-dialog-content>
-</div>
+</span>

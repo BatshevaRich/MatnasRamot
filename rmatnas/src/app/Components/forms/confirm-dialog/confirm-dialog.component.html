@@ -1,12 +1,12 @@
 <div dir="rtl">
-  <h1 mat-dialog-title>
-    {{title}}
-  </h1>
-  <div mat-dialog-content>
+  <mat-toolbar>
+    <span>{{title}}</span>
+  </mat-toolbar>
+  <mat-dialog-content>
     <p>{{message}}</p>
-  </div>
-  <div mat-dialog-actions>
-    <button mat-button (click)="onDismiss()">לא</button>
-    <button mat-raised-button color="primary" (click)="onConfirm()">כן</button>
-  </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-raised-button mat-dialog-close (click)="onDismiss()">לא</button>
+    <button mat-button mat-raised-button mat-dialog-close (click)="onConfirm()">כן</button>
+  </mat-dialog-actions>
 </div>
