@@ -17,11 +17,12 @@ import { AllTasksComponent } from './Components/all/all-tasks/all-tasks.componen
 import { MyTaskComponent } from './Components/task/task.component';
 import { OrganizationComponent } from './Components/organization/organization.component';
 import { OrganizationFComponent } from './Components/forms/organization-f/organization-f.component';
+import { MainComponent } from './Components/UI/main/main.component';
 
 
 export const routeList: Routes = [
     { path: '', component: /*VolunteerFComponent*/ HomeComponent },
-    { path: 'main', component: /*VolunteerFComponent*/ HomeComponent },
+    { path: 'main', component: MainComponent },
     { path: 'addvf', component: /*VolunteerFComponent*/ AddVFComponent },
 
     {

@@ -43,6 +43,7 @@ import { RoutingModule } from './routing.module';
 import { MaterialModule } from './material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DatePipe } from '@angular/common';
+import { MainComponent } from './Components/UI/main/main.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -78,7 +79,8 @@ import { DatePipe } from '@angular/common';
     ToVolunteerComponent,
     CategoryFComponent,
     ConfirmDialogComponent,
-    HeaderComponent
+    HeaderComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,

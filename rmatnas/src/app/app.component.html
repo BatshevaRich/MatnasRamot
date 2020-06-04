@@ -1,10 +1,12 @@
-<div>
-  <app-header></app-header>
-  <br>
-  <div class="main" dir="rtl">
-    <router-outlet></router-outlet>
+<main flex layout="column">
+  <div>
+    <app-header></app-header>
+    <br>
+    <div class="main" dir="rtl">
+      <router-outlet></router-outlet>
+    </div>
+    <br>
+    <br>
+    <app-footer></app-footer>
   </div>
-  <br>
-  <br>
-  <app-footer style="display: table-row;" class="footer"></app-footer>
-</div>
+</main>
