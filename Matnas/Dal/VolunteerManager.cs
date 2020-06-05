@@ -9,8 +9,45 @@ namespace Dal
 {
     public static class VolunteerManager
     {
-        public static int AddVolunteer(Volunteer volunteer, Category[] category)
+
+        /// <summary>
+        /// Get all volunteers from db.
+        /// </summary>
+        /// <returns>List of volunteers</returns>
+        public static IEnumerable<Volunteer> GetVolunteers()
         {
+            using (dbRamotEntities db = new dbRamotEntities())
+            {
+                List<Volunteer> volunteers = new List<Volunteer>();
+                foreach (var v in db.Volunteers.ToList())
+                {
+                    volunteers.Add(Mapper.CastVolunteerToComon(v));
+                }
+                return volunteers;
+            }
+        }
+
+        /// <summary>
+        /// Get volunteer by id
+        /// </summary>
+        /// <param name="id">Id of volunteer searching for</param>
+        /// <returns>Volunteer</returns>
+        public static Volunteer GetVolunteer(int id)
+        {
+            using (dbRamotEntities db = new dbRamotEntities())
+            {
+                return Mapper.CastVolunteerToComon(db.Volunteers.Find(id));
+            }
+        }
+
+        /// <summary>
+        /// Add volunteer to db, and categories for that volunteer.
+        /// </summary>
+        /// <param name="volunteer"></param>
+        /// <param name="category"></param>
+        /// <returns>Id of added volunteer</returns>
+        public static int AddVolunteer(Volunteer volunteer, Category[] category)
+        {/////////////////////////////////////need to deal with category add
             int x = 0;
             Volunteers v = Mapper.CastVolunteer(volunteer);
             using (dbRamotEntities db = new dbRamotEntities())
@@ -28,8 +65,13 @@ namespace Dal
             //AddCategoryToVolunteer(x, category);
             return x;
         }
+        
+        /// <summary>
+        /// Remove volunteer from db by object, including volunteer actions of that volunteer.
+        /// </summary>
+        /// <param name="volunteer"></param>
         public static void RemoveVolunteer(Volunteer volunteer)
-        {
+        {////////////////////////////////////////need to remove from volunteerandfamily table
             Volunteers v = Mapper.CastVolunteer(volunteer);
             using (dbRamotEntities db = new dbRamotEntities())
             {
@@ -37,6 +79,39 @@ namespace Dal
                 db.SaveChanges();
             }
         }
+
+        /// <summary>
+        /// Remove volunteer from db by id, including volunteer actions of that volunteer.
+        /// </summary>
+        /// <param name="id"></param>
+        public static void RemoveVolunteer(int id)
+        {
+            using (dbRamotEntities db = new dbRamotEntities())
+            {/////////////need to remove categories first- foreign key problem
+
+                var query = from row in db.VolunteerAndFamily.AsEnumerable() where row.IdVolunteer == id select row;
+
+                db.VolunteerAndFamily.Remove(db.VolunteerAndFamily.Find(query.FirstOrDefault().Id));
+
+                //db.VolunteerAndFamily.Remove(db.VolunteerAndFamily.Find()
+                db.Volunteers.Remove(db.Volunteers.Find(id));
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+
+            }
+        }
+
+        /// <summary>
+        /// Update volunteer with new information, including categories.
+        /// </summary>
+        /// <param name="volunteer"></param>
+        /// <param name="categories"></param>
         public static void UpdateVolunteer(Volunteer volunteer, Category[] categories)
         {
             Volunteers v = Mapper.CastVolunteer(volunteer);
@@ -47,23 +122,11 @@ namespace Dal
             }
         }
 
-        public static void RemoveVolunteer(int id)
-        {
-            using (dbRamotEntities db = new dbRamotEntities())
-            {/////////////need to remove categories first- foreign key problem
-                db.Volunteers.Remove(db.Volunteers.Find(id));
-                try
-                {
-                    db.SaveChanges();
-                }
-                catch (Exception e)
-                {
-                    throw e;
-                }
-                
-            }
-        }
-
+        /// <summary>
+        /// Get categories of volunteer.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>List of categories</returns>
         public static IEnumerable<Category> GetCategoriesOfVolunteer(int id)
         {
             using (dbRamotEntities db = new dbRamotEntities())
@@ -78,19 +141,12 @@ namespace Dal
             }
         }
 
-        public static IEnumerable<Volunteer> GetVolunteers()
-        {
-            using (dbRamotEntities db = new dbRamotEntities())
-            {
-                List<Volunteer> volunteers = new List<Volunteer>();
-                foreach (var v in db.Volunteers.ToList())
-                {
-                    volunteers.Add(Mapper.CastVolunteerToComon(v));
-                }
-                return volunteers;
-            }
-        }
 
+        /// <summary>
+        /// Gets all volunteers that share the same category.
+        /// </summary>
+        /// <param name="idCategory">Id of category filtering by</param>
+        /// <returns>List of volunteers</returns>
         public static IEnumerable<Volunteer> GetVolunteersByCategory(int idCategory)
         {
             using (dbRamotEntities db = new dbRamotEntities())
@@ -105,15 +161,12 @@ namespace Dal
             }
         }
 
-        public static Volunteer GetVolunteer(int id)
-        {
-            using (dbRamotEntities db = new dbRamotEntities())
-            {
-                return Mapper.CastVolunteerToComon(db.Volunteers.Find(id));
-            }
-        }
-
-
+        /// <summary>
+        /// Add category to volunter
+        /// Helper func- does not work........
+        /// </summary>
+        /// <param name="id">Id of volunteer</param>
+        /// <param name="category">Category object</param>
         public static void AddCategoryToVolunteer(int id, Category[] category)
         {
 
@@ -130,6 +183,12 @@ namespace Dal
 
             }
         }
+
+        /// <summary>
+        /// Remove category from volunter
+        /// </summary>
+        /// <param name="id">Id of volunteer</param>
+        /// <param name="category">Category object</param>
         public static void RemoveCategoryFromVolunteer(int id, Category category)
         {
 
@@ -140,6 +199,12 @@ namespace Dal
                 db.SaveChanges();
             }
         }
+        
+        /// <summary>
+        /// Get families of volunteer
+        /// </summary>
+        /// <param name="id">Id of volunteer</param>
+        /// <returns>List of families</returns>
         public static IEnumerable<Family> GetFamilies(int id)
         {
             List<Family> families = new List<Family>();
@@ -154,6 +219,8 @@ namespace Dal
             }
             return families;
         }
+        
+        
         public static IEnumerable<Event> GetEvents(int id)
         {
             List<Event> events = new List<Event>();
