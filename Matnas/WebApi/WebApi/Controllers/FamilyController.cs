@@ -77,16 +77,19 @@ namespace WebApi.Controllers
         [HttpGet]
         public IEnumerable<Family> GetFamiliesByCategoryAndVolunteer(int id)
         {
-            int idVolunteer = 0;
-            var re = Request;
-            var headers = re.Headers;
-
-            if (headers.Contains("Authorization"))
-            {
-                idVolunteer = int.Parse(headers.GetValues("Authorization").First());
-            }
-
-            return Bll.FamilyManager.GetFamiliesByCategoryAndVolunteer(id, idVolunteer);
+            return Bll.FamilyManager.GetFamiliesByCategory(id);
         }
+
+        //public IEnumerable<Family> GetFamiliesByCategoryAndVolunteer(int id)
+        //{
+        //    //int idVolunteer = 0;
+        //    //var re = Request;
+        //    //var headers = re.Headers;
+        //    //if (headers.Contains("Authorization"))
+        //    //{
+        //    //    idVolunteer = int.Parse(headers.GetValues("Authorization").First());
+        //    //}
+        //    //return Bll.FamilyManager.GetFamiliesByCategoryAndVolunteer(id, idVolunteer);
+        //}
     }
 }

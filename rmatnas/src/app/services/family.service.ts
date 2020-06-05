@@ -53,4 +53,8 @@ export class FamilyService {
   getFamiliesByCategoryAndVolunteer(idCategory: number, idVolunteer): Observable<Family[]> {
     return this.http.get<Family[]>(this.path + '/familiesbycategory/' + idCategory, {headers: {Authorization: idVolunteer.toString()}});
   }
+
+  getFamiliesByCategory(idCategory: number): Observable<Family[]> {
+    return this.http.get<Family[]>(this.path + '/familiesbycategory/' + idCategory);
+  }
 }
