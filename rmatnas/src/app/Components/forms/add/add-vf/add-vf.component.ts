@@ -99,7 +99,7 @@ export class AddVFComponent implements OnInit {
     }
     if (tab === 3) {
       this.selectedVolunteer = null;
-      this.selectedCategory != null ? this.vs.getVolunteersByCategoryAndFamily(this.selectedFamily.Id, this.selectedCategory.Id)
+      this.selectedCategory != null ? this.vs.getVolunteersByCategory(this.selectedCategory.Id)
       .subscribe(res => {
         this.volunteers = res;
       }) : this.selectedCategory = null;
