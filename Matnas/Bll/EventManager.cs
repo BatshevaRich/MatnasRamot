@@ -40,12 +40,12 @@ namespace Bll
 
         public static void RemoveCategory(int id, Category category)
         {
-            Dal.EventManager.RemoveCategotyFromEvent(id, category);
+            Dal.EventManager.RemoveCategoryFromEvent(id, category);
         }
 
         public static void AddCategory(int id, Category category)
         {
-            Dal.EventManager.AddCategotyToEvent(id, category);
+            Dal.EventManager.AddCategoryToEvent(id, category);
         }
         public static List<Category> GetCategories(int id)
         {

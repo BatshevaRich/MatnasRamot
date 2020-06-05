@@ -50,12 +50,12 @@ namespace Bll
         }
         public static void RemoveCategory(int id, Category category)
         {
-            Dal.VolunteerManager.RemoveCategotyFromVolunteer(id, category);
+            Dal.VolunteerManager.RemoveCategoryFromVolunteer(id, category);
         }
 
         public static void AddCategory(int id, Category[] category)
         {
-            Dal.VolunteerManager.AddCategotyToVolunteer(id, category);
+            Dal.VolunteerManager.AddCategoryToVolunteer(id, category);
         }
         public static IEnumerable<Group> GetGroups(int id)
         {

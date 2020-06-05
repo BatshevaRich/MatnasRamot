@@ -68,7 +68,7 @@ namespace Dal
                 return organizations;
             }
         }
-        public static void AddCategotyToOrganization(int id, Category category)
+        public static void AddCategoryToOrganization(int id, Category category)
         {
 
             using (dbRamotEntities db = new dbRamotEntities())
@@ -78,7 +78,7 @@ namespace Dal
                 db.SaveChanges();
             }
         }
-        public static void RemoveCategotyFromOrganization(int id, Category category)
+        public static void RemoveCategoryFromOrganization(int id, Category category)
         {
 
             using (dbRamotEntities db = new dbRamotEntities())

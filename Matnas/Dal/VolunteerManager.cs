@@ -25,7 +25,7 @@ namespace Dal
                 x = db.Volunteers.Local[0].Id;
             }
 
-            //AddCategotyToVolunteer(x, category);
+            //AddCategoryToVolunteer(x, category);
             return x;
         }
         public static void RemoveVolunteer(Volunteer volunteer)
@@ -113,7 +113,8 @@ namespace Dal
             }
         }
 
-        public static void AddCategotyToVolunteer(int id, Category[] category)
+
+        public static void AddCategoryToVolunteer(int id, Category[] category)
         {
 
             using (dbRamotEntities db = new dbRamotEntities())
@@ -129,7 +130,7 @@ namespace Dal
 
             }
         }
-        public static void RemoveCategotyFromVolunteer(int id, Category category)
+        public static void RemoveCategoryFromVolunteer(int id, Category category)
         {
 
             using (dbRamotEntities db = new dbRamotEntities())

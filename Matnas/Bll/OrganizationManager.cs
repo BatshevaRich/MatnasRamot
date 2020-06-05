@@ -39,12 +39,12 @@ namespace Bll
 
         public static void RemoveCategory(int id, Category category)
         {
-            Dal.OrganizationManager.RemoveCategotyFromOrganization(id, category);
+            Dal.OrganizationManager.RemoveCategoryFromOrganization(id, category);
         }
 
         public static void AddCategory(int id, Category category)
         {
-            Dal.OrganizationManager.AddCategotyToOrganization(id, category);
+            Dal.OrganizationManager.AddCategoryToOrganization(id, category);
         }
         public static List<Category> GetCategories(int id)
         {

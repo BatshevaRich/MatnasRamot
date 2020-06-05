@@ -68,7 +68,7 @@ namespace Dal
                 return events;
             }
         }
-        public static void AddCategotyToEvent(int id, Category category)
+        public static void AddCategoryToEvent(int id, Category category)
         {
 
             using (dbRamotEntities db = new dbRamotEntities())
@@ -78,7 +78,7 @@ namespace Dal
                 db.SaveChanges();
             }
         }
-        public static void RemoveCategotyFromEvent(int id, Category category)
+        public static void RemoveCategoryFromEvent(int id, Category category)
         {
 
             using (dbRamotEntities db = new dbRamotEntities())

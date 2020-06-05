@@ -27,12 +27,12 @@ namespace Bll
         }
         public static void RemoveCategory(int id, Category category)
         {
-            Dal.FamilyManager.RemoveCategotyFromFamily(id, category);
+            Dal.FamilyManager.RemoveCategoryFromFamily(id, category);
         }
 
         public static void AddCategory(int id, Category category)
         {
-            Dal.FamilyManager.AddCategotyToFamily(id, category);
+            Dal.FamilyManager.AddCategoryToFamily(id, category);
         }
         public static List<Category> GetCategories(int id)
         {
