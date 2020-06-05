@@ -208,8 +208,27 @@ namespace Dal
             }
             return families;
         }
-        
-        
+
+        /// <summary>
+        /// Get all volunteers for specific category and family.
+        /// </summary>
+        /// <param name="idFamily">Id of family</param>
+        /// <param name="idCategory">Id of category</param>
+        /// <returns>List of volunteers</returns>
+        public static IEnumerable<Volunteer> GetVolunteersByCategoryAndFamily(int idFamily, int idCategory)
+        {
+            using (dbRamotEntities db = new dbRamotEntities())
+            {
+                var volunteersDb = db.Volunteers.Where(v => v.Categories.Any(c => c.Id == idCategory) && !v.VolunteerAndFamily.Any(vf => vf.IdFamily == idFamily));
+                List<Volunteer> volunteers = new List<Volunteer>();
+                foreach (var v in volunteersDb)
+                {
+                    volunteers.Add(Mapper.CastVolunteerToComon(v));
+                }
+                return volunteers;
+            }
+        }
+
         public static IEnumerable<Event> GetEvents(int id)
         {
             List<Event> events = new List<Event>();

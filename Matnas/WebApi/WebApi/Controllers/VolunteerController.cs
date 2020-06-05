@@ -125,6 +125,27 @@ namespace WebApi.Controllers
             return Bll.VolunteerManager.GetVolunteersByCategory(idCategory);
         }
 
+        /// <summary>
+        /// Get volunteers for specific category and family.
+        /// </summary>
+        /// <param name="id">Id of category</param>
+        /// <returns>List of volunteers</returns>
+        [Route("api/volunteer/volunteersbyfac/{id}")]
+        [HttpGet]
+        public IEnumerable<Volunteer> GetVolunteersByCategoryAndFamily(int id)
+        {
+            int idFamily = 0;
+            var re = Request;
+            var headers = re.Headers;
+
+            if (headers.Contains("Authorization"))
+            {
+                idFamily = int.Parse(headers.GetValues("Authorization").First());
+            }
+
+            return Bll.VolunteerManager.GetVolunteersByCategoryAndFamily(idFamily, id);
+        }
+
         [Route("api/volunteer/groups")]
         public IEnumerable<Group> GetGroups(int id)
         {

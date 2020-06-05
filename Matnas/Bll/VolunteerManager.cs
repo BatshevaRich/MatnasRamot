@@ -118,6 +118,17 @@ namespace Bll
         {
             return Dal.VolunteerManager.GetVolunteersByCategory(idCategory);
         }
+
+        /// <summary>
+        /// Get volunteers by specific category and family.
+        /// </summary>
+        /// <param name="idFamily">Id of family</param>
+        /// <param name="idCategory">Id of category</param>
+        /// <returns>List of volunteers</returns>
+        public static IEnumerable<Volunteer> GetVolunteersByCategoryAndFamily(int idFamily, int idCategory)
+        {
+            return Dal.VolunteerManager.GetVolunteersByCategoryAndFamily(idFamily, idCategory);
+        }
         public static IEnumerable<Group> GetGroups(int id)
         {
           return  Dal.VolunteerManager.GetGroups(id);
