@@ -7,6 +7,9 @@ using Common;
 
 namespace Dal
 {
+    /// <summary>
+    /// Manager of volunteer
+    /// </summary>
     public static class VolunteerManager
     {
 
@@ -43,8 +46,8 @@ namespace Dal
         /// <summary>
         /// Add volunteer to db, and categories for that volunteer.
         /// </summary>
-        /// <param name="volunteer"></param>
-        /// <param name="category"></param>
+        /// <param name="volunteer">Volunteer object</param>
+        /// <param name="category">Category</param>
         /// <returns>Id of added volunteer</returns>
         public static int AddVolunteer(Volunteer volunteer, Category[] category)
         {/////////////////////////////////////need to deal with category add
@@ -65,25 +68,11 @@ namespace Dal
             //AddCategoryToVolunteer(x, category);
             return x;
         }
-        
-        /// <summary>
-        /// Remove volunteer from db by object, including volunteer actions of that volunteer.
-        /// </summary>
-        /// <param name="volunteer"></param>
-        public static void RemoveVolunteer(Volunteer volunteer)
-        {////////////////////////////////////////need to remove from volunteerandfamily table
-            Volunteers v = Mapper.CastVolunteer(volunteer);
-            using (dbRamotEntities db = new dbRamotEntities())
-            {
-                db.Volunteers.Remove(v);
-                db.SaveChanges();
-            }
-        }
 
         /// <summary>
         /// Remove volunteer from db by id, including volunteer actions of that volunteer.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Id of volunteer</param>
         public static void RemoveVolunteer(int id)
         {
             using (dbRamotEntities db = new dbRamotEntities())
@@ -110,8 +99,8 @@ namespace Dal
         /// <summary>
         /// Update volunteer with new information, including categories.
         /// </summary>
-        /// <param name="volunteer"></param>
-        /// <param name="categories"></param>
+        /// <param name="volunteer">Volunteer object</param>
+        /// <param name="categories">List of categories</param>
         public static void UpdateVolunteer(Volunteer volunteer, Category[] categories)
         {
             Volunteers v = Mapper.CastVolunteer(volunteer);
@@ -125,7 +114,7 @@ namespace Dal
         /// <summary>
         /// Get categories of volunteer.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Id of volunteer</param>
         /// <returns>List of categories</returns>
         public static IEnumerable<Category> GetCategoriesOfVolunteer(int id)
         {
