@@ -15,7 +15,7 @@ Image credits: unsplash.com
     height: 100vh;
 }
 .fade-carousel .carousel-indicators > li {
-    margin: 0 2px;
+    margin: 0;
     background-color: #f39c12;
     border-color: #f39c12;
     opacity: .7;
@@ -75,7 +75,6 @@ Image credits: unsplash.com
     position: absolute;
     width: 100%;
     height: 100%;
-    z-index: 2;
     background-color: #080d15;
     opacity: .7;
 }
