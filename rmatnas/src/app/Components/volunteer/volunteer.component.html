@@ -2,10 +2,12 @@
   <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3%" fxLayoutAlign="center">
     <div fxFlex="20%">
       <mat-card>
+        <mat-toolbar>
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"><i class="fa fa-user" style="size: 7x;"></i></div>
           <mat-card-title>{{ myvolunteer.Name }}</mat-card-title>
         </mat-card-header>
+      </mat-toolbar>
         <mat-card-content>
           <p>טלפון: {{ myvolunteer.Telephone }}</p>
           <p>פלאפון: {{ myvolunteer.Pelephone | phone }}</p>
