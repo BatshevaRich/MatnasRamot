@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { VolunteerAndEvent } from '../Classes/VolunteerAndEvent';
-import { baseURL } from 'src/environments/environment';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ import { baseURL } from 'src/environments/environment';
 export class VolunteerAndEventService {
 
   constructor(private http: HttpClient) { }
-  path = baseURL + 'VolunteerAndEvent/';
+  path = environment.baseURL + 'VolunteerAndEvent/';
   getVolunteerings(): Observable<VolunteerAndEvent[]> {
     return this.http.get<VolunteerAndEvent[]>(this.path);
   }

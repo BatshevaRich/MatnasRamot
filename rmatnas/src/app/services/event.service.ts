@@ -3,12 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, from } from 'rxjs';
 import {Eventt} from '../Classes/Eventt' ;
 import { Category } from '../Classes/Category';
-import { baseURL} from '../../environments/environment';
+import { environment} from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class EventService {
-  path = baseURL + 'event';
+  path = environment.baseURL + 'event';
   constructor(private http: HttpClient) { }
 
   getEvents(): Observable<Eventt[]> {
@@ -30,6 +30,6 @@ export class EventService {
    });
   }
   getCategoriesOfEvent(id: number): Observable<Category[]> {
-    return this.http.get<Category[]>(baseURL + 'categoriesOfEvent?id=' + id);
+    return this.http.get<Category[]>(environment.baseURL + 'categoriesOfEvent?id=' + id);
   }
 }

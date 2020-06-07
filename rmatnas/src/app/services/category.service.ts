@@ -3,12 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Category } from '../Classes/Category';
 import { Family } from '../Classes/Family';
-import { baseURL } from '../../environments/environment';
+import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
-  path = baseURL + 'category';
+  path = environment.baseURL + 'category';
   constructor(private http: HttpClient) { }
 
   getCategories(): Observable<Category[]> {
@@ -28,7 +28,7 @@ export class CategoryService {
     });
   }
   AddCategoriesForFamily(f: Family, categories: Category[]) {
-    this.http.post(baseURL + 'CategoriesToFamily', categories).subscribe((data => {
+    this.http.post(environment.baseURL + 'CategoriesToFamily', categories).subscribe((data => {
     }));
   }
 }

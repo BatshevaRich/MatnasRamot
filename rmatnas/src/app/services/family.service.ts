@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Family } from '../Classes/Family';
-import { baseURL } from '../../environments/environment';
+import { environment } from '../../environments/environment';
 import { Category } from '../Classes/Category';
 
 @Injectable({
@@ -11,7 +11,7 @@ import { Category } from '../Classes/Category';
 export class FamilyService {
   // tslint:disable-next-line:member-ordering
 
-  path = baseURL + 'family';
+  path = environment.baseURL + 'family';
   constructor(private http: HttpClient) { }
 
   getFamilies(): Observable<Family[]> {
@@ -19,7 +19,7 @@ export class FamilyService {
   }
 
   getFamiliesByVolunteer(id: number): Observable<Family[]> {
-    return this.http.get<Family[]>(baseURL + 'VolunteerAndFamily/' + id);
+    return this.http.get<Family[]>(environment.baseURL + 'VolunteerAndFamily/' + id);
   }
 
   getFamily(id: number): Observable<Family> {

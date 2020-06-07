@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Volunteer } from '../Classes/Volunteer';
-import { baseURL } from '../../environments/environment';
+import { environment } from '../../environments/environment';
 import { Category } from '../Classes/Category';
 @Injectable({
   providedIn: 'root'
 })
 export class VolunteerService {
-  path = baseURL + 'volunteer';
+  path = environment.baseURL + 'volunteer';
   constructor(private http: HttpClient) { }
   getVolunteers(): Observable<Volunteer[]> {
     return this.http.get<Volunteer[]>(this.path);
@@ -43,13 +43,13 @@ export class VolunteerService {
     return this.http.get<Volunteer[]>(this.path + '/volunteersbyfac/' + id, {headers: {Authorization: idFamily.toString()}});
   }
   getCategoriesOfVolunteer(id: number) {
-    return this.http.get<Category[]>(baseURL + 'CategoryVolunteer/' + id);
+    return this.http.get<Category[]>(environment.baseURL + 'CategoryVolunteer/' + id);
   }
   addCategoriesToVolunteer(id: number, categories: Category[]) {
-    return this.http.get(baseURL + 'CategoryVolunteer/' + id + '&category=' + categories);
+    return this.http.get(environment.baseURL + 'CategoryVolunteer/' + id + '&category=' + categories);
   }
   getVolunteersForFamily(fId: number): Observable<Volunteer[]> {
-    return this.http.get<Volunteer[]>(baseURL + 'VolunteerAndFamily/Getvf/' + fId);
+    return this.http.get<Volunteer[]>(environment.baseURL + 'VolunteerAndFamily/Getvf/' + fId);
   }
   getVolunteersByCategory(idCategory: number): Observable<Volunteer[]> {
     return this.http.get<Volunteer[]>(this.path + '/volunteersbycategory/' + idCategory);

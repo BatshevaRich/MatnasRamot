@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { VolunteerAndFamily } from '../Classes/VolunteerAndFamily';
-import { baseURL } from '../../environments/environment';
+import { environment } from '../../environments/environment';
 import { Volunteer } from '../Classes/Volunteer';
 import { Family } from '../Classes/Family';
 import { Category } from '../Classes/Category';
@@ -12,7 +12,7 @@ import { Category } from '../Classes/Category';
 export class VolunteerAndFamilyService {
 
   constructor(private http: HttpClient) { }
-  path = baseURL + 'VolunteerAndFamily/';
+  path = environment.baseURL + 'VolunteerAndFamily/';
   public getVolunteerings(): Observable<VolunteerAndFamily[]> {
     return this.http.get<VolunteerAndFamily[]>(this.path);
   }
