@@ -21,9 +21,10 @@ import { MainComponent } from './Components/UI/main/main.component';
 
 
 export const routeList: Routes = [
-    { path: '', component: /*VolunteerFComponent*/ HomeComponent },
+  { path: '', component: HomeComponent },
+    { path: 'home', component: HomeComponent },
     { path: 'main', component: MainComponent },
-    { path: 'addvf', component: /*VolunteerFComponent*/ AddVFComponent },
+    { path: 'addvf', component: AddVFComponent },
 
     {
       path: 'list',
