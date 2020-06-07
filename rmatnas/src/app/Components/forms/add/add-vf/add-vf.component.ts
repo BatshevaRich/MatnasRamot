@@ -64,7 +64,7 @@ export class AddVFComponent implements OnInit {
   volunteerChanged($event, tab) {
     if (tab === 1) {
       this.selectedFamily = null;
-      this.selectedVolunteer != null ? this.fs.getFamiliesByCategory(this.selectedCategory.Id, this.selectedVolunteer.Id)
+      this.selectedVolunteer != null ? this.fs.getFamiliesByCategory(this.selectedCategory.Id)
         .subscribe(res => {
           this.families = res;
         }) : this.selectedVolunteer = null;

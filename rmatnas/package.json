@@ -1,13 +1,18 @@
 {
   "name": "rmatnas",
   "version": "0.0.0",
+  "main": "main.js",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "web": "ng serve",
+    "electronb": "ng build --base-href ./ && tsc --p electron && electron .",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "setup-win": "electron-packager . rmatnas --overwrite --platform=win32 --out=release-builds --version-string.CompanyName=BRPB --version-string.FileDescription=Test --version-string.ProductName=\"rmatnas\"",
+    "e2e": "ng e2e",
+    "electron": "electron .",
+    "electron-build": "ng build --prod && npm run electron ."
   },
   "private": true,
   "dependencies": {
@@ -56,8 +61,10 @@
     "@fortawesome/fontawesome-free": "^5.13.0",
     "@types/jasmine": "^3.5.10",
     "@types/jasminewd2": "^2.0.8",
-    "@types/node": "~8.9.4",
+    "@types/node": "^8.10.61",
     "codelyzer": "^5.2.2",
+    "electron": "^9.0.2",
+    "electron-packager": "^14.2.1",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~4.1.0",
