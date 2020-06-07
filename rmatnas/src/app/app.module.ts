@@ -44,6 +44,7 @@ import { MaterialModule } from './material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DatePipe } from '@angular/common';
 import { MainComponent } from './Components/UI/main/main.component';
+import { ChartsModule } from 'ng2-charts';
 @NgModule({
   declarations: [
     AppComponent,
@@ -90,7 +91,8 @@ import { MainComponent } from './Components/UI/main/main.component';
     HttpClientModule,
     FormsModule,
     MaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    ChartsModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
