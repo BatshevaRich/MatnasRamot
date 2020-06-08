@@ -1,12 +1,11 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { Volunteer } from '../../Classes/Volunteer';
+import { Volunteer } from '../../../Classes/Volunteer';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { DataServiceService } from '../../Services/data-service.service';
 import { VolunteerService } from 'src/app/services/volunteer.service';
 import { Category } from 'src/app/Classes/Category';
 import { MatDialog } from '@angular/material/dialog';
-import { VolunteerFComponent } from '../forms/volunteer-f/volunteer-f.component';
+import { VolunteerFComponent } from '../../forms/volunteer-f/volunteer-f.component';
 @Component({
   selector: 'app-volunteer',
   templateUrl: './volunteer.component.html',

@@ -7,15 +7,15 @@ import { AllFamiliesComponent } from './Components/all/all-families/all-families
 import { AllOrganizationsComponent } from './Components/all/all-organizations/all-organizations.component';
 import { AllEventsComponent } from './Components/all/all-events/all-events.component';
 import { AllVolunteersComponent } from './Components/all/all-volunteers/all-volunteers.component';
-import { VolunteerComponent } from './Components/volunteer/volunteer.component';
+import { VolunteerComponent } from './Components/single/volunteer/volunteer.component';
 import { VolunteerFComponent } from './Components/forms/volunteer-f/volunteer-f.component';
-import { FamilyComponent } from './Components/family/family.component';
+import { FamilyComponent } from './Components/single/family/family.component';
 import { FamilyFComponent } from './Components/forms/family-f/family-f.component';
-import { EventComponent } from './Components/event/event.component';
+import { EventComponent } from './Components/single/event/event.component';
 import { EventFComponent } from './Components/forms/event-f/event-f.component';
 import { AllTasksComponent } from './Components/all/all-tasks/all-tasks.component';
-import { MyTaskComponent } from './Components/task/task.component';
-import { OrganizationComponent } from './Components/organization/organization.component';
+import { MyTaskComponent } from './Components/single/task/task.component';
+import { OrganizationComponent } from './Components/single/organization/organization.component';
 import { OrganizationFComponent } from './Components/forms/organization-f/organization-f.component';
 import { MainComponent } from './Components/UI/main/main.component';
 

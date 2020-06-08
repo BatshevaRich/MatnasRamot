@@ -5,7 +5,7 @@ import { VolunteerService } from 'src/app/services/volunteer.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { Volunteer } from 'src/app/Classes/Volunteer';
-import { VolunteerFComponent } from '../forms/volunteer-f/volunteer-f.component';
+import { VolunteerFComponent } from '../../forms/volunteer-f/volunteer-f.component';
 import { VolunteerAndFamilyService } from 'src/app/services/volunteer-and-family.service';
 import { Category } from 'src/app/Classes/Category';
 import { Family } from 'src/app/Classes/Family';

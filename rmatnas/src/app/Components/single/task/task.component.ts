@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { MyTask } from '../../Classes/MyTask';
-import { User2} from '../../user2';
-import { DataServiceService } from '../../Services/data-service.service';
+import { MyTask } from '../../../Classes/MyTask';
+import { User2} from '../../../user2';
+import { DataServiceService } from '../../../Services/data-service.service';
 import { HttpClient, HttpParams } from '@angular/common/http';
 @Component({
   selector: 'app-my-task',

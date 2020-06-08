@@ -16,13 +16,13 @@
           <p>יום הולדת: {{ myvolunteer.Age | date:"MMMM dd yyyy" }}</p>
           <p>פעילה:
             <span *ngIf="myvolunteer.IsActive">
-              <i class="fa fa-check"></i>
+              <mat-icon>check_circle_outline</mat-icon>
             </span>
             <span *ngIf="!myvolunteer.IsActive">
-              <i class="fa fa-times"></i>
+              <mat-icon>cancel</mat-icon>
             </span>
           </p>
-          <header>קטגוריות</header>
+          <header *ngIf="categories.length > 0">קטגוריות</header>
           <div *ngFor="let c of categories">
             <li>
               {{c.Name}}</li>

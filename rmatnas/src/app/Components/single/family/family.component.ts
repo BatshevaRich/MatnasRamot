@@ -1,12 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Family } from '../../Classes/Family';
-import { DataServiceService } from '../../Services/data-service.service';
+import { Family } from '../../../Classes/Family';
+import { DataServiceService } from '../../../Services/data-service.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { OnDestroy } from '@angular/core';
 import { FamilyService } from 'src/app/services/family.service';
 import { Category } from 'src/app/Classes/Category';
-import { FamilyFComponent } from '../forms/family-f/family-f.component';
+import { FamilyFComponent } from '../../forms/family-f/family-f.component';
 import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-family',
