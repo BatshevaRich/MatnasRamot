@@ -1,52 +1,68 @@
-<mat-toolbar color="primary" dir="rtl">
+<mat-toolbar class="mat-elevation-z5" color="primary" dir="rtl">
     <span fxShow="true" fxHide.lt-md="true">
-        <span>
-            <button mat-button class="nav-letters" [routerLink]='"./"'>מתנס מעלה רמות</button>
-        </span>
-        <span>
-            <button mat-button class="nav-letters" [routerLink]='"main"'>ראשי</button>
-        </span>
-        <span>
-            <button mat-button [matMenuTriggerFor]="menuT" class="nav-letters">
-                <mat-icon> directions_run</mat-icon>התנדבויות
-            </button>
-            <mat-menu #menuT="matMenu">
-                <button mat-menu-item class="nav-link" [routerLink]="'/list/vaf'" routerLinkActive="activeLink"><i
-                        class="fa fa-list"></i> כל ההתנדבויות</button>
-                <button mat-menu-item (click)="ToVolunteeropenDialog()"><i class="fa fa-user-plus"> הוספה</i></button>
-            </mat-menu>
-        </span>
-        <span>
-            <button mat-button [matMenuTriggerFor]="menu" class="nav-letters">
-                <mat-icon>person</mat-icon>מתנדבות
-            </button>
-            <mat-menu #menu="matMenu">
-                <button mat-menu-item class="nav-link" [routerLink]="'/list/volunteers'"
-                    routerLinkActive="activeLink"><i class="fa fa-list"></i> כל המתנדבות</button>
-                <button mat-menu-item (click)="VolunteeropenDialog()"><i class="fa fa-user-plus"> הוספה</i></button>
-            </mat-menu>
-        </span>
-        <span><button mat-button [matMenuTriggerFor]="menuF" class="nav-letters">
-                <mat-icon>child_friendly</mat-icon>משפחות
-            </button>
-            <mat-menu #menuF="matMenu">
-                <button mat-menu-item class="nav-link" [routerLink]="'/list/families'" routerLinkActive="activeLink"><i
-                        class="fa fa-list"></i> כל המשפחות</button>
-                <button mat-menu-item (click)="FamilyopenDialog()"><i class="fa fa-user-plus"> הוספה</i></button>
-            </mat-menu>
-        </span>
-        <span><button mat-button class="nav-letters">
-                <a class="nav-link" routerLink="/list/organizations" routerLinkActive="activeLink">
-                    ארגונים</a>
-            </button></span>
-        <span><button mat-button class="nav-letters">
-                <a class="nav-link" routerLink="/list/events" routerLinkActive="activeLink">
-                    ארועים</a>
-            </button></span>
-        <span><button mat-button class="nav-letters">
-                <a class="nav-link" routerLink="/list/tasks" routerLinkActive="activeLink">
-                    מטלות</a>
-            </button></span>
+        <mat-button-toggle-group>
+            <mat-button-toggle>
+                <span>
+                    <button mat-button class="nav-letters" [routerLink]='"./"'>מתנס מעלה רמות</button>
+                </span>
+            </mat-button-toggle>
+            <mat-button-toggle>
+                <span>
+                    <button mat-button class="nav-letters" [routerLink]='"main"'>ראשי</button>
+                </span>
+            </mat-button-toggle>
+            <mat-button-toggle>
+                <span>
+                    <button mat-button [matMenuTriggerFor]="menuT" class="nav-letters">
+                        <mat-icon> directions_run</mat-icon>התנדבויות
+                    </button>
+                    <mat-menu #menuT="matMenu">
+                        <button mat-menu-item class="nav-link" [routerLink]="'/list/vaf'"
+                            routerLinkActive="activeLink"><i class="fa fa-list"></i> כל ההתנדבויות</button>
+                        <button mat-menu-item (click)="ToVolunteeropenDialog()"><i class="fa fa-user-plus">
+                                הוספה</i></button>
+                    </mat-menu>
+                </span>
+            </mat-button-toggle>
+            <mat-button-toggle>
+                <span>
+                    <button mat-button [matMenuTriggerFor]="menu" class="nav-letters">
+                        <mat-icon>person</mat-icon>מתנדבות
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item class="nav-link" [routerLink]="'/list/volunteers'"
+                            routerLinkActive="activeLink"><i class="fa fa-list"></i> כל המתנדבות</button>
+                        <button mat-menu-item (click)="VolunteeropenDialog()"><i class="fa fa-user-plus">
+                                הוספה</i></button>
+                    </mat-menu>
+                </span>
+            </mat-button-toggle>
+            <mat-button-toggle>
+                <span>
+                    <button mat-button [matMenuTriggerFor]="menuF" class="nav-letters">
+                        <mat-icon>child_friendly</mat-icon>משפחות
+                    </button>
+                    <mat-menu #menuF="matMenu">
+                        <button mat-menu-item class="nav-link" [routerLink]="'/list/families'"
+                            routerLinkActive="activeLink"><i class="fa fa-list"></i> כל המשפחות</button>
+                        <button mat-menu-item (click)="FamilyopenDialog()"><i class="fa fa-user-plus">
+                                הוספה</i></button>
+                    </mat-menu>
+                </span>
+            </mat-button-toggle>
+            <mat-button-toggle><span><button mat-button class="nav-letters">
+                        <a class="nav-link" routerLink="/list/organizations" routerLinkActive="activeLink">
+                            ארגונים</a>
+                    </button></span></mat-button-toggle>
+            <mat-button-toggle><span><button mat-button class="nav-letters">
+                        <a class="nav-link" routerLink="/list/events" routerLinkActive="activeLink">
+                            ארועים</a>
+                    </button></span></mat-button-toggle>
+            <mat-button-toggle><span><button mat-button class="nav-letters">
+                        <a class="nav-link" routerLink="/list/tasks" routerLinkActive="activeLink">
+                            מטלות</a>
+                    </button></span></mat-button-toggle>
+        </mat-button-toggle-group>
     </span>
     <span fxShow="true" fxHide.gt-sm="true">
 
@@ -61,7 +77,7 @@
 </mat-toolbar>
 
 <mat-sidenav-container dir="rtl" fxFlexFill>
-    <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over" opened="false" fxHide.gt-sm="true">
+    <mat-sidenav style="background-color: darkslategray;" #sidenav fxLayout="column" mode="over" opened="false" fxHide.gt-sm="true">
         <span fxLayout="column">
             <span>
                 <button mat-button class="nav-letters" [routerLink]='"./"'>מתנס מעלה רמות</button>
