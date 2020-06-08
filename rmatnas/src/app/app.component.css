@@ -11,9 +11,3 @@
 router-outlet {
   position: absolute;
 }
-html, body {
-  /* make sure the body does not have a margin */
-  margin: 0;
-  /* this forces the body tag to fill the height of the window */
-  height: 100%;
-}

@@ -46,18 +46,19 @@ tr.example-element-row:not(.example-expanded-row):active {
   opacity: 0.5;
 }
 
-.mat-header-cell {
+mat-header-cell {
   text-align: center !important;
   text-align: center !important;
   flex-direction: column;
-  flex: 0 0 75px;
+  flex: 0 0 5%;
   justify-content: center;
   font-weight: bolder;
   font-size: large;
+  width: 5% !important;
   display: table-cell;
 }
 
-.mat-cell {
+mat-cell {
   text-align: center;
   justify-content: center;
   word-wrap: break-word !important;
