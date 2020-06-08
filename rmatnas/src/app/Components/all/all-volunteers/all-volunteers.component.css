@@ -46,7 +46,7 @@ tr.example-element-row:not(.example-expanded-row):active {
   opacity: 0.5;
 }
 
-mat-header-cell {
+.mat-header-cell {
   text-align: center !important;
   text-align: center !important;
   flex-direction: column;
@@ -57,8 +57,10 @@ mat-header-cell {
   width: 5% !important;
   display: table-cell;
 }
-
-mat-cell {
+.example-spacer {
+  flex: 1 1 auto;
+}
+.mat-cell {
   text-align: center;
   justify-content: center;
   word-wrap: break-word !important;
@@ -72,4 +74,8 @@ mat-cell {
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
   hyphens: auto;
+}
+.example-header-image {
+  background-image: url('../../../../assets/img/icons8-microsoft-excel-30.png');
+  /* background-size: cover; */
 }

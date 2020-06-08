@@ -7,9 +7,9 @@
           <mat-card-title>משפחת {{ family.LastName }}</mat-card-title>
         </mat-card-header>
         <mat-card-content class="card-body">
-          <p>שם פרטי אב: {{ family.FirstNameFather }}</p>
-          <p>שם פרטי אם: {{ family.FirstNameMother }}</p>
-          <p>שם משפחה: {{ family.LastName }}</p>
+          <span>אב: {{ family.FirstNameFather }}</span>&nbsp;
+          <span>אם: {{ family.FirstNameMother }}</span>
+          <p></p>
           <p>טלפון: {{ family.Telephone }}</p>
           <p>פלאפון אב: {{ family.PelephoneFather | phone }}</p>
           <p>פלאפון אם: {{ family.PelephoneMother | phone }}</p>
@@ -18,7 +18,7 @@
           <p>מספר ילדים: {{ family.NumChildren }}</p>
           <p>מפנה: {{ family.Reference }}</p>
           <p>סיבת ההפניה: {{ family.Reason }}</p>
-          <header>קטגוריות</header>
+          <header *ngIf="categories.length > 0">קטגוריות</header>
           <div *ngFor="let c of categories">
             <li>
               {{c.Name}}</li>

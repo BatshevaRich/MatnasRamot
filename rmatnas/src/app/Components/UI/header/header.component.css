@@ -1,5 +1,6 @@
 .nav-letters {
     font-size: x-large;
+    color: #fff;
 }
 
 .top {
@@ -10,6 +11,7 @@
 
 .mat-toolbar {
     height: 7vh;
+    background-color: darkslategray;
 }
 
 div {

@@ -3,7 +3,8 @@
     bottom: 0px;
     justify-content: center;
     align-items: center;
-    background-color: black;
+    background-color: darkslategray;
     width: 100%;
     color: #fff;
+    height: 50px;
 }

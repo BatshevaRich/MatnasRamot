@@ -38,6 +38,9 @@ export class FamilyComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.fs.getFamily(this.vId).subscribe(f => {
       this.family = f;
+      this.fs.getCategoriesOfFamily(this.vId).subscribe(c => {
+        this.categories = c;
+      })
       // this.fs.getCategoriesOfFamily(this.fId).subscribe(c => {
       //   this.categories = c;
       // });
