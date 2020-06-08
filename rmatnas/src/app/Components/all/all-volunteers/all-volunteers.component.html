@@ -13,6 +13,7 @@
       </mat-toolbar-row>
     </mat-card-header>
     <mat-card-content>
+      <span [ngClass]="(dataSource.filteredData.length > 0) && loaded ? 'visible': 'hidden'">
       <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows class="mat-elevation-z4">
         <ng-container matColumnDef="Name">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> שם </th>
@@ -75,11 +76,15 @@
       </table>
       <mat-paginator class="marginless-paginator-range-label" #paginator [pageSizeOptions]="[5, 10, 20]"
         showFirstLastButtons></mat-paginator>
-      <div *ngIf="!resultsLength">
-        <div class="text-center">
-          <i class="fa fa-spinner fa-spin" style="font-size:60px"></i> <br />
-        </div>
+      </span>
+      <div [ngClass]="dataSource.filteredData.length > 0 && loaded ? 'hidden': 'visible'">
+        <mat-error>לא נמצאו תוצאות</mat-error>
       </div>
+    <div [ngClass]="dataSource.filteredData.length == 0 && !loaded ? 'visible': 'hidden'">
+      <div class="text-center">
+        <i class="fa fa-spinner fa-spin" style="font-size:60px"></i> <br />
+      </div>
+    </div>
       <router-outlet></router-outlet>
     </mat-card-content>
   </mat-card>

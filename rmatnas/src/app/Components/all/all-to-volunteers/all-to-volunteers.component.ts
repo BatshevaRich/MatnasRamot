@@ -39,7 +39,7 @@ export class AllToVolunteersComponent implements OnInit, AfterViewInit {
   volunteerings: VolunteerAndFamily[] = [];
   families: Family[] = [];
   result = '';
-
+  loaded = false;
   constructor(public fs: FamilyService,
               public vfs: VolunteerAndFamilyService,
               public dialog: MatDialog) {
@@ -49,6 +49,7 @@ export class AllToVolunteersComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.vfs.getVolunteerings().subscribe(res => {
+      this.loaded = true;
       this.volunteerings = res;
       this.resultsLength = this.volunteerings.length;
       this.volunteerings.forEach(element => {

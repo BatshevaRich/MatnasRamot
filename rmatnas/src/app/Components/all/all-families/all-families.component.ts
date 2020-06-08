@@ -48,6 +48,7 @@ export class AllFamiliesComponent implements OnInit, AfterViewInit {
   @Input() vId: number;
   inp = false;
   result = '';
+  loaded = false;
 
   constructor(public fs: FamilyService,
               private changeDetectorRefs: ChangeDetectorRef,
@@ -60,6 +61,7 @@ export class AllFamiliesComponent implements OnInit, AfterViewInit {
       this.displayedColumns = ['LastName', 'Address', 'Telephone', 'NumChildren', 'Status', 'Reference'];
       this.inp = true;
       this.fs.getFamiliesByVolunteer(this.vId).subscribe((data: Family[]) => {
+        this.loaded = true;
         /// TODO: check if empty results, if empty- do not display table
         data = this.trimResultsFromDB(data);
         this.families = data;
@@ -68,6 +70,7 @@ export class AllFamiliesComponent implements OnInit, AfterViewInit {
       });
     } else {
       this.fs.getFamilies().subscribe((data: Family[]) => {
+        this.loaded = true;
         data = this.trimResultsFromDB(data);
         this.families = data;
         this.dataSource.data = data;

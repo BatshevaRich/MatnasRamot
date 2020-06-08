@@ -37,13 +37,13 @@ export interface Details {
 export class AllVolunteersComponent implements OnInit, AfterViewInit {
 
   constructor(public vs: VolunteerService,
-              private changeDetectorRefs: ChangeDetectorRef,
-              public dialog: MatDialog,
-              private datePipe: DatePipe) {
+    private changeDetectorRefs: ChangeDetectorRef,
+    public dialog: MatDialog,
+    private datePipe: DatePipe) {
     // this.dataSource.filterPredicate =
     //   (data: Details, filter: string) => data.Name.indexOf(filter) !== -1;
   }
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   displayedColumns = ['Name', 'Address', 'Pelephone', 'Email', 'Age', 'IsActive', 'columndelete'];
@@ -55,13 +55,14 @@ export class AllVolunteersComponent implements OnInit, AfterViewInit {
   @Input() vId: number;
   inp: boolean;
   result = '';
+  loaded = false;
 
   ngOnInit(): void {
     if (this.vId) {
       this.displayedColumns = ['Name', 'Address', 'Pelephone', 'Email', 'Age', 'IsActive'];
       this.inp = true;
       this.vs.getVolunteersForFamily(this.vId).subscribe((data: Volunteer[]) => {
-        /// TODO: check if empty results, if empty- do not display table
+        this.loaded = true;
         data = this.trimResultsFromDB(data);
         this.volunteers = data;
         this.dataSource.data = data;
@@ -69,6 +70,7 @@ export class AllVolunteersComponent implements OnInit, AfterViewInit {
       });
     } else {
       this.vs.getVolunteers().subscribe((volunteers: Volunteer[]) => {
+        this.loaded = true;
         volunteers = this.trimResultsFromDB(volunteers);
         this.volunteers = volunteers;
         this.dataSource.data = volunteers;

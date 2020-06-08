@@ -79,3 +79,11 @@ tr.example-element-row:not(.example-expanded-row):active {
   background-image: url('../../../../assets/img/icons8-microsoft-excel-30.png');
   /* background-size: cover; */
 }
+
+.hidden {
+  visibility: hidden;
+}
+
+.visible {
+  visibility: visible;
+}
