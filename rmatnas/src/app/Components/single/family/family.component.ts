@@ -30,6 +30,7 @@ export class FamilyComponent implements OnInit, OnDestroy {
   categories: Category[] = [];
   mySubscription2: Subscription;
   @Input() vId: number;
+  @Input() toV: boolean;
   chooseTab: string;
   constructor(public fs: FamilyService,
               public ARS: ActivatedRoute,

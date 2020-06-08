@@ -34,6 +34,7 @@ export class ToVolunteerComponent implements OnInit {
   );
   id: number;
   @Input() vId: number;
+  @Input() toV: boolean;
   mySubscription: Subscription;
   constructor(public vs: VolunteerAndFamilyService, public ARS: ActivatedRoute, public dialog: MatDialog) { }
 

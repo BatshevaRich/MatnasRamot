@@ -84,3 +84,15 @@ tr.example-element-row:not(.example-expanded-row):active {
 .visible {
   visibility: visible;
 }
+
+#block_container
+{
+  /* display: flex; */
+  justify-content: center;
+}
+#bloc1, #bloc2, #bloc3
+{
+  display: inline-block;
+  vertical-align: middle;
+  padding: 5px;
+}

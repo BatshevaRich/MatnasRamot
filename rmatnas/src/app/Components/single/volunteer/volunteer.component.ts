@@ -17,6 +17,7 @@ export class VolunteerComponent implements OnInit, OnDestroy {
   categories: Category[] = [];
   id: number;
   @Input() vId: number;
+  @Input() toV: boolean;
   mySubscription: Subscription;
   constructor(public vs: VolunteerService, public ARS: ActivatedRoute, public dialog: MatDialog) {
     this.myvolunteer = new Volunteer('..', '..', '..', '..', '..', '1999', false);

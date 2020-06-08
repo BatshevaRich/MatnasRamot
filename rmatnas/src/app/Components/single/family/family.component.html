@@ -1,12 +1,14 @@
-<div dir="rtl" class="text-right" style="padding-top: 3%">
+<div dir="rtl" class="text-right" style="padding-top: 1%">
   <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3%" fxLayoutAlign="center">
-    <div fxFlex="25%">
-      <mat-card class="example-card">
+    <!-- <div fxFlex="20%"> -->
+      <mat-card>
+        <mat-toolbar>
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"><i class="fa fa-user" style="size: 7x;"></i></div>
-          <mat-card-title>משפחת {{ family.LastName }}</mat-card-title>
+          <mat-card-title>{{ family.LastName }}</mat-card-title>
         </mat-card-header>
-        <mat-card-content class="card-body">
+      </mat-toolbar>
+        <mat-card-content>
           <span>אב: {{ family.FirstNameFather }}</span>&nbsp;
           <span>אם: {{ family.FirstNameMother }}</span>
           <p></p>
@@ -30,8 +32,8 @@
 
         </mat-card-content>
       </mat-card>
-    </div>
-    <div fxFlex="70%">
+    <!-- </div> -->
+    <div *ngIf="toV != true">
       <button hidden (click)="tabs.selectedIndex = 0">RESET</button>
       <mat-tab-group #tabs>
         <mat-tab></mat-tab> <!-- ADDITIONAL TAB -->

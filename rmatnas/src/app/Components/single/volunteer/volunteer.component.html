@@ -1,6 +1,6 @@
 <div dir="rtl" class="text-right" style="padding-top: 1%">
   <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3%" fxLayoutAlign="center">
-    <div fxFlex="20%">
+    <!-- <div fxFlex="20%"> -->
       <mat-card>
         <mat-toolbar>
         <mat-card-header>
@@ -34,8 +34,8 @@
 
         </mat-card-content>
       </mat-card>
-    </div>
-    <div fxFlex="75%">
+    <!-- </div> -->
+    <div *ngIf="toV != true">
       <button hidden (click)="tabs.selectedIndex = 0">RESET</button>
       <mat-tab-group #tabs>
         <mat-tab></mat-tab> <!-- ADDITIONAL TAB -->
