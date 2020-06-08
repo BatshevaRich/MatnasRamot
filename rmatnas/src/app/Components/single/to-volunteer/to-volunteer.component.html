@@ -1,22 +1,20 @@
-<div dir="rtl" class="text-right" style="padding-top: 3%">
-  <div class="container">
-    <div class="row">
-      <div class="card">
-        <div class="card-header">
-          <h4>התנדבות</h4>
-        </div>
-        <div class="card-body">
-          <div class="card-text">
-            <p>קטגוריה: {{ toVolunteer.Category.Name }}</p>
-            <p>מתנדבת: {{ toVolunteer.Volunteer.Name }}</p>
-            <p>משפחה: {{ toVolunteer.Family.LastName }}</p>
-            <p>תאריך: {{ toVolunteer.DateAdded | date:"MMMM dd yyyy" }}</p>
-            <p>הערות: {{ toVolunteer.Comments }}</p>
-          </div>
-          <p class="card-text"></p>
-          <button class="btn btn-primary">לעריכת הפרטים</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<mat-card dir="rtl">
+  <mat-toolbar>
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"><i class="fa fa-user" style="size: 7x;"></i></div>
+      <mat-card-title>{{ toVolunteer.DateAdded | date:"MMMM dd yyyy" }}</mat-card-title>
+    </mat-card-header>
+  </mat-toolbar>
+  <mat-card-content>
+    <p>קטגוריה: {{ toVolunteer.Category.Name }}</p>
+    <p>מתנדבת: {{ toVolunteer.Volunteer.Name }}</p>
+    <p>משפחה: {{ toVolunteer.Family.LastName }}</p>
+    <p>תאריך: {{ toVolunteer.DateAdded | date:"MMMM dd yyyy" }}</p>
+    <p>הערות: {{ toVolunteer.Comments }}</p>
+    <mat-card-actions>
+      <button mat-raised-button (click)="ToVolunteeropenDialog()">לעריכת
+        הפרטים</button>
+    </mat-card-actions>
+
+  </mat-card-content>
+</mat-card>

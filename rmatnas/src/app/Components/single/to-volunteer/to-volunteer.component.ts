@@ -9,6 +9,7 @@ import { VolunteerFComponent } from '../../forms/volunteer-f/volunteer-f.compone
 import { VolunteerAndFamilyService } from 'src/app/services/volunteer-and-family.service';
 import { Category } from 'src/app/Classes/Category';
 import { Family } from 'src/app/Classes/Family';
+import { AddVFComponent } from '../../forms/add/add-vf/add-vf.component';
 
 @Component({
   selector: 'app-to-volunteer',
@@ -49,8 +50,8 @@ export class ToVolunteerComponent implements OnInit {
     });
   }
 
-  VolunteeropenDialog() {
-    const dialogRef = this.dialog.open(VolunteerFComponent, {
+  ToVolunteeropenDialog() {
+    const dialogRef = this.dialog.open(AddVFComponent, {
       data: {
         dataKey: this.toVolunteer,
         update: true,
