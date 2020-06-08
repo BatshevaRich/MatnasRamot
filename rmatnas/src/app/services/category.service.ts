@@ -31,4 +31,12 @@ export class CategoryService {
     this.http.post(environment.baseURL + 'CategoriesToFamily', categories).subscribe((data => {
     }));
   }
+
+  GetAllCategoriesOfAllVolunteers() {
+    return this.http.get<Category[]>(this.path + '/allcategoriesvolunteers');
+  }
+
+  GetAllCategoriesOfAllFamilies() {
+    return this.http.get<Category[]>(this.path + '/allcategoriesfamilies');
+  }
 }

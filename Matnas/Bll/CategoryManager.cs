@@ -36,5 +36,15 @@ namespace Bll
         {
             Dal.CategoryManager.RemoveCategory(id);
         }
+
+        public static IEnumerable<Category> GetCategoriesForAllVolunteers()
+        {
+            return Dal.CategoryManager.GetCategoriesForAllVolunteers();
+        }
+
+        public static IEnumerable<Category> GetCategoriesForAllFamilies()
+        {
+            return Dal.CategoryManager.GetCategoriesForAllFamilies();
+        }
     }
 }

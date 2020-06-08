@@ -39,5 +39,17 @@ namespace WebApi.Controllers
         {
             Bll.CategoryManager.RemoveCategory(id);
         }
+
+        [Route("api/category/allcategoriesvolunteers")]
+        public IEnumerable<Category> GetAllCategoriesForAllVolunteers()
+        {
+            return Bll.CategoryManager.GetCategoriesForAllVolunteers();
+        }
+
+        [Route("api/category/allcategoriesfamilies")]
+        public IEnumerable<Category> GetAllCategoriesForAllFamilies()
+        {
+            return Bll.CategoryManager.GetCategoriesForAllFamilies();
+        }
     }
 }

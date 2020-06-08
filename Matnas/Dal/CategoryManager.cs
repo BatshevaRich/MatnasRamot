@@ -68,5 +68,40 @@ namespace Dal
                 return events;
             }
         }
+
+        public static IEnumerable<Category> GetCategoriesForAllVolunteers()
+        {
+            using (dbRamotEntities db = new dbRamotEntities())
+            {
+                List<Category> categories = new List<Category>();
+                var all = db.Volunteers;
+                foreach (var item in all)
+                {
+                    foreach (var cat in item.Categories)
+                    {
+                        categories.Add(Mapper.CastCategoryToCommon(cat));
+                    }
+                }
+                return categories;
+            }
+            
+            
+        }
+        public static IEnumerable<Category> GetCategoriesForAllFamilies()
+        {
+            using (dbRamotEntities db = new dbRamotEntities())
+            {
+                List<Category> categories = new List<Category>();
+                var all = db.Families;
+                foreach (var item in all)
+                {
+                    foreach (var cat in item.Categories)
+                    {
+                        categories.Add(Mapper.CastCategoryToCommon(cat));
+                    }
+                }
+                return categories;
+            }
+        }
     }
 }
