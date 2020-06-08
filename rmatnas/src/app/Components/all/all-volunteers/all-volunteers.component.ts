@@ -62,19 +62,19 @@ export class AllVolunteersComponent implements OnInit, AfterViewInit {
       this.displayedColumns = ['Name', 'Address', 'Pelephone', 'Email', 'Age', 'IsActive'];
       this.inp = true;
       this.vs.getVolunteersForFamily(this.vId).subscribe((data: Volunteer[]) => {
-        this.loaded = true;
         data = this.trimResultsFromDB(data);
         this.volunteers = data;
         this.dataSource.data = data;
         this.resultsLength = this.dataSource.data.length;
+        this.loaded = true;
       });
     } else {
       this.vs.getVolunteers().subscribe((volunteers: Volunteer[]) => {
-        this.loaded = true;
         volunteers = this.trimResultsFromDB(volunteers);
         this.volunteers = volunteers;
         this.dataSource.data = volunteers;
         this.resultsLength = this.dataSource.data.length;
+        this.loaded = true;
       });
     }
   }

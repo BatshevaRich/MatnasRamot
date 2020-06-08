@@ -59,7 +59,7 @@
         <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
       </table>
     </span>
-    <div [ngClass]="dataSource.filteredData.length > 0 && loaded ? 'hidden': 'visible'">
+    <div *ngIf="resultsLength == 0 && loaded">
       <mat-error>לא נמצאו תוצאות</mat-error>
     </div>
     <div [ngClass]="dataSource.filteredData.length == 0 && !loaded ? 'visible': 'hidden'">
