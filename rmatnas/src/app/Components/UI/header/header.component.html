@@ -20,7 +20,7 @@
                         <button mat-menu-item class="nav-link" [routerLink]="'/list/vaf'"
                             routerLinkActive="activeLink"><i class="fa fa-list"></i> כל ההתנדבויות</button>
                         <button mat-menu-item (click)="ToVolunteeropenDialog()"><i class="fa fa-user-plus">
-                                הוספה</i></button>
+                                </i> הוספה</button>
                     </mat-menu>
                 </span>
             </mat-button-toggle>
@@ -33,7 +33,7 @@
                         <button mat-menu-item class="nav-link" [routerLink]="'/list/volunteers'"
                             routerLinkActive="activeLink"><i class="fa fa-list"></i> כל המתנדבות</button>
                         <button mat-menu-item (click)="VolunteeropenDialog()"><i class="fa fa-user-plus">
-                                הוספה</i></button>
+                                </i> הוספה</button>
                     </mat-menu>
                 </span>
             </mat-button-toggle>
@@ -46,7 +46,7 @@
                         <button mat-menu-item class="nav-link" [routerLink]="'/list/families'"
                             routerLinkActive="activeLink"><i class="fa fa-list"></i> כל המשפחות</button>
                         <button mat-menu-item (click)="FamilyopenDialog()"><i class="fa fa-user-plus">
-                                הוספה</i></button>
+                                </i> הוספה</button>
                     </mat-menu>
                 </span>
             </mat-button-toggle>
@@ -93,7 +93,7 @@
                     <button mat-menu-item class="nav-link" [routerLink]="'/list/vaf'" routerLinkActive="activeLink"><i
                             class="fa fa-list"></i> כל ההתנדבויות</button>
                     <button mat-menu-item (click)="ToVolunteeropenDialog()"><i class="fa fa-user-plus">
-                            הוספה</i></button>
+                            </i>הוספה</button>
                 </mat-menu>
             </span>
             <span>
@@ -103,7 +103,7 @@
                 <mat-menu #menu="matMenu">
                     <button mat-menu-item class="nav-link" [routerLink]="'/list/volunteers'"
                         routerLinkActive="activeLink"><i class="fa fa-list"></i> כל המתנדבות</button>
-                    <button mat-menu-item (click)="VolunteeropenDialog()"><i class="fa fa-user-plus"> הוספה</i></button>
+                    <button mat-menu-item class="nav-link" (click)="VolunteeropenDialog()"><i class="fa fa-user-plus"></i> הוספה</button>
                 </mat-menu>
             </span>
             <span><button mat-button [matMenuTriggerFor]="menuF" class="nav-letters">
@@ -112,7 +112,7 @@
                 <mat-menu #menuF="matMenu">
                     <button mat-menu-item class="nav-link" [routerLink]="'/list/families'"
                         routerLinkActive="activeLink"><i class="fa fa-list"></i> כל המשפחות</button>
-                    <button mat-menu-item (click)="FamilyopenDialog()"><i class="fa fa-user-plus"> הוספה</i></button>
+                    <button mat-menu-item class="nav-link"(click)="FamilyopenDialog()"><i class="fa fa-user-plus"></i> הוספה</button>
                 </mat-menu>
             </span>
             <span><button mat-button class="nav-letters">
