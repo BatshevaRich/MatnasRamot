@@ -7,7 +7,7 @@
           <input matInput (keyup)="applyFilter($event.target.value)">
         </mat-form-field>
         <span class="example-spacer"></span>
-        <div class="example-header-image" mat-card-avatar matTooltip="הורדה לקובץ אקסל" (click)="exportTableToExcel()" *ngIf="!vId" color="">
+        <div class="example-header-image" mat-card-avatar matTooltip="הורדה לקובץ אקסל" (click)="exportTableToExcel()" *ngIf="!vId">
           <mat-icon>file_copy</mat-icon>
         </div>
       </mat-toolbar-row>

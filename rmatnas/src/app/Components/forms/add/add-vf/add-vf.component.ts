@@ -7,6 +7,7 @@ import { FamilyService } from 'src/app/services/family.service';
 import { VolunteerService } from 'src/app/services/volunteer.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { VolunteerAndFamilyService } from 'src/app/services/volunteer-and-family.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-add-vf',
@@ -29,7 +30,8 @@ export class AddVFComponent implements OnInit {
               private cs: CategoryService,
               private vaf: VolunteerAndFamilyService,
               private dialogRef: MatDialogRef<AddVFComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any) {
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              private _snackBar: MatSnackBar) {
     this.refresh();
   }
   refresh() {
@@ -88,6 +90,7 @@ export class AddVFComponent implements OnInit {
       this.selectedCategory != null ? this.vs.getVolunteersByCategory(this.selectedCategory.Id)
         .subscribe(res => {
           this.volunteers = res;
+          this.volunteers = this.volunteers.filter(v => v.IsActive);
         }) : this.selectedCategory = null;
     }
     if (tab === 2) {
@@ -102,10 +105,15 @@ export class AddVFComponent implements OnInit {
       this.selectedCategory != null ? this.vs.getVolunteersByCategory(this.selectedCategory.Id)
       .subscribe(res => {
         this.volunteers = res;
+        this.volunteers = this.volunteers.filter(v => v.IsActive);
       }) : this.selectedCategory = null;
     }
   }
   submitForm(f) {
     this.vaf.addVolunteerAction(this.selectedVolunteer, this.selectedFamily, this.selectedCategory);
+    this._snackBar.open('שמירת התנדבות מבוצעת...', 'OK', {
+        duration: 2000,
+        direction: 'rtl'
+      });
   }
 }

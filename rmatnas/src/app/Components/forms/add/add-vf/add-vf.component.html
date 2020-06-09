@@ -3,11 +3,12 @@
   <mat-toolbar>
     <span>התנדבות חדשה</span>
     <span class="example-spacer"></span>
-    <button mat-fab color="" *ngIf="selectedCategory && selectedFamily && selectedVolunteer"type="submit">
-      <span >שמירה</span>
+    <button mat-mini-fab color="accent" (click)="refresh()" type="button">
+      <mat-icon>refresh</mat-icon>
     </button>
-    <button mat-fab color="" (click)="refresh()" type="button">
-      <span><mat-icon>refresh</mat-icon></span>
+    <span *ngIf="selectedCategory && selectedFamily && selectedVolunteer" class="example-spacer"></span>
+    <button mat-fab color="primary" *ngIf="selectedCategory && selectedFamily && selectedVolunteer" type="button">
+      <span >שמירה</span>
     </button>
   </mat-toolbar>
 <div>

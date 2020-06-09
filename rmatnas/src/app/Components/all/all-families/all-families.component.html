@@ -8,7 +8,7 @@
         </mat-form-field>
         <span class="example-spacer"></span>
         <div class="example-header-image" mat-card-avatar matTooltip="הורדה לקובץ אקסל" (click)="exportTableToExcel()"
-          *ngIf="!vId" color="">
+          *ngIf="!vId">
           <mat-icon>file_copy</mat-icon>
         </div>
       </mat-toolbar-row>
@@ -44,7 +44,7 @@
         <ng-container *ngIf="!vId" matColumnDef="columndelete">
           <th mat-header-cell *matHeaderCellDef>מחיקה </th>
           <td mat-cell *matCellDef="let element">
-            <mat-icon style="color: #e27216d9;" (click)="delete(element, element)"><i class="fa fa-trash"></i>
+            <mat-icon (click)="delete(element, element)"><i class="fa fa-trash"></i>
             </mat-icon>
           </td>
         </ng-container>

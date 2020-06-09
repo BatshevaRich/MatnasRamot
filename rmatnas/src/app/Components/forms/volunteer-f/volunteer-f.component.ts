@@ -6,6 +6,7 @@ import { Category } from 'src/app/Classes/Category';
 import { Subscription } from 'rxjs';
 import { CategoryService } from 'src/app/services/category.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material';
 @Component({
   selector: 'app-volunteer-f',
   templateUrl: './volunteer-f.component.html',
@@ -25,7 +26,8 @@ export class VolunteerFComponent implements OnInit, OnDestroy {
   constructor(public vs: VolunteerService,
               private cs: CategoryService,
               private dialogRef: MatDialogRef<VolunteerFComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any) {
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              public _snackBar: MatSnackBar) {
     this.mySubscription = cs.getCategories().subscribe(res => {
       this.categories = res;
     });
@@ -54,6 +56,10 @@ export class VolunteerFComponent implements OnInit, OnDestroy {
         });
       this.mytemplateForm.resetForm();
       this.newVolunteer = new Volunteer('default', '000000000', '000000000', 'default@ddd', 'default', '1999-01-01', false);
+      this._snackBar.open('שמירת מתנדבת מבוצעת...', 'OK', {
+        duration: 2000,
+        direction: 'rtl'
+      });
     }
   }
 
@@ -77,4 +83,5 @@ export class VolunteerFComponent implements OnInit, OnDestroy {
       return 'הערך שהוזן אינו תקני';
     }
   }
+
 }
