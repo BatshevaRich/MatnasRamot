@@ -1,0 +1,9 @@
+.fullscreen {
+    width: 100%;
+    position: relative;
+    height: calc(93vh - 50px);
+    opacity: .7;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
