@@ -1,5 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 @import '~font-awesome/css/font-awesome.css';
 @import '~material-design-icons/iconfont/material-icons.css';
-*:focus {outline:none !important}
+
+*:focus {
+  outline: none !important
+}
+
+.fullscreen {
+  width: 100%;
+  position: relative;
+  height: calc(93vh - (50px + 50px));
+  /* background-color: gray; */
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.wf-loading mat-icon {
+  display: none;
+}
+
+html,
+body {
+  height: 100%;
+}
