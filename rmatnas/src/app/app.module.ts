@@ -45,6 +45,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { DatePipe } from '@angular/common';
 import { MainComponent } from './Components/UI/main/main.component';
 import { ChartsModule } from 'ng2-charts';
+import * as WebFont from 'webfontloader';
+
+WebFont.load({
+  custom: { families: ['Material Icons', 'Material Icons Outline'], }
+});
 @NgModule({
   declarations: [
     AppComponent,

@@ -2,4 +2,6 @@
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 @import '~font-awesome/css/font-awesome.css';
 @import '~material-design-icons/iconfont/material-icons.css';
-*:focus {outline:none !important}
+*:focus {outline:none !important}.wf-loading mat-icon {
+  display: none;
+}

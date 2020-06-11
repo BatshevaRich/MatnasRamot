@@ -44,8 +44,8 @@
         <ng-container *ngIf="!vId" matColumnDef="columndelete">
           <th mat-header-cell *matHeaderCellDef>מחיקה </th>
           <td mat-cell *matCellDef="let element">
-            <mat-icon (click)="delete(element, element)"><i class="fa fa-trash"></i>
-            </mat-icon>
+            <h5 (click)="delete(element, element)"><i class="fa fa-trash"></i>
+            </h5>
           </td>
         </ng-container>
         <ng-container matColumnDef="expandedDetail">
