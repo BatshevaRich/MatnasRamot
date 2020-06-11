@@ -36,7 +36,7 @@ export interface Details {
   ],
 })
 export class AllFamiliesComponent implements OnInit, AfterViewInit {
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   displayedColumns = ['LastName', 'Address', 'Telephone', 'NumChildren', 'Status', 'Reference', 'columndelete'];
@@ -49,6 +49,8 @@ export class AllFamiliesComponent implements OnInit, AfterViewInit {
   inp = false;
   result = '';
   loaded = false;
+  error = false;
+  notFound = false;
 
   constructor(public fs: FamilyService,
               private changeDetectorRefs: ChangeDetectorRef,
@@ -62,20 +64,25 @@ export class AllFamiliesComponent implements OnInit, AfterViewInit {
       this.inp = true;
       this.fs.getFamiliesByVolunteer(this.vId).subscribe((data: Family[]) => {
         this.loaded = true;
-        /// TODO: check if empty results, if empty- do not display table
-        data = this.trimResultsFromDB(data);
-        this.families = data;
-        this.dataSource.data = data;
-        this.resultsLength = this.dataSource.data.length;
-      });
+        if (data.length === 0) {
+          this.notFound = true;
+        } else {
+          data = this.trimResultsFromDB(data);
+          this.families = data;
+          this.dataSource.data = data;
+          this.resultsLength = this.dataSource.data.length;
+          this.error = false;
+        }
+      }, err => { this.error = true; this.loaded = true; });
     } else {
       this.fs.getFamilies().subscribe((data: Family[]) => {
-        this.loaded = true;
         data = this.trimResultsFromDB(data);
         this.families = data;
         this.dataSource.data = data;
         this.resultsLength = this.dataSource.data.length;
-      });
+        this.loaded = true;
+        this.error = false;
+      }, err => { this.error = true; this.loaded = true; });
     }
   }
 
