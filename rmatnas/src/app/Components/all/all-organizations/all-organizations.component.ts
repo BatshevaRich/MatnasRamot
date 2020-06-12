@@ -2,18 +2,18 @@ import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { Organization } from 'src/app/Classes/Organization';
 import { DataServiceService } from '../../../Services/data-service.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { MatSort, MatTable, MatPaginator, MatTableDataSource } from '@angular/material';
+import { MatSort, MatTable, MatPaginator, MatTableDataSource, MatDialog } from '@angular/material';
 import { OrganizationService } from 'src/app/services/organization.service';
+import { Observable } from 'rxjs';
+import { ConfirmDialogModel, ConfirmDialogComponent } from '../../forms/confirm-dialog/confirm-dialog.component';
 export interface Details {
   Id: number;
   Name: string;
+  Contact: string;
+  Phone: string;
   Address: string;
-  // Telephone: string;
-  Pelephone: string;
-  Email: string;
-  Age: Date;
-  // Comments: string;
-  IsActive: boolean;
+  Comments: string;
+  email: string;
 }
 
 @Component({
@@ -35,7 +35,7 @@ export class AllOrganizationsComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  displayedColumns = ['Name', 'Address', 'Pelephone', 'Email', 'Age', 'IsActive', 'columndelete'];
+  displayedColumns = ['Name', 'Contact', 'Phone', 'Address', 'Email', 'columndelete'];
   expandedElement: Details | null;
   dataSource = new MatTableDataSource();
   resultsLength = 0;
@@ -46,7 +46,8 @@ export class AllOrganizationsComponent implements OnInit {
   error = false;
   notFound = false;
 
-  constructor(public os: OrganizationService) { }
+  constructor(public os: OrganizationService,
+              public dialog: MatDialog) { }
 
   ngOnInit() {
     this.organizations = this.os.getOrganizations().subscribe((organizations: Organization[]) => {
@@ -60,6 +61,33 @@ export class AllOrganizationsComponent implements OnInit {
         this.error = false;
       }
     }, err => { this.error = true; this.loaded = true; });
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  confirmDialog(): Observable<any> {
+    const message = `מחיקה זו היא לצמיתות! האם תרצי להמשיך?`;
+    const dialogData = new ConfirmDialogModel('מחיקת מתנדבת', message);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: '75%',
+      data: dialogData
+    });
+    return dialogRef.afterClosed();
+  }
+
+  delete(event, elm) {
+    this.confirmDialog().subscribe(res => {
+      this.result = res;
+      if (res) {
+        // this.os.removeVolunteer(elm.Id);
+        // this.dataSource.data = this.dataSource.data
+        //   .filter(i => i !== elm);
+        // .map((i, idx) => (i.position = (idx + 1), i));
+      }
+    });
   }
 
 }
