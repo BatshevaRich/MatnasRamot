@@ -40,6 +40,9 @@ export class AllToVolunteersComponent implements OnInit, AfterViewInit {
   families: Family[] = [];
   result = '';
   loaded = false;
+  error = false;
+  notFound = false;
+
   constructor(public fs: FamilyService,
               public vfs: VolunteerAndFamilyService,
               public dialog: MatDialog) {
@@ -50,9 +53,13 @@ export class AllToVolunteersComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.vfs.getVolunteerings().subscribe(res => {
       this.loaded = true;
+      if (res.length === 0) {
+          this.notFound = true;
+        } else {
       this.volunteerings = res;
       this.resultsLength = this.volunteerings.length;
       this.volunteerings.forEach(element => {
+        // tslint:disable-next-line: no-use-before-declare
         const item = new Details();
         item.Id = element.Id;
         item.NameFamily = element.Family.LastName;
@@ -64,6 +71,7 @@ export class AllToVolunteersComponent implements OnInit, AfterViewInit {
         item.IdFamily = element.Family.Id;
       });
       this.dataSource.data = this.allvolunteerings;
+    }
     });
     // if (this.vId) {
     //   this.fs.getFamiliesByVolunteer(this.vId).subscribe(data=>{
