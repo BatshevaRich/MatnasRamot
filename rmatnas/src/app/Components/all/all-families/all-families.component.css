@@ -87,7 +87,7 @@ tr.example-element-row:not(.example-expanded-row):active {
 }
 
 .hidden {
-  visibility: hidden;
+  display: none
 }
 
 .visible {
