@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Family } from '../../../Classes/Family';
 import { DataServiceService } from '../../../Services/data-service.service';
 import { Subscription } from 'rxjs';
@@ -31,6 +31,7 @@ export class FamilyComponent implements OnInit, OnDestroy {
   mySubscription2: Subscription;
   @Input() vId: number;
   @Input() toV: boolean;
+  @Output() addedFamily: EventEmitter<Family> = new EventEmitter<Family>();
   chooseTab: string;
   constructor(public fs: FamilyService,
               public ARS: ActivatedRoute,
@@ -63,6 +64,7 @@ export class FamilyComponent implements OnInit, OnDestroy {
       }
     });
     dialogRef.afterClosed().subscribe(res => {
+      this.addedFamily.emit(res);
     });
   }
 }

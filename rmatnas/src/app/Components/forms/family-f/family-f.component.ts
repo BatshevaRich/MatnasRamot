@@ -57,6 +57,7 @@ export class FamilyFComponent implements OnInit, OnDestroy {
     if (this.data.update) {
       this.newFamily.Id = this.data.id;
       this.fs.updateFamily(this.newFamily, this.categoriesSelected);
+      this.dialogRef.close(this.newFamily);
     } else {
       this.fs.addFamily(this.newFamily, this.categoriesSelected)
         .then(t => {
