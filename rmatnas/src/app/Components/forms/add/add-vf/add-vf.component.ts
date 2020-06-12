@@ -31,7 +31,7 @@ export class AddVFComponent implements OnInit {
               private vaf: VolunteerAndFamilyService,
               private dialogRef: MatDialogRef<AddVFComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
-              private _snackBar: MatSnackBar) {
+              private snackBar: MatSnackBar) {
     this.refresh();
   }
   refresh() {
@@ -111,7 +111,7 @@ export class AddVFComponent implements OnInit {
   }
   submitForm(f) {
     this.vaf.addVolunteerAction(this.selectedVolunteer, this.selectedFamily, this.selectedCategory);
-    this._snackBar.open('שמירת התנדבות מבוצעת...', 'OK', {
+    this.snackBar.open('שמירת התנדבות מבוצעת...', 'OK', {
         duration: 2000,
         direction: 'rtl'
       });

@@ -26,7 +26,7 @@ export class VolunteerFComponent implements OnInit, OnDestroy {
               private cs: CategoryService,
               private dialogRef: MatDialogRef<VolunteerFComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
-              public _snackBar: MatSnackBar) {
+              public snackBar: MatSnackBar) {
     this.mySubscription = cs.getCategories().subscribe(res => {
       this.categories = res;
     });
@@ -56,7 +56,7 @@ export class VolunteerFComponent implements OnInit, OnDestroy {
         });
       this.mytemplateForm.resetForm();
       this.newVolunteer = new Volunteer('default', '000000000', '000000000', 'default@ddd', 'default', '1999-01-01', false);
-      this._snackBar.open('שמירת מתנדבת מבוצעת...', 'OK', {
+      this.snackBar.open('שמירת מתנדבת מבוצעת...', 'OK', {
         duration: 2000,
         direction: 'rtl'
       });

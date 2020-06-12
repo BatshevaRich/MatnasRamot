@@ -41,7 +41,7 @@ export class FamilyFComponent implements OnInit, OnDestroy {
               private cs: CategoryService,
               private dialogRef: MatDialogRef<FamilyFComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
-              private _snackBar: MatSnackBar) {
+              private snackBar: MatSnackBar) {
     this.mySubscription = cs.getCategories().subscribe(res => {
       this.categories = res;
     });
@@ -79,7 +79,7 @@ export class FamilyFComponent implements OnInit, OnDestroy {
         'reason',
         'reference');
     }
-    this._snackBar.open('שמירת משפחה מבוצעת...', 'OK', {
+    this.snackBar.open('שמירת משפחה מבוצעת...', 'OK', {
       duration: 2000,
       direction: 'rtl'
     });
