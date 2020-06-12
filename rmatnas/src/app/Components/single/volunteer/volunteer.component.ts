@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { Volunteer } from '../../../Classes/Volunteer';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
@@ -18,6 +18,7 @@ export class VolunteerComponent implements OnInit, OnDestroy {
   id: number;
   @Input() vId: number;
   @Input() toV: boolean;
+  @Output() addedVolunteer: EventEmitter<Volunteer> = new EventEmitter<Volunteer>();
   mySubscription: Subscription;
   constructor(public vs: VolunteerService, public ARS: ActivatedRoute, public dialog: MatDialog) {
     this.myvolunteer = new Volunteer('..', '..', '..', '..', '..', '1999', false);
@@ -49,6 +50,7 @@ export class VolunteerComponent implements OnInit, OnDestroy {
       }
     });
     dialogRef.afterClosed().subscribe(res => {
+      this.addedVolunteer.emit(res);
     });
   }
 

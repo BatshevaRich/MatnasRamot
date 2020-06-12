@@ -21,7 +21,6 @@ export class VolunteerFComponent implements OnInit, OnDestroy {
   email = new FormControl('', [Validators.required, Validators.email]);
   token = 0;
   categoriesSelected: Category[] = [];
-  @Output() addedVolunteer: EventEmitter<Volunteer> = new EventEmitter<Volunteer>();
   newVolunteer: Volunteer = new Volunteer('default', '000000000', '000000000', 'volunteer@example.com', 'default', '1999-01-01', true);
   constructor(public vs: VolunteerService,
               private cs: CategoryService,
@@ -44,6 +43,7 @@ export class VolunteerFComponent implements OnInit, OnDestroy {
     if (this.data.update) {
       this.newVolunteer.Id = this.data.id;
       this.vs.updateVolunteer(this.newVolunteer, this.categoriesSelected);
+      this.dialogRef.close(this.newVolunteer);
     } else {
       this.vs.addVolunteer(this.newVolunteer, this.categoriesSelected)
         .then(t => {

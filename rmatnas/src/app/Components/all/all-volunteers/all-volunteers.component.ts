@@ -62,11 +62,15 @@ export class AllVolunteersComponent implements OnInit, AfterViewInit {
       this.displayedColumns = ['Name', 'Address', 'Pelephone', 'Email', 'Age', 'IsActive'];
       this.inp = true;
       this.vs.getVolunteersForFamily(this.vId).subscribe((data: Volunteer[]) => {
-        data = this.trimResultsFromDB(data);
-        this.volunteers = data;
-        this.dataSource.data = data;
-        this.resultsLength = this.dataSource.data.length;
         this.loaded = true;
+        if (data.length === 0) {
+          this.notFound = true;
+        } else {
+          data = this.trimResultsFromDB(data);
+          this.volunteers = data;
+          this.dataSource.data = data;
+          this.resultsLength = this.dataSource.data.length;
+        }
       });
     } else {
       this.vs.getVolunteers().subscribe((volunteers: Volunteer[]) => {
@@ -89,6 +93,16 @@ export class AllVolunteersComponent implements OnInit, AfterViewInit {
       volunteer.Comments == null ? volunteer.Comments = '' : volunteer.Comments = volunteer.Comments.trim();
     }
     return volunteers;
+  }
+
+  trimResultFromUpdate(volunteer: Volunteer) {
+    volunteer.Name = volunteer.Name.trim();
+    volunteer.Address == null ? volunteer.Address = '' : volunteer.Address = volunteer.Address.trim();
+    volunteer.Telephone == null ? volunteer.Telephone = '' : volunteer.Telephone = volunteer.Telephone.trim();
+    volunteer.Pelephone == null ? volunteer.Pelephone = '' : volunteer.Pelephone = volunteer.Pelephone.trim();
+    volunteer.Email == null ? volunteer.Email = '' : volunteer.Email = volunteer.Email.trim();
+    volunteer.Comments == null ? volunteer.Comments = '' : volunteer.Comments = volunteer.Comments.trim();
+    return volunteer;
   }
 
   ngAfterViewInit() {
@@ -152,6 +166,11 @@ export class AllVolunteersComponent implements OnInit, AfterViewInit {
     const ws = XLSX.utils.json_to_sheet(data);
     XLSX.utils.book_append_sheet(wb, ws, 'מתנדבות');
     XLSX.writeFile(wb, `מתנדבות.xlsx`);
+  }
+
+  updateTable(event) {
+    this.dataSource.data = this.dataSource.data.map((item: Volunteer) => item.Id === event.Id ? event : item);
+    this.table.renderRows();
   }
 
 }
