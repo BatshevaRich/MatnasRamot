@@ -86,6 +86,10 @@ tr.example-element-row:not(.example-expanded-row):active {
   flex: 1 1 auto;
 }
 
+.hidden {
+  display: none
+}
+
 .visible {
   visibility: visible;
 }
