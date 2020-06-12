@@ -172,7 +172,7 @@ export class AllVolunteersComponent implements OnInit, AfterViewInit {
   }
 
   updateTable(event) {
-    this.dataSource.data = this.dataSource.data.map((item: Volunteer) => item.Id === event.Id ? event : item);
+    this.dataSource.data = this.dataSource.data.map((item: Volunteer) => item.Id === event.Id ? this.trimResultFromUpdate(event) : item);
     this.table.renderRows();
   }
 
