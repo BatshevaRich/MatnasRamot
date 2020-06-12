@@ -48,5 +48,15 @@ export class HeaderComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
     });
   }
+  GroupopenDialog() {
+    const dialogRef = this.dialog.open(FamilyFComponent, {
+      data: {
+        dataKey: null,
+        update: false
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
 
 }

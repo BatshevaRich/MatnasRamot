@@ -1,11 +1,11 @@
 .nav-letters {
-    font-size: x-large;
+    font-size: large;
     color: #fff;
 }
 
 .top {
     /* width: 100%; */
-    font-size: x-large;
+    font-size: large;
     height: 50px;
 }
 
@@ -31,8 +31,9 @@ a {
 }
 
 button {
-    font-size: 110%;
+    /* font-size: 110%; */
     min-width: min-content;
+    padding:3px!important;
 }
 
 .example-icon {
@@ -73,22 +74,21 @@ button {
   }
   
   mat-button-toggle {
-      background-color: darkslategray;
-      border: 1px rgba(0,0,0,0) solid !important;
+      /* background-color: darkslategray; */
+      /* border: 1px solid !important; */
       /* margin-top: 5px !important; */
       padding: 0 1px !important;
   }
   
   mat-button-toggle:hover {
-      border: 1px #000 solid !important;
-      background-color: black !important;
+      /* border: 1px solid !important; */
       border-radius: 1px !important;
   }
   
   .mat-button-toggle-checked {
-        box-shadow: 0 0 10px #000 !important;
+        box-shadow: 0 0 10px 10px  !important;
       border-radius: 1px !important;
-      background-color: gray !important;
+      /* background-color: gray !important; */
   }
   
   .mat-button-toggle-input {
