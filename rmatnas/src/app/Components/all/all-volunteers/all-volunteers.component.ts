@@ -37,9 +37,9 @@ export interface Details {
 export class AllVolunteersComponent implements OnInit, AfterViewInit {
 
   constructor(public vs: VolunteerService,
-    private changeDetectorRefs: ChangeDetectorRef,
-    public dialog: MatDialog,
-    private datePipe: DatePipe) {
+              private changeDetectorRefs: ChangeDetectorRef,
+              public dialog: MatDialog,
+              private datePipe: DatePipe) {
     // this.dataSource.filterPredicate =
     //   (data: Details, filter: string) => data.Name.indexOf(filter) !== -1;
   }
@@ -56,17 +56,23 @@ export class AllVolunteersComponent implements OnInit, AfterViewInit {
   inp: boolean;
   result = '';
   loaded = false;
+  error = false;
+  notFound = false;
 
   ngOnInit(): void {
     if (this.vId) {
       this.displayedColumns = ['Name', 'Address', 'Pelephone', 'Email', 'Age', 'IsActive'];
       this.inp = true;
       this.vs.getVolunteersForFamily(this.vId).subscribe((data: Volunteer[]) => {
+        this.loaded = true;
+        if (data.length === 0) {
+          this.notFound = true;
+        } else {
         data = this.trimResultsFromDB(data);
         this.volunteers = data;
         this.dataSource.data = data;
         this.resultsLength = this.dataSource.data.length;
-        this.loaded = true;
+        }
       });
     } else {
       this.vs.getVolunteers().subscribe((volunteers: Volunteer[]) => {
@@ -75,7 +81,8 @@ export class AllVolunteersComponent implements OnInit, AfterViewInit {
         this.dataSource.data = volunteers;
         this.resultsLength = this.dataSource.data.length;
         this.loaded = true;
-      });
+        this.error = false;
+      }, err => { this.error = true; this.loaded = true; });
     }
   }
 

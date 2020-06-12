@@ -1,5 +1,6 @@
-<div style="padding: 1%;">
-  <mat-card class="mat-elevation-z2">
+<div class="mat-elevation-z2" style="padding: 1%;">
+  <mat-card [ngClass]="!error? 'fullscreen': 'hidden'">
+    <div [ngClass]="loaded &&!notFound? 'fullscreen': 'hidden'">
     <mat-card-header>
       <mat-toolbar-row>
         <mat-form-field style="font-size: 50%; display: table">
@@ -78,15 +79,28 @@
         <mat-paginator class="marginless-paginator-range-label" #paginator [pageSizeOptions]="[5, 10, 20]"
           showFirstLastButtons></mat-paginator>
       </span>
-      <div *ngIf="resultsLength == 0 && loaded">
-        <mat-error>לא נמצאו תוצאות</mat-error>
-      </div>
-      <div [ngClass]="dataSource.filteredData.length == 0 && !loaded ? 'visible': 'hidden'">
-        <div class="text-center">
-          <i class="fa fa-spinner fa-spin" style="font-size:60px"></i> <br />
+      <router-outlet></router-outlet>
+      <router-outlet></router-outlet>
+      </mat-card-content>
+    </div>
+    <div *ngIf="!error && !loaded">
+      <div class="d-flex justify-content-center">
+        <div class="spinner-border" style="color: gray; width: 10rem; height: 10rem;" role="status">
+          <span class="sr-only">Loading...</span>
         </div>
       </div>
-      <router-outlet></router-outlet>
-    </mat-card-content>
+    </div>
+    <span *ngIf="notFound" class="text-center">
+      <mat-error>לא נמצאו מתנדבות למשפחה זו</mat-error>
+    </span>
+  </mat-card>
+  <mat-card *ngIf="error && loaded" class="fullscreen text-center" [ngClass]="error && loaded? 'visible': 'hidden'">
+    <span style="position: absolute; top:45%">
+      <mat-progress-bar mode="buffer">בעיה בטעינת הנתונים</mat-progress-bar>
+      <mat-error>
+        <h3>לא נמצאו תוצאות</h3>
+        <h4>בעיה בטעינת הנתונים</h4>
+      </mat-error>
+    </span>
   </mat-card>
 </div>
