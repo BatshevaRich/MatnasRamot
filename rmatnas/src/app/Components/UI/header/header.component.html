@@ -58,15 +58,24 @@
                     <mat-menu #menuG="matMenu">
                         <button mat-menu-item class="nav-link" [routerLink]="'/list/organizations'"
                             routerLinkActive="activeLink"><i class="fa fa-list"></i> כל הארגונים</button>
-                        <button mat-menu-item (click)="GroupopenDialog()"><i class="fa fa-user-plus">
+                        <button mat-menu-item (click)="OrganizationopenDialog()"><i class="fa fa-user-plus">
                             </i> הוספה</button>
                     </mat-menu>
                 </span>
             </mat-button-toggle>
-            <mat-button-toggle class="bg-dark"><span><button mat-button class="nav-letters">
-                        <a class="nav-link" routerLink="/list/events" routerLinkActive="activeLink">
-                            ארועים</a>
-                    </button></span></mat-button-toggle>
+            <mat-button-toggle class="bg-dark">
+                <span>
+                    <button mat-button [matMenuTriggerFor]="menuE" class="nav-letters">
+                        <mat-icon>event</mat-icon>ארועים
+                    </button>
+                    <mat-menu #menuE="matMenu">
+                        <button mat-menu-item class="nav-link" [routerLink]="'/list/events'"
+                            routerLinkActive="activeLink"><i class="fa fa-list"></i> כל הארועים</button>
+                        <button mat-menu-item (click)="EventopenDialog()"><i class="fa fa-user-plus">
+                            </i> הוספה</button>
+                    </mat-menu>
+                </span>
+            </mat-button-toggle>
             <mat-button-toggle class="bg-dark"><span><button mat-button class="nav-letters">
                         <a class="nav-link" routerLink="/list/tasks" routerLinkActive="activeLink">
                             מטלות</a>

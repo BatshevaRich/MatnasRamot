@@ -3,6 +3,8 @@ import { MatDialog } from '@angular/material';
 import { VolunteerFComponent } from '../../forms/volunteer-f/volunteer-f.component';
 import { FamilyFComponent } from '../../forms/family-f/family-f.component';
 import { AddVFComponent } from '../../forms/add/add-vf/add-vf.component';
+import { OrganizationFComponent } from '../../forms/organization-f/organization-f.component';
+import { EventFComponent } from '../../forms/event-f/event-f.component';
 
 @Component({
   selector: 'app-header',
@@ -48,8 +50,18 @@ export class HeaderComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
     });
   }
-  GroupopenDialog() {
-    const dialogRef = this.dialog.open(FamilyFComponent, {
+  OrganizationopenDialog() {
+    const dialogRef = this.dialog.open(OrganizationFComponent, {
+      data: {
+        dataKey: null,
+        update: false
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+  EventopenDialog() {
+    const dialogRef = this.dialog.open(EventFComponent, {
       data: {
         dataKey: null,
         update: false
