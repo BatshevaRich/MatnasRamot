@@ -27,7 +27,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { TaskFComponent } from './Components/forms/task-f/task-f.component';
 import { PhonePipe } from './Pipes/phone.pipe';
 import { FilterPipe } from './Pipes/filter.pipe';
-import { CategoryComponent } from './Components/single/category/category.component';
 import { ChooseCategoryComponent } from './Components/single/choose-category/choose-category.component';
 import { AddVFComponent } from './Components/forms/add/add-vf/add-vf.component';
 import { AddVEComponent } from './Components/forms/add/add-ve/add-ve.component';
@@ -69,7 +68,6 @@ WebFont.load({
     FooterComponent,
     AsideComponent,
     MyTaskComponent,
-    CategoryComponent,
     ChooseCategoryComponent,
     AllTasksComponent,
     BorderDirective,
