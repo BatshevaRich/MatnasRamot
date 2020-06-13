@@ -73,7 +73,7 @@ export class VolunteerFComponent implements OnInit, OnDestroy {
     this.categoriesSelected = [];
     e.forEach(element => {
       if (element.checked) {
-        this.categoriesSelected.push(new Category(element.id, element.name));
+        this.categoriesSelected.push(new Category(element.name));
       }
     });
   }

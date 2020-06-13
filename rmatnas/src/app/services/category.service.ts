@@ -15,9 +15,7 @@ export class CategoryService {
     return this.http.get<Category[]>(this.path + '');
   }
   addCategory(category: Category) {
-
-    this.http.post(this.path + '/', category).subscribe(data => {
-    });
+    return this.http.post(this.path + '/', category).toPromise().then(res => res);
   }
   updateCategory(category: Category) {
     this.http.put(this.path + '/' + category.Id, category).subscribe(data => {
