@@ -49,9 +49,13 @@ export class ChooseCategoryComponent implements OnInit, OnDestroy {
     this.idOfCategory = id;
     this.displayForm = true;
   }
-
+  deleteCat(id: number) {
+    this.cs.removeCategory(id).subscribe(res => {
+      this.categories = this.categories.filter(i => i.Id !== id);
+      this.arr = this.arr.filter(i => i.id !== id);
+    });
+  }
   public reloadWithNewData(event: Category) {
-    debugger;
     this.cs.getCategories().subscribe(res => {
       this.arr = [];
       this.categories = res;

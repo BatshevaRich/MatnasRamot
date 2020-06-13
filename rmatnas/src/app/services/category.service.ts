@@ -24,8 +24,7 @@ export class CategoryService {
     return this.http.put(this.path + '/' + category.Id, category);
   }
   removeCategory(id: number) {
-    this.http.delete(this.path + '/' + id).subscribe(data => {
-    });
+    return this.http.delete(this.path + '/' + id);
   }
   AddCategoriesForFamily(f: Family, categories: Category[]) {
     this.http.post(environment.baseURL + 'CategoriesToFamily', categories).subscribe((data => {
