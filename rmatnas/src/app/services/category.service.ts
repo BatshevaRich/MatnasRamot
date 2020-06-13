@@ -14,12 +14,14 @@ export class CategoryService {
   getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(this.path + '');
   }
+  getCategory(id: number): Observable<Category> {
+    return this.http.get<Category>(this.path + '/' + id);
+  }
   addCategory(category: Category) {
     return this.http.post(this.path + '/', category).toPromise().then(res => res);
   }
   updateCategory(category: Category) {
-    this.http.put(this.path + '/' + category.Id, category).subscribe(data => {
-    });
+    return this.http.put(this.path + '/' + category.Id, category);
   }
   removeCategory(id: number) {
     this.http.delete(this.path + '/' + id).subscribe(data => {

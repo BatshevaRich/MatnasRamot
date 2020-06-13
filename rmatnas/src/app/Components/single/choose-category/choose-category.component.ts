@@ -9,13 +9,6 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./choose-category.component.css']
 })
 export class ChooseCategoryComponent implements OnInit, OnDestroy {
-  categories: Category[] = [];
-  mySubscription: Subscription;
-  @Output() selectc: EventEmitter<{ checked: boolean, id: number, name: string }[]>
-  = new EventEmitter<{ checked: boolean, id: number, name: string }[]>();
-  @Input() chosenC: Category[] = [];
-  categoriesSelected: Category[] = [];
-  arr: Array<{ checked: boolean, id: number, name: string }> = [];
   constructor(private cs: CategoryService) {
     this.mySubscription = cs.getCategories().subscribe(data => {
       this.categories = data;
@@ -30,6 +23,15 @@ export class ChooseCategoryComponent implements OnInit, OnDestroy {
       }
     });
   }
+  displayForm = false;
+  categories: Category[] = [];
+  mySubscription: Subscription;
+  @Output() selectc: EventEmitter<{ checked: boolean, id: number, name: string }[]>
+    = new EventEmitter<{ checked: boolean, id: number, name: string }[]>();
+  @Input() chosenC: Category[] = [];
+  categoriesSelected: Category[] = [];
+  arr: Array<{ checked: boolean, id: number, name: string }> = [];
+  idOfCategory: number;
 
   ngOnInit() {
 
@@ -43,4 +45,28 @@ export class ChooseCategoryComponent implements OnInit, OnDestroy {
   add(event, c: Category) {
     this.selectc.emit(this.arr);
   }
+  displayCat(id: number) {
+    this.idOfCategory = id;
+    this.displayForm = true;
+  }
+
+  public reloadWithNewData(event: Category) {
+    debugger;
+    this.cs.getCategories().subscribe(res => {
+      this.arr = [];
+      this.categories = res;
+      if (this.chosenC) {
+        this.categories.forEach(element => {
+          if (this.chosenC.find(x => x.Id === element.Id)) {
+            this.arr.push({ checked: true, id: element.Id, name: element.Name });
+          } else {
+            this.arr.push({ checked: false, id: element.Id, name: element.Name });
+          }
+          this.displayForm = false;
+        });
+      }
+    });
+
+  }
+
 }
