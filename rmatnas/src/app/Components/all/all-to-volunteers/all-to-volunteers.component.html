@@ -5,7 +5,7 @@
         <mat-toolbar-row>
           <mat-form-field style="font-size: 50%; display: table">
             <mat-label>חיפוש שם</mat-label>
-            <input matInput (keyup)="applyFilter($event.target.value)">
+            <input matInput (focus)="$event.target.select()" (keyup)="applyFilter($event.target.value)">
           </mat-form-field>
           <span class="example-spacer"></span>
           <div class="example-header-image" mat-card-avatar matTooltip="הורדה לקובץ אקסל" *ngIf="!vId">

@@ -8,13 +8,13 @@
       <div class="form-group">
         <mat-form-field appearance="outline">
           <mat-hint>שם</mat-hint>
-          <input matInput maxlength="10" [(ngModel)]="newVolunteer.Name" name="Name" required>
+          <input matInput (focus)="$event.target.select()" maxlength="10" [(ngModel)]="newVolunteer.Name" name="Name" required>
           <mat-icon matPrefix>person</mat-icon>
         </mat-form-field>
         <br />
         <mat-form-field appearance="outline">
           <mat-hint>מייל</mat-hint>
-          <input matInput placeholder="volunteer@example.com" required email [(ngModel)]="newVolunteer.Email"
+          <input matInput (focus)="$event.target.select()" placeholder="volunteer@example.com" required email [(ngModel)]="newVolunteer.Email"
             name="Email">
           <mat-icon matPrefix>email</mat-icon>
           <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
@@ -22,25 +22,25 @@
         <br />
         <mat-form-field appearance="outline">
           <mat-hint>טלפון</mat-hint>
-          <input matInput placeholder="050-525-2525" appPhoneMask [(ngModel)]="newVolunteer.Telephone" name="Telephone">
+          <input matInput (focus)="$event.target.select()" placeholder="050-525-2525" appPhoneMask [(ngModel)]="newVolunteer.Telephone" name="Telephone">
           <mat-icon matPrefix>phone</mat-icon>
         </mat-form-field>
         <br />
         <mat-form-field appearance="outline">
           <mat-hint>פלאפון</mat-hint>
-          <input matInput placeholder="050-525-2525" required [(ngModel)]="newVolunteer.Pelephone" name="Pelephone">
+          <input matInput (focus)="$event.target.select()" placeholder="050-525-2525" required [(ngModel)]="newVolunteer.Pelephone" name="Pelephone">
           <mat-icon matPrefix>phone</mat-icon>
         </mat-form-field>
         <br />
         <mat-form-field appearance="outline">
           <mat-hint>כתובת</mat-hint>
-          <input matInput [(ngModel)]="newVolunteer.Address" name="Address">
+          <input matInput (focus)="$event.target.select()" [(ngModel)]="newVolunteer.Address" name="Address">
           <mat-icon matPrefix>location_city</mat-icon>
         </mat-form-field>
         <br />
         <mat-form-field appearance="outline">
           <mat-hint>תאריך לידה</mat-hint>
-          <input matInput [matDatepicker]="picker1" [(ngModel)]="newVolunteer.Age"
+          <input matInput (focus)="$event.target.select()" [matDatepicker]="picker1" [(ngModel)]="newVolunteer.Age"
             (ngModelChange)="newVolunteer.Age = $event" name="Age">
           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
           <mat-datepicker #picker1></mat-datepicker>
@@ -52,13 +52,12 @@
           (ngModelChange)="newVolunteer.IsActive = !newVolunteer.IsActive"></mat-slide-toggle>
         <br />
         <br />
-        <h5>קטגוריות</h5>
         <app-choose-category [chosenC]="categoriesOfVolunteer" (selectc)="selectCategories($event)">
         </app-choose-category>
       </div>
       <mat-form-field appearance="outline" class="example-full-width">
         <mat-hint>הערות</mat-hint>
-        <textarea matInput [(ngModel)]="newVolunteer.Comments" name="Comments"></textarea>
+        <textarea matInput (focus)="$event.target.select()" [(ngModel)]="newVolunteer.Comments" name="Comments"></textarea>
         <mat-icon matSuffix>comment</mat-icon>
       </mat-form-field>
       <mat-dialog-actions align="end">

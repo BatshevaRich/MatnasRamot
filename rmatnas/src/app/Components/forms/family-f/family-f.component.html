@@ -8,72 +8,71 @@
       <div class="form-group">
         <mat-form-field appearance="outline">
           <mat-hint>שם</mat-hint>
-          <input matInput maxlength="10" [(ngModel)]="newFamily.FirstNameFather" name="FirstNameFather" required>
+          <input matInput (focus)="$event.target.select()" maxlength="10" [(ngModel)]="newFamily.FirstNameFather" name="FirstNameFather" required>
           <mat-icon matPrefix>person</mat-icon>
         </mat-form-field>
         <br />
         <mat-form-field appearance="outline">
           <mat-hint>שם</mat-hint>
-          <input matInput maxlength="10" [(ngModel)]="newFamily.FirstNameMother" name="FirstNameMother" required>
+          <input matInput (focus)="$event.target.select()" maxlength="10" [(ngModel)]="newFamily.FirstNameMother" name="FirstNameMother" required>
           <mat-icon matPrefix>person</mat-icon>
         </mat-form-field>
         <br />
         <mat-form-field appearance="outline">
           <mat-hint>שם</mat-hint>
-          <input matInput maxlength="20" [(ngModel)]="newFamily.LastName" name="LastName" required>
+          <input matInput (focus)="$event.target.select()" maxlength="20" [(ngModel)]="newFamily.LastName" name="LastName" required>
           <mat-icon matPrefix>person</mat-icon>
         </mat-form-field>
         <br />
         <mat-form-field appearance="outline">
           <mat-hint>טלפון</mat-hint>
-          <input matInput placeholder="050-525-2525" appPhoneMask [(ngModel)]="newFamily.Telephone" name="Telephone">
+          <input matInput (focus)="$event.target.select()" placeholder="050-525-2525" appPhoneMask [(ngModel)]="newFamily.Telephone" name="Telephone">
           <mat-icon matPrefix>phone</mat-icon>
         </mat-form-field>
         <br />
         <mat-form-field appearance="outline">
           <mat-hint>פלאפון אב</mat-hint>
-          <input matInput placeholder="050-525-2525" required [(ngModel)]="newFamily.PelephoneFather"
+          <input matInput (focus)="$event.target.select()" placeholder="050-525-2525" required [(ngModel)]="newFamily.PelephoneFather"
             name="PelephoneFather">
           <mat-icon matPrefix>phone</mat-icon>
         </mat-form-field>
         <br />
         <mat-form-field appearance="outline">
           <mat-hint>פלאפון אם</mat-hint>
-          <input matInput placeholder="050-525-2525" required [(ngModel)]="newFamily.PelephoneMother"
+          <input matInput (focus)="$event.target.select()" placeholder="050-525-2525" required [(ngModel)]="newFamily.PelephoneMother"
             name="PelephoneMother">
           <mat-icon matPrefix>phone</mat-icon>
         </mat-form-field>
         <br />
         <mat-form-field appearance="outline">
           <mat-hint>כתובת</mat-hint>
-          <input matInput [(ngModel)]="newFamily.Address" name="Address">
+          <input matInput (focus)="$event.target.select()" [(ngModel)]="newFamily.Address" name="Address">
           <mat-icon matPrefix>location_city</mat-icon>
         </mat-form-field>
         <br />
         <mat-form-field appearance="outline">
           <mat-hint>גורם מפנה</mat-hint>
-          <input matInput maxlength="10" [(ngModel)]="newFamily.Reference" name="Reference">
+          <input matInput (focus)="$event.target.select()" maxlength="10" [(ngModel)]="newFamily.Reference" name="Reference">
           <mat-icon matPrefix>person</mat-icon>
         </mat-form-field>
         <br />
         <mat-form-field appearance="outline">
           <mat-hint>מספר ילדים</mat-hint>
-          <input [(ngModel)]="newFamily.NumChildren" name="NumChildren" type="number" min="0" max="20" matInput>
+          <input [(ngModel)]="newFamily.NumChildren" name="NumChildren" type="number" min="0" max="20" matInput (focus)="$event.target.select()">
         </mat-form-field>
         <br />
         <mat-form-field appearance="outline">
           <mat-hint>סטטוס</mat-hint>
-          <input matInput maxlength="10" [(ngModel)]="newFamily.Status" name="Status">
+          <input matInput (focus)="$event.target.select()" maxlength="10" [(ngModel)]="newFamily.Status" name="Status">
           <mat-icon matPrefix>person</mat-icon>
         </mat-form-field>
         <br />
         <mat-form-field appearance="outline" class="example-full-width">
           <mat-hint>סיבה</mat-hint>
-          <textarea matInput [(ngModel)]="newFamily.Reason" name="Reason"></textarea>
+          <textarea matInput (focus)="$event.target.select()" [(ngModel)]="newFamily.Reason" name="Reason"></textarea>
           <mat-icon matSuffix>comment</mat-icon>
         </mat-form-field>
         <br />
-        <h5>קטגוריות</h5>
         <app-choose-category [chosenC]="categoriesOfFamily" (selectc)="selectCategories($event)">
         </app-choose-category>
         <br />
