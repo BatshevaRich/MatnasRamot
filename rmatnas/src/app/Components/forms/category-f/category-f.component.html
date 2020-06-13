@@ -1,11 +1,27 @@
-<p>category-f works!</p>
-<h1>add category</h1>
-
-
-<h1>remove category</h1>
-
-<h1>edit category</h1>
-
-
-
-
+<span dir="rtl">
+    <h6 style="width: 100% !important; z-index: 2;">
+        <span *ngIf="!vId" mat-dialog-title>הוספת קטגוריה</span>
+        <span *ngIf="vId" mat-dialog-title>עדכון קטגוריה</span>
+    </h6>
+    <mat-dialog-content>
+        <form (ngSubmit)="submitForm(categoryForm)" class="text-right" #categoryForm="ngForm">
+            <div class="form-group">
+                <mat-form-field appearance="outline">
+                    <mat-hint>שם קטגוריה</mat-hint>
+                    <input matInput (focus)="$event.target.select()" maxlength="20" [(ngModel)]="newCategory.Name" name="Name" required>
+                    <mat-icon *ngIf="!vId" matPrefix>add_to_photos</mat-icon>
+                    <mat-icon *ngIf="vId" matPrefix>edit</mat-icon>
+                </mat-form-field>
+                <br />
+            </div>
+            <mat-dialog-actions align="end">
+                <button mat-button mat-raised-button mat-dialog-close>ביטול</button>
+                <button mat-button mat-raised-button type="submit">
+                    <span *ngIf="!vId">הוספה</span>
+                    <span *ngIf="vId">עדכון</span>
+                </button>
+            </mat-dialog-actions>
+        </form>
+        <br />
+    </mat-dialog-content>
+</span>

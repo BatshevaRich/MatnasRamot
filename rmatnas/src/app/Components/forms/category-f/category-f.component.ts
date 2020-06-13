@@ -16,9 +16,9 @@ export class CategoryFComponent implements OnInit {
   @Input() vId: number;
   @Output() changedCategory: EventEmitter<Category> = new EventEmitter<Category>();
   constructor(private cs: CategoryService,
-    private dialogRef: MatDialogRef<CategoryFComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    public snackBar: MatSnackBar) {
+              private dialogRef: MatDialogRef<CategoryFComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              public snackBar: MatSnackBar) {
 
   }
 
