@@ -41,6 +41,9 @@
           <mat-icon matPrefix>location_city</mat-icon>
         </mat-form-field>
         <br />
+        <app-choose-category [chosenC]="categoriesOfOrganization" (selectc)="selectCategories($event)">
+        </app-choose-category>
+        <br>
         <mat-form-field appearance="outline" class="example-full-width">
           <mat-hint>הערות</mat-hint>
           <textarea matInput (focus)="$event.target.select()" [(ngModel)]="newOrganization.Comments" name="Comments"></textarea>
