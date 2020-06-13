@@ -31,11 +31,11 @@
       <button hidden (click)="tabs.selectedIndex = 0">RESET</button>
       <mat-tab-group #tabs>
         <mat-tab></mat-tab> <!-- ADDITIONAL TAB -->
-        <mat-tab label="משפחות">
-          <app-all-families [vId]="vId"></app-all-families>
-        </mat-tab>
         <mat-tab label="מתנדבות">
           <app-all-volunteers></app-all-volunteers>
+        </mat-tab>
+        <mat-tab label="משפחות">
+          <app-all-families [vId]="vId"></app-all-families>
         </mat-tab>
         <mat-tab label="ארועים">
           <app-all-events></app-all-events>

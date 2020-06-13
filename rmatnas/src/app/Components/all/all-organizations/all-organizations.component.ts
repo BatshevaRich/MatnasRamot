@@ -35,7 +35,7 @@ export class AllOrganizationsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  displayedColumns = ['Name', 'Contact', 'Phone', 'Address', 'Email', 'columndelete'];
+  displayedColumns = ['Name', 'Contact', 'Phone', 'Address', 'Email', 'addVolunteer', 'addFamily', 'columndelete'];
   expandedElement: Details | null;
   dataSource = new MatTableDataSource();
   resultsLength = 0;
