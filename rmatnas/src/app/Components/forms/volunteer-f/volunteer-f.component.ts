@@ -27,7 +27,7 @@ export class VolunteerFComponent implements OnInit, OnDestroy {
               private dialogRef: MatDialogRef<VolunteerFComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
               public snackBar: MatSnackBar) {
-    this.mySubscription = cs.getCategories().subscribe(res => {
+    cs.getCategories().subscribe(res => {
       this.categories = res;
     });
   }

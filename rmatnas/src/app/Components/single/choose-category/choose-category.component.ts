@@ -10,17 +10,19 @@ import { Subscription } from 'rxjs';
 })
 export class ChooseCategoryComponent implements OnInit, OnDestroy {
   constructor(private cs: CategoryService) {
-    this.mySubscription = cs.getCategories().subscribe(data => {
+    cs.getCategories().subscribe(data => {
       this.categories = data;
-      if (this.chosenC) {
-        this.categories.forEach(element => {
+      this.categories.forEach(element => {
+        if (this.chosenC) {
           if (this.chosenC.find(x => x.Id === element.Id)) {
             this.arr.push({ checked: true, id: element.Id, name: element.Name });
           } else {
             this.arr.push({ checked: false, id: element.Id, name: element.Name });
           }
-        });
-      }
+        } else {
+          this.arr.push({ checked: false, id: element.Id, name: element.Name });
+        }
+      });
     });
   }
   displayForm = false;
