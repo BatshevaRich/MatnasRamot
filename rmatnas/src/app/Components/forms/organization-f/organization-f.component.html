@@ -1,40 +1,61 @@
-<div dir="rtl">
-        <form (ngSubmit)="submitForm(organizationForm)" class="text-right" #organizationForm="ngForm">
-          <div class="form-group">
-            <label>שם:
-              <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-                [(ngModel)]="newOrganization.name" name="name" required>
-            </label>
-            <span class="spn">&</span>
-            <label>שם איש קשר:
-              <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-                [(ngModel)]="newOrganization.contact" name="contact" required>
-            </label>
-            <br>
-            <label> פלאפון:
-              <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-              appPhoneMask [(ngModel)]="newOrganization.phone" name="phone" required>
-            </label>
-            <br>
-            <label> מייל:
-              <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm" email
-                [(ngModel)]="newOrganization.email" name="email">
-            </label>
-            <br>
-            <label> כתובת:
-              <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-                [(ngModel)]="newOrganization.address" name="address">
-            </label>
-            <br>
-            <label> הערות:
-              <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-                type="date" [(ngModel)]="newOrganization.comments" name="comments">
-            </label>
-            <br>
-          </div>
-          <button class="btn btn-primary" type="submit" [disabled]="organizationForm.invalid">להוספת הארגון</button>
-        </form>
-        <span *ngIf="organizationForm.submitted">
-          {{organizationForm.value | json}}
-        </span>
+<span dir="rtl">
+  <mat-toolbar style="width: 100% !important; z-index: 2;">
+    <span *ngIf="!data.update" mat-dialog-title>הוספת ארגון</span>
+    <span *ngIf="data.update" mat-dialog-title>עדכון ארגון</span>
+  </mat-toolbar>
+  <mat-dialog-content>
+    <form (ngSubmit)="submitForm(organizationForm)" class="text-right" #organizationForm="ngForm">
+      <div class="form-group">
+        <mat-form-field appearance="outline">
+          <mat-hint>שם</mat-hint>
+          <input matInput (focus)="$event.target.select()" maxlength="10" [(ngModel)]="newOrganization.Name" name="Name"
+            required>
+          <mat-icon matPrefix>person</mat-icon>
+        </mat-form-field>
+        <br />
+        <mat-form-field appearance="outline">
+          <mat-hint>איש קשר</mat-hint>
+          <input matInput (focus)="$event.target.select()" maxlength="10" [(ngModel)]="newOrganization.Contact" name="Contact"
+            required>
+          <mat-icon matPrefix>person</mat-icon>
+        </mat-form-field>
+        <br />
+        <mat-form-field appearance="outline">
+          <mat-hint>מייל</mat-hint>
+          <input matInput (focus)="$event.target.select()" placeholder="organization@example.com" required email
+            [(ngModel)]="newOrganization.email" name="Email">
+          <mat-icon matPrefix>email</mat-icon>
+          <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <br />
+        <mat-form-field appearance="outline">
+          <mat-hint>טלפון</mat-hint>
+          <input matInput (focus)="$event.target.select()" placeholder="050-525-2525" appPhoneMask
+            [(ngModel)]="newOrganization.Phone" name="Telephone">
+          <mat-icon matPrefix>phone</mat-icon>
+        </mat-form-field>
+        <br />
+        <mat-form-field appearance="outline">
+          <mat-hint>כתובת</mat-hint>
+          <input matInput (focus)="$event.target.select()" [(ngModel)]="newOrganization.Address" name="Address">
+          <mat-icon matPrefix>location_city</mat-icon>
+        </mat-form-field>
+        <br />
+        <mat-form-field appearance="outline" class="example-full-width">
+          <mat-hint>הערות</mat-hint>
+          <textarea matInput (focus)="$event.target.select()" [(ngModel)]="newOrganization.Comments" name="Comments"></textarea>
+          <mat-icon matSuffix>comment</mat-icon>
+        </mat-form-field>
+        <br />
       </div>
+      <mat-dialog-actions align="end">
+        <button mat-button mat-raised-button mat-dialog-close>ביטול</button>
+        <button mat-button mat-raised-button [mat-dialog-close]="token" type="submit">
+          <span *ngIf="!data.update">הוספה</span>
+          <span *ngIf="data.update">עדכון</span>
+        </button>
+      </mat-dialog-actions>
+    </form>
+    <br />
+  </mat-dialog-content>
+</span>
