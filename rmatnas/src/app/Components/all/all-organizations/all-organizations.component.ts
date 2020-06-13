@@ -90,4 +90,12 @@ export class AllOrganizationsComponent implements OnInit, AfterViewInit {
     });
   }
 
+  addVolunteer(event, elm) {
+    // this.os.addVolunteerToOrganization()
+  }
+
+  addFamily(event, elm) {
+
+  }
+
 }

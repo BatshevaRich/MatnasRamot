@@ -1,7 +1,7 @@
 <mat-card dir="rtl">
   <mat-toolbar>
     <mat-card-header>
-      <div mat-card-avatar class="example-header-image"><i class="fa fa-user" style="size: 7x;"></i></div>
+      <div mat-card-avatar class="example-header-image"><mat-icon> directions_run</mat-icon></div>
       <mat-card-title>{{ toVolunteer.DateAdded | date:"MMMM dd yyyy" }}</mat-card-title>
     </mat-card-header>
   </mat-toolbar>
@@ -11,10 +11,10 @@
     <p>משפחה: {{ toVolunteer.Family.LastName }}</p>
     <p>תאריך: {{ toVolunteer.DateAdded | date:"MMMM dd yyyy" }}</p>
     <p>הערות: {{ toVolunteer.Comments }}</p>
-    <mat-card-actions>
+    <!-- <mat-card-actions>
       <button mat-raised-button (click)="ToVolunteeropenDialog()">לעריכת
         הפרטים</button>
-    </mat-card-actions>
+    </mat-card-actions> -->
 
   </mat-card-content>
 </mat-card>
