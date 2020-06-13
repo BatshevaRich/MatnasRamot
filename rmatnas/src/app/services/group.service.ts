@@ -22,7 +22,7 @@ export class GroupService {
   addOrganization(organization: Organization) {
     // const head = {params: new HttpParams().set ('newOrganization','Organization')};
     const s = Organization;
-    const newOrganization = new Organization(52, 'dgfgg', null, null, null, null, null);
+    const newOrganization = new Organization('dgfgg', null, null, null, null, null);
 
     this.http
       .post(this.path, newOrganization)

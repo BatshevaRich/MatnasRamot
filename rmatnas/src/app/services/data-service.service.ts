@@ -73,7 +73,6 @@ export class DataServiceService {
     this.events.push(new Eventt(1, 'ברירת מחדל', '1999'));
     this.organizations.push(
       new Organization(
-        1,
         'ברירת מחדל',
         'ברירת מחדל',
         '879864596',
