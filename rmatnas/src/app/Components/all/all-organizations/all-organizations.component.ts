@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, Input, AfterViewInit } from '@angular/core';
 import { Organization } from 'src/app/Classes/Organization';
-import { DataServiceService } from '../../../Services/data-service.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MatSort, MatTable, MatPaginator, MatTableDataSource, MatDialog } from '@angular/material';
 import { OrganizationService } from 'src/app/services/organization.service';

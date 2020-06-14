@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject, ViewChild, OnDestroy } from '@angular/core';
 import { Family } from 'src/app/Classes/Family';
-import { DataServiceService } from '../../../Services/data-service.service';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FamilyService } from 'src/app/services/family.service';

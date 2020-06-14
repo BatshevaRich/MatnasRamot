@@ -1,6 +1,5 @@
 import { Component, OnInit, EventEmitter,Output } from '@angular/core';
 import { MyTask } from 'src/app/Classes/MyTask';
-import { DataServiceService } from 'src/app/Services/data-service.service';
 
 @Component({
   selector: 'app-task-f',
@@ -11,7 +10,7 @@ export class TaskFComponent implements OnInit {
 
   @Output()mySend:EventEmitter<MyTask>=new EventEmitter<MyTask>();
   newTask: MyTask = new MyTask(1, 'ברירת מחדל', 'ברירת מחדל');
-  constructor(public ds: DataServiceService) { }
+  constructor() { }
 
   ngOnInit() {
   }

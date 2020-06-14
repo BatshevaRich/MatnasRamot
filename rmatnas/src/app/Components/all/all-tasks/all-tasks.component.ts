@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MyTask} from '../../../Classes/MyTask';
-import { DataServiceService } from 'src/app/Services/data-service.service';
 @Component({
   selector: 'app-all-tasks',
   templateUrl: './all-tasks.component.html',
@@ -9,7 +8,7 @@ import { DataServiceService } from 'src/app/Services/data-service.service';
 export class AllTasksComponent implements OnInit {
   tasks: MyTask[] = [];
   sumDone: number;
-  constructor(public ds: DataServiceService) {
+  constructor() {
     this.tasks.push(new MyTask(1, 'להזמין פרסומת בלוח קיר', '02/05/2019'));
     this.tasks.push(new MyTask(2, 'לברר בקשר למשפחת לוי', '02/05/2019'));
     this.tasks.push(

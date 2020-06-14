@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { DataServiceService } from '../../../Services/data-service.service';
 import { ActivatedRoute } from '@angular/router';
 import { Organization } from 'src/app/Classes/Organization';
 import { Category } from 'src/app/Classes/Category';
