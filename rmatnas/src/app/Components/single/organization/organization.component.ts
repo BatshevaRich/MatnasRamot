@@ -22,6 +22,11 @@ export class OrganizationComponent implements OnInit, OnDestroy {
   @Input() toV: boolean;
   @Output() addedOrganization: EventEmitter<Organization> = new EventEmitter<Organization>();
   mySubscription: Subscription;
+  selectedTabIndex: any;
+  showEvent: boolean;
+  showFamily: boolean;
+  showOrganization: boolean;
+  showVolunteer: boolean;
   constructor(public vs: OrganizationService,
               public dialog: MatDialog,
               private elementRef: ElementRef) {
@@ -52,6 +57,21 @@ export class OrganizationComponent implements OnInit, OnDestroy {
     });
     dialogRef.afterClosed().subscribe(res => {
       this.addedOrganization.emit(res);
+    });
+  }
+
+  onTabChange(event) {
+    setTimeout(() => {
+      this.selectedTabIndex = event;
+      if (event.index === 3) {
+        this.showEvent = true;
+      }
+      if (event.index === 1) {
+        this.showVolunteer = true;
+      }
+      if (event.index === 2) {
+        this.showFamily = true;
+      }
     });
   }
 

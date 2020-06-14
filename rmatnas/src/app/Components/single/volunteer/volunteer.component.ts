@@ -1,6 +1,5 @@
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { Volunteer } from '../../../Classes/Volunteer';
-import { Subscription } from 'rxjs';
 import { VolunteerService } from 'src/app/services/volunteer.service';
 import { Category } from 'src/app/Classes/Category';
 import { MatDialog } from '@angular/material/dialog';
@@ -18,7 +17,10 @@ export class VolunteerComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() vId: number;
   @Input() toV: boolean;
   @Output() addedVolunteer: EventEmitter<Volunteer> = new EventEmitter<Volunteer>();
-  mySubscription: Subscription;
+  selectedTabIndex: number;
+  showFamily = false;
+  showEvent = false;
+  showOrganization = false;
   constructor(public vs: VolunteerService,
               public dialog: MatDialog,
               private elementRef: ElementRef) {
@@ -57,4 +59,18 @@ export class VolunteerComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
+  onTabChange(event) {
+    setTimeout(() => {
+      this.selectedTabIndex = event;
+      if (event.index === 3) {
+        this.showEvent = true;
+      }
+      if (event.index === 1) {
+        this.showFamily = true;
+      }
+      if (event.index === 2) {
+        this.showOrganization = true;
+      }
+    });
+  }
 }

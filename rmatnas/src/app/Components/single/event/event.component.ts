@@ -21,6 +21,11 @@ export class EventComponent implements OnInit, OnDestroy {
   @Input() toV: boolean;
   @Output() addedEvent: EventEmitter<Eventt> = new EventEmitter<Eventt>();
   mySubscription: Subscription;
+  selectedTabIndex: any;
+  showEvent: boolean;
+  showFamily: boolean;
+  showOrganization: boolean;
+  showVolunteer: boolean;
   constructor(public es: EventService,
               public dialog: MatDialog,
               private elementRef: ElementRef) {
@@ -49,6 +54,21 @@ export class EventComponent implements OnInit, OnDestroy {
     });
     dialogRef.afterClosed().subscribe(res => {
       this.addedEvent.emit(res);
+    });
+  }
+
+  onTabChange(event) {
+    setTimeout(() => {
+      this.selectedTabIndex = event;
+      if (event.index === 3) {
+        this.showOrganization = true;
+      }
+      if (event.index === 1) {
+        this.showVolunteer = true;
+      }
+      if (event.index === 2) {
+        this.showFamily = true;
+      }
     });
   }
 

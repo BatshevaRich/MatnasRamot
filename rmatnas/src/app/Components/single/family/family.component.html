@@ -34,17 +34,17 @@
       </mat-card>
     <!-- </div> -->
     <div *ngIf="toV != true">
-      <button hidden (click)="tabs.selectedIndex = 0">RESET</button>
-      <mat-tab-group #tabs>
+      <button *ngIf="false" (click)="tabs.selectedIndex = 0">RESET</button>
+      <mat-tab-group dir="rtl" (selectedTabChange)="onTabChange($event)" #tabs>
         <mat-tab></mat-tab> <!-- ADDITIONAL TAB -->
         <mat-tab label="מתנדבות">
-          <app-all-volunteers [vId]="vId"></app-all-volunteers>
+          <app-all-volunteers *ngIf="showVolunteer" dir="rtl" [vId]="vId"></app-all-volunteers>
         </mat-tab>
         <mat-tab label="ארגונים">
-          <app-all-organizations></app-all-organizations>
+          <app-all-organizations *ngIf="showOrganization" dir="rtl"></app-all-organizations>
         </mat-tab>
         <mat-tab label="ארועים">
-          <app-all-events></app-all-events>
+          <app-all-events *ngIf="showEvent" dir="rtl"></app-all-events>
         </mat-tab>
       </mat-tab-group>
     </div>

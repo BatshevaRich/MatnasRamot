@@ -32,6 +32,10 @@ export class FamilyComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() toV: boolean;
   @Output() addedFamily: EventEmitter<Family> = new EventEmitter<Family>();
   chooseTab: string;
+  selectedTabIndex: any;
+  showEvent: boolean;
+  showVolunteer: boolean;
+  showOrganization: boolean;
   constructor(public fs: FamilyService,
               public dialog: MatDialog,
               private elementRef: ElementRef) { }
@@ -64,6 +68,21 @@ export class FamilyComponent implements OnInit, OnDestroy, AfterViewInit {
     });
     dialogRef.afterClosed().subscribe(res => {
       this.addedFamily.emit(res);
+    });
+  }
+
+  onTabChange(event) {
+    setTimeout(() => {
+      this.selectedTabIndex = event;
+      if (event.index === 3) {
+        this.showEvent = true;
+      }
+      if (event.index === 1) {
+        this.showVolunteer = true;
+      }
+      if (event.index === 2) {
+        this.showOrganization = true;
+      }
     });
   }
 }
