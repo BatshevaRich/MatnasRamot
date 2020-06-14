@@ -11,7 +11,6 @@ import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './Components/UI/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FooterComponent } from './Components/UI/footer/footer.component';
-import { AsideComponent } from './Components/UI/aside/aside.component';
 import { EventComponent } from './Components/single/event/event.component';
 import { OrganizationComponent } from './Components/single/organization/organization.component';
 import { AllEventsComponent } from './Components/all/all-events/all-events.component';
@@ -67,7 +66,6 @@ WebFont.load({
     AllOrganizationsComponent,
     HomeComponent,
     FooterComponent,
-    AsideComponent,
     MyTaskComponent,
     ChooseCategoryComponent,
     AllTasksComponent,
