@@ -16,12 +16,13 @@ export class MainComponent {
     cs.getCategories().subscribe(res => {
       this.categories = res;
       cs.GetAllCategoriesOfAllVolunteers().subscribe(data => {
-        const all = data.reduce((map => (r, a) =>
-          (!map.has(a.Name) && map.set(a.Name, r[r.push({ name: a.Name, count: a.Id }) - 1]), map.get(a.Name), r))(new Map()),
-          []
-        );
-        all.forEach((element: { name: Label; count: number; }) => {
-          this.pieChartLabels.push(element.name);
+        const all = [...data.reduce((mp, o) => {
+          if (!mp.has(o.Name)) { mp.set(o.Name, { ...o, count: 0 }); }
+          mp.get(o.Name).count++;
+          return mp;
+        }, new Map()).values()];
+        all.forEach((element: { Name: Label; count: number; }) => {
+          this.pieChartLabels.push(element.Name);
           this.pieChartData.push(element.count);
         });
       });
