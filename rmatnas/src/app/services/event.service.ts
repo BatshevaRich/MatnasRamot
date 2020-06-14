@@ -15,15 +15,13 @@ export class EventService {
     return this.http.get<Eventt[]>(this.path);
   }
   getEvent(id: number): Observable<Eventt> {
-    return this.http.get<Eventt>(this.path + id);
+    return this.http.get<Eventt>(this.path + '/' + id);
   }
-  addEvent(event: Eventt) {
-
-   this.http.post(this.path, event).subscribe(data => { });
+  addEvent(event: Eventt, categoriesSelect: Category[]) {
+   return this.http.post(this.path, event).toPromise();
   }
-  updateEvent(event: Eventt) {
-   this.http.put(this.path + event.Id, event).subscribe(data => {
-   });
+  updateEvent(event: Eventt, categoriesSelect: Category[]) {
+   return this.http.put(this.path + event.Id, event);
   }
   removeEvent(id: number) {
    this.http.delete(this.path + id).subscribe(data => {

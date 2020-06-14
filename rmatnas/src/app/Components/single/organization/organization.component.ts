@@ -30,7 +30,6 @@ export class OrganizationComponent implements OnInit, OnDestroy {
     if (this.mySubscription) {
       this.mySubscription.unsubscribe();
     }
-
   }
 
   ngOnInit() {
