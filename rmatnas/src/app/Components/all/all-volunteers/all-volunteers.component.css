@@ -76,8 +76,7 @@ tr.example-element-row:not(.example-expanded-row):active {
   hyphens: auto;
 }
 .example-header-image {
-  background-image: url('../../../../assets/img/icons8-microsoft-excel-30.png');
-  /* background-size: cover; */
+    /* background-size: cover; */
 }
 
 .hidden {

@@ -112,7 +112,7 @@ export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewIni
 
   confirmDialog(): Observable<any> {
     const message = `מחיקה זו היא לצמיתות! האם תרצי להמשיך?`;
-    const dialogData = new ConfirmDialogModel('מחיקת מתנדבת', message);
+    const dialogData = new ConfirmDialogModel('מחיקת התנדבות', message);
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       maxWidth: '75%',
       data: dialogData

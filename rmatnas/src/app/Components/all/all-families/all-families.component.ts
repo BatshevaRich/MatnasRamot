@@ -140,7 +140,7 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
 
   confirmDialog(): Observable<any> {
     const message = `מחיקה זו היא לצמיתות! האם תרצי להמשיך?`;
-    const dialogData = new ConfirmDialogModel('מחיקת מתנדבת', message);
+    const dialogData = new ConfirmDialogModel('מחיקת משפחה', message);
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       maxWidth: '75%',
       data: dialogData

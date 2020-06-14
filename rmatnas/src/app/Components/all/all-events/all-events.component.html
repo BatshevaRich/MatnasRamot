@@ -6,12 +6,13 @@
           <mat-form-field style="font-size: 50%; display: table">
             <mat-label>חיפוש בכל השדות</mat-label>
             <input matInput (focus)="$event.target.select()">
+            <i matPrefix class="fa fa-search" aria-hidden="true"></i>
             <!-- (keyup)="applyFilter($event.target.value)" -->
           </mat-form-field>
           <span class="example-spacer"></span>
           <!-- <div class="example-header-image" mat-card-avatar matTooltip="הורדה לקובץ אקסל" (click)="exportTableToExcel()"
           *ngIf="!vId">
-          <mat-icon>file_copy</mat-icon>
+          <i class="fa fa-file-excel-o" aria-hidden="true"></i>
         </div> -->
         </mat-toolbar-row>
       </mat-card-header>
@@ -37,21 +38,21 @@
             <ng-container *ngIf="!vId" matColumnDef="addVolunteer">
               <th mat-header-cell *matHeaderCellDef>+ מתנדבת</th>
               <td mat-cell *matCellDef="let element">
-                <h5 (click)="delete(element, element)"><mat-icon>person_add</mat-icon>
+                <h5 (click)="delete(element, element)"><i class="fa fa-user-plus"></i>
                 </h5>
               </td>
             </ng-container>
             <ng-container *ngIf="!vId" matColumnDef="addFamily">
               <th mat-header-cell *matHeaderCellDef> + משפחה</th>
               <td mat-cell *matCellDef="let element">
-                <h5 (click)="delete(element, element)"><mat-icon>child_friendly</mat-icon>
+                <h5 (click)="delete(element, element)"><i class="fa fa-child"></i>
                 </h5>
               </td>
             </ng-container>
             <ng-container matColumnDef="showDetails">
               <th mat-header-cell *matHeaderCellDef>פרטים </th>
               <td mat-cell *matCellDef="let element">
-                <h5 (click)="showDetails(element)"><mat-icon>expand_more</mat-icon>
+                <h5 (click)="showDetails(element)"><i class="fa fa-caret-down"></i>
                 </h5>
               </td>
             </ng-container>
