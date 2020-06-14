@@ -49,24 +49,12 @@ export class AllOrganizationsComponent implements OnInit, OnDestroy, AfterViewIn
               public dialog: MatDialog,
               private elementRef: ElementRef) { }
 
-              ngOnDestroy() {
-                this.elementRef.nativeElement.remove();
-              }
+  ngOnDestroy() {
+    this.elementRef.nativeElement.remove();
+  }
   ngOnInit() {
     if (this.vId) {
-      // this.organizations = [];
-     } else {
-      // this.organizations = this.os.getOrganizations().subscribe((organizations: Organization[]) => {
-      //   this.loaded = true;
-      //   if (organizations.length === 0) {
-      //     this.notFound = true;
-      //   } else {
-      //     this.organizations = organizations;
-      //     this.dataSource.data = organizations;
-      //     this.resultsLength = this.dataSource.data.length;
-      //     this.error = false;
-      //   }
-      // }, err => { this.error = true; this.loaded = true; });
+      this.displayedColumns = ['Name', 'Contact', 'Phone', 'Address', 'Email'];
     }
   }
 

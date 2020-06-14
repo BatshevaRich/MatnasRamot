@@ -49,9 +49,10 @@ export class AllEventsComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit() {
     if (this.vId) {
-      this.eventts = [];
+      this.displayedColumns = ['Name', 'Description', 'StartDate', 'EndDate'];
     }
   }
+
   ngOnDestroy() {
     this.elementRef.nativeElement.remove();
   }
