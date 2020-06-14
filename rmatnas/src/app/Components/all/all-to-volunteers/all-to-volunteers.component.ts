@@ -1,6 +1,4 @@
 import { Component, OnInit, Input, ViewChild, AfterViewInit, OnDestroy, ElementRef } from '@angular/core';
-import { VolunteerService } from 'src/app/services/volunteer.service';
-import { Volunteer } from 'src/app/Classes/Volunteer';
 import { VolunteerAndFamilyService } from 'src/app/services/volunteer-and-family.service';
 import { VolunteerAndFamily } from 'src/app/Classes/VolunteerAndFamily';
 import { Family } from 'src/app/Classes/Family';
@@ -11,6 +9,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material';
 import { Observable } from 'rxjs';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../../forms/confirm-dialog/confirm-dialog.component';
+import * as XLSX from 'xlsx';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-all-to-volunteers',
@@ -118,6 +118,19 @@ export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewIni
       data: dialogData
     });
     return dialogRef.afterClosed();
+  }
+
+  public exportTableToExcel() {
+    const data = this.allvolunteerings.map(x => ({
+      שם_מתנדבת: x.NameVolunteer,
+      שם_משפחה: x.NameFamily,
+      קטגוריה: x.Category,
+      פלאפון_מתנדבת: x.PelephoneVolunteer,
+    }));
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.json_to_sheet(data);
+    XLSX.utils.book_append_sheet(wb, ws, 'התנדבויות');
+    XLSX.writeFile(wb, `התנדבויות.xlsx`);
   }
 
 }
