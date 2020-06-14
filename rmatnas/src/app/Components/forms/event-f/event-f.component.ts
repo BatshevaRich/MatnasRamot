@@ -29,7 +29,7 @@ export class EventFComponent implements OnInit {
               private dialogRef: MatDialogRef<OrganizationFComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
               public snackBar: MatSnackBar,
-               fb: FormBuilder) {
+              fb: FormBuilder) {
                 this.form = fb.group({
                   date: [{begin: new Date(2020, 7, 5), end: new Date(2020, 7, 25)}]
                 });

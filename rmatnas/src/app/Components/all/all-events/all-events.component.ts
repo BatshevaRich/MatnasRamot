@@ -4,6 +4,7 @@ import { EventService } from 'src/app/services/event.service';
 import { MatSort, MatTable, MatPaginator, MatTableDataSource, MatDialog } from '@angular/material';
 import { Observable } from 'rxjs';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../../forms/confirm-dialog/confirm-dialog.component';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 export interface Details {
   Id: number;
   Name: string;
@@ -16,7 +17,14 @@ export interface Details {
 @Component({
   selector: 'app-all-events',
   templateUrl: './all-events.component.html',
-  styleUrls: ['./all-events.component.css']
+  styleUrls: ['./all-events.component.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class AllEventsComponent implements OnInit, AfterViewInit {
   eventts: any;

@@ -22,18 +22,15 @@ export class EventComponent implements OnInit, OnDestroy {
   @Output() addedEvent: EventEmitter<Eventt> = new EventEmitter<Eventt>();
   mySubscription: Subscription;
   constructor(public es: EventService, public dialog: MatDialog, public ARS: ActivatedRoute) {
-
-    this.mySubscription = ARS.params.subscribe((args) => {
-      this.id = args.eventId;
-      es.getEvent(this.id).subscribe(e => {
-        this.myEvent = e;
-      });
-      if (this.mySubscription) {
-      this.mySubscription.unsubscribe();
-    }
-    });
+    this.myEvent = new Eventt('...', '...', '11/10/1999', '11/10/1999', '11/10/1999');
   }
   ngOnInit() {
+    this.es.getEvent(this.vId).subscribe(v => {
+      this.myEvent = v;
+      // this.vs.getCategoriesOfVolunteer(this.vId).subscribe(c => {
+      //   this.categories = c;
+      // });
+    });
   }
   ngOnDestroy(): void {
     if (this.mySubscription) {

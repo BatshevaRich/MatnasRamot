@@ -28,11 +28,11 @@
             </ng-container>
             <ng-container matColumnDef="StartDate">
               <th mat-header-cell *matHeaderCellDef> תאריך התחלה </th>
-              <td mat-cell *matCellDef="let element"> {{element.StartDate}} </td>
+              <td mat-cell *matCellDef="let element"> {{element.StartDate | date:"MMMM dd yyyy"}} </td>
             </ng-container>
             <ng-container matColumnDef="EndDate">
               <th mat-header-cell *matHeaderCellDef> תאריך סיום </th>
-              <td mat-cell *matCellDef="let element"> {{element.EndDate}} </td>
+              <td mat-cell *matCellDef="let element"> {{element.EndDate | date:"MMMM dd yyyy"}} </td>
             </ng-container>
             <ng-container *ngIf="!vId" matColumnDef="addVolunteer">
               <th mat-header-cell *matHeaderCellDef>+ מתנדבת</th>
