@@ -123,7 +123,8 @@
                             class="fa fa-user-plus"></i> הוספה</button>
                 </mat-menu>
             </span>
-            <span><button mat-button [matMenuTriggerFor]="menuF" class="nav-letters">
+            <span>
+                <button mat-button [matMenuTriggerFor]="menuF" class="nav-letters">
                     <mat-icon>child_friendly</mat-icon>משפחות
                 </button>
                 <mat-menu #menuF="matMenu">
@@ -133,14 +134,28 @@
                         הוספה</button>
                 </mat-menu>
             </span>
-            <span><button mat-button class="nav-letters">
-                    <a class="nav-link" routerLink="/list/organizations" routerLinkActive="activeLink">
-                        ארגונים</a>
-                </button></span>
-            <span><button mat-button class="nav-letters">
-                    <a class="nav-link" routerLink="/list/events" routerLinkActive="activeLink">
-                        ארועים</a>
-                </button></span>
+            <span>
+                <button mat-button [matMenuTriggerFor]="menuG" class="nav-letters">
+                    <mat-icon>group</mat-icon>ארגונים
+                </button>
+                <mat-menu #menuG="matMenu">
+                    <button mat-menu-item class="nav-link" [routerLink]="'/list/organizations'"
+                        routerLinkActive="activeLink"><i class="fa fa-list"></i> כל הארגונים</button>
+                    <button mat-menu-item (click)="OrganizationopenDialog()"><i class="fa fa-user-plus">
+                        </i> הוספה</button>
+                </mat-menu>
+            </span>
+            <span>
+                <button mat-button [matMenuTriggerFor]="menuE" class="nav-letters">
+                    <mat-icon>event</mat-icon>ארועים
+                </button>
+                <mat-menu #menuE="matMenu">
+                    <button mat-menu-item class="nav-link" [routerLink]="'/list/events'"
+                        routerLinkActive="activeLink"><i class="fa fa-list"></i> כל הארועים</button>
+                    <button mat-menu-item (click)="EventopenDialog()"><i class="fa fa-user-plus">
+                        </i> הוספה</button>
+                </mat-menu>
+            </span>
             <span><button mat-button class="nav-letters">
                     <a class="nav-link" routerLink="/list/tasks" routerLinkActive="activeLink">
                         מטלות</a>
