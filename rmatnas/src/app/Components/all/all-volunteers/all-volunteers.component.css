@@ -75,9 +75,6 @@ tr.example-element-row:not(.example-expanded-row):active {
   -webkit-hyphens: auto;
   hyphens: auto;
 }
-.example-header-image {
-    /* background-size: cover; */
-}
 
 .hidden {
   display: none

@@ -3,11 +3,10 @@
     <div [ngClass]="loaded &&!notFound? 'fullscreen': 'hidden'">
       <mat-card-header>
         <mat-toolbar-row>
-          <mat-form-field style="font-size: 50%; display: table">
-            <mat-label>חיפוש בכל השדות</mat-label>
-            <input matInput (focus)="$event.target.select()">
+          <mat-form-field style="display: table">
+            <mat-label>חיפוש</mat-label>
+            <input matInput (focus)="$event.target.select()" (keyup)="applyFilter($event.target.value)">
             <i matPrefix class="fa fa-search" aria-hidden="true"></i>
-            <!-- (keyup)="applyFilter($event.target.value)" -->
           </mat-form-field>
           <span class="example-spacer"></span>
           <!-- <div class="example-header-image" mat-card-avatar matTooltip="הורדה לקובץ אקסל" (click)="exportTableToExcel()"

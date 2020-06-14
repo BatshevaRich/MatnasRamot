@@ -3,8 +3,8 @@
     <div [ngClass]="loaded &&!notFound? 'fullscreen': 'hidden'">
       <mat-card-header>
         <mat-toolbar-row>
-          <mat-form-field style="font-size: 50%; display: table">
-            <mat-label>חיפוש בכל השדות</mat-label>
+          <mat-form-field style="display: table">
+            <mat-label>חיפוש</mat-label>
             <input matInput (focus)="$event.target.select()" (keyup)="applyFilter($event.target.value)">
             <i matPrefix class="fa fa-search" aria-hidden="true"></i>
           </mat-form-field>
@@ -65,12 +65,13 @@
               </td>
             </ng-container>
             <ng-container matColumnDef="expandedDetail">
-              <td mat-cell *matCellDef="let element"  [attr.colspan]="displayedColumns.length">
+              <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
                 <div class="example-element-detail" [@detailExpand]="
                       element == expandedElement ? 'expanded' : 'collapsed'
                     ">
                   <div *ngIf="element.show" class="example-element-description">
-                    <app-volunteer *ngIf="!vId" (addedVolunteer)="updateTable($event)" [vId]="element.Id"></app-volunteer>
+                    <app-volunteer *ngIf="!vId" (addedVolunteer)="updateTable($event)" [vId]="element.Id">
+                    </app-volunteer>
                     <span class="example-element-description-attribution">
                     </span>
                   </div>

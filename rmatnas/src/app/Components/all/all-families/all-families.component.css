@@ -77,10 +77,6 @@ tr.example-element-row:not(.example-expanded-row):active {
   hyphens: auto;
 }
 
-.example-header-image {
-    /* background-size: cover; */
-}
-
 .example-spacer {
   flex: 1 1 auto;
 }

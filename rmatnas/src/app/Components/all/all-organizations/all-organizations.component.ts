@@ -96,6 +96,12 @@ export class AllOrganizationsComponent implements OnInit, OnDestroy, AfterViewIn
     });
   }
 
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+  }
+
   showDetails(element) {
     element.show = !element.show;
   }

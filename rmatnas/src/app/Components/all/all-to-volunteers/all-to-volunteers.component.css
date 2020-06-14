@@ -90,10 +90,6 @@ tr.example-element-row:not(.example-expanded-row):active {
   padding: 5px;
 }
 
-.example-header-image {
-    /* background-size: cover; */
-}
-
 .example-spacer {
   flex: 1 1 auto;
 }

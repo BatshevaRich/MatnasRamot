@@ -75,9 +75,6 @@ table {
     -webkit-hyphens: auto;
     hyphens: auto;
   }
-  .example-header-image {
-        /* background-size: cover; */
-  }
   
   .hidden {
     display: none
