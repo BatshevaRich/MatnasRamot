@@ -1,20 +1,37 @@
-<div dir="rtl">
-        <form (ngSubmit)="submitForm(eventForm)" class="text-right" #eventForm="ngForm">
-          <div class="form-group">
-            <label>תאור:
-              <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-                [(ngModel)]="newEvent.Description" name="Description" required>
-            </label>
-           <br>
-            <label> תאריך:
-              <input class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-                type="date" [(ngModel)]="newEvent.DateAdded" name="DateAdded">
-            </label>
-            <br>
-          </div>
-          <button class="btn btn-primary" type="submit" [disabled]="eventForm.invalid">להוספת הארוע</button>
-        </form>
-        <span *ngIf="eventForm.submitted">
-          {{eventForm.value | json}}
-        </span>
+<span dir="rtl">
+  <mat-toolbar style="width: 100% !important; z-index: 2;">
+    <span *ngIf="!data.update" mat-dialog-title>הוספת ארוע</span>
+    <span *ngIf="data.update" mat-dialog-title>עדכון ארוע</span>
+  </mat-toolbar>
+  <mat-dialog-content>
+    <form (ngSubmit)="submitForm(eventForm)" [formGroup]="form" class="text-right" #eventForm="ngForm">
+      <div class="form-group">
+        <mat-form-field appearance="outline">
+          <mat-hint>שם</mat-hint>
+          <input matInput (focus)="$event.target.select()" maxlength="15" [(ngModel)]="newEvent.Name" [ngModelOptions]="{standalone: true}" name="Name"
+            required>
+          <mat-icon matPrefix>create</mat-icon>
+        </mat-form-field>
+        <br />
+        <mat-form-field>
+          <input matInput placeholder="Choose a date" [satDatepicker]="picker" formControlName="date">
+          <sat-datepicker style="text-align: left;" dir="ltr" #picker [rangeMode]="true">
+          </sat-datepicker>
+          <sat-datepicker-toggle matSuffix [for]="picker"></sat-datepicker-toggle>
+        </mat-form-field>
+        <br>
+        <app-choose-category [chosenC]="categoriesOfOrganization" (selectc)="selectCategories($event)">
+        </app-choose-category>
+        <br>
       </div>
+      <mat-dialog-actions align="end">
+        <button mat-button mat-raised-button mat-dialog-close>ביטול</button>
+        <button mat-button mat-raised-button [mat-dialog-close]="token" type="submit">
+          <span *ngIf="!data.update">הוספה</span>
+          <span *ngIf="data.update">עדכון</span>
+        </button>
+      </mat-dialog-actions>
+    </form>
+    <br />
+  </mat-dialog-content>
+</span>

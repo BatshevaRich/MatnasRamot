@@ -1,42 +1,43 @@
-<div class="text-right" dir="rtl">
-    <h4>ID: {{event.Id}}</h4>
-    <h4>תאור: {{event.Description}}</h4>
-    <h4>תאריך: {{event.DateAdded}}</h4>
+<div dir="rtl" class="text-right" style="padding-top: 1%">
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3%" fxLayoutAlign="center">
+    <!-- <div fxFlex="20%"> -->
+    <mat-card>
+      <mat-toolbar>
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"><i class="fa fa-user" style="size: 7x;"></i></div>
+          <mat-card-title>{{ myEvent.Name }}</mat-card-title>
+        </mat-card-header>
+      </mat-toolbar>
+      <mat-card-content>
+        <p>איש קשר: {{myEvent.Description}}</p>
+        <p>פלאפון: {{myEvent.DateAdded}}</p>
+        <header *ngIf="categories.length > 0">קטגוריות</header>
+        <div *ngFor="let c of categories">
+          <li>
+            {{c.Name}}</li>
+        </div>
+        <mat-card-actions>
+          <button mat-raised-button (click)="EventOpenDialog()">לעריכת
+            הפרטים</button>
+        </mat-card-actions>
+
+      </mat-card-content>
+    </mat-card>
+    <!-- </div> -->
+    <div *ngIf="toV != true">
+      <button hidden (click)="tabs.selectedIndex = 0">RESET</button>
+      <mat-tab-group #tabs>
+        <mat-tab></mat-tab> <!-- ADDITIONAL TAB -->
+        <mat-tab label="מתנדבות">
+          <app-all-volunteers></app-all-volunteers>
+        </mat-tab>
+        <mat-tab label="משפחות">
+          <app-all-families [vId]="vId"></app-all-families>
+        </mat-tab>
+        <mat-tab label="ארגונים">
+          <app-all-organizations></app-all-organizations>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
   </div>
-  <div dir="rtl">
-    <nav class="navbar navbar-expand-md bg-light navbar-light static-top">
-      <div dir="rtl" class="collapse navbar-collapse " id="navbarCollapse">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              routerLink="volunteers"
-              routerLinkActive="activeLink"
-            >
-              מתנדבות</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              routerLink="families"
-              routerLinkActive="activeLink"
-            >
-              משפחות</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              routerLink="organizations"
-              routerLinkActive="activeLink"
-            >
-              ארגונים</a
-            >
-          </li>
-        </ul>
-      </div>
-    </nav>
-    <router-outlet></router-outlet>
-  </div>
-  
+</div>
