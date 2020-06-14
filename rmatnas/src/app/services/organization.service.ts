@@ -40,4 +40,26 @@ export class OrganizationService {
     // const head={params:new HttpParams() ('newOrganization',myOrganization)};
     this.http.delete(this.path + '/' + id).subscribe();
   }
+  getOrganizationsByCategoryAndFamily(idFamily: number, id: number): Observable<Organization[]> {
+    return this.http.get<Organization[]>(this.path + '/Organizationsbyfac/' + id, {headers: {Authorization: idFamily.toString()}});
+  }
+  getOrganizationsByCategoryAndVolunteer(idFamily: number, idVolunteer: number, id: number): Observable<Organization[]> {
+    return this.http.get<Organization[]>(this.path + '/Organizationsbyfac/' + id,
+    {headers: {Authorization: idFamily.toString(), volunteer: idVolunteer.toString()}});
+  }
+  getCategoriesOfOrganization(id: number) {
+    return this.http.get<Category[]>(environment.baseURL + 'CategoryOrganization/' + id);
+  }
+  addCategoriesToOrganization(id: number, categories: Category[]) {
+    return this.http.get(environment.baseURL + 'CategoryOrganization/' + id + '&category=' + categories);
+  }
+  getOrganizationsForFamily(fId: number): Observable<Organization[]> {
+    return this.http.get<Organization[]>(environment.baseURL + 'OrganizationAndFamily/Getof/' + fId);
+  }
+  getOrganizationsForVolunteer(vId: number): Observable<Organization[]> {
+    return this.http.get<Organization[]>(environment.baseURL + 'OrganizationAndVolunteer/Getov/' + vId);
+  }
+  getOrganizationsByCategory(idCategory: number): Observable<Organization[]> {
+    return this.http.get<Organization[]>(this.path + '/Organizationsbycategory/' + idCategory);
+  }
 }
