@@ -11,7 +11,7 @@ import { NgForm } from '@angular/forms';
 })
 export class CategoryFComponent implements OnInit, OnDestroy {
   @ViewChild('categoryForm') mytemplateForm: NgForm;
-  newCategory: Category = new Category('...');
+  newCategory: Category = new Category('...', 0);
   token = 0;
   @Input() vId: number;
   @Output() changedCategory: EventEmitter<Category> = new EventEmitter<Category>();
@@ -48,7 +48,7 @@ export class CategoryFComponent implements OnInit, OnDestroy {
 
         });
       this.mytemplateForm.resetForm();
-      this.newCategory = new Category('default');
+      this.newCategory = new Category('default', 0);
       this.snackBar.open('שמירת קטגוריה מבוצעת...', 'OK', {
         duration: 2000,
         direction: 'rtl'

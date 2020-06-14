@@ -21,7 +21,7 @@ export class ToVolunteerComponent implements OnInit, OnDestroy {
     new Family('fathername', 'mothername', 'lastname', '0', '0', '0', 'address', 'status',
       2, 'reason', 'reference'),
     new Volunteer('default', '000000000', '000000000', 'default@ddd', 'default', '1999-01-01', false),
-    new Category('hello'), 'default', '1999-01-01'
+    new Category('hello', 0), 'default', '1999-01-01'
   );
   id: number;
   @Input() vId: number;

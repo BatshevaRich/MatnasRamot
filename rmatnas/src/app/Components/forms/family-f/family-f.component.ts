@@ -79,7 +79,7 @@ export class FamilyFComponent implements OnInit, OnDestroy {
     this.categoriesSelected = [];
     e.forEach(element => {
       if (element.checked) {
-        this.categoriesSelected.push(new Category(element.name));
+        this.categoriesSelected.push(new Category(element.name, element.id));
       }
     });
   }
