@@ -9,7 +9,7 @@ import { Category } from '../Classes/Category';
   providedIn: 'root'
 })
 export class OrganizationService {
-  path = environment.baseURL + 'organization';
+  path = environment.baseURL + 'group';
   constructor(private http: HttpClient) { }
   getOrganizations(): Observable<Organization[]> {
     return this.http.get<Organization[]>(this.path);
