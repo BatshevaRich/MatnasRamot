@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Inject } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject, OnDestroy, ElementRef } from '@angular/core';
 import { Organization } from 'src/app/Classes/Organization';
 import { NgForm, FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
@@ -11,7 +11,7 @@ import { CategoryService } from 'src/app/services/category.service';
   templateUrl: './organization-f.component.html',
   styleUrls: ['./organization-f.component.css']
 })
-export class OrganizationFComponent implements OnInit {
+export class OrganizationFComponent implements OnInit, OnDestroy {
   @ViewChild('organizationForm') mytemplateForm: NgForm;
   categories: Category[] = [];
   categoriesOfOrganization: Category[] = [];
@@ -23,7 +23,8 @@ export class OrganizationFComponent implements OnInit {
               private cs: CategoryService,
               private dialogRef: MatDialogRef<OrganizationFComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
-              public snackBar: MatSnackBar) {
+              public snackBar: MatSnackBar,
+              private elementRef: ElementRef) {
                 cs.getCategories().subscribe(res => {
                   this.categories = res;
                 });
@@ -34,6 +35,10 @@ export class OrganizationFComponent implements OnInit {
       this.newOrganization = this.data.dataKey;
       this.categoriesOfOrganization = this.data.chosenC;
     }
+  }
+
+  ngOnDestroy(): void {
+    this.elementRef.nativeElement.remove();
   }
 
   selectCategories(e) {

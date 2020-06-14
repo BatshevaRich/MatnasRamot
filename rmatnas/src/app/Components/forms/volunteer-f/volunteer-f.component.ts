@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, ViewChild, Inject, OnDestroy } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, ViewChild, Inject, OnDestroy, ElementRef } from '@angular/core';
 import { Volunteer } from '../../../Classes/Volunteer';
 import { VolunteerService } from 'src/app/services/volunteer.service';
 import { NgForm, FormControl, Validators } from '@angular/forms';
@@ -26,7 +26,8 @@ export class VolunteerFComponent implements OnInit, OnDestroy {
               private cs: CategoryService,
               private dialogRef: MatDialogRef<VolunteerFComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
-              public snackBar: MatSnackBar) {
+              public snackBar: MatSnackBar,
+              private elementRef: ElementRef) {
     cs.getCategories().subscribe(res => {
       this.categories = res;
     });
@@ -63,10 +64,8 @@ export class VolunteerFComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy() {
-    if (this.mySubscription) {
-      this.mySubscription.unsubscribe();
-    }
+  ngOnDestroy(): void {
+    this.elementRef.nativeElement.remove();
   }
 
   selectCategories(e) {

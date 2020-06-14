@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Inject } from '@angular/core';
+import { Component, OnInit, Input, Inject, OnDestroy, ElementRef } from '@angular/core';
 import { Family } from 'src/app/Classes/Family';
 import { Volunteer } from 'src/app/Classes/Volunteer';
 import { Category } from 'src/app/Classes/Category';
@@ -14,7 +14,7 @@ import { MatSnackBar } from '@angular/material';
   templateUrl: './add-vf.component.html',
   styleUrls: ['./add-vf.component.css']
 })
-export class AddVFComponent implements OnInit {
+export class AddVFComponent implements OnInit, OnDestroy {
   @Input() idFamily: number;
   @Input() idVolunteer: number;
   families: Family[] = [];
@@ -31,7 +31,8 @@ export class AddVFComponent implements OnInit {
               private vaf: VolunteerAndFamilyService,
               private dialogRef: MatDialogRef<AddVFComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
-              private snackBar: MatSnackBar) {
+              private snackBar: MatSnackBar,
+              private elementRef: ElementRef) {
     this.refresh();
   }
   refresh() {
@@ -51,6 +52,10 @@ export class AddVFComponent implements OnInit {
   }
 
   ngOnInit() { }
+
+  ngOnDestroy(): void {
+    this.elementRef.nativeElement.remove();
+  }
 
   onChangeFamily(newValue, tab) {
     if (tab === 3) {

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ChangeDetectorRef, AfterViewInit, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef, AfterViewInit, Input, ElementRef, OnDestroy } from '@angular/core';
 import { Volunteer } from '../../../Classes/Volunteer';
 import { VolunteerService } from 'src/app/services/volunteer.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
@@ -34,12 +34,13 @@ export interface Details {
     ]),
   ],
 })
-export class AllVolunteersComponent implements OnInit, AfterViewInit {
+export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(public vs: VolunteerService,
               private changeDetectorRefs: ChangeDetectorRef,
               public dialog: MatDialog,
-              private datePipe: DatePipe) {
+              private datePipe: DatePipe,
+              private elementRef: ElementRef) {
     // this.dataSource.filterPredicate =
     //   (data: Details, filter: string) => data.Name.indexOf(filter) !== -1;
   }
@@ -128,6 +129,9 @@ export class AllVolunteersComponent implements OnInit, AfterViewInit {
   }
   showDetails(element) {
     element.show = !element.show;
+  }
+  ngOnDestroy() {
+    this.elementRef.nativeElement.remove();
   }
 
   confirmDialog(): Observable<any> {

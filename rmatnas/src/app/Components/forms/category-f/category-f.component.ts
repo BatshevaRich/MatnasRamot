@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, Input, Output, EventEmitter, ElementRef, OnDestroy } from '@angular/core';
 import { CategoryService } from 'src/app/services/category.service';
 import { Category } from 'src/app/Classes/Category';
 import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
@@ -9,7 +9,7 @@ import { NgForm } from '@angular/forms';
   templateUrl: './category-f.component.html',
   styleUrls: ['./category-f.component.css']
 })
-export class CategoryFComponent implements OnInit {
+export class CategoryFComponent implements OnInit, OnDestroy {
   @ViewChild('categoryForm') mytemplateForm: NgForm;
   newCategory: Category = new Category('...');
   token = 0;
@@ -18,7 +18,8 @@ export class CategoryFComponent implements OnInit {
   constructor(private cs: CategoryService,
               private dialogRef: MatDialogRef<CategoryFComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
-              public snackBar: MatSnackBar) {
+              public snackBar: MatSnackBar,
+              private elementRef: ElementRef) {
 
   }
 
@@ -53,6 +54,10 @@ export class CategoryFComponent implements OnInit {
         direction: 'rtl'
       });
     }
+  }
+
+  ngOnDestroy(): void {
+    this.elementRef.nativeElement.remove();
   }
 
 }

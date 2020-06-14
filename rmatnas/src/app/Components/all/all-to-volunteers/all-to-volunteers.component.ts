@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, AfterViewInit, OnDestroy, ElementRef } from '@angular/core';
 import { VolunteerService } from 'src/app/services/volunteer.service';
 import { Volunteer } from 'src/app/Classes/Volunteer';
 import { VolunteerAndFamilyService } from 'src/app/services/volunteer-and-family.service';
@@ -24,7 +24,7 @@ import { ConfirmDialogModel, ConfirmDialogComponent } from '../../forms/confirm-
     ]),
   ],
 })
-export class AllToVolunteersComponent implements OnInit, AfterViewInit {
+export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild(MatTable) table: MatTable<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -45,7 +45,8 @@ export class AllToVolunteersComponent implements OnInit, AfterViewInit {
 
   constructor(public fs: FamilyService,
               public vfs: VolunteerAndFamilyService,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              private elementRef: ElementRef) {
     this.dataSource.filterPredicate =
       (data: Details, filter: string) => data.NameVolunteer.indexOf(filter) !== -1;
    }
@@ -84,7 +85,9 @@ export class AllToVolunteersComponent implements OnInit, AfterViewInit {
     //   });
     // }
   }
-
+  ngOnDestroy() {
+    this.elementRef.nativeElement.remove();
+  }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }

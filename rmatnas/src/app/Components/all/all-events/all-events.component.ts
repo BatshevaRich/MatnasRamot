@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, AfterViewInit, OnDestroy, ElementRef } from '@angular/core';
 import { Eventt } from 'src/app/Classes/Eventt';
 import { EventService } from 'src/app/services/event.service';
 import { MatSort, MatTable, MatPaginator, MatTableDataSource, MatDialog } from '@angular/material';
@@ -26,7 +26,7 @@ export interface Details {
     ]),
   ],
 })
-export class AllEventsComponent implements OnInit, AfterViewInit {
+export class AllEventsComponent implements OnInit, OnDestroy, AfterViewInit {
   eventts: any;
   search = '';
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -44,12 +44,16 @@ export class AllEventsComponent implements OnInit, AfterViewInit {
   notFound = false;
 
   constructor(public es: EventService,
-              public dialog: MatDialog) { }
+              public dialog: MatDialog,
+              private elementRef: ElementRef) { }
 
   ngOnInit() {
     if (this.vId) {
       this.eventts = [];
     }
+  }
+  ngOnDestroy() {
+    this.elementRef.nativeElement.remove();
   }
 
   ngAfterViewInit() {

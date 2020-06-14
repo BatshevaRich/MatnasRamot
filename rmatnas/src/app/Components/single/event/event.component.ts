@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ElementRef } from '@angular/core';
 import { Eventt } from 'src/app/Classes/Eventt';
-import { ActivatedRoute } from '@angular/router';
+
 import { Subscription } from 'rxjs';
 import { EventService } from 'src/app/services/event.service';
 import { Category } from 'src/app/Classes/Category';
@@ -21,7 +21,9 @@ export class EventComponent implements OnInit, OnDestroy {
   @Input() toV: boolean;
   @Output() addedEvent: EventEmitter<Eventt> = new EventEmitter<Eventt>();
   mySubscription: Subscription;
-  constructor(public es: EventService, public dialog: MatDialog, public ARS: ActivatedRoute) {
+  constructor(public es: EventService,
+              public dialog: MatDialog,
+              private elementRef: ElementRef) {
     this.myEvent = new Eventt('...', '...', '11/10/1999', '11/10/1999', '11/10/1999');
   }
   ngOnInit() {
@@ -33,9 +35,7 @@ export class EventComponent implements OnInit, OnDestroy {
     });
   }
   ngOnDestroy(): void {
-    if (this.mySubscription) {
-      this.mySubscription.unsubscribe();
-    }
+    this.elementRef.nativeElement.remove();
   }
 
   EventOpenDialog() {

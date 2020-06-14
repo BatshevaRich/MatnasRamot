@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ChangeDetectorRef, AfterViewChecked, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ChangeDetectorRef, AfterViewInit, OnDestroy, ElementRef } from '@angular/core';
 import { Family } from '../../../Classes/Family';
 import { FamilyService } from 'src/app/services/family.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
@@ -35,7 +35,7 @@ export interface Details {
     ]),
   ],
 })
-export class AllFamiliesComponent implements OnInit, AfterViewInit {
+export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -54,7 +54,8 @@ export class AllFamiliesComponent implements OnInit, AfterViewInit {
 
   constructor(public fs: FamilyService,
               private changeDetectorRefs: ChangeDetectorRef,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              private elementRef: ElementRef) {
     this.dataSource.filterPredicate =
       (data: Details, filter: string) => data.LastName.indexOf(filter) !== -1;
   }
@@ -62,6 +63,9 @@ export class AllFamiliesComponent implements OnInit, AfterViewInit {
     if (this.vId) {
       this.displayedColumns = ['LastName', 'Address', 'Telephone', 'NumChildren', 'Status', 'Reference'];
     }
+  }
+  ngOnDestroy() {
+    this.elementRef.nativeElement.remove();
   }
 
   trimResultsFromDB(families: Family[]) {

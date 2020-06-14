@@ -1,6 +1,5 @@
-import { Component, OnInit, Inject, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, OnDestroy, ElementRef } from '@angular/core';
 import { Family } from 'src/app/Classes/Family';
-import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FamilyService } from 'src/app/services/family.service';
 import { Category } from '../../../Classes/Category';
@@ -22,25 +21,15 @@ export class FamilyFComponent implements OnInit, OnDestroy {
   @ViewChild('familyForm') mytemplateForm: NgForm;
   categoriesOfFamily: Category[] = [];
   newFamily: Family = new Family(
-
-    'fathername',
-    'mothername',
-    'lastname',
-    '0',
-    '0',
-    '0',
-    'address',
-    'status',
-    2,
-    'reason',
-    'reference'
-  );
+    'fathername', 'mothername', 'lastname',
+    '0', '0', '0', 'address', 'status', 2, 'reason', 'reference');
   id: number;
   constructor(public fs: FamilyService,
               private cs: CategoryService,
               private dialogRef: MatDialogRef<FamilyFComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
-              private snackBar: MatSnackBar) {
+              private snackBar: MatSnackBar,
+              private elementRef: ElementRef) {
     this.mySubscription = cs.getCategories().subscribe(res => {
       this.categories = res;
     });
@@ -95,9 +84,7 @@ export class FamilyFComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
-    if (this.mySubscription) {
-      this.mySubscription.unsubscribe();
-    }
+  ngOnDestroy(): void {
+    this.elementRef.nativeElement.remove();
   }
 }

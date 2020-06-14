@@ -1,7 +1,6 @@
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, AfterViewInit, ElementRef } from '@angular/core';
 import { Volunteer } from '../../../Classes/Volunteer';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
 import { VolunteerService } from 'src/app/services/volunteer.service';
 import { Category } from 'src/app/Classes/Category';
 import { MatDialog } from '@angular/material/dialog';
@@ -11,7 +10,7 @@ import { VolunteerFComponent } from '../../forms/volunteer-f/volunteer-f.compone
   templateUrl: './volunteer.component.html',
   styleUrls: ['./volunteer.component.css']
 })
-export class VolunteerComponent implements OnInit, OnDestroy {
+export class VolunteerComponent implements OnInit, OnDestroy, AfterViewInit {
   chooseTab: string;
   myvolunteer: Volunteer;
   categories: Category[] = [];
@@ -20,20 +19,24 @@ export class VolunteerComponent implements OnInit, OnDestroy {
   @Input() toV: boolean;
   @Output() addedVolunteer: EventEmitter<Volunteer> = new EventEmitter<Volunteer>();
   mySubscription: Subscription;
-  constructor(public vs: VolunteerService, public ARS: ActivatedRoute, public dialog: MatDialog) {
+  constructor(public vs: VolunteerService,
+              public dialog: MatDialog,
+              private elementRef: ElementRef) {
     this.myvolunteer = new Volunteer('..', '..', '..', '..', '..', '1999', false);
   }
 
   ngOnDestroy(): void {
-    if (this.mySubscription) {
-      this.mySubscription.unsubscribe();
-    }
-
+    this.elementRef.nativeElement.remove();
   }
 
   ngOnInit() {
+
+  }
+
+  ngAfterViewInit() {
     this.vs.getVolunteer(this.vId).subscribe(v => {
       this.myvolunteer = v;
+      console.log('volunteer component');
       this.vs.getCategoriesOfVolunteer(this.vId).subscribe(c => {
         this.categories = c;
       });

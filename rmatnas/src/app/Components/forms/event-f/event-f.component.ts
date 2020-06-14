@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Inject } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject, OnDestroy, ElementRef } from '@angular/core';
 import { Eventt } from 'src/app/Classes/Eventt';
 import { EventService } from 'src/app/services/event.service';
 import { NgForm, FormBuilder, FormGroup } from '@angular/forms';
@@ -12,7 +12,7 @@ import { RangesFooter } from '../../UI/ranges-footer/ranges-footer.component';
   templateUrl: './event-f.component.html',
   styleUrls: ['./event-f.component.css']
 })
-export class EventFComponent implements OnInit {
+export class EventFComponent implements OnInit, OnDestroy {
 
   @ViewChild('eventForm') mytemplateForm: NgForm;
   categories: Category[] = [];
@@ -29,7 +29,8 @@ export class EventFComponent implements OnInit {
               private dialogRef: MatDialogRef<OrganizationFComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
               public snackBar: MatSnackBar,
-              fb: FormBuilder) {
+              fb: FormBuilder,
+              private elementRef: ElementRef) {
                 this.form = fb.group({
                   date: [{begin: new Date(2020, 7, 5), end: new Date(2020, 7, 25)}]
                 });
@@ -81,5 +82,7 @@ export class EventFComponent implements OnInit {
   inlineRangeChange($event) {
     this.inlineRange = $event;
   }
-
+  ngOnDestroy(): void {
+    this.elementRef.nativeElement.remove();
+  }
 }

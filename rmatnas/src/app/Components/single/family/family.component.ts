@@ -1,7 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit, ElementRef } from '@angular/core';
 import { Family } from '../../../Classes/Family';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+
 import { OnDestroy } from '@angular/core';
 import { FamilyService } from 'src/app/services/family.service';
 import { Category } from 'src/app/Classes/Category';
@@ -12,7 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './family.component.html',
   styleUrls: ['./family.component.css']
 })
-export class FamilyComponent implements OnInit, OnDestroy {
+export class FamilyComponent implements OnInit, OnDestroy, AfterViewInit {
   family: Family = new Family('fathername',
     'mothername',
     'lastname',
@@ -33,10 +33,12 @@ export class FamilyComponent implements OnInit, OnDestroy {
   @Output() addedFamily: EventEmitter<Family> = new EventEmitter<Family>();
   chooseTab: string;
   constructor(public fs: FamilyService,
-              public ARS: ActivatedRoute,
-              public dialog: MatDialog) { }
+              public dialog: MatDialog,
+              private elementRef: ElementRef) { }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  ngAfterViewInit() {
     this.fs.getFamily(this.vId).subscribe(f => {
       this.family = f;
       this.fs.getCategoriesOfFamily(this.vId).subscribe(c => {
@@ -48,9 +50,7 @@ export class FamilyComponent implements OnInit, OnDestroy {
     });
   }
   ngOnDestroy(): void {
-    if (this.mySubscription) {
-      this.mySubscription.unsubscribe();
-    }
+    this.elementRef.nativeElement.remove();
   }
 
   FamilyopenDialog() {

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, AfterViewInit, OnDestroy, ElementRef } from '@angular/core';
 import { Organization } from 'src/app/Classes/Organization';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MatSort, MatTable, MatPaginator, MatTableDataSource, MatDialog } from '@angular/material';
@@ -28,7 +28,7 @@ export interface Details {
   ],
 })
 
-export class AllOrganizationsComponent implements OnInit, AfterViewInit {
+export class AllOrganizationsComponent implements OnInit, OnDestroy, AfterViewInit {
   organizations: any;
   search = '';
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -46,8 +46,12 @@ export class AllOrganizationsComponent implements OnInit, AfterViewInit {
   notFound = false;
 
   constructor(public os: OrganizationService,
-              public dialog: MatDialog) { }
+              public dialog: MatDialog,
+              private elementRef: ElementRef) { }
 
+              ngOnDestroy() {
+                this.elementRef.nativeElement.remove();
+              }
   ngOnInit() {
     if (this.vId) {
       // this.organizations = [];

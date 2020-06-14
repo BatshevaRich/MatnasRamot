@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Output, EventEmitter, Input, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter, Input, ViewChildren, QueryList, ElementRef } from '@angular/core';
 import { CategoryService } from 'src/app/services/category.service';
 import { Category } from 'src/app/Classes/Category';
 import { Subscription } from 'rxjs';
@@ -9,7 +9,8 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./choose-category.component.css']
 })
 export class ChooseCategoryComponent implements OnInit, OnDestroy {
-  constructor(private cs: CategoryService) {
+  constructor(private cs: CategoryService,
+              private elementRef: ElementRef) {
     cs.getCategories().subscribe(data => {
       this.categories = data;
       this.categories.forEach(element => {
@@ -39,10 +40,8 @@ export class ChooseCategoryComponent implements OnInit, OnDestroy {
 
 
   }
-  ngOnDestroy() {
-    if (this.mySubscription) {
-      this.mySubscription.unsubscribe();
-    }
+  ngOnDestroy(): void {
+    this.elementRef.nativeElement.remove();
   }
   add(event, c: Category) {
     this.selectc.emit(this.arr);
