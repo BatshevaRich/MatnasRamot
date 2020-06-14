@@ -42,7 +42,7 @@
     "chartjs-plugin-datalabels": "^0.7.0",
     "font-awesome": "^4.7.0",
     "glyphicons": "^0.2.0",
-    "jquery": ">=3.5.1",
+    "jquery": "^3.5.1",
     "kind-of": "^6.0.3",
     "material-design-icons": "^3.0.1",
     "material-design-icons-iconfont": "^5.0.1",
