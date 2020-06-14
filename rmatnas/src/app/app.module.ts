@@ -45,7 +45,9 @@ import { DatePipe } from '@angular/common';
 import { MainComponent } from './Components/UI/main/main.component';
 import { ChartsModule } from 'ng2-charts';
 import * as WebFont from 'webfontloader';
-
+import { SatDatepickerModule, SatNativeDateModule } from 'saturn-datepicker';
+import { RangesFooter } from './Components/UI/ranges-footer/ranges-footer.component';
+import {ReactiveFormsModule} from '@angular/forms';
 WebFont.load({
   custom: { families: ['Material Icons', 'Material Icons Outline'], }
 });
@@ -84,7 +86,8 @@ WebFont.load({
     CategoryFComponent,
     ConfirmDialogComponent,
     HeaderComponent,
-    MainComponent
+    MainComponent,
+    RangesFooter
   ],
   imports: [
     BrowserModule,
@@ -95,8 +98,11 @@ WebFont.load({
     FormsModule,
     MaterialModule,
     FlexLayoutModule,
-    ChartsModule
+    ChartsModule,
+    ReactiveFormsModule,
+    SatDatepickerModule, SatNativeDateModule
   ],
+  entryComponents: [RangesFooter],
   providers: [DatePipe],
   bootstrap: [AppComponent]
 })

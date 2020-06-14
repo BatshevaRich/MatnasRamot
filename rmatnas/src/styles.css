@@ -3,6 +3,7 @@
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 @import '~font-awesome/css/font-awesome.css';
 @import '~material-design-icons/iconfont/material-icons.css';
+@import '~saturn-datepicker/bundle.css';
 
 *:focus {
   outline: none !important
