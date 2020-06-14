@@ -31,7 +31,7 @@ export class AllToVolunteersComponent implements OnInit, AfterViewInit {
   displayedColumns = ['NameVolunteer', 'NameFamily', 'Category', 'PelephoneVolunteer', 'columndelete'];
   expandedElement: Details | null;
   allvolunteerings: Details[] = [];
-  dataSource = new MatTableDataSource();
+  dataSource = new MatTableDataSource([]);
   search = '';
   resultsLength = 0;
   @Input() vId: number;

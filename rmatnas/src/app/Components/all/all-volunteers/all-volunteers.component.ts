@@ -46,10 +46,10 @@ export class AllVolunteersComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  displayedColumns = ['Name', 'Address', 'Pelephone', 'Email', 'Age', 'IsActive', 'columndelete'];
+  displayedColumns = ['showDetails', 'Name', 'Address', 'Pelephone', 'Email', 'Age', 'IsActive', 'columndelete'];
   expandedElement: Details | null;
   volunteers: any;
-  dataSource = new MatTableDataSource();
+  dataSource = new MatTableDataSource([]);
   search = '';
   resultsLength = 0;
   @Input() vId: number;
@@ -62,27 +62,6 @@ export class AllVolunteersComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     if (this.vId) {
       this.displayedColumns = ['Name', 'Address', 'Pelephone', 'Email', 'Age', 'IsActive'];
-      this.inp = true;
-      this.vs.getVolunteersForFamily(this.vId).subscribe((data: Volunteer[]) => {
-        this.loaded = true;
-        if (data.length === 0) {
-          this.notFound = true;
-        } else {
-        data = this.trimResultsFromDB(data);
-        this.volunteers = data;
-        this.dataSource.data = data;
-        this.resultsLength = this.dataSource.data.length;
-        }
-      });
-    } else {
-      this.vs.getVolunteers().subscribe((volunteers: Volunteer[]) => {
-        volunteers = this.trimResultsFromDB(volunteers);
-        this.volunteers = volunteers;
-        this.dataSource.data = volunteers;
-        this.resultsLength = this.dataSource.data.length;
-        this.loaded = true;
-        this.error = false;
-      }, err => { this.error = true; this.loaded = true; });
     }
   }
 
@@ -111,6 +90,29 @@ export class AllVolunteersComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    if (this.vId) {
+      this.inp = true;
+      this.vs.getVolunteersForFamily(this.vId).subscribe((data: Volunteer[]) => {
+        this.loaded = true;
+        if (data.length === 0) {
+          this.notFound = true;
+        } else {
+        data = this.trimResultsFromDB(data);
+        this.volunteers = data;
+        this.dataSource.data = data;
+        this.resultsLength = this.dataSource.data.length;
+        }
+      });
+    } else {
+      this.vs.getVolunteers().subscribe((volunteers: Volunteer[]) => {
+        volunteers = this.trimResultsFromDB(volunteers);
+        this.volunteers = volunteers;
+        this.dataSource.data = volunteers;
+        this.resultsLength = this.dataSource.data.length;
+        this.loaded = true;
+        this.error = false;
+      }, err => { this.error = true; this.loaded = true; });
+    }
   }
 
   delete(event, elm) {
@@ -123,6 +125,9 @@ export class AllVolunteersComponent implements OnInit, AfterViewInit {
         // .map((i, idx) => (i.position = (idx + 1), i));
       }
     });
+  }
+  showDetails(element) {
+    element.show = !element.show;
   }
 
   confirmDialog(): Observable<any> {

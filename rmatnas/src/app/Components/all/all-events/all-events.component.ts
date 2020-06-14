@@ -32,9 +32,9 @@ export class AllEventsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  displayedColumns = ['Name', 'Description', 'StartDate', 'EndDate', 'columndelete'];
+  displayedColumns = ['showDetails', 'Name', 'Description', 'StartDate', 'EndDate', 'columndelete'];
   expandedElement: Details | null;
-  dataSource = new MatTableDataSource();
+  dataSource = new MatTableDataSource([]);
   resultsLength = 0;
   @Input() vId: number;
   inp: boolean;
@@ -47,7 +47,15 @@ export class AllEventsComponent implements OnInit, AfterViewInit {
               public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.eventts = this.es.getEvents().subscribe((events: Eventt[]) => {
+    if (this.vId) {
+      this.eventts = [];
+    }
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    this.es.getEvents().subscribe((events: Eventt[]) => {
       this.loaded = true;
       if (events.length === 0) {
         this.notFound = true;
@@ -58,11 +66,6 @@ export class AllEventsComponent implements OnInit, AfterViewInit {
         this.error = false;
       }
     }, err => { this.error = true; this.loaded = true; });
-  }
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
   }
 
   confirmDialog(): Observable<any> {
@@ -85,6 +88,10 @@ export class AllEventsComponent implements OnInit, AfterViewInit {
         // .map((i, idx) => (i.position = (idx + 1), i));
       }
     });
+  }
+
+  showDetails(element) {
+    element.show = !element.show;
   }
 
   addVolunteer(event, elm) {

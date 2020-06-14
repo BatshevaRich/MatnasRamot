@@ -34,9 +34,9 @@ export class AllOrganizationsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  displayedColumns = ['Name', 'Contact', 'Phone', 'Address', 'Email', 'addVolunteer', 'addFamily', 'columndelete'];
+  displayedColumns = ['showDetails', 'Name', 'Contact', 'Phone', 'Address', 'Email', 'addVolunteer', 'addFamily', 'columndelete'];
   expandedElement: Details | null;
-  dataSource = new MatTableDataSource();
+  dataSource = new MatTableDataSource([]);
   resultsLength = 0;
   @Input() vId: number;
   inp: boolean;
@@ -49,7 +49,27 @@ export class AllOrganizationsComponent implements OnInit, AfterViewInit {
               public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.organizations = this.os.getOrganizations().subscribe((organizations: Organization[]) => {
+    if (this.vId) {
+      // this.organizations = [];
+     } else {
+      // this.organizations = this.os.getOrganizations().subscribe((organizations: Organization[]) => {
+      //   this.loaded = true;
+      //   if (organizations.length === 0) {
+      //     this.notFound = true;
+      //   } else {
+      //     this.organizations = organizations;
+      //     this.dataSource.data = organizations;
+      //     this.resultsLength = this.dataSource.data.length;
+      //     this.error = false;
+      //   }
+      // }, err => { this.error = true; this.loaded = true; });
+    }
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    this.os.getOrganizations().subscribe((organizations: Organization[]) => {
       this.loaded = true;
       if (organizations.length === 0) {
         this.notFound = true;
@@ -60,11 +80,6 @@ export class AllOrganizationsComponent implements OnInit, AfterViewInit {
         this.error = false;
       }
     }, err => { this.error = true; this.loaded = true; });
-  }
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
   }
 
   confirmDialog(): Observable<any> {
@@ -87,6 +102,10 @@ export class AllOrganizationsComponent implements OnInit, AfterViewInit {
         // .map((i, idx) => (i.position = (idx + 1), i));
       }
     });
+  }
+
+  showDetails(element) {
+    element.show = !element.show;
   }
 
   addVolunteer(event, elm) {

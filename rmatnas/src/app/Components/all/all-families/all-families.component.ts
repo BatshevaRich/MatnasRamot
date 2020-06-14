@@ -39,10 +39,10 @@ export class AllFamiliesComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  displayedColumns = ['LastName', 'Address', 'Telephone', 'NumChildren', 'Status', 'Reference', 'columndelete'];
+  displayedColumns = ['showDetails', 'LastName', 'Address', 'Telephone', 'NumChildren', 'Status', 'Reference', 'columndelete'];
   expandedElement: Details | null;
   families: Family[] = [];
-  dataSource = new MatTableDataSource();
+  dataSource = new MatTableDataSource([]);
   search = '';
   resultsLength = 0;
   @Input() vId: number;
@@ -61,6 +61,29 @@ export class AllFamiliesComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     if (this.vId) {
       this.displayedColumns = ['LastName', 'Address', 'Telephone', 'NumChildren', 'Status', 'Reference'];
+    }
+  }
+
+  trimResultsFromDB(families: Family[]) {
+    for (const family of families) {
+      family.LastName = family.LastName.trim();
+      family.FirstNameFather = family.FirstNameFather.trim();
+      family.FirstNameMother = family.FirstNameMother.trim();
+      family.Address == null ? family.Address = '' : family.Address = family.Address.trim();
+      family.Telephone == null ? family.Telephone = '' : family.Telephone = family.Telephone.trim();
+      family.PelephoneFather == null ? family.PelephoneFather = '' : family.PelephoneFather = family.PelephoneFather.trim();
+      family.PelephoneMother == null ? family.PelephoneMother = '' : family.PelephoneMother = family.PelephoneMother.trim();
+      family.Status == null ? family.Status = '' : family.Status = family.Status.trim();
+      family.Reference == null ? family.Reference = '' : family.Reference = family.Reference.trim();
+      family.Reason == null ? family.Reason = '' : family.Reason = family.Reason.trim();
+    }
+    return families;
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    if (this.vId) {
       this.inp = true;
       this.fs.getFamiliesByVolunteer(this.vId).subscribe((data: Family[]) => {
         this.loaded = true;
@@ -84,27 +107,6 @@ export class AllFamiliesComponent implements OnInit, AfterViewInit {
         this.error = false;
       }, err => { this.error = true; this.loaded = true; });
     }
-  }
-
-  trimResultsFromDB(families: Family[]) {
-    for (const family of families) {
-      family.LastName = family.LastName.trim();
-      family.FirstNameFather = family.FirstNameFather.trim();
-      family.FirstNameMother = family.FirstNameMother.trim();
-      family.Address == null ? family.Address = '' : family.Address = family.Address.trim();
-      family.Telephone == null ? family.Telephone = '' : family.Telephone = family.Telephone.trim();
-      family.PelephoneFather == null ? family.PelephoneFather = '' : family.PelephoneFather = family.PelephoneFather.trim();
-      family.PelephoneMother == null ? family.PelephoneMother = '' : family.PelephoneMother = family.PelephoneMother.trim();
-      family.Status == null ? family.Status = '' : family.Status = family.Status.trim();
-      family.Reference == null ? family.Reference = '' : family.Reference = family.Reference.trim();
-      family.Reason == null ? family.Reason = '' : family.Reason = family.Reason.trim();
-    }
-    return families;
-  }
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
   }
 
   newFamily(family) {
@@ -174,6 +176,10 @@ export class AllFamiliesComponent implements OnInit, AfterViewInit {
     family.Reference == null ? family.Reference = '' : family.Reference = family.Reference.trim();
     family.Reason == null ? family.Reason = '' : family.Reason = family.Reason.trim();
     return family;
+  }
+
+  showDetails(element) {
+    element.show = !element.show;
   }
 
   updateTable(event) {

@@ -6,6 +6,7 @@ export class Organization {
     Address: string;
     Comments: string;
     email: string;
+    show: boolean;
     constructor(name: string, contact: string, phone: string, address: string, comments: string, email: string) {
         this.Name = name;
         this.Contact = contact;
@@ -13,5 +14,6 @@ export class Organization {
         this.Address = address;
         this.Comments = comments;
         this.email = email;
+        this.show = false;
     }
 }

@@ -8,6 +8,7 @@ export class Volunteer {
     Age: string;
     Comments: string;
     IsActive: boolean;
+    show: boolean;
     //////////////////// look up optional params
     // tslint:disable-next-line: max-line-length
     constructor(Name: string, telephone: string, pelephone: string, email: string, address: string, birthdate: string, isActive: boolean) {
@@ -19,6 +20,7 @@ export class Volunteer {
         this.Email = email;
         this.Age = birthdate;
         this.IsActive = isActive;
+        this.show = false;
     }
 
     public CalculateAge() {

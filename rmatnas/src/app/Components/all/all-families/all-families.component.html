@@ -41,6 +41,13 @@
               <th mat-header-cell *matHeaderCellDef mat-sort-header> הפניה </th>
               <td mat-cell *matCellDef="let element"> {{element.Reference}} </td>
             </ng-container>
+            <ng-container matColumnDef="showDetails">
+              <th mat-header-cell *matHeaderCellDef>פרטים </th>
+              <td mat-cell *matCellDef="let element">
+                <h5 (click)="showDetails(element)"><mat-icon>expand_more</mat-icon>
+                </h5>
+              </td>
+            </ng-container>
             <ng-container *ngIf="!vId" matColumnDef="columndelete">
               <th mat-header-cell *matHeaderCellDef>מחיקה </th>
               <td mat-cell *matCellDef="let element">
