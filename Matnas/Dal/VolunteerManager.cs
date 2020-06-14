@@ -57,15 +57,14 @@ namespace Dal
             {
                 foreach (var item in category)
                 {
-                    var test = Mapper.CastCategory(item);
-                    v.Categories.Add(test);
+                    var c = db.Categories.FirstOrDefault(ca => ca.Id == item.Id);
+                    //var c =cc.FirstOrDefault(ca => ca.Id == item.Id);
+                    v.Categories.Add(c);
                 }
                 db.Volunteers.Add(v);
                 db.SaveChanges();
                 x = db.Volunteers.Local[0].Id;
             }
-
-            //AddCategoryToVolunteer(x, category);
             return x;
         }
 
