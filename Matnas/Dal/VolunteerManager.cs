@@ -75,13 +75,13 @@ namespace Dal
         public static void RemoveVolunteer(int id)
         {
             using (dbRamotEntities db = new dbRamotEntities())
-            {/////////////need to remove categories first- foreign key problem
-
+            {
                 var query = from row in db.VolunteerAndFamily.AsEnumerable() where row.IdVolunteer == id select row;
-
-                db.VolunteerAndFamily.Remove(db.VolunteerAndFamily.Find(query.FirstOrDefault().Id));
-
-                //db.VolunteerAndFamily.Remove(db.VolunteerAndFamily.Find()
+                if (query.ToList().Count > 0)
+                {
+                    db.VolunteerAndFamily.Remove(db.VolunteerAndFamily.Find(query.FirstOrDefault().Id));
+                }
+                db.Volunteers.Find(id).Categories.Clear();
                 db.Volunteers.Remove(db.Volunteers.Find(id));
                 try
                 {

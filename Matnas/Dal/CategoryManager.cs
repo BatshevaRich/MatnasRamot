@@ -23,6 +23,22 @@ namespace Dal
             Categories c = Mapper.CastCategory(category);
             using (dbRamotEntities db = new dbRamotEntities())
             {
+                foreach (var item in db.Volunteers)
+                {
+                    item.Categories.Remove(c);
+                }
+                foreach (var item in db.Families)
+                {
+                    item.Categories.Remove(c);
+                }
+                foreach (var item in db.Events)
+                {
+                    item.Categories.Remove(c);
+                }
+                foreach (var item in db.Organization)
+                {
+                    item.Categories.Remove(c);
+                }
                 db.Categories.Remove(c);
                 db.SaveChanges();
             }
@@ -51,6 +67,35 @@ namespace Dal
         {
             using (dbRamotEntities db = new dbRamotEntities())
             {
+                var c = db.Categories.FirstOrDefault(i => i.Id == id);
+                foreach (var item in db.Volunteers)
+                {
+                    item.Categories.Remove(c);
+                }
+                foreach (var item in db.Families)
+                {
+                    item.Categories.Remove(c);
+                }
+                foreach (var item in db.Events)
+                {
+                    item.Categories.Remove(c);
+                }
+                foreach (var item in db.Organization)
+                {
+                    item.Categories.Remove(c);
+                }
+                foreach (var item in db.OrganizationAndFamily)
+                {/////////////////////////////////////
+                    item.Categories = null;
+                }
+                foreach (var item in db.VolunteerAndFamily)
+                {///////////////////////////////////////
+                    item.Categories = null;
+                }
+                foreach (var item in db.VolunteerAndEvent)
+                {
+                    item.Categories = null;
+                }
                 db.Categories.Remove(db.Categories.Find(id));
                 db.SaveChanges();
             }
