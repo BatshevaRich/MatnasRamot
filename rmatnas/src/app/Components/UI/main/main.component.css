@@ -7,3 +7,11 @@
     background-position: center center;
     background-repeat: no-repeat;
   }
+
+  .hidden {
+    display: none
+  }
+  
+  .visible {
+    visibility: visible;
+  }

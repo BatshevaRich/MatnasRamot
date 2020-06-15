@@ -6,20 +6,29 @@
           <div mat-card-avatar class="example-header-image"><i class="fa fa-user" style="size: 7x;"></i></div>
           <mat-card-title>קטגוריות בשימוש אצל מתנדבות</mat-card-title>
         </mat-card-header>
+        <div *ngIf="pieChartData.length == 0">
+          <app-spinner></app-spinner>
+        </div>
+        <div [ngClass]="pieChartData.length > 0 ? 'visible': 'hidden'">
         <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
           [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColors" [legend]="pieChartLegend">
         </canvas>
+      </div>
       </mat-card>
     </div>
     <div fxFlex="35%">
       <mat-card class="example-card">
         <mat-card-header>
-          <div mat-card-avatar class="example-header-image"><i class="fa fa-user" style="size: 7x;"></i></div>
+          <div mat-card-avatar class="example-header-image"><i class="fa fa-child"></i></div>
           <mat-card-title>קטגוריות בשימוש אצל משפחות</mat-card-title>
         </mat-card-header>
-        <canvas baseChart [data]="pieChartDataF" [labels]="pieChartLabelsF" [chartType]="pieChartType"
-          [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColors" [legend]="pieChartLegend">
-        </canvas>
+        <div *ngIf="pieChartDataF.length == 0">
+          <app-spinner></app-spinner>
+        </div>
+        <div [ngClass]="pieChartDataF.length > 0 ? 'visible': 'hidden'">
+          <canvas baseChart [data]="pieChartDataF" [labels]="pieChartLabelsF" [chartType]="pieChartType"
+            [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColors" [legend]="pieChartLegend">
+          </canvas></div>
       </mat-card>
     </div>
   </div>
