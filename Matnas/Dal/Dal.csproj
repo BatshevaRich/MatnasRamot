@@ -81,20 +81,17 @@
       <DependentUpon>Matnath.tt</DependentUpon>
     </Compile>
     <Compile Include="Mapper.cs" />
-    <Compile Include="Matnath.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Matnath.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Matnath.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Matnath.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Matnath.Context.cs" />
+    <Compile Include="Matnath.cs" />
     <Compile Include="Matnath.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Matnath.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Matnath1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Matnath.tt</DependentUpon>
     </Compile>
     <Compile Include="Organization.cs">
       <DependentUpon>Matnath.tt</DependentUpon>
@@ -155,15 +152,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Matnath.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Matnath.edmx</DependentUpon>
-      <LastGenOutput>Matnath.Context.cs</LastGenOutput>
-    </Content>
     <Content Include="Matnath.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Matnath.edmx</DependentUpon>
-      <LastGenOutput>Matnath.cs</LastGenOutput>
+      <LastGenOutput>Matnath1.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

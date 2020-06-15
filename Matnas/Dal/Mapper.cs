@@ -188,18 +188,24 @@ namespace Dal
         {
             return eventt == null? null: new Events()
             {
-                dateAdded = eventt.DateAdded,
-                description = eventt.Description,
-                Id = eventt.Id
+                DateAdded = (DateTime)eventt.DateAdded,
+                Description = eventt.Description,
+                Id = eventt.Id,
+                Name = eventt.Name,
+                StartDate = (DateTime)eventt.StartDate,
+                EndDate = (DateTime)eventt.EndDate
             };
         }
         public static Event CastEventToComon(Events eventt)
         {
             return eventt == null? null: new Event()
             {
-                DateAdded = eventt.dateAdded,
-                Description = eventt.description,
-                Id = eventt.Id
+                DateAdded = eventt.DateAdded,
+                Description = eventt.Description,
+                Id = eventt.Id,
+                Name = eventt.Name,
+                StartDate = eventt.StartDate,
+                EndDate = eventt.EndDate
             };
         }
         public static Volunteers CastVolunteer(Volunteer volunteer)

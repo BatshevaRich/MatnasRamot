@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="dbRamotModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="dbRamotModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Categories">
           <Key>
             <PropertyRef Name="Id" />
@@ -57,8 +57,11 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="description" Type="nvarchar" MaxLength="50" />
-          <Property Name="dateAdded" Type="date" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateAdded" Type="date" Nullable="false" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="EndDate" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="Families">
           <Key>
@@ -201,18 +204,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="event">
-          <End Role="Events" Type="Self.Events" Multiplicity="1" />
-          <End Role="VolunteerAndEvent" Type="Self.VolunteerAndEvent" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Events">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="VolunteerAndEvent">
-              <PropertyRef Name="IdEvent" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="family">
           <End Role="Families" Type="Self.Families" Multiplicity="1" />
           <End Role="VolunteerAndFamily" Type="Self.VolunteerAndFamily" Multiplicity="*" />
@@ -318,18 +309,6 @@
             </Principal>
             <Dependent Role="CategoriesForVolunteer">
               <PropertyRef Name="IdCategory" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_events">
-          <End Role="Events" Type="Self.Events" Multiplicity="1" />
-          <End Role="CategoriesForEvents" Type="Self.CategoriesForEvents" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Events">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CategoriesForEvents">
-              <PropertyRef Name="IdEvent" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -446,10 +425,6 @@
             <End Role="Categories" EntitySet="Categories" />
             <End Role="OrganizationAndFamily" EntitySet="OrganizationAndFamily" />
           </AssociationSet>
-          <AssociationSet Name="event" Association="Self.event">
-            <End Role="Events" EntitySet="Events" />
-            <End Role="VolunteerAndEvent" EntitySet="VolunteerAndEvent" />
-          </AssociationSet>
           <AssociationSet Name="family" Association="Self.family">
             <End Role="Families" EntitySet="Families" />
             <End Role="VolunteerAndFamily" EntitySet="VolunteerAndFamily" />
@@ -486,10 +461,6 @@
             <End Role="Categories" EntitySet="Categories" />
             <End Role="CategoriesForVolunteer" EntitySet="CategoriesForVolunteer" />
           </AssociationSet>
-          <AssociationSet Name="FK_events" Association="Self.FK_events">
-            <End Role="Events" EntitySet="Events" />
-            <End Role="CategoriesForEvents" EntitySet="CategoriesForEvents" />
-          </AssociationSet>
           <AssociationSet Name="FK_GroupForVolunteer_ToTable2" Association="Self.FK_GroupForVolunteer_ToTable2">
             <End Role="Volunteers" EntitySet="Volunteers" />
             <End Role="VolunteersInGroup" EntitySet="VolunteersInGroup" />
@@ -519,8 +490,7 @@
             <End Role="VolunteerAndEvent" EntitySet="VolunteerAndEvent" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="dbRamotModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -544,10 +514,13 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="dateAdded" Type="DateTime" Precision="0" />
           <NavigationProperty Name="VolunteerAndEvent" Relationship="Self.event" FromRole="Events" ToRole="VolunteerAndEvent" />
           <NavigationProperty Name="Categories" Relationship="Self.CategoriesForEvents" FromRole="Events" ToRole="Categories" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateAdded" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="Families">
           <Key>
@@ -887,10 +860,13 @@
           <EntitySetMapping Name="Events">
             <EntityTypeMapping TypeName="dbRamotModel.Events">
               <MappingFragment StoreEntitySet="Events">
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="dateAdded" ColumnName="dateAdded" />
-              </MappingFragment>
+                </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Families">
