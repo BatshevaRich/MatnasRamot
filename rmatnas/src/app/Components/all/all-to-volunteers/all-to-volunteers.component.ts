@@ -44,36 +44,43 @@ export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewIni
   notFound = false;
 
   constructor(public fs: FamilyService,
-              public vfs: VolunteerAndFamilyService,
-              public dialog: MatDialog,
-              private elementRef: ElementRef) {
+    public vfs: VolunteerAndFamilyService,
+    public dialog: MatDialog,
+    private elementRef: ElementRef) {
     // this.dataSource.filterPredicate =
     //   (data: Details, filter: string) => data.NameVolunteer.indexOf(filter) !== -1;
-   }
+  }
 
   ngOnInit() {
-    this.vfs.getVolunteerings().subscribe(res => {
+    if (this.vId) {
+      this.volunteerings = [];
       this.loaded = true;
-      if (res.length === 0) {
+      this.notFound = true;
+      this.displayedColumns = ['NameVolunteer', 'NameFamily', 'Category', 'PelephoneVolunteer'];
+     } else {
+      this.vfs.getVolunteerings().subscribe(res => {
+        this.loaded = true;
+        if (res.length === 0) {
           this.notFound = true;
         } else {
-      this.volunteerings = res;
-      this.resultsLength = this.volunteerings.length;
-      this.volunteerings.forEach(element => {
-        // tslint:disable-next-line: no-use-before-declare
-        const item = new Details();
-        item.Id = element.Id;
-        item.NameFamily = element.Family.LastName;
-        item.NameVolunteer = element.Volunteer.Name;
-        element.Category ? item.Category = element.Category.Name : item.Category = 'קטגוריה נמחקה';
-        item.PelephoneVolunteer = element.Volunteer.Pelephone;
-        this.allvolunteerings.push(item);
-        item.IdVolunteer = element.Volunteer.Id;
-        item.IdFamily = element.Family.Id;
-      });
-      this.dataSource.data = this.allvolunteerings;
+          this.volunteerings = res;
+          this.resultsLength = this.volunteerings.length;
+          this.volunteerings.forEach(element => {
+            // tslint:disable-next-line: no-use-before-declare
+            const item = new Details();
+            item.Id = element.Id;
+            item.NameFamily = element.Family.LastName;
+            item.NameVolunteer = element.Volunteer.Name;
+            element.Category ? item.Category = element.Category.Name : item.Category = 'קטגוריה נמחקה';
+            item.PelephoneVolunteer = element.Volunteer.Pelephone;
+            this.allvolunteerings.push(item);
+            item.IdVolunteer = element.Volunteer.Id;
+            item.IdFamily = element.Family.Id;
+          });
+          this.dataSource.data = this.allvolunteerings;
+        }
+      }, err => { this.error = true; this.loaded = true; });
     }
-    }, err => { this.error = true; this.loaded = true; });
   }
   ngOnDestroy() {
     this.elementRef.nativeElement.remove();

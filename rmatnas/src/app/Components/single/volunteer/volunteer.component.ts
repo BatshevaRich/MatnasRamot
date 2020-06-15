@@ -18,9 +18,9 @@ export class VolunteerComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() toV: boolean;
   @Output() addedVolunteer: EventEmitter<Volunteer> = new EventEmitter<Volunteer>();
   selectedTabIndex: number;
-  showFamily = false;
+  showFamily = true;
   showEvent = false;
-  showOrganization = false;
+  showVolunteerings: boolean;
   constructor(public vs: VolunteerService,
               public dialog: MatDialog,
               private elementRef: ElementRef) {
@@ -69,7 +69,7 @@ export class VolunteerComponent implements OnInit, OnDestroy, AfterViewInit {
         this.showFamily = true;
       }
       if (event.index === 2) {
-        this.showOrganization = true;
+        this.showVolunteerings = true;
       }
     });
   }
