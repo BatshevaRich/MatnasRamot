@@ -51,6 +51,13 @@ namespace Dal
         {
             using (dbRamotEntities db = new dbRamotEntities())
             {
+                var query = from row in db.OrganizationAndFamily.AsEnumerable() where row.IdOrganization == id select row;
+                if (query.ToList().Count > 0)
+                {
+                    db.OrganizationAndFamily.FirstOrDefault().Families = null;
+                    // db.VolunteerAndFamily.Remove(db.VolunteerAndFamily.Find(query.FirstOrDefault().Id));
+                }
+                db.Organization.Find(id).Categories.Clear();
                 db.Organization.Remove(db.Organization.Find(id));
                 db.SaveChanges();
             }

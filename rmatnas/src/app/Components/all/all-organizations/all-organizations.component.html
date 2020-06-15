@@ -45,17 +45,10 @@
               <th mat-header-cell *matHeaderCellDef> מייל </th>
               <td mat-cell *matCellDef="let element"> {{element.email}} </td>
             </ng-container>
-            <ng-container *ngIf="!vId" matColumnDef="addVolunteer">
-              <th mat-header-cell *matHeaderCellDef>+ מתנדבת</th>
-              <td mat-cell *matCellDef="let element">
-                <h5 (click)="delete(element, element)"><i class="fa fa-user-plus"></i>
-                </h5>
-              </td>
-            </ng-container>
             <ng-container *ngIf="!vId" matColumnDef="addFamily">
               <th mat-header-cell *matHeaderCellDef> + משפחה</th>
               <td mat-cell *matCellDef="let element">
-                <h5 (click)="delete(element, element)"><i class="fa fa-child"></i>
+                <h5 (click)="addFamily(element, element)"><i class="fa fa-child"></i>
                 </h5>
               </td>
             </ng-container>

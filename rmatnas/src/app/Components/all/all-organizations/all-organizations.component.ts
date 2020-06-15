@@ -35,7 +35,7 @@ export class AllOrganizationsComponent implements OnInit, OnDestroy, AfterViewIn
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  displayedColumns = ['showDetails', 'Name', 'Contact', 'Phone', 'Address', 'Email', 'addVolunteer', 'addFamily', 'columndelete'];
+  displayedColumns = ['showDetails', 'Name', 'Contact', 'Phone', 'Address', 'Email', 'addFamily', 'columndelete'];
   expandedElement: Details | null;
   dataSource = new MatTableDataSource([]);
   resultsLength = 0;
@@ -47,8 +47,8 @@ export class AllOrganizationsComponent implements OnInit, OnDestroy, AfterViewIn
   notFound = false;
 
   constructor(public os: OrganizationService,
-    public dialog: MatDialog,
-    private elementRef: ElementRef) { }
+              public dialog: MatDialog,
+              private elementRef: ElementRef) { }
 
   ngOnDestroy() {
     this.elementRef.nativeElement.remove();
@@ -102,9 +102,9 @@ export class AllOrganizationsComponent implements OnInit, OnDestroy, AfterViewIn
     this.confirmDialog().subscribe(res => {
       this.result = res;
       if (res) {
-        // this.os.removeVolunteer(elm.Id);
-        // this.dataSource.data = this.dataSource.data
-        //   .filter(i => i !== elm);
+        this.os.removeOrganization(elm.Id);
+        this.dataSource.data = this.dataSource.data
+          .filter(i => i !== elm);
         // .map((i, idx) => (i.position = (idx + 1), i));
       }
     });
@@ -120,18 +120,12 @@ export class AllOrganizationsComponent implements OnInit, OnDestroy, AfterViewIn
     element.show = !element.show;
   }
 
-  addVolunteer(event, elm) {
-    // this.os.addVolunteerToOrganization()
-  }
-
   addFamily(event, elm) {
-    debugger
     const dialogRef = this.dialog.open(AddFOComponent, {
       maxWidth: '75%',
       data: {
         id: event.Id
       }
-      // data: dialogData
     });
     return dialogRef.afterClosed();
   }
