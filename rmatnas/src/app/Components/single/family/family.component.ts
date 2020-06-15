@@ -34,7 +34,7 @@ export class FamilyComponent implements OnInit, OnDestroy, AfterViewInit {
   chooseTab: string;
   selectedTabIndex: any;
   showEvent: boolean;
-  showVolunteer: boolean;
+  showVolunteer: boolean = true;
   showOrganization: boolean;
   constructor(public fs: FamilyService,
               public dialog: MatDialog,

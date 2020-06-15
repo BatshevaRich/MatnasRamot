@@ -79,7 +79,8 @@ namespace Dal
                 var query = from row in db.VolunteerAndFamily.AsEnumerable() where row.IdVolunteer == id select row;
                 if (query.ToList().Count > 0)
                 {
-                    db.VolunteerAndFamily.Remove(db.VolunteerAndFamily.Find(query.FirstOrDefault().Id));
+                    db.VolunteerAndFamily.FirstOrDefault().Volunteers = null;
+                    // db.VolunteerAndFamily.Remove(db.VolunteerAndFamily.Find(query.FirstOrDefault().Id));
                 }
                 db.Volunteers.Find(id).Categories.Clear();
                 db.Volunteers.Remove(db.Volunteers.Find(id));

@@ -19,11 +19,10 @@
           <li>
             {{c.Name}}</li>
         </div>
-        <mat-card-actions>
+        <mat-card-actions *ngIf="toV != true">
           <button mat-raised-button (click)="OrganizationOpenDialog()">לעריכת
             הפרטים</button>
         </mat-card-actions>
-
       </mat-card-content>
     </mat-card>
     <!-- </div> -->

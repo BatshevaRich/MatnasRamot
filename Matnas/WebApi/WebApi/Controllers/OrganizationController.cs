@@ -5,9 +5,12 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace WebApi.Controllers
 {
+    [RoutePrefix("api/Organization")]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class OrganizationController : ApiController
     {
         // GET: api/Organization

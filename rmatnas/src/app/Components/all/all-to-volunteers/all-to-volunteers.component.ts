@@ -65,7 +65,7 @@ export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewIni
         item.Id = element.Id;
         item.NameFamily = element.Family.LastName;
         item.NameVolunteer = element.Volunteer.Name;
-        item.Category = element.Category.Name;
+        element.Category? item.Category = element.Category.Name: item.Category = 'קטגוריה נמחקה';
         item.PelephoneVolunteer = element.Volunteer.Pelephone;
         this.allvolunteerings.push(item);
         item.IdVolunteer = element.Volunteer.Id;

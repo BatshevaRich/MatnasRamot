@@ -13,6 +13,10 @@ namespace Dal
             OrganizationAndFamily g = Mapper.CastOrganizationAndFamily(oaf);
             using (dbRamotEntities db = new dbRamotEntities())
             { //if (db.OrganizationAndFamily.Contains(g)) 
+                //var family = db.Families.FirstOrDefault(ca => ca.Id == oaf.Family.Id);
+                //var organization = db.Groups.FirstOrDefault(g => g.Id == oaf.Organization.Id);
+                //var category = db.Categories.FirstOrDefault(c => c.Id == oaf.Category.Id);
+               
                 db.OrganizationAndFamily.Add(g);
                 db.SaveChanges();
             }

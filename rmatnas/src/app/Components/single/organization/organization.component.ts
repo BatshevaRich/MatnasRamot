@@ -27,7 +27,7 @@ export class OrganizationComponent implements OnInit, OnDestroy {
   showFamily: boolean;
   showOrganization: boolean;
   showVolunteer: boolean;
-  constructor(public vs: OrganizationService,
+  constructor(public os: OrganizationService,
               public dialog: MatDialog,
               private elementRef: ElementRef) {
     this.myOrganization = new Organization('...', '...', '...', '...', '...', '...');
@@ -38,11 +38,11 @@ export class OrganizationComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.vs.getOrganization(this.vId).subscribe(v => {
+    this.os.getOrganization(this.vId).subscribe(v => {
       this.myOrganization = v;
-      // this.vs.getCategoriesOfOrganization(this.vId).subscribe(c => {
-      //   this.categories = c;
-      // });
+      this.os.getCategoriesOfOrganization(this.vId).subscribe(c => {
+        this.categories = c;
+      });
     });
   }
 
