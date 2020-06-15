@@ -44,5 +44,12 @@ namespace WebApi.Controllers
         {
             return Bll.GroupManager.GetVolunteers(id);
         }
+
+        [Route("api/group/categoriesOfGroup/{id}")]
+        [HttpGet]
+        public IEnumerable<Category> GetCategories(int id)
+        {
+            return Bll.GroupManager.GetCategories(id);
+        }
     }
 }

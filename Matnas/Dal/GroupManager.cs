@@ -73,5 +73,20 @@ namespace Dal
             }
             return volunteers;
         }
+
+        public static IEnumerable<Common.Category> GetCategories(int id)
+        {
+            List<Category> categories = new List<Category>();
+            using (dbRamotEntities db = new dbRamotEntities())
+            {
+                var g = db.Groups.Find(id).Categories.ToList();
+                foreach (var c in g)
+                {
+                    categories.Add(Mapper.CastCategoryToCommon(c));
+                }
+
+            }
+            return categories;
+        }
     }
 }
