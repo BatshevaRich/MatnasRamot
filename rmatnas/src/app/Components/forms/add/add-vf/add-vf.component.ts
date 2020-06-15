@@ -26,13 +26,13 @@ export class AddVFComponent implements OnInit, OnDestroy {
   selectedVolunteer: Volunteer = null;
   selectedCategory: Category;
   constructor(private fs: FamilyService,
-              private vs: VolunteerService,
-              private cs: CategoryService,
-              private vaf: VolunteerAndFamilyService,
-              private dialogRef: MatDialogRef<AddVFComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any,
-              private snackBar: MatSnackBar,
-              private elementRef: ElementRef) {
+    private vs: VolunteerService,
+    private cs: CategoryService,
+    private vaf: VolunteerAndFamilyService,
+    private dialogRef: MatDialogRef<AddVFComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private snackBar: MatSnackBar,
+    private elementRef: ElementRef) {
     this.refresh();
   }
   refresh() {
@@ -100,7 +100,7 @@ export class AddVFComponent implements OnInit, OnDestroy {
     }
     if (tab === 2) {
       this.selectedFamily = null;
-      this.selectedCategory != null ? this.fs.getFamiliesByCategoryAndVolunteer(this.selectedCategory.Id, this.selectedVolunteer.Id)
+      this.selectedCategory != null ? this.fs.getFamiliesByCategory(this.selectedCategory.Id)
         .subscribe(res => {
           this.families = res;
         }) : this.selectedCategory = null;
@@ -108,17 +108,21 @@ export class AddVFComponent implements OnInit, OnDestroy {
     if (tab === 3) {
       this.selectedVolunteer = null;
       this.selectedCategory != null ? this.vs.getVolunteersByCategory(this.selectedCategory.Id)
-      .subscribe(res => {
-        this.volunteers = res;
-        this.volunteers = this.volunteers.filter(v => v.IsActive);
-      }) : this.selectedCategory = null;
+        .subscribe(res => {
+          this.volunteers = res;
+          this.volunteers = this.volunteers.filter(v => v.IsActive);
+        }) : this.selectedCategory = null;
     }
   }
   submitForm(f) {
+    debugger
     this.vaf.addVolunteerAction(this.selectedVolunteer, this.selectedFamily, this.selectedCategory);
     this.snackBar.open('שמירת התנדבות מבוצעת...', 'OK', {
-        duration: 2000,
-        direction: 'rtl'
-      });
+      duration: 2000,
+      direction: 'rtl'
+    });
+  }
+  onTabChange() {
+    this.refresh();
   }
 }
