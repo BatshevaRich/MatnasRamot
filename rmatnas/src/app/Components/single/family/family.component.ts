@@ -34,8 +34,8 @@ export class FamilyComponent implements OnInit, OnDestroy, AfterViewInit {
   chooseTab: string;
   selectedTabIndex: any;
   showEvent: boolean;
-  showVolunteer: boolean = true;
-  showOrganization: boolean;
+  showVolunteer = true;
+  showVolunteerings: boolean;
   constructor(public fs: FamilyService,
               public dialog: MatDialog,
               private elementRef: ElementRef) { }
@@ -48,9 +48,6 @@ export class FamilyComponent implements OnInit, OnDestroy, AfterViewInit {
       this.fs.getCategoriesOfFamily(this.vId).subscribe(c => {
         this.categories = c;
       });
-      // this.fs.getCategoriesOfFamily(this.fId).subscribe(c => {
-      //   this.categories = c;
-      // });
     });
   }
   ngOnDestroy(): void {
@@ -81,7 +78,7 @@ export class FamilyComponent implements OnInit, OnDestroy, AfterViewInit {
         this.showVolunteer = true;
       }
       if (event.index === 2) {
-        this.showOrganization = true;
+        this.showVolunteerings = true;
       }
     });
   }

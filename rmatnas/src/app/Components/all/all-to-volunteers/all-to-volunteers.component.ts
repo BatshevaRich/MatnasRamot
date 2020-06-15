@@ -44,9 +44,9 @@ export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewIni
   notFound = false;
 
   constructor(public fs: FamilyService,
-    public vfs: VolunteerAndFamilyService,
-    public dialog: MatDialog,
-    private elementRef: ElementRef) {
+              public vfs: VolunteerAndFamilyService,
+              public dialog: MatDialog,
+              private elementRef: ElementRef) {
     // this.dataSource.filterPredicate =
     //   (data: Details, filter: string) => data.NameVolunteer.indexOf(filter) !== -1;
   }

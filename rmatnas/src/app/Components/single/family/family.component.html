@@ -1,13 +1,13 @@
 <div dir="rtl" class="text-right" style="padding-top: 1%">
-  <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3%" fxLayoutAlign="center">
-    <!-- <div fxFlex="20%"> -->
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3%" fxLayoutAlign="right">
+    <div fxFlex="25%">
       <mat-card>
         <mat-toolbar>
-        <mat-card-header>
-          <div mat-card-avatar class="example-header-image"><i class="fa fa-child"></i></div>
-          <mat-card-title>{{ family.LastName }}</mat-card-title>
-        </mat-card-header>
-      </mat-toolbar>
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image"><i class="fa fa-child"></i></div>
+            <mat-card-title>{{ family.LastName }}</mat-card-title>
+          </mat-card-header>
+        </mat-toolbar>
         <mat-card-content>
           <span>אב: {{ family.FirstNameFather }}</span>&nbsp;
           <span>אם: {{ family.FirstNameMother }}</span>
@@ -32,24 +32,21 @@
 
         </mat-card-content>
       </mat-card>
-    <!-- </div> -->
-    <div dir="rtl" style="text-align: right;" *ngIf="toV != true">
-      <!-- <button *ngIf="false" (click)="tabs.selectedIndex = 0">RESET</button> -->
-      <mat-tab-group style="text-align: right;" [selectedIndex]= 1 dir="rtl" (selectedTabChange)="onTabChange($event)" #tabs>
+    </div>
+    <mat-card *ngIf="toV != true" fxFlex="75%">
+      <button *ngIf="false" (click)="tabs.selectedIndex = 0">RESET</button>
+      <mat-tab-group [selectedIndex]=1 dir="rtl" (selectedTabChange)="onTabChange($event)" #tabs>
         <mat-tab></mat-tab> <!-- ADDITIONAL TAB -->
-        <mat-tab dir="rtl"  label="מתנדבות">
+        <mat-tab label="מתנדבות">
           <app-all-volunteers *ngIf="showVolunteer" dir="rtl" [vId]="vId"></app-all-volunteers>
         </mat-tab>
-        <mat-tab dir="rtl"label="ארגונים">
-          <app-all-organizations *ngIf="showOrganization" dir="rtl" [vId]="vId"></app-all-organizations>
+        <mat-tab label="התנדבויות">
+          <app-all-to-volunteers *ngIf="showVolunteerings" dir="rtl" [vId]="vId"></app-all-to-volunteers>
         </mat-tab>
-        <mat-tab dir="rtl"label="ארועים">
+        <mat-tab label="ארועים">
           <app-all-events *ngIf="showEvent" dir="rtl"></app-all-events>
         </mat-tab>
-        <mat-tab dir="rtl"  label="התנדבויות">
-          <app-all-volunteers *ngIf="showVolunteer" dir="rtl" [vId]="vId"></app-all-volunteers>
-        </mat-tab>
       </mat-tab-group>
-    </div>
+    </mat-card>
   </div>
 </div>
