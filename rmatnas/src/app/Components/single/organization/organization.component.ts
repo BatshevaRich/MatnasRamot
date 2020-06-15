@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ElementRef, AfterViewInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { Organization } from 'src/app/Classes/Organization';
@@ -12,7 +12,7 @@ import { OrganizationFComponent } from '../../forms/organization-f/organization-
   templateUrl: './organization.component.html',
   styleUrls: ['./organization.component.css']
 })
-export class OrganizationComponent implements OnInit, OnDestroy {
+export class OrganizationComponent implements OnInit, OnDestroy, AfterViewInit {
 
   chooseTab: string;
   myOrganization: Organization;
@@ -33,11 +33,15 @@ export class OrganizationComponent implements OnInit, OnDestroy {
     this.myOrganization = new Organization('...', '...', '...', '...', '...', '...');
   }
 
+  ngOnInit() {
+
+  }
+
   ngOnDestroy(): void {
     this.elementRef.nativeElement.remove();
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
     this.os.getOrganization(this.vId).subscribe(v => {
       this.myOrganization = v;
       this.os.getCategoriesOfOrganization(this.vId).subscribe(c => {
@@ -63,13 +67,10 @@ export class OrganizationComponent implements OnInit, OnDestroy {
   onTabChange(event) {
     setTimeout(() => {
       this.selectedTabIndex = event;
-      if (event.index === 3) {
+      if (event.index === 2) {
         this.showEvent = true;
       }
       if (event.index === 1) {
-        this.showVolunteer = true;
-      }
-      if (event.index === 2) {
         this.showFamily = true;
       }
     });

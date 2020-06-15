@@ -52,7 +52,7 @@ namespace WebApi.Controllers
         {
             return Bll.OrganizationManager.GetFamilies(id);
         }
-        [Route("api/organization/categories")]
+        [Route("categories/{id}")]
         public IEnumerable<Category> GetCategories(int id)
         {
             return Bll.OrganizationManager.GetCategories(id);
