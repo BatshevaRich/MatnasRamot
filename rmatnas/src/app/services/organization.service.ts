@@ -30,7 +30,7 @@ export class OrganizationService {
   updateOrganization(myOrganization: Organization, categoriesSelected: Category[]) {
     // const head={params:new HttpParams() ('newOrganization',myOrganization)};
     const myData = {} as any;
-    myData.Organization = myOrganization;
+    myData.organization = myOrganization;
     myData.categories = categoriesSelected;
     this.http.put(
       this.path, myData

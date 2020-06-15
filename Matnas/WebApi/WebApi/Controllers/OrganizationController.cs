@@ -1,4 +1,5 @@
 ﻿using Common;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,9 +33,11 @@ namespace WebApi.Controllers
         }
 
         // PUT: api/Organization/5
-        public void Put(int id, [FromBody]Organization organization)
+        public void Put([FromBody] JObject data)
         {
-            Bll.OrganizationManager.UpdateOrganization(organization);
+            Organization newOrganization = data["organization"].ToObject<Organization>();
+            Category[] category = data["categories"].ToObject<Category[]>();
+            Bll.OrganizationManager.UpdateOrganization(newOrganization, category);
         }
 
         // DELETE: api/Organization/5

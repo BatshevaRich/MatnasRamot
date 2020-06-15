@@ -37,11 +37,17 @@ namespace Dal
             }
         }
 
-        public static void UpdateOrganization(Common.Organization organization)
+        public static void UpdateOrganization(Common.Organization organization, Category[] categories)
         {
             Organization e = Mapper.CastOrganization(organization);
             using (dbRamotEntities db = new dbRamotEntities())
             {
+                db.Organization.Find(organization.Id).Categories.Clear();
+                foreach (var item in categories)
+                {
+                    var c = db.Categories.FirstOrDefault(ca => ca.Id == item.Id);
+                    db.Organization.Find(organization.Id).Categories.Add(c);
+                }
                 db.Entry<Organization>(db.Set<Organization>().Find(e.Id)).CurrentValues.SetValues(e);
                 db.SaveChanges();
             }

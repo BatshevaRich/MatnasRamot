@@ -17,9 +17,9 @@ namespace Bll
         {
             Dal.OrganizationManager.RemoveOrganization(organization);
         }
-        public static void UpdateOrganization(Organization organization)
+        public static void UpdateOrganization(Organization organization, Category[] categories)
         {
-            Dal.OrganizationManager.UpdateOrganization(organization);
+            Dal.OrganizationManager.UpdateOrganization(organization, categories);
         }
 
         public static Organization GetOrganization(int id)

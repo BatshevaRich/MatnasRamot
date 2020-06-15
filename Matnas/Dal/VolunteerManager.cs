@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Metadata.Edm;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -105,7 +106,13 @@ namespace Dal
         {
             Volunteers v = Mapper.CastVolunteer(volunteer);
             using (dbRamotEntities db = new dbRamotEntities())
-            {/////////////////////////////////need to fix categories!
+            {
+                db.Volunteers.Find(volunteer.Id).Categories.Clear();
+                foreach (var item in categories)
+                {
+                    var c = db.Categories.FirstOrDefault(ca => ca.Id == item.Id);
+                    db.Volunteers.Find(volunteer.Id).Categories.Add(c);
+                }
                 db.Entry<Volunteers>(db.Set<Volunteers>().Find(v.Id)).CurrentValues.SetValues(v);
                 db.SaveChanges();
             }
@@ -188,7 +195,7 @@ namespace Dal
                 db.SaveChanges();
             }
         }
-        
+
         /// <summary>
         /// Get families of volunteer
         /// </summary>
