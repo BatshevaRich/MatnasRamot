@@ -90,15 +90,10 @@
             showFirstLastButtons></mat-paginator>
         </span>
         <router-outlet></router-outlet>
-        <router-outlet></router-outlet>
       </mat-card-content>
     </div>
-    <div *ngIf="!error && !loaded">
-      <div class="d-flex justify-content-center">
-        <div class="spinner-border" style="color: gray; width: 10rem; height: 10rem;" role="status">
-          <span class="sr-only">Loading...</span>
-        </div>
-      </div>
+    <div *ngIf="!error && !loaded" style="height: calc(93vh - (50px + 50px));">
+            <app-spinner></app-spinner>
     </div>
     <span *ngIf="notFound" class="text-center">
       <mat-error>לא נמצאו ארגונים במערכת</mat-error>
