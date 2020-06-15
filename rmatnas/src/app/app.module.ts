@@ -49,6 +49,8 @@ import {ReactiveFormsModule} from '@angular/forms';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { SpinnerComponent } from './Components/UI/spinner/spinner.component';
 import { ErrorComponent } from './Components/UI/error/error.component';
+import { getHebrewPaginatorIntl } from './Components/UI/hebrew-paginator-intl';
+import { MatPaginatorIntl } from '@angular/material';
 WebFont.load({
   custom: { families: ['Material Icons', 'Material Icons Outline'], }
 });
@@ -106,7 +108,7 @@ WebFont.load({
     ScrollingModule
   ],
   entryComponents: [RangesFooter],
-  providers: [DatePipe],
+  providers: [DatePipe, { provide: MatPaginatorIntl, useValue: getHebrewPaginatorIntl() }],
   bootstrap: [AppComponent]
 })
 export class AppModule {
