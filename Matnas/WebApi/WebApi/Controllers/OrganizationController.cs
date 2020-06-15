@@ -39,7 +39,9 @@ namespace WebApi.Controllers
         {
             Bll.OrganizationManager.RemoveOrganization(id);
         }
-        [Route("api/volunteer/families")]
+
+        [Route("getfamilies/{id}")]
+        [HttpGet]
         public IEnumerable<Family> GetFamiliess(int id)
         {
             return Bll.OrganizationManager.GetFamilies(id);
