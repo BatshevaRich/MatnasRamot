@@ -34,7 +34,7 @@ import { CategoryFComponent } from './Components/forms/category-f/category-f.com
 import { AllToVolunteersComponent } from './Components/all/all-to-volunteers/all-to-volunteers.component';
 import { MatIconRegistry } from '@angular/material/icon';
 import { ToVolunteerComponent } from './Components/single/to-volunteer/to-volunteer.component';
-import { ConfirmDialogComponent } from './Components/forms/confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from './Components/UI/confirm-dialog/confirm-dialog.component';
 import { HeaderComponent } from './Components/UI/header/header.component';
 import { RoutingModule } from './routing.module';
 import { MaterialModule } from './material.module';
@@ -46,6 +46,9 @@ import * as WebFont from 'webfontloader';
 import { SatDatepickerModule, SatNativeDateModule } from 'saturn-datepicker';
 import { RangesFooter } from './Components/UI/ranges-footer/ranges-footer.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { SpinnerComponent } from './Components/UI/spinner/spinner.component';
+import { ErrorComponent } from './Components/UI/error/error.component';
 WebFont.load({
   custom: { families: ['Material Icons', 'Material Icons Outline'], }
 });
@@ -84,7 +87,9 @@ WebFont.load({
     ConfirmDialogComponent,
     HeaderComponent,
     MainComponent,
-    RangesFooter
+    RangesFooter,
+    SpinnerComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -97,7 +102,8 @@ WebFont.load({
     FlexLayoutModule,
     ChartsModule,
     ReactiveFormsModule,
-    SatDatepickerModule, SatNativeDateModule
+    SatDatepickerModule, SatNativeDateModule,
+    ScrollingModule
   ],
   entryComponents: [RangesFooter],
   providers: [DatePipe],

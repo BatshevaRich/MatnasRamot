@@ -4,7 +4,7 @@ import { VolunteerService } from 'src/app/services/volunteer.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
-import { ConfirmDialogModel, ConfirmDialogComponent } from '../../forms/confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogModel, ConfirmDialogComponent } from '../../UI/confirm-dialog/confirm-dialog.component';
 import { MatDialog, MatSort } from '@angular/material';
 import { Observable } from 'rxjs';
 import * as XLSX from 'xlsx';

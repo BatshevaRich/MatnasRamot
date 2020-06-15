@@ -8,7 +8,7 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material';
 import { Observable } from 'rxjs';
-import { ConfirmDialogModel, ConfirmDialogComponent } from '../../forms/confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogModel, ConfirmDialogComponent } from '../../UI/confirm-dialog/confirm-dialog.component';
 import * as XLSX from 'xlsx';
 import { DatePipe } from '@angular/common';
 
@@ -47,8 +47,8 @@ export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewIni
               public vfs: VolunteerAndFamilyService,
               public dialog: MatDialog,
               private elementRef: ElementRef) {
-    this.dataSource.filterPredicate =
-      (data: Details, filter: string) => data.NameVolunteer.indexOf(filter) !== -1;
+    // this.dataSource.filterPredicate =
+    //   (data: Details, filter: string) => data.NameVolunteer.indexOf(filter) !== -1;
    }
 
   ngOnInit() {
@@ -73,7 +73,7 @@ export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewIni
       });
       this.dataSource.data = this.allvolunteerings;
     }
-    });
+    }, err => { this.error = true; this.loaded = true; });
     // if (this.vId) {
     //   this.fs.getFamiliesByVolunteer(this.vId).subscribe(data=>{
     //     this.families = data;
