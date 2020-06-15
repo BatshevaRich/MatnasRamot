@@ -1,33 +1,33 @@
 <div dir="rtl" class="text-right" style="padding-top: 1%">
-  <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3%" fxLayoutAlign="center">
-    <!-- <div fxFlex="20%"> -->
-    <mat-card>
-      <mat-toolbar>
-        <mat-card-header>
-          <div mat-card-avatar class="example-header-image"><i class="fa fa-calendar-o" aria-hidden="true"></i></div>
-          <mat-card-title>{{ myEvent.Name }}</mat-card-title>
-        </mat-card-header>
-      </mat-toolbar>
-      <mat-card-content>
-        <p>תאור: {{myEvent.Description}}</p>
-        <p>תאריך התחלה: {{myEvent.StartDate | date:"MMMM dd yyyy"}}</p>
-        <p>תאריך סיום: {{myEvent.EndDate  | date:"MMMM dd yyyy"}}</p>
-        <header *ngIf="categories.length > 0">קטגוריות</header>
-        <div *ngFor="let c of categories">
-          <li>
-            {{c.Name}}</li>
-        </div>
-        <mat-card-actions>
-          <button mat-raised-button (click)="EventOpenDialog()">לעריכת
-            הפרטים</button>
-        </mat-card-actions>
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3%" fxLayoutAlign="right">
+    <div fxFlex="25%">
+      <mat-card>
+        <mat-toolbar>
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image"><i class="fa fa-calendar-o" aria-hidden="true"></i></div>
+            <mat-card-title>{{ myEvent.Name }}</mat-card-title>
+          </mat-card-header>
+        </mat-toolbar>
+        <mat-card-content>
+          <p>תאור: {{myEvent.Description}}</p>
+          <p>תאריך התחלה: {{myEvent.StartDate | date:"MMMM dd yyyy"}}</p>
+          <p>תאריך סיום: {{myEvent.EndDate  | date:"MMMM dd yyyy"}}</p>
+          <header *ngIf="categories.length > 0">קטגוריות</header>
+          <div *ngFor="let c of categories">
+            <li>
+              {{c.Name}}</li>
+          </div>
+          <mat-card-actions>
+            <button mat-raised-button (click)="EventOpenDialog()">לעריכת
+              הפרטים</button>
+          </mat-card-actions>
 
-      </mat-card-content>
-    </mat-card>
-    <!-- </div> -->
-    <div *ngIf="toV != true">
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <mat-card *ngIf="toV != true" fxFlex="75%">
       <button *ngIf="false" (click)="tabs.selectedIndex = 0">RESET</button>
-      <mat-tab-group dir="rtl" (selectedTabChange)="onTabChange($event)" #tabs>
+      <mat-tab-group dir="rtl" [selectedIndex]=1 (selectedTabChange)="onTabChange($event)" #tabs>
         <mat-tab></mat-tab> <!-- ADDITIONAL TAB -->
         <mat-tab label="מתנדבות">
           <app-all-volunteers *ngIf="showVolunteer" dir="rtl"></app-all-volunteers>
@@ -36,9 +36,9 @@
           <app-all-families *ngIf="showFamily" dir="rtl"></app-all-families>
         </mat-tab>
         <mat-tab label="ארגונים">
-          <app-all-organizations *ngIf="showOrganization" dir="rtl" ></app-all-organizations>
+          <app-all-organizations *ngIf="showOrganization" dir="rtl"></app-all-organizations>
         </mat-tab>
       </mat-tab-group>
-    </div>
+    </mat-card>
   </div>
 </div>

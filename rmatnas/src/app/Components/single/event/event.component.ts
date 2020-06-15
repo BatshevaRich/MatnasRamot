@@ -25,7 +25,7 @@ export class EventComponent implements OnInit, OnDestroy {
   showEvent: boolean;
   showFamily: boolean;
   showOrganization: boolean;
-  showVolunteer: boolean;
+  showVolunteer = true;
   constructor(public es: EventService,
               public dialog: MatDialog,
               private elementRef: ElementRef) {
