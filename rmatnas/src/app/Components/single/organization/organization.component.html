@@ -1,6 +1,6 @@
 <div dir="rtl" class="text-right" style="padding-top: 1%">
   <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3%" fxLayoutAlign="right">
-    <div fxFlex="25%">
+    <div [fxFlex]="toV ? large : smallest">
     <mat-card>
       <mat-toolbar>
         <mat-card-header>
@@ -19,7 +19,7 @@
           <li>
             {{c.Name}}</li>
         </div>
-        <mat-card-actions *ngIf="toV != true">
+        <mat-card-actions *ngIf="toV != true" [fxFlex]="toV ? largest : small">
           <button mat-raised-button (click)="OrganizationOpenDialog()">לעריכת
             הפרטים</button>
         </mat-card-actions>

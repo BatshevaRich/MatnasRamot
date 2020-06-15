@@ -30,6 +30,10 @@ export class FamilyComponent implements OnInit, OnDestroy, AfterViewInit {
   mySubscription2: Subscription;
   @Input() vId: number;
   @Input() toV: boolean;
+  smallest = '20%';
+  small = '80%';
+  large = '100%';
+  largest = '0%';
   @Output() addedFamily: EventEmitter<Family> = new EventEmitter<Family>();
   chooseTab: string;
   selectedTabIndex: any;

@@ -20,6 +20,10 @@ export class OrganizationComponent implements OnInit, OnDestroy, AfterViewInit {
   id: number;
   @Input() vId: number;
   @Input() toV: boolean;
+  smallest = '20%';
+  small = '80%';
+  large = '100%';
+  largest = '0%';
   @Output() addedOrganization: EventEmitter<Organization> = new EventEmitter<Organization>();
   mySubscription: Subscription;
   selectedTabIndex: any;

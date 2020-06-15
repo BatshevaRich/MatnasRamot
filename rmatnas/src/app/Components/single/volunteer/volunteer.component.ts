@@ -16,6 +16,10 @@ export class VolunteerComponent implements OnInit, OnDestroy, AfterViewInit {
   id: number;
   @Input() vId: number;
   @Input() toV: boolean;
+  smallest = '20%';
+  small = '80%';
+  large = '100%';
+  largest = '0%';
   @Output() addedVolunteer: EventEmitter<Volunteer> = new EventEmitter<Volunteer>();
   selectedTabIndex: number;
   showFamily = true;

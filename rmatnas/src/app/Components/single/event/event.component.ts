@@ -19,6 +19,10 @@ export class EventComponent implements OnInit, OnDestroy {
   id: number;
   @Input() vId: number;
   @Input() toV: boolean;
+  smallest = '20%';
+  small = '80%';
+  large = '100%';
+  largest = '0%';
   @Output() addedEvent: EventEmitter<Eventt> = new EventEmitter<Eventt>();
   mySubscription: Subscription;
   selectedTabIndex: any;
