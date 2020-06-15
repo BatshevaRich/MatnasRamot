@@ -5,6 +5,7 @@ import { MatSort, MatTable, MatPaginator, MatTableDataSource, MatDialog } from '
 import { OrganizationService } from 'src/app/services/organization.service';
 import { Observable } from 'rxjs';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../../UI/confirm-dialog/confirm-dialog.component';
+import { AddFOComponent } from '../../forms/add/add-fo/add-fo.component';
 export interface Details {
   Id: number;
   Name: string;
@@ -46,8 +47,8 @@ export class AllOrganizationsComponent implements OnInit, OnDestroy, AfterViewIn
   notFound = false;
 
   constructor(public os: OrganizationService,
-              public dialog: MatDialog,
-              private elementRef: ElementRef) { }
+    public dialog: MatDialog,
+    private elementRef: ElementRef) { }
 
   ngOnDestroy() {
     this.elementRef.nativeElement.remove();
@@ -61,19 +62,32 @@ export class AllOrganizationsComponent implements OnInit, OnDestroy, AfterViewIn
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    this.os.getOrganizations().subscribe((organizations: Organization[]) => {
-      this.loaded = true;
-      if (organizations.length === 0) {
-        this.notFound = true;
-      } else {
-        this.organizations = organizations;
-        this.dataSource.data = organizations;
-        this.resultsLength = this.dataSource.data.length;
-        this.error = false;
-      }
-    }, err => { this.error = true; this.loaded = true; });
+    if (this.vId) {
+      this.inp = true;
+      this.os.getOrganizationsForFamily(this.vId).subscribe((data: Organization[]) => {
+        this.loaded = true;
+        if (data.length === 0) {
+          this.notFound = true;
+        } else {
+          this.organizations = data;
+          this.dataSource.data = data;
+          this.resultsLength = this.dataSource.data.length;
+        }
+      });
+    } else {
+      this.os.getOrganizations().subscribe((organizations: Organization[]) => {
+        this.loaded = true;
+        if (organizations.length === 0) {
+          this.notFound = true;
+        } else {
+          this.organizations = organizations;
+          this.dataSource.data = organizations;
+          this.resultsLength = this.dataSource.data.length;
+          this.error = false;
+        }
+      }, err => { this.error = true; this.loaded = true; });
+    }
   }
-
   confirmDialog(): Observable<any> {
     const message = `מחיקה זו היא לצמיתות! האם תרצי להמשיך?`;
     const dialogData = new ConfirmDialogModel('מחיקת מתנדבת', message);
@@ -111,7 +125,15 @@ export class AllOrganizationsComponent implements OnInit, OnDestroy, AfterViewIn
   }
 
   addFamily(event, elm) {
-
+    debugger
+    const dialogRef = this.dialog.open(AddFOComponent, {
+      maxWidth: '75%',
+      data: {
+        id: event.Id
+      }
+      // data: dialogData
+    });
+    return dialogRef.afterClosed();
   }
 
 }

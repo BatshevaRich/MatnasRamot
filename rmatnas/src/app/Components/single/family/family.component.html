@@ -33,18 +33,21 @@
         </mat-card-content>
       </mat-card>
     <!-- </div> -->
-    <div *ngIf="toV != true">
-      <button *ngIf="false" (click)="tabs.selectedIndex = 0">RESET</button>
-      <mat-tab-group dir="rtl" (selectedTabChange)="onTabChange($event)" #tabs>
+    <div dir="rtl" style="text-align: right;" *ngIf="toV != true">
+      <!-- <button *ngIf="false" (click)="tabs.selectedIndex = 0">RESET</button> -->
+      <mat-tab-group style="text-align: right;" [selectedIndex]= 1 dir="rtl" (selectedTabChange)="onTabChange($event)" #tabs>
         <mat-tab></mat-tab> <!-- ADDITIONAL TAB -->
-        <mat-tab label="מתנדבות">
+        <mat-tab dir="rtl"  label="מתנדבות">
           <app-all-volunteers *ngIf="showVolunteer" dir="rtl" [vId]="vId"></app-all-volunteers>
         </mat-tab>
-        <mat-tab label="ארגונים">
-          <app-all-organizations *ngIf="showOrganization" dir="rtl"></app-all-organizations>
+        <mat-tab dir="rtl"label="ארגונים">
+          <app-all-organizations *ngIf="showOrganization" dir="rtl" [vId]="vId"></app-all-organizations>
         </mat-tab>
-        <mat-tab label="ארועים">
+        <mat-tab dir="rtl"label="ארועים">
           <app-all-events *ngIf="showEvent" dir="rtl"></app-all-events>
+        </mat-tab>
+        <mat-tab dir="rtl"  label="התנדבויות">
+          <app-all-volunteers *ngIf="showVolunteer" dir="rtl" [vId]="vId"></app-all-volunteers>
         </mat-tab>
       </mat-tab-group>
     </div>

@@ -9,7 +9,7 @@ import { Category } from '../Classes/Category';
   providedIn: 'root'
 })
 export class OrganizationService {
-  path = environment.baseURL + 'group';
+  path = environment.baseURL + 'organization';
   constructor(private http: HttpClient) { }
   getOrganizations(): Observable<Organization[]> {
     return this.http.get<Organization[]>(this.path);
@@ -47,14 +47,14 @@ export class OrganizationService {
     return this.http.get<Organization[]>(this.path + '/Organizationsbyfac/' + id,
     {headers: {Authorization: idFamily.toString(), volunteer: idVolunteer.toString()}});
   }
-  getCategoriesOfOrganization(id: number) {
-    return this.http.get<Category[]>(environment.baseURL + 'CategoryOrganization/' + id);
+  getCategoriesOfOrganization(id: number): Observable<Category[]> {
+    return this.http.get<Category[]>(this.path + '/categories/' + id);
   }
   addCategoriesToOrganization(id: number, categories: Category[]) {
     return this.http.get(environment.baseURL + 'CategoryOrganization/' + id + '&category=' + categories);
   }
   getOrganizationsForFamily(fId: number): Observable<Organization[]> {
-    return this.http.get<Organization[]>(environment.baseURL + 'OrganizationAndFamily/Getof/' + fId);
+    return this.http.get<Organization[]>(environment.baseURL + 'family/organizations/' + fId);
   }
   getOrganizationsForVolunteer(vId: number): Observable<Organization[]> {
     return this.http.get<Organization[]>(environment.baseURL + 'OrganizationAndVolunteer/Getov/' + vId);

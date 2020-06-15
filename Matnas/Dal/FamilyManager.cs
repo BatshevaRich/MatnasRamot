@@ -92,6 +92,14 @@ namespace Dal
         {
             using (dbRamotEntities db = new dbRamotEntities())
             {
+                var query = from row in db.VolunteerAndFamily.AsEnumerable() where row.IdFamily == id select row;
+                if (query.ToList().Count > 0)
+                {
+                    db.VolunteerAndFamily.FirstOrDefault().Families = null;
+                    // db.VolunteerAndFamily.Remove(db.VolunteerAndFamily.Find(query.FirstOrDefault().Id));
+                }
+                db.Families.Find(id).OrganizationAndFamily.Clear();
+                db.Families.Find(id).Categories.Clear();
                 db.Families.Remove(db.Families.Find(id));
                 db.SaveChanges();
             }
@@ -183,11 +191,11 @@ namespace Dal
             List<Common.Organization> organizations = new List<Common.Organization>();
             using (dbRamotEntities db = new dbRamotEntities())
             {
-                Volunteers v = db.Volunteers.Find(id);
+                Families v = db.Families.Find(id);
                 var f = db.OrganizationAndFamily.Where(g => g.IdFamily == id).Select(g => g.IdOrganization).ToArray();
                 foreach (var o in f)
                 {
-                   organizations.Add(Mapper.CastOrganizationToComon(db.Organization.Find(id)));
+                   organizations.Add(Mapper.CastOrganizationToComon(db.Organization.Find(o)));
                 }
             }
             return organizations;

@@ -67,7 +67,7 @@ namespace WebApi.Controllers
         {
             return Bll.FamilyManager.GetVolunteers(id);
         }
-        [Route("api/family/organizations")]
+        [Route("organizations/{id}")]
         public IEnumerable<Organization> GetOrganizations(int id)
         {
             return Bll.FamilyManager.GetOrganizations(id);
@@ -75,10 +75,11 @@ namespace WebApi.Controllers
         
         [Route("familiesbycategory/{id}")]
         [HttpGet]
-        public IEnumerable<Family> GetFamiliesByCategoryAndVolunteer(int id)
+        public IEnumerable<Family> GetFamiliesByCategory(int id)
         {
             return Bll.FamilyManager.GetFamiliesByCategory(id);
         }
+
 
         //public IEnumerable<Family> GetFamiliesByCategoryAndVolunteer(int id)
         //{
