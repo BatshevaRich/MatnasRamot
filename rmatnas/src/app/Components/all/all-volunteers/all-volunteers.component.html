@@ -98,13 +98,7 @@
       <mat-error>לא נמצאו מתנדבות למשפחה זו</mat-error>
     </span>
   </mat-card>
-  <mat-card *ngIf="error && loaded" class="fullscreen text-center" [ngClass]="error && loaded? 'visible': 'hidden'">
-    <span style="position: absolute; top:45%">
-      <mat-progress-bar mode="buffer">בעיה בטעינת הנתונים</mat-progress-bar>
-      <mat-error>
-        <h3>לא נמצאו תוצאות</h3>
-        <h4>בעיה בטעינת הנתונים</h4>
-      </mat-error>
-    </span>
-  </mat-card>
 </div>
+<mat-card *ngIf="error && loaded" class="fullscreen text-center" [ngClass]="error && loaded? 'visible': 'hidden'">
+  <app-error></app-error>
+</mat-card>
