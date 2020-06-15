@@ -38,9 +38,6 @@ export class ToVolunteerComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.vs.getVolunteering(this.vId).subscribe((v: VolunteerAndFamily) => {
       this.toVolunteer = v;
-      if (this.toVolunteer.Family) {this.toVolunteer.Family = null; }
-      if (this.toVolunteer.Volunteer) { this.toVolunteer.Volunteer = null; }
-      if (this.toVolunteer.Category) { this.toVolunteer.Category = new Category('קטגוריה נמחקה', 0); }
     });
   }
 

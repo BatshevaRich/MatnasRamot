@@ -6,9 +6,9 @@
     </mat-card-header>
   </mat-toolbar>
   <mat-card-content>
-    <p>קטגוריה: {{ toVolunteer.Category.Name }}</p>
-    <p>מתנדבת: {{ toVolunteer.Volunteer.Name }}</p>
-    <p>משפחה: {{ toVolunteer.Family.LastName }}</p>
+    <p>קטגוריה: {{ toVolunteer.Category ? toVolunteer.Category.Name: 'קטגוריה נמחקה' }}</p>
+    <p>מתנדבת: {{ toVolunteer.Volunteer ? toVolunteer.Volunteer.Name: 'מתנדבת נמחקה' }}</p>
+    <p>משפחה: {{ toVolunteer.Family ? toVolunteer.Family.LastName: 'משפחה נמחקה'}}</p>
     <p>תאריך: {{ toVolunteer.DateAdded | date:"MMMM dd yyyy" }}</p>
     <p>הערות: {{ toVolunteer.Comments }}</p>
     <!-- <mat-card-actions>
