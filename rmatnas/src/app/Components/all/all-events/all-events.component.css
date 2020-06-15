@@ -47,11 +47,11 @@ table {
   }
   
   .mat-header-cell {
-    text-align: center !important;
+    text-align: right !important;
     /* display: flex; */
     flex-direction: column;
     flex: 0 0 75px;
-    justify-content: center;
+    justify-content: right;
     font-weight: bolder;
     font-size: large;
     display: table-cell;
@@ -62,8 +62,8 @@ table {
   }
   
   .mat-cell {
-    text-align: center;
-    justify-content: center;
+    text-align: right;
+    justify-content: right;
     word-wrap: break-word !important;
     white-space: pre !important;
     flex: 0 0 5% !important;
