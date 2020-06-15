@@ -30,9 +30,6 @@
       <button *ngIf="false" (click)="tabs.selectedIndex = 0">RESET</button>
       <mat-tab-group dir="rtl" (selectedTabChange)="onTabChange($event)" #tabs>
         <mat-tab></mat-tab> <!-- ADDITIONAL TAB -->
-        <mat-tab label="מתנדבות">
-          <app-all-volunteers *ngIf="showVolunteer" dir="rtl"></app-all-volunteers>
-        </mat-tab>
         <mat-tab label="משפחות">
           <app-all-families *ngIf="showFamily" dir="rtl"></app-all-families>
         </mat-tab>

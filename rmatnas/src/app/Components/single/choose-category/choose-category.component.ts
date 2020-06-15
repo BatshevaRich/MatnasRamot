@@ -1,7 +1,9 @@
 import { Component, OnInit, OnDestroy, Output, EventEmitter, Input, ViewChildren, QueryList, ElementRef } from '@angular/core';
 import { CategoryService } from 'src/app/services/category.service';
 import { Category } from 'src/app/Classes/Category';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
+import { ConfirmDialogModel, ConfirmDialogComponent } from '../../UI/confirm-dialog/confirm-dialog.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-choose-category',
@@ -10,7 +12,8 @@ import { Subscription } from 'rxjs';
 })
 export class ChooseCategoryComponent implements OnInit, OnDestroy {
   constructor(private cs: CategoryService,
-              private elementRef: ElementRef) {
+              private elementRef: ElementRef,
+              public dialog: MatDialog) {
     cs.getCategories().subscribe(data => {
       this.categories = data;
       this.categories.forEach(element => {
@@ -51,10 +54,24 @@ export class ChooseCategoryComponent implements OnInit, OnDestroy {
     this.displayForm = true;
   }
   deleteCat(id: number) {
-    this.cs.removeCategory(id).subscribe(res => {
-      this.categories = this.categories.filter(i => i.Id !== id);
-      this.arr = this.arr.filter(i => i.id !== id);
+    this.confirmDialog().subscribe(res => {
+      if (res) {
+        this.cs.removeCategory(id).subscribe(result => {
+          this.categories = this.categories.filter(i => i.Id !== id);
+          this.arr = this.arr.filter(i => i.id !== id);
+        });
+      }
     });
+  }
+
+  confirmDialog(): Observable<any> {
+    const message = `מחיקה זו היא לצמיתות, כולל מחיקת כל המקומות בהן קטגוריה זו מופיעה. האם תרצי להמשיך?`;
+    const dialogData = new ConfirmDialogModel('מחיקת קטגוריה', message);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: '75%',
+      data: dialogData
+    });
+    return dialogRef.afterClosed();
   }
   public reloadWithNewData(event: Category) {
     this.cs.getCategories().subscribe(res => {

@@ -18,10 +18,8 @@ export class OrganizationAndFamilyService {
   getVolunteering(id: number): Observable<OrganizationAndFamily> {
     return this.http.get<OrganizationAndFamily>(this.path + id);
   }
-  addVolunteering(volunteering: OrganizationAndFamily) {
-
-    this.http.post(this.path, volunteering).subscribe(data => {
-    });
+  addFamilyToOrganization(value: OrganizationAndFamily) {
+    return this.http.post(this.path, value).subscribe(res => res);
   }
   removeVolunteering(id: number) {
     this.http.delete(this.path + id).subscribe(data => {

@@ -65,7 +65,7 @@ export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewIni
         item.Id = element.Id;
         item.NameFamily = element.Family.LastName;
         item.NameVolunteer = element.Volunteer.Name;
-        element.Category? item.Category = element.Category.Name: item.Category = 'קטגוריה נמחקה';
+        element.Category ? item.Category = element.Category.Name : item.Category = 'קטגוריה נמחקה';
         item.PelephoneVolunteer = element.Volunteer.Pelephone;
         this.allvolunteerings.push(item);
         item.IdVolunteer = element.Volunteer.Id;
@@ -74,16 +74,6 @@ export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewIni
       this.dataSource.data = this.allvolunteerings;
     }
     }, err => { this.error = true; this.loaded = true; });
-    // if (this.vId) {
-    //   this.fs.getFamiliesByVolunteer(this.vId).subscribe(data=>{
-    //     this.families = data;
-    //   })
-    //  }
-    // else {
-    //   this.fs.getFamilies().subscribe(data => {
-    //     this.families = data;
-    //   });
-    // }
   }
   ngOnDestroy() {
     this.elementRef.nativeElement.remove();
