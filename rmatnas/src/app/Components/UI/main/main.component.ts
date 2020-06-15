@@ -46,8 +46,8 @@ export class MainComponent {
     plugins: {
       datalabels: {
         formatter: (value, ctx) => {
-          const label = ctx.chart.data.labels[ctx.dataIndex];
-          return label;
+          // const label = ctx.chart.data.labels[ctx.dataIndex];
+          // return label;
         },
       },
     }
