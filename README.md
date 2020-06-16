@@ -12,7 +12,7 @@ Charts: [ng2-charts](https://valor-software.com/ng2-charts/#/PieChart)
 <br>
 Date Picker: [Saturn Datepicker](https://www.npmjs.com/package/saturn-datepicker)
 <br>
-Flex Layout: [Flex Layout)(https://www.npmjs.com/package/@angular/flex-layout)
+Flex Layout: [Flex Layout](https://www.npmjs.com/package/@angular/flex-layout)
 ## Development Environment
 Windows 10, Visual Studio 2019, Visual Studio Code
 ## Contributing
