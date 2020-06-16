@@ -5,9 +5,12 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace WebApi.Controllers
 {
+    [RoutePrefix("api/event")]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class EventController : ApiController
     {
         // GET: api/Event
@@ -27,15 +30,19 @@ namespace WebApi.Controllers
             return Bll.EventManager.GetVolunteers(id);
         }
         // POST: api/Event
-        public void Post([FromBody]Event eventt)
+        public int Post([FromBody] JObject data)
         {
-            Bll.EventManager.AddEvent(eventt);
+            Event newEvent = data["event"].ToObject<Event>();
+            Category[] category = data["categories"].ToObject<Category[]>();
+            return Bll.EventManager.AddEvent(newEvent, category);
         }
 
         // PUT: api/Event/5
-        public void Put(int id, [FromBody]Event eventt)
+        public void Put([FromBody] JObject data)
         {
-            Bll.EventManager.UpdateEvent(eventt);
+            Event newEvent = data["event"].ToObject<Event>();
+            Category[] category = data["categories"].ToObject<Category[]>();
+            Bll.EventManager.UpdateEvent(newEvent, category);
         }
 
         // DELETE: api/Event/5

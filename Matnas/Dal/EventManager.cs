@@ -9,14 +9,23 @@ namespace Dal
 {
     public static class EventManager
     {
-        public static void AddEvent(Event eventt)
+        public static int AddEvent(Event eventt, Category[] categories)
         {
-            Events e = Mapper.CastEvent(eventt);
+            int x = 0;
+            Events v = Mapper.CastEvent(eventt);
             using (dbRamotEntities db = new dbRamotEntities())
             {
-                db.Events.Add(e);
+                foreach (var item in categories)
+                {
+                    var c = db.Categories.FirstOrDefault(ca => ca.Id == item.Id);
+                    //var c =cc.FirstOrDefault(ca => ca.Id == item.Id);
+                    v.Categories.Add(c);
+                }
+                db.Events.Add(v);
                 db.SaveChanges();
+                x = db.Events.Local[0].Id;
             }
+            return x;
         }
         public static void RemoveEvent(Event eventt)
         {
@@ -37,11 +46,17 @@ namespace Dal
             }
         }
 
-        public static void UpdateEvent(Event eventt)
+        public static void UpdateEvent(Event eventt, Category[] categories)
         {
             Events e = Mapper.CastEvent(eventt);
             using (dbRamotEntities db = new dbRamotEntities())
             {
+                db.Events.Find(eventt.Id).Categories.Clear();
+                foreach (var item in categories)
+                {
+                    var c = db.Categories.FirstOrDefault(ca => ca.Id == item.Id);
+                    db.Events.Find(eventt.Id).Categories.Add(c);
+                }
                 db.Entry<Events>(db.Set<Events>().Find(e.Id)).CurrentValues.SetValues(e);
                 db.SaveChanges();
             }

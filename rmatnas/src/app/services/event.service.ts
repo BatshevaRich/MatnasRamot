@@ -18,10 +18,19 @@ export class EventService {
     return this.http.get<Eventt>(this.path + '/' + id);
   }
   addEvent(event: Eventt, categoriesSelect: Category[]) {
-   return this.http.post(this.path, event).toPromise();
+    const myData = {} as any;
+    myData.event = event;
+    myData.categories = categoriesSelect;
+    return this.http
+      .post(this.path, myData).toPromise().then(res => res);
   }
   updateEvent(event: Eventt, categoriesSelect: Category[]) {
-   return this.http.put(this.path + event.Id, event);
+    const myData = {} as any;
+    myData.event = event;
+    myData.categories = categoriesSelect;
+    this.http.put(
+      this.path, myData
+    ).subscribe();
   }
   removeEvent(id: number) {
    this.http.delete(this.path + id).subscribe(data => {

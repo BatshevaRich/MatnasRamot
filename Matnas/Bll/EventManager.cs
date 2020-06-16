@@ -10,17 +10,17 @@ namespace Bll
 {
     public static class EventManager
     {
-        public static void AddEvent(Event eventt)
+        public static int AddEvent(Event eventt, Category[] categories)
         {
-            Dal.EventManager.AddEvent(eventt);
+            return Dal.EventManager.AddEvent(eventt, categories);
         }
         public static void RemoveEvent(Event eventt)
         {
             Dal.EventManager.RemoveEvent(eventt);
         }
-        public static void UpdateEvent(Event eventt)
+        public static void UpdateEvent(Event eventt, Category[] categories)
         {
-            Dal.EventManager.UpdateEvent(eventt);
+            Dal.EventManager.UpdateEvent(eventt, categories);
         }
 
         public static Event GetEvent(int id)

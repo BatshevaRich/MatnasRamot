@@ -34,9 +34,9 @@ export class EventComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.es.getEvent(this.vId).subscribe(v => {
       this.myEvent = v;
-      // this.vs.getCategoriesOfVolunteer(this.vId).subscribe(c => {
-      //   this.categories = c;
-      // });
+      this.es.getCategoriesOfEvent(this.vId).subscribe((c: Category[]) => {
+        this.categories = c;
+      });
     });
   }
   ngOnDestroy(): void {
