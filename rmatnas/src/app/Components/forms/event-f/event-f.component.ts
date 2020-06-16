@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Inject, OnDestroy, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject, OnDestroy, ElementRef, AfterViewInit } from '@angular/core';
 import { Eventt } from 'src/app/Classes/Eventt';
 import { EventService } from 'src/app/services/event.service';
 import { NgForm, FormBuilder, FormGroup } from '@angular/forms';
@@ -12,7 +12,7 @@ import { RangesFooter } from '../../UI/ranges-footer/ranges-footer.component';
   templateUrl: './event-f.component.html',
   styleUrls: ['./event-f.component.css']
 })
-export class EventFComponent implements OnInit, OnDestroy {
+export class EventFComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild('eventForm') mytemplateForm: NgForm;
   categories: Category[] = [];
@@ -20,7 +20,7 @@ export class EventFComponent implements OnInit, OnDestroy {
   newEvent: Eventt = new Eventt(null, null, null, null, null);
   token = 0;
   categoriesSelected: Category[] = [];
-  date: [{begin: Date, end: Date}];
+  date: [{ begin: Date, end: Date }];
   inlineRange;
   form: FormGroup;
   rangesFooter = RangesFooter;
@@ -31,14 +31,17 @@ export class EventFComponent implements OnInit, OnDestroy {
               public snackBar: MatSnackBar,
               fb: FormBuilder,
               private elementRef: ElementRef) {
-                this.form = fb.group({
-                  date: [{begin: new Date(2020, 7, 5), end: new Date(2020, 7, 25)}]
-                });
-                cs.getCategories().subscribe(res => {
-                  this.categories = res;
-                });
-               }
+    this.form = fb.group({
+      date: [{ begin: new Date(2020, 7, 5), end: new Date(2020, 7, 25) }]
+    });
+    cs.getCategories().subscribe(res => {
+      this.categories = res;
+    });
+  }
 
+  ngAfterViewInit() {
+    this.date = [{ begin: new Date(2020, 7, 5), end: new Date(2020, 7, 25) }];
+  }
   ngOnInit() {
     if (this.data.update) {
       this.newEvent = this.data.dataKey;
@@ -58,9 +61,15 @@ export class EventFComponent implements OnInit, OnDestroy {
   submitForm(f) {
     if (this.data.update) {
       this.newEvent.Id = this.data.id;
+      this.newEvent.DateAdded = new Date().toDateString();
+      this.newEvent.StartDate = this.date[0].begin.toDateString();
+      this.newEvent.EndDate = this.date[0].end.toDateString();
       this.es.updateEvent(this.newEvent, this.categoriesSelected);
       this.dialogRef.close(this.newEvent);
     } else {
+      this.newEvent.DateAdded = new Date().toDateString();
+      this.newEvent.StartDate = this.date[0].begin.toDateString();
+      this.newEvent.EndDate = this.date[0].end.toDateString();
       this.es.addEvent(this.newEvent, this.categoriesSelected)
         .then(t => {
           this.token = t as number;

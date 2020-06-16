@@ -27,15 +27,15 @@ namespace WebApi.Controllers
             return Bll.EventManager.GetVolunteers(id);
         }
         // POST: api/Event
-        public void Post([FromBody]Event family)
+        public void Post([FromBody]Event eventt)
         {
-            Bll.EventManager.AddEvent(family);
+            Bll.EventManager.AddEvent(eventt);
         }
 
         // PUT: api/Event/5
-        public void Put(int id, [FromBody]Event family)
+        public void Put(int id, [FromBody]Event eventt)
         {
-            Bll.EventManager.UpdateEvent(family);
+            Bll.EventManager.UpdateEvent(eventt);
         }
 
         // DELETE: api/Event/5
