@@ -42,6 +42,7 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
   search = '';
   resultsLength = 0;
   @Input() vId: number;
+  @Input() where: number;
   result = '';
   loaded = false;
   error = false;
@@ -83,18 +84,33 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     if (this.vId) {
-      this.fs.getFamiliesByVolunteer(this.vId).subscribe((data: Family[]) => {
-        this.loaded = true;
-        if (data.length === 0) {
-          this.notFound = true;
-        } else {
-          data = this.trimResultsFromDB(data);
-          this.families = data;
-          this.dataSource.data = data;
-          this.resultsLength = this.dataSource.data.length;
-          this.error = false;
-        }
-      }, err => { this.error = true; this.loaded = true; });
+      if (this.where === 1) {
+        this.fs.getFamiliesByVolunteer(this.vId).subscribe((data: Family[]) => {
+          this.loaded = true;
+          if (data.length === 0) {
+            this.notFound = true;
+          } else {
+            data = this.trimResultsFromDB(data);
+            this.families = data;
+            this.dataSource.data = data;
+            this.resultsLength = this.dataSource.data.length;
+            this.error = false;
+          }
+        }, err => { this.error = true; this.loaded = true; });
+      } else if (this.where === 3) {
+        this.fs.getFamiliesByOrganization(this.vId).subscribe((data: Family[]) => {
+          this.loaded = true;
+          if (data.length === 0) {
+            this.notFound = true;
+          } else {
+            data = this.trimResultsFromDB(data);
+            this.families = data;
+            this.dataSource.data = data;
+            this.resultsLength = this.dataSource.data.length;
+            this.error = false;
+          }
+        }, err => { this.error = true; this.loaded = true; });
+      }
     } else {
       this.fs.getFamilies().subscribe((data: Family[]) => {
         data = this.trimResultsFromDB(data);

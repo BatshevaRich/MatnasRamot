@@ -33,4 +33,12 @@ export class VolunteerAndFamilyService {
     return this.http
       .post(this.path, vaf).toPromise().then(res => res);
   }
+
+  getVolunteeringsForVolunteer(idVolunteer: number) {
+    return this.http.get<VolunteerAndFamily[]>(this.path + '/Getforvolunteer/' + idVolunteer);
+  }
+
+  getVolunteeringsForFamily(idFamily: number) {
+    return this.http.get<VolunteerAndFamily[]>(this.path + '/Getforfamily/' + idFamily);
+  }
 }

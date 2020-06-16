@@ -41,7 +41,7 @@
           <app-all-volunteers *ngIf="showVolunteer" dir="rtl" [vId]="vId" [where]=2></app-all-volunteers>
         </mat-tab>
         <mat-tab label="התנדבויות">
-          <app-all-to-volunteers *ngIf="showVolunteerings" dir="rtl" [vId]="vId"></app-all-to-volunteers>
+          <app-all-to-volunteers *ngIf="showVolunteerings" dir="rtl" [vId]="vId" [where]=2></app-all-to-volunteers>
         </mat-tab>
         <mat-tab label="ארועים">
           <app-all-events *ngIf="showEvent" dir="rtl"></app-all-events>

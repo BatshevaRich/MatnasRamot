@@ -31,7 +31,7 @@
       <mat-tab-group dir="rtl" [selectedIndex]=1 (selectedTabChange)="onTabChange($event)" #tabs>
         <mat-tab></mat-tab> <!-- ADDITIONAL TAB -->
         <mat-tab label="משפחות">
-          <app-all-families *ngIf="showFamily" dir="rtl"></app-all-families>
+          <app-all-families *ngIf="showFamily" dir="rtl" [vId]="vId" [where]=3></app-all-families>
         </mat-tab>
         <mat-tab label="ארועים">
           <app-all-events *ngIf="showEvent" dir="rtl"></app-all-events>

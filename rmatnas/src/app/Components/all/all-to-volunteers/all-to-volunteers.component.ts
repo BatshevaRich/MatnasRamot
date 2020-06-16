@@ -35,6 +35,7 @@ export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewIni
   search = '';
   resultsLength = 0;
   @Input() vId: number;
+  @Input() where: number;
   volunteerings: VolunteerAndFamily[] = [];
   families: Family[] = [];
   result = '';
@@ -52,69 +53,136 @@ export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewIni
 
   ngOnInit() {
     if (this.vId) {
-      this.volunteerings = [];
-      this.loaded = true;
-      this.notFound = true;
       this.displayedColumns = ['NameVolunteer', 'NameFamily', 'Category', 'PelephoneVolunteer'];
-     } else {
-      this.vfs.getVolunteerings().subscribe((res: VolunteerAndFamily[]) => {
-        this.loaded = true;
-        if (res.length === 0) {
-          this.notFound = true;
-        } else {
-          this.volunteerings = res;
-          this.resultsLength = this.volunteerings.length;
-          this.volunteerings.forEach(element => {
-            // tslint:disable-next-line: no-use-before-declare
-            const item = new Details();
-            item.Id = element.Id;
-            item.NameFamily = element.Family.LastName;
-            item.NameVolunteer = element.Volunteer.Name;
-            element.Category ? item.Category = element.Category.Name : item.Category = 'קטגוריה נמחקה';
-            item.PelephoneVolunteer = element.Volunteer.Pelephone;
-            this.allvolunteerings.push(item);
-            item.IdVolunteer = element.Volunteer.Id;
-            item.IdFamily = element.Family.Id;
-          });
-          this.dataSource.data = this.allvolunteerings;
-        }
-      }, err => { this.error = true; this.loaded = true; });
+      if (this.where === 1) {
+        this.vfs.getVolunteeringsForVolunteer(this.vId).subscribe((res: VolunteerAndFamily[]) => {
+          this.loaded = true;
+          if (res.length === 0) {
+            this.notFound = true;
+          } else {
+            this.volunteerings = res;
+            this.resultsLength = this.volunteerings.length;
+            this.volunteerings.forEach(element => {
+              // tslint:disable-next-line: no-use-before-declare
+              const item = new Details();
+              item.Id = element.Id;
+              item.NameFamily = element.Family.LastName;
+              item.NameVolunteer = element.Volunteer.Name;
+              element.Category ? item.Category = element.Category.Name : item.Category = 'קטגוריה נמחקה';
+              item.PelephoneVolunteer = element.Volunteer.Pelephone;
+              this.allvolunteerings.push(item);
+              item.IdVolunteer = element.Volunteer.Id;
+              item.IdFamily = element.Family.Id;
+            });
+            this.dataSource.data = this.allvolunteerings;
+          }
+        }, err => { this.error = true; this.loaded = true; });
+      } else if (this.where === 1) {
+        this.vfs.getVolunteeringsForFamily(this.vId).subscribe((res: VolunteerAndFamily[]) => {
+          this.loaded = true;
+          if (res.length === 0) {
+            this.notFound = true;
+          } else {
+            this.volunteerings = res;
+            this.resultsLength = this.volunteerings.length;
+            this.volunteerings.forEach(element => {
+              // tslint:disable-next-line: no-use-before-declare
+              const item = new Details();
+              item.Id = element.Id;
+              item.NameFamily = element.Family.LastName;
+              item.NameVolunteer = element.Volunteer.Name;
+              element.Category ? item.Category = element.Category.Name : item.Category = 'קטגוריה נמחקה';
+              item.PelephoneVolunteer = element.Volunteer.Pelephone;
+              this.allvolunteerings.push(item);
+              item.IdVolunteer = element.Volunteer.Id;
+              item.IdFamily = element.Family.Id;
+            });
+            this.dataSource.data = this.allvolunteerings;
+          }
+        }, err => { this.error = true; this.loaded = true; });
+      } else if (this.where === 2) {
+        this.vfs.getVolunteeringsForFamily(this.vId).subscribe((res: VolunteerAndFamily[]) => {
+          this.loaded = true;
+          if (res.length === 0) {
+            this.notFound = true;
+          } else {
+            this.volunteerings = res;
+            this.resultsLength = this.volunteerings.length;
+            this.volunteerings.forEach(element => {
+              // tslint:disable-next-line: no-use-before-declare
+              const item = new Details();
+              item.Id = element.Id;
+              item.NameFamily = element.Family.LastName;
+              item.NameVolunteer = element.Volunteer.Name;
+              element.Category ? item.Category = element.Category.Name : item.Category = 'קטגוריה נמחקה';
+              item.PelephoneVolunteer = element.Volunteer.Pelephone;
+              this.allvolunteerings.push(item);
+              item.IdVolunteer = element.Volunteer.Id;
+              item.IdFamily = element.Family.Id;
+            });
+            this.dataSource.data = this.allvolunteerings;
+          }
+        }, err => { this.error = true; this.loaded = true; });
+      } else {
+        this.vfs.getVolunteerings().subscribe((res: VolunteerAndFamily[]) => {
+          this.loaded = true;
+          if (res.length === 0) {
+            this.notFound = true;
+          } else {
+            this.volunteerings = res;
+            this.resultsLength = this.volunteerings.length;
+            this.volunteerings.forEach(element => {
+              // tslint:disable-next-line: no-use-before-declare
+              const item = new Details();
+              item.Id = element.Id;
+              item.NameFamily = element.Family.LastName;
+              item.NameVolunteer = element.Volunteer.Name;
+              element.Category ? item.Category = element.Category.Name : item.Category = 'קטגוריה נמחקה';
+              item.PelephoneVolunteer = element.Volunteer.Pelephone;
+              this.allvolunteerings.push(item);
+              item.IdVolunteer = element.Volunteer.Id;
+              item.IdFamily = element.Family.Id;
+            });
+            this.dataSource.data = this.allvolunteerings;
+          }
+        }, err => { this.error = true; this.loaded = true; });
+      }
     }
   }
-  ngOnDestroy() {
-    this.elementRef.nativeElement.remove();
-  }
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
+    ngOnDestroy() {
+      this.elementRef.nativeElement.remove();
+    }
+    ngAfterViewInit() {
+      this.dataSource.paginator = this.paginator;
+    }
 
-  applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    this.dataSource.filter = filterValue;
-  }
+    applyFilter(filterValue: string) {
+      filterValue = filterValue.trim(); // Remove whitespace
+      filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+      this.dataSource.filter = filterValue;
+    }
 
-  delete(elm: Details) {
-    this.confirmDialog().subscribe(res => {
-      this.result = res;
-      if (res) {
-        this.vfs.removeVolunteering(elm.Id);
-        this.dataSource.data = this.dataSource.data
-          .filter(i => i !== elm);
-        // .map((i, idx) => (i.position = (idx + 1), i));
-      }
-    });
-  }
+    delete(elm: Details) {
+      this.confirmDialog().subscribe(res => {
+        this.result = res;
+        if (res) {
+          this.vfs.removeVolunteering(elm.Id);
+          this.dataSource.data = this.dataSource.data
+            .filter(i => i !== elm);
+          // .map((i, idx) => (i.position = (idx + 1), i));
+        }
+      });
+    }
 
-  confirmDialog(): Observable<any> {
-    const message = `מחיקה זו היא לצמיתות! האם תרצי להמשיך?`;
-    const dialogData = new ConfirmDialogModel('מחיקת התנדבות', message);
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      maxWidth: '75%',
-      data: dialogData
-    });
-    return dialogRef.afterClosed();
-  }
+    confirmDialog(): Observable < any > {
+      const message = `מחיקה זו היא לצמיתות! האם תרצי להמשיך?`;
+      const dialogData = new ConfirmDialogModel('מחיקת התנדבות', message);
+      const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+        maxWidth: '75%',
+        data: dialogData
+      });
+      return dialogRef.afterClosed();
+    }
 
   public exportTableToExcel() {
     const data = this.allvolunteerings.map((x: Details) => ({

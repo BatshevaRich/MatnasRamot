@@ -19,9 +19,11 @@ export class FamilyService {
   }
 
   getFamiliesByVolunteer(id: number): Observable<Family[]> {
-    return this.http.get<Family[]>(environment.baseURL + 'VolunteerAndFamily/' + id);
+    return this.http.get<Family[]>(environment.baseURL + 'volunteer/families/' + id);
   }
-
+  getFamiliesByOrganization(id: number): Observable<Family[]> {
+    return this.http.get<Family[]>(environment.baseURL + 'organization/families/' + id);
+  }
   getFamily(id: number): Observable<Family> {
     return this.http.get<Family>(this.path + '/' + id);
   }

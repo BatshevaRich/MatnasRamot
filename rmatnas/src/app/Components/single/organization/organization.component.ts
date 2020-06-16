@@ -24,7 +24,7 @@ export class OrganizationComponent implements OnInit, OnDestroy, AfterViewInit {
   @Output() addedOrganization: EventEmitter<Organization> = new EventEmitter<Organization>();
   selectedTabIndex: any;
   showEvent: boolean;
-  showFamily: boolean;
+  showFamily = true;
   showVolunteer = true;
   constructor(public os: OrganizationService,
               public dialog: MatDialog,

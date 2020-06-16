@@ -265,5 +265,21 @@ namespace Dal
             }
             return groups;
         }
+
+        public static IEnumerable<Common.Volunteer> GetVolunteersForFamily(int id)
+        {
+            using (dbRamotEntities db = new dbRamotEntities())
+            {//////////////////////////////////////////////////////////////
+                var query = from vf in db.VolunteerAndFamily
+                            where vf.Families.Id == id
+                            select vf;
+                List<Common.Volunteer> volunteers = new List<Common.Volunteer>();
+                foreach (var item in query.AsEnumerable())
+                {
+                    volunteers.Add(Mapper.CastVolunteerAndFamilyToComon(item).Volunteer);
+                }
+                return volunteers;
+            }
+        }
     }
 }

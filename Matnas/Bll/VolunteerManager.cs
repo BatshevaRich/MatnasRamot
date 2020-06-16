@@ -133,7 +133,10 @@ namespace Bll
         {
           return  Dal.VolunteerManager.GetGroups(id);
         }
-        
+        public static IEnumerable<Volunteer> GetVolunteersForFamily(int id)
+        {
+            return Dal.VolunteerManager.GetVolunteersForFamily(id);
+        }
         public static IEnumerable<Event> GetEvents(int id)
         {
             return Dal.VolunteerManager.GetEvents(id);

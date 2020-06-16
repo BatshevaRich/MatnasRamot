@@ -40,10 +40,10 @@
       <mat-tab-group dir="rtl" [selectedIndex]=1 (selectedTabChange)="onTabChange($event)" #tabs>
         <mat-tab></mat-tab><!--  ADDITIONAL TAB -->
         <mat-tab label="משפחות">
-          <app-all-families dir="rtl" *ngIf="showFamily" [vId]="vId"></app-all-families>
+          <app-all-families dir="rtl" *ngIf="showFamily" [where]=1 [vId]="vId"></app-all-families>
         </mat-tab>
         <mat-tab label="התנדבויות">
-          <app-all-to-volunteers dir="rtl" *ngIf="showVolunteerings" [vId]="vId"></app-all-to-volunteers>
+          <app-all-to-volunteers dir="rtl" *ngIf="showVolunteerings" [vId]="vId" [where]=1></app-all-to-volunteers>
         </mat-tab>
         <mat-tab label="ארועים">
           <app-all-events dir="rtl" *ngIf="showEvent"></app-all-events>

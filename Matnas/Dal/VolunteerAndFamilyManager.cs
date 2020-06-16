@@ -57,37 +57,37 @@ namespace Dal
 
             }
         }
-        public static IEnumerable<Common.Family> GetVolunteerAndFamilyForVolunteer(int id)
+        public static IEnumerable<Common.VolunteerAndFamily> GetVolunteerAndFamilyForVolunteer(int id)
         {
             using (dbRamotEntities db = new dbRamotEntities())
-            {//////////////////////////////////////////////////////////////
+            {
                 var query = from vf in db.VolunteerAndFamily
                             where vf.Volunteers.Id == id
                             select vf;
-                List<Common.Family> families = new List<Common.Family>();
+                List<Common.VolunteerAndFamily> volunteerAction = new List<Common.VolunteerAndFamily>();
                 foreach (var item in query.AsEnumerable())
                 {
-                    families.Add(Mapper.CastVolunteerAndFamilyToComon(item).Family);
+                    volunteerAction.Add(Mapper.CastVolunteerAndFamilyToComon(item));
                 }
-                return families;
+                return volunteerAction;
                 //return Mapper.CastVolunteerAndFamilyToComon(query.First()).Family;
 
             }
         }
 
-        public static IEnumerable<Common.Volunteer> GetVolunteerAndFamilyForFamily(int id)
+        public static IEnumerable<Common.VolunteerAndFamily> GetVolunteerAndFamilyForFamily(int id)
         {
             using (dbRamotEntities db = new dbRamotEntities())
             {//////////////////////////////////////////////////////////////
                 var query = from vf in db.VolunteerAndFamily
                             where vf.Families.Id == id
                             select vf;
-                List<Common.Volunteer> volunteers = new List<Common.Volunteer>();
+                List<Common.VolunteerAndFamily> volunteerAction = new List<Common.VolunteerAndFamily>();
                 foreach (var item in query.AsEnumerable())
                 {
-                    volunteers.Add(Mapper.CastVolunteerAndFamilyToComon(item).Volunteer);
+                    volunteerAction.Add(Mapper.CastVolunteerAndFamilyToComon(item));
                 }
-                return volunteers;
+                return volunteerAction;
                 //return Mapper.CastVolunteerAndFamilyToComon(query.First()).Family;
 
             }

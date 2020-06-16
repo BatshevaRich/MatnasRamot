@@ -46,12 +46,13 @@ namespace WebApi.Controllers
             Bll.OrganizationManager.RemoveOrganization(id);
         }
 
-        [Route("getfamilies/{id}")]
+        [Route("families/{id}")]
         [HttpGet]
-        public IEnumerable<Family> GetFamiliess(int id)
+        public IEnumerable<Family> GetFamilies(int id)
         {
             return Bll.OrganizationManager.GetFamilies(id);
         }
+
         [Route("categories/{id}")]
         public IEnumerable<Category> GetCategories(int id)
         {

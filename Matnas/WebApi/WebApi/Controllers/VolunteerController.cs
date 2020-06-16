@@ -107,7 +107,7 @@ namespace WebApi.Controllers
         /// </summary>
         /// <param name="id">Id of volunteer</param>
         /// <returns>List of families</returns>
-        [Route("api/volunteer/families")]
+        [Route("api/volunteer/families/{id}")]
         [HttpGet]
         public IEnumerable<Family> GetFamilies(int id)
         {
@@ -155,6 +155,11 @@ namespace WebApi.Controllers
         public IEnumerable<Event> GetEvents(int id)
         {
             return Bll.VolunteerManager.GetEvents(id);
+        }
+        [Route("api/volunteer/family/{id}")]
+        public IEnumerable<Volunteer> GetVolunteersForFamily(int id)
+        {
+            return Bll.VolunteerManager.GetVolunteersForFamily(id);
         }
     }
 }
