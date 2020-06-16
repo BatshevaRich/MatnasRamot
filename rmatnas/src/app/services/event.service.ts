@@ -43,7 +43,7 @@ export class EventService {
     return this.http.get<Eventt[]>(this.path + '/Eventsbyvac/' + id, {headers: {Authorization: idVolunteer.toString()}});
   }
   getCategoriesOfEvent(id: number) {
-    return this.http.get<Category[]>(environment.baseURL + 'CategoryEventt/' + id);
+    return this.http.get<Category[]>(this.path + '/categoriesOfEvent/' + id);
   }
   addCategoriesToEvent(id: number, categories: Category[]) {
     return this.http.get(environment.baseURL + 'CategoryEvent/' + id + '&category=' + categories);

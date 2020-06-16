@@ -51,6 +51,7 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
   search = '';
   resultsLength = 0;
   @Input() vId: number;
+  @Input() where: number;
   result = '';
   loaded = false;
   error = false;
@@ -88,17 +89,31 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     if (this.vId) {
-      this.vs.getVolunteersForFamily(this.vId).subscribe((data: Volunteer[]) => {
-        this.loaded = true;
-        if (data.length === 0) {
-          this.notFound = true;
-        } else {
-        data = this.trimResultsFromDB(data);
-        this.volunteers = data;
-        this.dataSource.data = data;
-        this.resultsLength = this.dataSource.data.length;
-        }
-      });
+      if (this.where === 4) {
+        this.vs.getVolunteersForEvent(this.vId).subscribe((data: Volunteer[]) => {
+          this.loaded = true;
+          if (data.length === 0) {
+            this.notFound = true;
+          } else {
+            data = this.trimResultsFromDB(data);
+            this.volunteers = data;
+            this.dataSource.data = data;
+            this.resultsLength = this.dataSource.data.length;
+          }
+        });
+      } else if (this.where === 2) {
+        this.vs.getVolunteersForFamily(this.vId).subscribe((data: Volunteer[]) => {
+          this.loaded = true;
+          if (data.length === 0) {
+            this.notFound = true;
+          } else {
+            data = this.trimResultsFromDB(data);
+            this.volunteers = data;
+            this.dataSource.data = data;
+            this.resultsLength = this.dataSource.data.length;
+          }
+        });
+      }
     } else {
       this.vs.getVolunteers().subscribe((volunteers: Volunteer[]) => {
         volunteers = this.trimResultsFromDB(volunteers);

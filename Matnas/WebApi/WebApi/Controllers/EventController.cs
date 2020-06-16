@@ -1,4 +1,5 @@
 ﻿using Common;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace WebApi.Controllers
         {
             return Bll.EventManager.GetEvent(id);
         }
-        [Route("api/event/volunteers")]
+        [Route("volunteers/{id}")]
         public IEnumerable<Volunteer> GetVolunteers(int id)
         {
             return Bll.EventManager.GetVolunteers(id);
@@ -50,7 +51,7 @@ namespace WebApi.Controllers
         {
             Bll.EventManager.RemoveEvent(id);
         }
-        [Route("api/categoriesOfEvent")]
+        [Route("categoriesOfEvent/{id}")]
         public IEnumerable<Category> GetCategories(int id)
         {
             return Bll.EventManager.GetCategories(id);

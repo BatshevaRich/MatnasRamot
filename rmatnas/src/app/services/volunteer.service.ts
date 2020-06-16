@@ -54,4 +54,7 @@ export class VolunteerService {
   getVolunteersByCategory(idCategory: number): Observable<Volunteer[]> {
     return this.http.get<Volunteer[]>(this.path + '/volunteersbycategory/' + idCategory);
   }
+  getVolunteersForEvent(idEvent: number): Observable<Volunteer[]> {
+    return this.http.get<Volunteer[]>(environment.baseURL + 'event/volunteers/' + idEvent);
+  }
 }
