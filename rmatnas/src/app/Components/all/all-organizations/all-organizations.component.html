@@ -65,7 +65,7 @@
                       element == expandedElement ? 'expanded' : 'collapsed'
                     ">
                   <div *ngIf="element.show" class="example-element-description">
-                    <app-organization *ngIf="!vId" [vId]="element.Id"></app-organization>
+                    <app-organization *ngIf="!vId" [vId]="element.Id" (addedOrganization)="updateTable($event)"></app-organization>
                     <span class="example-element-description-attribution">
                     </span>
                   </div>

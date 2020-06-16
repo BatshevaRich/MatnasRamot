@@ -65,12 +65,23 @@ export class AllEventsComponent implements OnInit, OnDestroy, AfterViewInit {
       if (events.length === 0) {
         this.notFound = true;
       } else {
-        this.eventts = events;
-        this.dataSource.data = events;
+        this.eventts = this.trimResultsFromDB(events);
+        this.dataSource.data = this.eventts;
         this.resultsLength = this.dataSource.data.length;
         this.error = false;
       }
     }, err => { this.error = true; this.loaded = true; });
+  }
+
+  trimResultsFromDB(events: Eventt[]) {
+    for (const eventt of events) {
+      eventt.Name = eventt.Name.trim();
+      eventt.StartDate == null ? eventt.StartDate = '' : eventt.StartDate = eventt.StartDate.trim();
+      eventt.EndDate == null ? eventt.EndDate = '' : eventt.EndDate = eventt.EndDate.trim();
+      eventt.DateAdded == null ? eventt.DateAdded = '' : eventt.DateAdded = eventt.DateAdded.trim();
+      eventt.Description == null ? eventt.Description = '' : eventt.Description = eventt.Description.trim();
+    }
+    return events;
   }
 
   confirmDialog(): Observable<any> {
@@ -105,8 +116,22 @@ export class AllEventsComponent implements OnInit, OnDestroy, AfterViewInit {
     element.show = !element.show;
   }
 
+  trimResultFromUpdate(eventt: Eventt) {
+      eventt.Name = eventt.Name.trim();
+      eventt.StartDate == null ? eventt.StartDate = '' : eventt.StartDate = eventt.StartDate.trim();
+      eventt.EndDate == null ? eventt.EndDate = '' : eventt.EndDate = eventt.EndDate.trim();
+      eventt.DateAdded == null ? eventt.DateAdded = '' : eventt.DateAdded = eventt.DateAdded.trim();
+      eventt.Description == null ? eventt.Description = '' : eventt.Description = eventt.Description.trim();
+      return eventt;
+  }
+
+  updateTable(event) {
+    this.dataSource.data = this.dataSource.data.map((item: Eventt) => item.Id === event.Id ? this.trimResultFromUpdate(event) : item);
+    this.table.renderRows();
+  }
+
   addVolunteer(event, elm) {
-    // this.os.addVolunteerToOrganization()
+    // this.os.addVolunteerToeventt()
   }
 
   addFamily(event, elm) {

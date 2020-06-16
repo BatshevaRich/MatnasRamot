@@ -69,7 +69,7 @@ export class AllOrganizationsComponent implements OnInit, OnDestroy, AfterViewIn
         if (data.length === 0) {
           this.notFound = true;
         } else {
-          this.organizations = data;
+          this.organizations = this.trimResultsFromDB(data);
           this.dataSource.data = data;
           this.resultsLength = this.dataSource.data.length;
         }
@@ -80,7 +80,7 @@ export class AllOrganizationsComponent implements OnInit, OnDestroy, AfterViewIn
         if (organizations.length === 0) {
           this.notFound = true;
         } else {
-          this.organizations = organizations;
+          this.organizations = this.trimResultsFromDB(organizations);
           this.dataSource.data = organizations;
           this.resultsLength = this.dataSource.data.length;
           this.error = false;
@@ -88,6 +88,19 @@ export class AllOrganizationsComponent implements OnInit, OnDestroy, AfterViewIn
       }, err => { this.error = true; this.loaded = true; });
     }
   }
+
+  trimResultsFromDB(organizations: Organization[]) {
+    for (const organization of organizations) {
+      organization.Name = organization.Name.trim();
+      organization.email = organization.email.trim();
+      organization.Address == null ? organization.Address = '' : organization.Address = organization.Address.trim();
+      organization.Phone == null ? organization.Phone = '' : organization.Phone = organization.Phone.trim();
+      organization.Comments == null ? organization.Comments = '' : organization.Comments = organization.Comments.trim();
+      organization.Contact == null ? organization.Contact = '' : organization.Contact = organization.Contact.trim();
+    }
+    return organizations;
+  }
+
   confirmDialog(): Observable<any> {
     const message = `מחיקה זו היא לצמיתות! האם תרצי להמשיך?`;
     const dialogData = new ConfirmDialogModel('מחיקת מתנדבת', message);
@@ -128,6 +141,21 @@ export class AllOrganizationsComponent implements OnInit, OnDestroy, AfterViewIn
       }
     });
     return dialogRef.afterClosed();
+  }
+
+  trimResultFromUpdate(organization: Organization) {
+    organization.Name = organization.Name.trim();
+    organization.email = organization.email.trim();
+    organization.Address == null ? organization.Address = '' : organization.Address = organization.Address.trim();
+    organization.Phone == null ? organization.Phone = '' : organization.Phone = organization.Phone.trim();
+    organization.Comments == null ? organization.Comments = '' : organization.Comments = organization.Comments.trim();
+    organization.Contact == null ? organization.Contact = '' : organization.Contact = organization.Contact.trim();
+    return organization;
+  }
+
+  updateTable(event) {
+    this.dataSource.data = this.dataSource.data.map((item: Organization) => item.Id === event.Id ? this.trimResultFromUpdate(event) : item);
+    this.table.renderRows();
   }
 
 }
