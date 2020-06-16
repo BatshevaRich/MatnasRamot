@@ -25,12 +25,12 @@ export class CategoryFComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (this.vId) {
-      this.cs.getCategory(this.vId).subscribe(res => {
+      this.cs.getCategory(this.vId).subscribe((res: Category) => {
         this.newCategory = res;
       });
     }
   }
-  submitForm(f) {
+  submitForm() {
     if (this.vId) {
       this.newCategory.Id = this.vId;
       this.cs.updateCategory(this.newCategory).subscribe(res => {
@@ -38,8 +38,8 @@ export class CategoryFComponent implements OnInit, OnDestroy {
       });
     } else {
       this.cs.addCategory(this.newCategory)
-        .then(t => {
-          this.token = t as number;
+        .then((t: number) => {
+          this.token = t;
           this.newCategory.Id = this.token;
           this.changedCategory.emit(this.newCategory);
         });

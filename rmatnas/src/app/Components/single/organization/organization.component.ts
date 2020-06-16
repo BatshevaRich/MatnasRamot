@@ -1,10 +1,8 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ElementRef, AfterViewInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-
 import { Organization } from 'src/app/Classes/Organization';
 import { Category } from 'src/app/Classes/Category';
 import { OrganizationService } from 'src/app/services/organization.service';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatTabChangeEvent } from '@angular/material';
 import { OrganizationFComponent } from '../../forms/organization-f/organization-f.component';
 
 @Component({
@@ -13,7 +11,6 @@ import { OrganizationFComponent } from '../../forms/organization-f/organization-
   styleUrls: ['./organization.component.css']
 })
 export class OrganizationComponent implements OnInit, OnDestroy, AfterViewInit {
-
   chooseTab: string;
   myOrganization: Organization;
   categories: Category[] = [];
@@ -25,12 +22,10 @@ export class OrganizationComponent implements OnInit, OnDestroy, AfterViewInit {
   large = '100%';
   largest = '0%';
   @Output() addedOrganization: EventEmitter<Organization> = new EventEmitter<Organization>();
-  mySubscription: Subscription;
   selectedTabIndex: any;
   showEvent: boolean;
   showFamily: boolean;
-  showOrganization: boolean;
-  showVolunteer: boolean;
+  showVolunteer = true;
   constructor(public os: OrganizationService,
               public dialog: MatDialog,
               private elementRef: ElementRef) {
@@ -46,9 +41,9 @@ export class OrganizationComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.os.getOrganization(this.vId).subscribe(v => {
-      this.myOrganization = v;
-      this.os.getCategoriesOfOrganization(this.vId).subscribe(c => {
+    this.os.getOrganization(this.vId).subscribe((o: Organization) => {
+      this.myOrganization = o;
+      this.os.getCategoriesOfOrganization(this.vId).subscribe((c: Category[]) => {
         this.categories = c;
       });
     });
@@ -68,7 +63,7 @@ export class OrganizationComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
-  onTabChange(event) {
+  onTabChange(event: MatTabChangeEvent) {
     setTimeout(() => {
       this.selectedTabIndex = event;
       if (event.index === 2) {

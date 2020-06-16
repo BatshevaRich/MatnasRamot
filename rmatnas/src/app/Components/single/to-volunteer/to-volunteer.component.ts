@@ -1,8 +1,6 @@
 import { Component, OnInit, Input, ElementRef, OnDestroy } from '@angular/core';
 import { VolunteerAndFamily } from 'src/app/Classes/VolunteerAndFamily';
-import { Subscription } from 'rxjs';
 import { VolunteerService } from 'src/app/services/volunteer.service';
-
 import { MatDialog } from '@angular/material/dialog';
 import { Volunteer } from 'src/app/Classes/Volunteer';
 import { VolunteerFComponent } from '../../forms/volunteer-f/volunteer-f.component';
@@ -18,15 +16,13 @@ import { AddVFComponent } from '../../forms/add/add-vf/add-vf.component';
 })
 export class ToVolunteerComponent implements OnInit, OnDestroy {
   toVolunteer: VolunteerAndFamily = new VolunteerAndFamily(
-    new Family('fathername', 'mothername', 'lastname', '0', '0', '0', 'address', 'status',
-      2, 'reason', 'reference'),
-    new Volunteer('default', '000000000', '000000000', 'default@ddd', 'default', '1999-01-01', false),
-    new Category('hello', 0), 'default', '1999-01-01'
+    new Family('...', '...', '...', '0', '0', '0', '...', '...', 1, '...', '...'),
+    new Volunteer('...', '...', '...', '...@...', '...', '1999-01-01', false),
+    new Category('...', 0), 'default', '1999-01-01'
   );
   id: number;
   @Input() vId: number;
   @Input() toV: boolean;
-  mySubscription: Subscription;
   constructor(public vs: VolunteerAndFamilyService,
               public dialog: MatDialog,
               private elementRef: ElementRef) { }

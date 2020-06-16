@@ -8,7 +8,8 @@
             <div class="form-group">
                 <mat-form-field appearance="outline">
                     <mat-hint>שם קטגוריה</mat-hint>
-                    <input matInput (focus)="$event.target.select()" maxlength="20" [(ngModel)]="newCategory.Name" name="Name" required>
+                    <input matInput (focus)="$event.target.select()" maxlength="20" [(ngModel)]="newCategory.Name"
+                        name="Name" required>
                     <mat-icon *ngIf="!vId" matPrefix>add_to_photos</mat-icon>
                     <mat-icon *ngIf="vId" matPrefix>edit</mat-icon>
                 </mat-form-field>

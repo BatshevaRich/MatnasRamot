@@ -35,7 +35,6 @@ export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewIni
   search = '';
   resultsLength = 0;
   @Input() vId: number;
-  inp: boolean;
   volunteerings: VolunteerAndFamily[] = [];
   families: Family[] = [];
   result = '';
@@ -58,7 +57,7 @@ export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewIni
       this.notFound = true;
       this.displayedColumns = ['NameVolunteer', 'NameFamily', 'Category', 'PelephoneVolunteer'];
      } else {
-      this.vfs.getVolunteerings().subscribe(res => {
+      this.vfs.getVolunteerings().subscribe((res: VolunteerAndFamily[]) => {
         this.loaded = true;
         if (res.length === 0) {
           this.notFound = true;
@@ -95,7 +94,7 @@ export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewIni
     this.dataSource.filter = filterValue;
   }
 
-  delete(event, elm) {
+  delete(elm: Details) {
     this.confirmDialog().subscribe(res => {
       this.result = res;
       if (res) {
@@ -118,7 +117,7 @@ export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   public exportTableToExcel() {
-    const data = this.allvolunteerings.map(x => ({
+    const data = this.allvolunteerings.map((x: Details) => ({
       שם_מתנדבת: x.NameVolunteer,
       שם_משפחה: x.NameFamily,
       קטגוריה: x.Category,
@@ -129,7 +128,6 @@ export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewIni
     XLSX.utils.book_append_sheet(wb, ws, 'התנדבויות');
     XLSX.writeFile(wb, `התנדבויות.xlsx`);
   }
-
 }
 
 // tslint:disable-next-line: max-classes-per-file

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ChangeDetectorRef, AfterViewInit, Input, ElementRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, Input, ElementRef, OnDestroy } from '@angular/core';
 import { Volunteer } from '../../../Classes/Volunteer';
 import { VolunteerService } from 'src/app/services/volunteer.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
@@ -14,11 +14,9 @@ export interface Details {
   Id: number;
   Name: string;
   Address: string;
-  // Telephone: string;
   Pelephone: string;
   Email: string;
   Age: Date;
-  // Comments: string;
   IsActive: boolean;
 }
 
@@ -37,7 +35,6 @@ export interface Details {
 export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(public vs: VolunteerService,
-              private changeDetectorRefs: ChangeDetectorRef,
               public dialog: MatDialog,
               private datePipe: DatePipe,
               private elementRef: ElementRef) {
@@ -54,7 +51,6 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
   search = '';
   resultsLength = 0;
   @Input() vId: number;
-  inp: boolean;
   result = '';
   loaded = false;
   error = false;
@@ -92,7 +88,6 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     if (this.vId) {
-      this.inp = true;
       this.vs.getVolunteersForFamily(this.vId).subscribe((data: Volunteer[]) => {
         this.loaded = true;
         if (data.length === 0) {
@@ -116,7 +111,7 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
     }
   }
 
-  delete(event, elm) {
+  delete(elm: Details) {
     this.confirmDialog().subscribe(res => {
       this.result = res;
       if (res) {
@@ -127,7 +122,7 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
       }
     });
   }
-  showDetails(element) {
+  showDetails(element: Volunteer) {
     element.show = !element.show;
   }
   ngOnDestroy() {
@@ -144,13 +139,6 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
     return dialogRef.afterClosed();
   }
 
-  newVolunteer(myvolunteer) {
-    this.volunteers.push(myvolunteer);
-    this.dataSource.data = this.volunteers as unknown as MatTableDataSource<Details>[];
-    this.table.renderRows();
-    this.changeDetectorRefs.detectChanges();
-  }
-
   public CalculateAge(element: Details) {
     const birthday = new Date(element.Age);
     const timeDiff = Math.abs(Date.now() - birthday.getTime());
@@ -164,7 +152,7 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   public exportTableToExcel() {
-    const data = this.volunteers.map(x => ({
+    const data = this.volunteers.map((x: Volunteer) => ({
       שם: x.Name,
       כתובת: x.Address,
       טלפון: x.Telephone,
@@ -180,7 +168,7 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
     XLSX.writeFile(wb, `מתנדבות.xlsx`);
   }
 
-  updateTable(event) {
+  updateTable(event: Volunteer) {
     this.dataSource.data = this.dataSource.data.map((item: Volunteer) => item.Id === event.Id ? this.trimResultFromUpdate(event) : item);
     this.table.renderRows();
   }

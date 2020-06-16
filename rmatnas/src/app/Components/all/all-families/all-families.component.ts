@@ -14,10 +14,6 @@ export interface Details {
   LastName: string;
   Address: string;
   Telephone: string;
-  // Pelephone: string;
-  // Email: string;
-  // Age: Date;
-  // Comments: string;
   NumChildren: number;
   Status: string;
   Reference: string;
@@ -46,7 +42,6 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
   search = '';
   resultsLength = 0;
   @Input() vId: number;
-  inp = false;
   result = '';
   loaded = false;
   error = false;
@@ -88,7 +83,6 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     if (this.vId) {
-      this.inp = true;
       this.fs.getFamiliesByVolunteer(this.vId).subscribe((data: Family[]) => {
         this.loaded = true;
         if (data.length === 0) {
@@ -113,7 +107,7 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  newFamily(family) {
+  newFamily(family: Family) {
     this.families.push(family);
     this.dataSource.data = this.families as unknown as MatTableDataSource<Details>[];
     this.table.renderRows();
@@ -126,7 +120,7 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
     this.dataSource.filter = filterValue;
   }
 
-  delete(event, elm) {
+  delete(elm: Details) {
     this.confirmDialog().subscribe(res => {
       this.result = res;
       if (res) {
@@ -182,11 +176,11 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
     return family;
   }
 
-  showDetails(element) {
+  showDetails(element: Family) {
     element.show = !element.show;
   }
 
-  updateTable(event) {
+  updateTable(event: Family) {
     this.dataSource.data = this.dataSource.data.map((item: Family) => item.Id === event.Id ? this.trimResultFromUpdate(event) : item);
     this.table.renderRows();
   }

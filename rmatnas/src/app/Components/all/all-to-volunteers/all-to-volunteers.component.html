@@ -36,7 +36,7 @@
             <ng-container *ngIf="!vId" matColumnDef="columndelete">
               <th mat-header-cell *matHeaderCellDef>מחיקה </th>
               <td mat-cell *matCellDef="let element">
-                <h5 (click)="delete(element, element)"><i class="fa fa-trash"></i>
+                <h5 (click)="delete(element)"><i class="fa fa-trash"></i>
                 </h5>
             </ng-container>
             <ng-container matColumnDef="expandedDetail">
@@ -48,8 +48,6 @@
                     <app-to-volunteer id="bloc1" [vId]="element.Id" [toV]=true></app-to-volunteer>
                     <app-volunteer id="bloc2" [vId]="element.IdVolunteer" [toV]=true></app-volunteer>
                     <app-family id="bloc3" [vId]="element.IdFamily" [toV]=true></app-family>
-
-                    <!-- <app-myvolunteer [vId]="element.Id"></app-myvolunteer> -->
                     <span class="example-element-description-attribution">
                     </span>
                   </div>

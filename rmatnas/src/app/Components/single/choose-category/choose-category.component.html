@@ -5,18 +5,20 @@
   </button>
 </h5>
 <p *ngFor="let c of arr; let i=index">
-  <button mat-mini-fab type="button" style="width: 25px; height: 25px; font-size: 20px;" color="" matTooltip="מחיקת קטגוריה" (click)="deleteCat(c.id)">
+  <button mat-mini-fab type="button" style="width: 25px; height: 25px; font-size: 20px;" color=""
+    matTooltip="מחיקת קטגוריה" (click)="deleteCat(c.id)">
     <mat-icon>delete</mat-icon>
   </button>
   &nbsp;
-  <button mat-mini-fab type="button" style="width: 25px; height: 25px; font-size: 20px;" color="" matTooltip="שינוי פרטי קטגוריה" (click)="displayCat(c.id)">
+  <button mat-mini-fab type="button" style="width: 25px; height: 25px; font-size: 20px;" color=""
+    matTooltip="שינוי פרטי קטגוריה" (click)="displayCat(c.id)">
     <mat-icon>edit</mat-icon>
   </button>
   &nbsp;
-  <mat-checkbox [(ngModel)]="c.checked" (change)="add($event, c)" [id]="c.id">{{ c.name }}</mat-checkbox>
+  <mat-checkbox [(ngModel)]="c.checked" (change)="add()" [id]="c.id">{{ c.name }}</mat-checkbox>
 
 </p>
 
 <span *ngIf="displayForm">
-  <app-category-f (changedCategory)="reloadWithNewData($event)" [vId]="idOfCategory"></app-category-f>
+  <app-category-f (changedCategory)="reloadWithNewData()" [vId]="idOfCategory"></app-category-f>
 </span>

@@ -4,6 +4,7 @@ import { VolunteerService } from 'src/app/services/volunteer.service';
 import { Category } from 'src/app/Classes/Category';
 import { MatDialog } from '@angular/material/dialog';
 import { VolunteerFComponent } from '../../forms/volunteer-f/volunteer-f.component';
+import { MatTabChangeEvent } from '@angular/material';
 @Component({
   selector: 'app-volunteer',
   templateUrl: './volunteer.component.html',
@@ -35,15 +36,12 @@ export class VolunteerComponent implements OnInit, OnDestroy, AfterViewInit {
     this.elementRef.nativeElement.remove();
   }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() { }
 
   ngAfterViewInit() {
-    this.vs.getVolunteer(this.vId).subscribe(v => {
+    this.vs.getVolunteer(this.vId).subscribe((v: Volunteer) => {
       this.myvolunteer = v;
-      console.log('volunteer component');
-      this.vs.getCategoriesOfVolunteer(this.vId).subscribe(c => {
+      this.vs.getCategoriesOfVolunteer(this.vId).subscribe((c: Category[]) => {
         this.categories = c;
       });
     });
@@ -63,9 +61,9 @@ export class VolunteerComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
-  onTabChange(event) {
+  onTabChange(event: MatTabChangeEvent) {
     setTimeout(() => {
-      this.selectedTabIndex = event;
+      this.selectedTabIndex = event.index;
       if (event.index === 3) {
         this.showEvent = true;
       }

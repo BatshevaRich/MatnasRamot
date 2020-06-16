@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject, ViewChild, OnDestroy, ElementRef } from '@angular/core';
 import { Family } from 'src/app/Classes/Family';
-import { Subscription } from 'rxjs';
 import { FamilyService } from 'src/app/services/family.service';
 import { Category } from '../../../Classes/Category';
 import { CategoryService } from 'src/app/services/category.service';
@@ -14,15 +13,13 @@ import { MatSnackBar } from '@angular/material';
   styleUrls: ['./family-f.component.css']
 })
 export class FamilyFComponent implements OnInit, OnDestroy {
-  // tslint:disable-next-line: max-line-length
   categories: Category[] = [];
-  mySubscription: Subscription;
   categoriesSelected: Category[] = [];
   @ViewChild('familyForm') mytemplateForm: NgForm;
   categoriesOfFamily: Category[] = [];
   newFamily: Family = new Family(
-    'fathername', 'mothername', 'lastname',
-    '0', '0', '0', 'address', 'status', 2, 'reason', 'reference');
+    '...', '...', '...',
+    '0', '0', '0', '...', '...', 2, '...', '...');
   id: number;
   constructor(public fs: FamilyService,
               private cs: CategoryService,
@@ -30,41 +27,31 @@ export class FamilyFComponent implements OnInit, OnDestroy {
               @Inject(MAT_DIALOG_DATA) public data: any,
               private snackBar: MatSnackBar,
               private elementRef: ElementRef) {
-    this.mySubscription = cs.getCategories().subscribe(res => {
+    cs.getCategories().subscribe((res: Category[]) => {
       this.categories = res;
     });
   }
   ngOnInit() {
-
     if (this.data.update) {
       this.newFamily = this.data.dataKey;
       this.categoriesOfFamily = this.data.chosenC;
     }
   }
-  submitForm(f) {
+  submitForm() {
     if (this.data.update) {
       this.newFamily.Id = this.data.id;
       this.fs.updateFamily(this.newFamily, this.categoriesSelected);
       this.dialogRef.close(this.newFamily);
     } else {
       this.fs.addFamily(this.newFamily, this.categoriesSelected)
-        .then(t => {
-          this.newFamily.Id = t as number;
+        .then((t: number) => {
+          this.newFamily.Id = t;
           this.categoriesSelected = [];
           this.dialogRef.close(t);
         });
       this.mytemplateForm.resetForm();
-      this.newFamily = new Family('fathername',
-        'mothername',
-        'lastname',
-        '0',
-        '0',
-        '0',
-        'address',
-        'status',
-        2,
-        'reason',
-        'reference');
+      this.newFamily = new Family('fathername', 'mothername', 'lastname', '0',
+        '0', '0', 'address', 'status', 2, 'reason', 'reference');
     }
     this.snackBar.open('שמירת משפחה מבוצעת...', 'OK', {
       duration: 2000,
@@ -73,9 +60,9 @@ export class FamilyFComponent implements OnInit, OnDestroy {
 
   }
 
-  selectCategories(e) {
+  selectCategories(e: { checked: boolean, id: number, name: string }[]) {
     this.categoriesSelected = [];
-    e.forEach(element => {
+    e.forEach((element: { checked: boolean, id: number, name: string }) => {
       if (element.checked) {
         this.categoriesSelected.push(new Category(element.name, element.id));
       }

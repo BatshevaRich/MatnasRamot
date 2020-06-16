@@ -34,19 +34,18 @@ export class AddFOComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.idOrganization = this.data.id;
-    this.os.getOrganization(this.idOrganization).subscribe(res => {
+    this.os.getOrganization(this.idOrganization).subscribe((res: Organization) => {
       this.selectedOrganization = res;
     });
     this.os.getCategoriesOfOrganization(this.idOrganization).subscribe((cats: Category[]) => {
       this.selectedCategories = cats;
       this.selectedCategories.forEach(element => {
-        this.fs.getFamiliesByCategory(element.Id).subscribe(data => {
+        this.fs.getFamiliesByCategory(element.Id).subscribe((data: Family[]) => {
           data.forEach(family => {
             this.families.push(family);
           });
         });
       });
-      
     });
    }
 
@@ -55,16 +54,15 @@ export class AddFOComponent implements OnInit, OnDestroy {
   }
 
   onSelection(event) {
-    debugger
   }
-  
 
-  submitForm(f) {
-    this.selectedFamilies.forEach(element => {
+
+  submitForm() {
+    this.selectedFamilies.forEach((element: Family) => {
       this.oaf.addFamilyToOrganization(
         new OrganizationAndFamily(element, this.selectedOrganization, this.selectedCategories[0], '', ''));
     });
-    
+
     // this.vaf.addOrganizationAction(this.selectedOrganization, this.selectedFamily, this.selectedCategory);
     // this.snackBar.open('שמירת התנדבות מבוצעת...', 'OK', {
     //     duration: 2000,

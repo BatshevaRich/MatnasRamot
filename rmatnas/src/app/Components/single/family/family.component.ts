@@ -1,33 +1,20 @@
 import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit, ElementRef } from '@angular/core';
 import { Family } from '../../../Classes/Family';
-import { Subscription } from 'rxjs';
-
 import { OnDestroy } from '@angular/core';
 import { FamilyService } from 'src/app/services/family.service';
 import { Category } from 'src/app/Classes/Category';
 import { FamilyFComponent } from '../../forms/family-f/family-f.component';
 import { MatDialog } from '@angular/material/dialog';
+import { MatTabChangeEvent } from '@angular/material';
 @Component({
   selector: 'app-family',
   templateUrl: './family.component.html',
   styleUrls: ['./family.component.css']
 })
 export class FamilyComponent implements OnInit, OnDestroy, AfterViewInit {
-  family: Family = new Family('fathername',
-    'mothername',
-    'lastname',
-    '0',
-    '0',
-    '0',
-    'address',
-    'status',
-    2,
-    'reason',
-    'reference');
-  mySubscription: Subscription;
+  family: Family = new Family('...', '...', '...', '0', '0', '0', '...', '...', 2, '...', '...');
   id: number;
   categories: Category[] = [];
-  mySubscription2: Subscription;
   @Input() vId: number;
   @Input() toV: boolean;
   smallest = '20%';
@@ -47,9 +34,9 @@ export class FamilyComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit() { }
 
   ngAfterViewInit() {
-    this.fs.getFamily(this.vId).subscribe(f => {
+    this.fs.getFamily(this.vId).subscribe((f: Family) => {
       this.family = f;
-      this.fs.getCategoriesOfFamily(this.vId).subscribe(c => {
+      this.fs.getCategoriesOfFamily(this.vId).subscribe((c: Category[]) => {
         this.categories = c;
       });
     });
@@ -72,7 +59,7 @@ export class FamilyComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
-  onTabChange(event) {
+  onTabChange(event: MatTabChangeEvent) {
     setTimeout(() => {
       this.selectedTabIndex = event;
       if (event.index === 3) {

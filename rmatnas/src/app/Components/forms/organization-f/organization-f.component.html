@@ -4,7 +4,7 @@
     <span *ngIf="data.update" mat-dialog-title>עדכון ארגון</span>
   </mat-toolbar>
   <mat-dialog-content>
-    <form (ngSubmit)="submitForm(organizationForm)" class="text-right" #organizationForm="ngForm">
+    <form (ngSubmit)="submitForm()" class="text-right" #organizationForm="ngForm">
       <div class="form-group">
         <mat-form-field appearance="outline">
           <mat-hint>שם</mat-hint>

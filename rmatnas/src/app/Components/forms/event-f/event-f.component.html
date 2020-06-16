@@ -4,7 +4,7 @@
     <span *ngIf="data.update" mat-dialog-title>עדכון ארוע</span>
   </mat-toolbar>
   <mat-dialog-content>
-    <form (ngSubmit)="submitForm(eventForm)" [formGroup]="form" class="text-right" #eventForm="ngForm">
+    <form (ngSubmit)="submitForm()" [formGroup]="form" class="text-right" #eventForm="ngForm">
       <div class="form-group">
         <mat-form-field appearance="outline">
           <mat-hint>שם</mat-hint>

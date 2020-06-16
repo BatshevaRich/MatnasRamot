@@ -4,7 +4,7 @@
     <span *ngIf="data.update" mat-dialog-title>עדכון משפחה</span>
   </mat-toolbar>
   <mat-dialog-content>
-    <form (ngSubmit)="submitForm(familyForm)" class="text-right" #familyForm="ngForm">
+    <form (ngSubmit)="submitForm()" class="text-right" #familyForm="ngForm">
       <div class="form-group">
         <mat-form-field appearance="outline">
           <mat-hint>שם משפחה</mat-hint>

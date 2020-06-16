@@ -40,7 +40,6 @@ export class AllOrganizationsComponent implements OnInit, OnDestroy, AfterViewIn
   dataSource = new MatTableDataSource([]);
   resultsLength = 0;
   @Input() vId: number;
-  inp: boolean;
   result = '';
   loaded = false;
   error = false;
@@ -63,7 +62,6 @@ export class AllOrganizationsComponent implements OnInit, OnDestroy, AfterViewIn
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     if (this.vId) {
-      this.inp = true;
       this.os.getOrganizationsForFamily(this.vId).subscribe((data: Organization[]) => {
         this.loaded = true;
         if (data.length === 0) {
@@ -111,7 +109,7 @@ export class AllOrganizationsComponent implements OnInit, OnDestroy, AfterViewIn
     return dialogRef.afterClosed();
   }
 
-  delete(event, elm) {
+  delete(elm: Details) {
     this.confirmDialog().subscribe(res => {
       this.result = res;
       if (res) {
@@ -129,11 +127,11 @@ export class AllOrganizationsComponent implements OnInit, OnDestroy, AfterViewIn
     this.dataSource.filter = filterValue;
   }
 
-  showDetails(element) {
+  showDetails(element: Organization) {
     element.show = !element.show;
   }
 
-  addFamily(event, elm) {
+  addFamily(event) {
     const dialogRef = this.dialog.open(AddFOComponent, {
       maxWidth: '75%',
       data: {
@@ -153,7 +151,7 @@ export class AllOrganizationsComponent implements OnInit, OnDestroy, AfterViewIn
     return organization;
   }
 
-  updateTable(event) {
+  updateTable(event: Organization) {
     this.dataSource.data = this.dataSource.data.map((item: Organization) => item.Id === event.Id ? this.trimResultFromUpdate(event) : item);
     this.table.renderRows();
   }

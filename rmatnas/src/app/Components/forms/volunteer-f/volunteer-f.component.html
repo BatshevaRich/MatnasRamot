@@ -4,7 +4,7 @@
     <span *ngIf="data.update" mat-dialog-title>עדכון מתנדבת</span>
   </mat-toolbar>
   <mat-dialog-content>
-    <form (ngSubmit)="submitForm(volunteerForm)" class="text-right" #volunteerForm="ngForm">
+    <form (ngSubmit)="submitForm()" class="text-right" #volunteerForm="ngForm">
       <div class="form-group">
         <mat-form-field appearance="outline">
           <mat-hint>שם</mat-hint>

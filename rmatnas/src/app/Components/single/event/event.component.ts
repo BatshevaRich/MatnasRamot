@@ -1,10 +1,8 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ElementRef } from '@angular/core';
 import { Eventt } from 'src/app/Classes/Eventt';
-
-import { Subscription } from 'rxjs';
 import { EventService } from 'src/app/services/event.service';
 import { Category } from 'src/app/Classes/Category';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatTabChangeEvent } from '@angular/material';
 import { EventFComponent } from '../../forms/event-f/event-f.component';
 
 @Component({
@@ -24,9 +22,7 @@ export class EventComponent implements OnInit, OnDestroy {
   large = '100%';
   largest = '0%';
   @Output() addedEvent: EventEmitter<Eventt> = new EventEmitter<Eventt>();
-  mySubscription: Subscription;
   selectedTabIndex: any;
-  showEvent: boolean;
   showFamily: boolean;
   showOrganization: boolean;
   showVolunteer = true;
@@ -61,7 +57,7 @@ export class EventComponent implements OnInit, OnDestroy {
     });
   }
 
-  onTabChange(event) {
+  onTabChange(event: MatTabChangeEvent) {
     setTimeout(() => {
       this.selectedTabIndex = event;
       if (event.index === 3) {

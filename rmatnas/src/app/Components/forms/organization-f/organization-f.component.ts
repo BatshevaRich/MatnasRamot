@@ -25,7 +25,7 @@ export class OrganizationFComponent implements OnInit, OnDestroy {
               @Inject(MAT_DIALOG_DATA) public data: any,
               public snackBar: MatSnackBar,
               private elementRef: ElementRef) {
-                cs.getCategories().subscribe(res => {
+                cs.getCategories().subscribe((res: Category[]) => {
                   this.categories = res;
                 });
                }
@@ -52,28 +52,26 @@ export class OrganizationFComponent implements OnInit, OnDestroy {
     this.elementRef.nativeElement.remove();
   }
 
-  selectCategories(e) {
+  selectCategories(e: { checked: boolean, id: number, name: string }[]) {
     this.categoriesSelected = [];
-    e.forEach(element => {
+    e.forEach((element: { checked: boolean, id: number, name: string }) => {
       if (element.checked) {
         this.categoriesSelected.push(new Category(element.name, element.id));
       }
     });
   }
 
-  submitForm(f) {
+  submitForm() {
     if (this.data.update) {
       this.newOrganization.Id = this.data.id;
       this.os.updateOrganization(this.newOrganization, this.categoriesSelected);
       this.dialogRef.close(this.newOrganization);
     } else {
       this.os.addOrganization(this.newOrganization, this.categoriesSelected)
-        .then(t => {
-          this.token = t as number;
-          /////////////////////// need to find out about safe casting in ts
+        .then((t: number) => {
+          this.token = t;
           this.newOrganization.Id = this.token;
           this.categoriesSelected = [];
-          // this.addedVolunteer.emit(this.newVolunteer);
           this.dialogRef.close(this.token);
         });
       this.mytemplateForm.resetForm();

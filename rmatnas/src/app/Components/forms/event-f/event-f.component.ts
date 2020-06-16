@@ -34,13 +34,13 @@ export class EventFComponent implements OnInit, OnDestroy, AfterViewInit {
     this.form = fb.group({
       date: [{ begin: new Date(2020, 7, 5), end: new Date(2020, 7, 25) }]
     });
-    cs.getCategories().subscribe(res => {
+    cs.getCategories().subscribe((res: Category[]) => {
       this.categories = res;
     });
   }
 
   ngAfterViewInit() {
-    this.date = [{ begin: new Date(2020, 7, 5), end: new Date(2020, 7, 25) }];
+    this.date = [{ begin: new Date(), end: new Date() }];
   }
   ngOnInit() {
     if (this.data.update) {
@@ -49,16 +49,16 @@ export class EventFComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  selectCategories(e) {
+  selectCategories(e: { checked: boolean, id: number, name: string }[]) {
     this.categoriesSelected = [];
-    e.forEach(element => {
+    e.forEach((element: { checked: boolean, id: number, name: string }) => {
       if (element.checked) {
         this.categoriesSelected.push(new Category(element.name, element.id));
       }
     });
   }
 
-  submitForm(f) {
+  submitForm() {
     if (this.data.update) {
       this.newEvent.Id = this.data.id;
       this.newEvent.DateAdded = new Date().toDateString();
@@ -71,8 +71,8 @@ export class EventFComponent implements OnInit, OnDestroy, AfterViewInit {
       this.newEvent.StartDate = this.date[0].begin.toDateString();
       this.newEvent.EndDate = this.date[0].end.toDateString();
       this.es.addEvent(this.newEvent, this.categoriesSelected)
-        .then(t => {
-          this.token = t as number;
+        .then((t: number) => {
+          this.token = t;
           this.newEvent.Id = this.token;
           this.categoriesSelected = [];
           this.dialogRef.close(this.token);

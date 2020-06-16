@@ -37,7 +37,6 @@ export class AllEventsComponent implements OnInit, OnDestroy, AfterViewInit {
   dataSource = new MatTableDataSource([]);
   resultsLength = 0;
   @Input() vId: number;
-  inp: boolean;
   result = '';
   loaded = false;
   error = false;
@@ -85,7 +84,7 @@ export class AllEventsComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   confirmDialog(): Observable<any> {
-    const message = `מחיקה זו היא לצמיתות! האם תרצי להמשיך?`;
+    const message = `מחיקה זו היא לצמיתות, ותמחק את כל המקומות בהן קיים ארוע זה (לדוג' אצל מתנדבת)! האם תרצי להמשיך?`;
     const dialogData = new ConfirmDialogModel('מחיקת ארוע', message);
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       maxWidth: '75%',
@@ -94,7 +93,7 @@ export class AllEventsComponent implements OnInit, OnDestroy, AfterViewInit {
     return dialogRef.afterClosed();
   }
 
-  delete(event, elm) {
+  delete(event: Details) {
     this.confirmDialog().subscribe(res => {
       this.result = res;
       if (res) {
@@ -112,7 +111,7 @@ export class AllEventsComponent implements OnInit, OnDestroy, AfterViewInit {
     this.dataSource.filter = filterValue;
   }
 
-  showDetails(element) {
+  showDetails(element: Eventt) {
     element.show = !element.show;
   }
 
@@ -125,16 +124,16 @@ export class AllEventsComponent implements OnInit, OnDestroy, AfterViewInit {
       return eventt;
   }
 
-  updateTable(event) {
+  updateTable(event: Eventt) {
     this.dataSource.data = this.dataSource.data.map((item: Eventt) => item.Id === event.Id ? this.trimResultFromUpdate(event) : item);
     this.table.renderRows();
   }
 
-  addVolunteer(event, elm) {
+  addVolunteer(event: Details) {
 
   }
 
-  addFamily(event, elm) {
+  addFamily(event: Details) {
 
   }
 

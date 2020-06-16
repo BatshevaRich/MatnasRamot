@@ -26,27 +26,27 @@ export class AddVFComponent implements OnInit, OnDestroy {
   selectedVolunteer: Volunteer = null;
   selectedCategory: Category;
   constructor(private fs: FamilyService,
-    private vs: VolunteerService,
-    private cs: CategoryService,
-    private vaf: VolunteerAndFamilyService,
-    private dialogRef: MatDialogRef<AddVFComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private snackBar: MatSnackBar,
-    private elementRef: ElementRef) {
+              private vs: VolunteerService,
+              private cs: CategoryService,
+              private vaf: VolunteerAndFamilyService,
+              private dialogRef: MatDialogRef<AddVFComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              private snackBar: MatSnackBar,
+              private elementRef: ElementRef) {
     this.refresh();
   }
   refresh() {
     this.selectedCategory = null;
     this.selectedFamily = null;
     this.selectedVolunteer = null;
-    this.vs.getVolunteers().subscribe(res => {
+    this.vs.getVolunteers().subscribe((res: Volunteer[]) => {
       this.volunteers = res;
-      this.volunteers = this.volunteers.filter(v => v.IsActive);
+      this.volunteers = this.volunteers.filter((v: Volunteer) => v.IsActive);
     });
-    this.fs.getFamilies().subscribe(res => {
+    this.fs.getFamilies().subscribe((res: Family[]) => {
       this.families = res;
     });
-    this.cs.getCategories().subscribe(res => {
+    this.cs.getCategories().subscribe((res: Category[]) => {
       this.categories = res;
     });
   }
@@ -57,22 +57,22 @@ export class AddVFComponent implements OnInit, OnDestroy {
     this.elementRef.nativeElement.remove();
   }
 
-  onChangeFamily(newValue, tab) {
+  onChangeFamily(tab: number) {
     if (tab === 3) {
       this.selectedCategory = null;
       this.selectedVolunteer = null;
       this.selectedFamily != null ? this.fs.getCategoriesOfFamily(this.selectedFamily.Id)
-        .subscribe(res => {
+        .subscribe((res: Category[]) => {
           this.categories = res;
         }) : this.selectedFamily = null;
     }
   }
 
-  volunteerChanged($event, tab) {
+  volunteerChanged(tab: number) {
     if (tab === 1) {
       this.selectedFamily = null;
       this.selectedVolunteer != null ? this.fs.getFamiliesByCategory(this.selectedCategory.Id)
-        .subscribe(res => {
+        .subscribe((res: Family[]) => {
           this.families = res;
         }) : this.selectedVolunteer = null;
     }
@@ -80,7 +80,7 @@ export class AddVFComponent implements OnInit, OnDestroy {
       this.selectedFamily = null;
       this.selectedCategory = null;
       this.selectedVolunteer != null ? this.vs.getCategoriesOfVolunteer(this.selectedVolunteer.Id)
-        .subscribe(res => {
+        .subscribe((res: Category[]) => {
           this.categories = res;
         }) : this.selectedVolunteer = null;
     }
@@ -88,34 +88,33 @@ export class AddVFComponent implements OnInit, OnDestroy {
 
     }
   }
-  onChangeCtegory($event, tab) {
+  onChangeCtegory(tab: number) {
     if (tab === 1) {
       this.selectedVolunteer = null;
       this.selectedFamily = null;
       this.selectedCategory != null ? this.vs.getVolunteersByCategory(this.selectedCategory.Id)
-        .subscribe(res => {
+        .subscribe((res: Volunteer[]) => {
           this.volunteers = res;
-          this.volunteers = this.volunteers.filter(v => v.IsActive);
+          this.volunteers = this.volunteers.filter((v: Volunteer) => v.IsActive);
         }) : this.selectedCategory = null;
     }
     if (tab === 2) {
       this.selectedFamily = null;
       this.selectedCategory != null ? this.fs.getFamiliesByCategory(this.selectedCategory.Id)
-        .subscribe(res => {
+        .subscribe((res: Family[]) => {
           this.families = res;
         }) : this.selectedCategory = null;
     }
     if (tab === 3) {
       this.selectedVolunteer = null;
       this.selectedCategory != null ? this.vs.getVolunteersByCategory(this.selectedCategory.Id)
-        .subscribe(res => {
+        .subscribe((res: Volunteer[]) => {
           this.volunteers = res;
-          this.volunteers = this.volunteers.filter(v => v.IsActive);
+          this.volunteers = this.volunteers.filter((v: Volunteer) => v.IsActive);
         }) : this.selectedCategory = null;
     }
   }
-  submitForm(f) {
-    debugger
+  submitForm() {
     this.vaf.addVolunteerAction(this.selectedVolunteer, this.selectedFamily, this.selectedCategory);
     this.snackBar.open('שמירת התנדבות מבוצעת...', 'OK', {
       duration: 2000,
