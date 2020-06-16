@@ -75,11 +75,17 @@ namespace Dal
         /// <param name="family">Family object</param>
         /// <param name="categories">List of categories</param>
         public static void UpdateFamily(Family family, Category[] categories)
-        {////////////////////////////////////////////////////////////////
-            Families f = Mapper.CastFamily(family);
+        {
+            Families v = Mapper.CastFamily(family);
             using (dbRamotEntities db = new dbRamotEntities())
             {
-                db.Entry<Families>(db.Set<Families>().Find(f.Id)).CurrentValues.SetValues(f);
+                db.Families.Find(family.Id).Categories.Clear();
+                foreach (var item in categories)
+                {
+                    var c = db.Categories.FirstOrDefault(ca => ca.Id == item.Id);
+                    db.Families.Find(family.Id).Categories.Add(c);
+                }
+                db.Entry<Families>(db.Set<Families>().Find(v.Id)).CurrentValues.SetValues(v);
                 db.SaveChanges();
             }
         }

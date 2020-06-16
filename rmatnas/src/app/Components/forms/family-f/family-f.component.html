@@ -7,20 +7,20 @@
     <form (ngSubmit)="submitForm(familyForm)" class="text-right" #familyForm="ngForm">
       <div class="form-group">
         <mat-form-field appearance="outline">
-          <mat-hint>שם</mat-hint>
+          <mat-hint>שם משפחה</mat-hint>
+          <input matInput (focus)="$event.target.select()" maxlength="10" [(ngModel)]="newFamily.LastName" name="LastName" required>
+          <mat-icon matPrefix>person</mat-icon>
+        </mat-form-field>
+        <br />
+        <mat-form-field appearance="outline">
+          <mat-hint>שם אב</mat-hint>
           <input matInput (focus)="$event.target.select()" maxlength="10" [(ngModel)]="newFamily.FirstNameFather" name="FirstNameFather" required>
           <mat-icon matPrefix>person</mat-icon>
         </mat-form-field>
         <br />
         <mat-form-field appearance="outline">
-          <mat-hint>שם</mat-hint>
+          <mat-hint>שם אם</mat-hint>
           <input matInput (focus)="$event.target.select()" maxlength="10" [(ngModel)]="newFamily.FirstNameMother" name="FirstNameMother" required>
-          <mat-icon matPrefix>person</mat-icon>
-        </mat-form-field>
-        <br />
-        <mat-form-field appearance="outline">
-          <mat-hint>שם</mat-hint>
-          <input matInput (focus)="$event.target.select()" maxlength="20" [(ngModel)]="newFamily.LastName" name="LastName" required>
           <mat-icon matPrefix>person</mat-icon>
         </mat-form-field>
         <br />

@@ -8,14 +8,14 @@
       <div class="form-group">
         <mat-form-field appearance="outline">
           <mat-hint>שם</mat-hint>
-          <input matInput (focus)="$event.target.select()" maxlength="10" [(ngModel)]="newOrganization.Name" name="Name"
+          <input matInput (focus)="$event.target.select()" maxlength="20" [(ngModel)]="newOrganization.Name" name="Name"
             required>
           <mat-icon matPrefix>person</mat-icon>
         </mat-form-field>
         <br />
         <mat-form-field appearance="outline">
           <mat-hint>איש קשר</mat-hint>
-          <input matInput (focus)="$event.target.select()" maxlength="10" [(ngModel)]="newOrganization.Contact" name="Contact"
+          <input matInput (focus)="$event.target.select()" maxlength="20" [(ngModel)]="newOrganization.Contact" name="Contact"
             required>
           <mat-icon matPrefix>person</mat-icon>
         </mat-form-field>
