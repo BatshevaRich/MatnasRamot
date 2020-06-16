@@ -9,3 +9,7 @@
 .example-spacer {
   flex: 1 1 auto;
 }
+
+::ng-deep .mat-tab-labels > .mat-tab-label:first-child {
+  display: none;
+}

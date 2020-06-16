@@ -38,28 +38,11 @@
           <mat-select [(value)]="selectedFamily" (selectionChange)="onChangeFamily(selectedFamily, 1)">
             <mat-option>None</mat-option>
             <div *ngFor="let f of families">
-              <mat-option [value]="f">{{f.LastName}}, {{f.FirstNameFather}} & {{f.FirstNameMother}}, {{f.Telephone}}
+              <mat-option [value]="f">{{f.LastName}}, {{f.FirstNameFather}} ו{{f.FirstNameMother}}, {{f.Telephone}}
               </mat-option>
             </div>
           </mat-select>
         </mat-form-field>
-        <div *ngIf="selectedVolunteer">
-          <div class="card">
-            <div class="card-header">
-              <h4>שם: {{ selectedVolunteer.Name }}</h4>
-            </div>
-            <div class="card-body">
-              <p>טלפון: {{ selectedVolunteer.Telephone }}</p>
-              <p>פלאפון: {{ selectedVolunteer.Pelephone | phone }}</p>
-              <p>כתובת: {{ selectedVolunteer.Address }}</p>
-              <p>מייל: {{ selectedVolunteer.Email }}</p>
-              <p>יום הולדת: {{ selectedVolunteer.Age | date:"MMMM dd yyyy" }}</p>
-              <div *ngFor="let c of categories">
-                {{c.Name}}
-              </div>
-            </div>
-          </div>
-        </div>
       </mat-tab>
 
       <mat-tab label="לפי מתנדבת" class="mat-elevation-z4">
@@ -88,7 +71,7 @@
           <mat-select [(value)]="selectedFamily" (selectionChange)="onChangeFamily(selectedFamily, 2)">
             <mat-option>None</mat-option>
             <div *ngFor="let f of families">
-              <mat-option [value]="f">{{f.LastName}}, {{f.FirstNameFather}} & {{f.FirstNameMother}}, {{f.Telephone}}
+              <mat-option [value]="f">{{f.LastName}}, {{f.FirstNameFather}} ו{{f.FirstNameMother}}, {{f.Telephone}}
               </mat-option>
             </div>
           </mat-select>
@@ -101,7 +84,7 @@
           <mat-select [(value)]="selectedFamily" (selectionChange)="onChangeFamily(selectedFamily, 3)">
             <mat-option>None</mat-option>
             <div *ngFor="let f of families">
-              <mat-option [value]="f">{{f.LastName}}, {{f.FirstNameFather}} & {{f.FirstNameMother}}, {{f.Telephone}}
+              <mat-option [value]="f">{{f.LastName}}, {{f.FirstNameFather}}  ו{{f.FirstNameMother}}, {{f.Telephone}}
               </mat-option>
             </div>
           </mat-select>
