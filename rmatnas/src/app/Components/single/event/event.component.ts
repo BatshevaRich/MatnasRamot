@@ -60,15 +60,15 @@ export class EventComponent implements OnInit, OnDestroy {
   onTabChange(event: MatTabChangeEvent) {
     setTimeout(() => {
       this.selectedTabIndex = event;
-      if (event.index === 3) {
+      if (event.index === 2) {
         this.showOrganization = true;
       }
       if (event.index === 1) {
         this.showVolunteer = true;
       }
-      if (event.index === 2) {
-        this.showFamily = true;
-      }
+      // if (event.index === 2) {
+      //   this.showFamily = true;
+      // }
     });
   }
 
