@@ -32,7 +32,7 @@ export class AllEventsComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  displayedColumns = ['showDetails', 'Name', 'Description', 'StartDate', 'EndDate', 'columndelete'];
+  displayedColumns = ['showDetails', 'Name', 'Description', 'StartDate', 'EndDate', 'addvolunteer', 'addfamily', 'columndelete'];
   expandedElement: Details | null;
   dataSource = new MatTableDataSource([]);
   resultsLength = 0;
@@ -131,7 +131,7 @@ export class AllEventsComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   addVolunteer(event, elm) {
-    // this.os.addVolunteerToeventt()
+
   }
 
   addFamily(event, elm) {
