@@ -98,7 +98,7 @@ namespace WebApi.Controllers
         /// <param name="category">Category of volunteer</param>
         [Route("api/removeCategoryFromVolunteer")]
         public void RemoveCategory(int id, [FromBody] Category category)
-        {/////////////////need to check if works
+        {
             Bll.VolunteerManager.RemoveCategory(id, category);
         }
         

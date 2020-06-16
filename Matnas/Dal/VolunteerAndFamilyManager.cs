@@ -52,7 +52,7 @@ namespace Dal
         public static Common.VolunteerAndFamily GetVolunteerAndFamily(int id)
         {
             using (dbRamotEntities db = new dbRamotEntities())
-            {//////////////////////////////////////////////////////////////
+            {
                 return Mapper.CastVolunteerAndFamilyToComon(db.VolunteerAndFamily.Find(id));
 
             }

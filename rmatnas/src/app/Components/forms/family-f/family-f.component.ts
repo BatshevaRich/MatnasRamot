@@ -49,10 +49,8 @@ export class FamilyFComponent implements OnInit, OnDestroy {
     } else {
       this.fs.addFamily(this.newFamily, this.categoriesSelected)
         .then(t => {
-          /////////////////////// need to find out about safe casting in ts
           this.newFamily.Id = t as number;
           this.categoriesSelected = [];
-          // this.addedVolunteer.emit(this.newVolunteer);
           this.dialogRef.close(t);
         });
       this.mytemplateForm.resetForm();

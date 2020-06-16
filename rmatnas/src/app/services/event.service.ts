@@ -48,4 +48,8 @@ export class EventService {
   getEventsByCategory(idCategory: number): Observable<Eventt[]> {
     return this.http.get<Eventt[]>(this.path + '/Eventsbycategory/' + idCategory);
   }
+  addVolunteerToEvent(idEvent: number, idVolunteer: number) {
+    ////////////////////////////////////////////////////////////////
+    return this.http.put(this.path, idEvent);
+  }
 }

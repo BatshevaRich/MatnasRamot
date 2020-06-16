@@ -36,16 +36,12 @@ export class CategoryFComponent implements OnInit, OnDestroy {
       this.cs.updateCategory(this.newCategory).subscribe(res => {
         this.changedCategory.emit(this.newCategory);
       });
-      // this.dialogRef.close(this.newCategory);
     } else {
       this.cs.addCategory(this.newCategory)
         .then(t => {
           this.token = t as number;
-          /////////////////////// need to find out about safe casting in ts
           this.newCategory.Id = this.token;
           this.changedCategory.emit(this.newCategory);
-          // this.dialogRef.close(this.token);
-
         });
       this.mytemplateForm.resetForm();
       this.newCategory = new Category('default', 0);

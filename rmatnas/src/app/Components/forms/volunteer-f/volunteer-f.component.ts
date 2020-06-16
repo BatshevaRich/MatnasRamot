@@ -49,10 +49,8 @@ export class VolunteerFComponent implements OnInit, OnDestroy {
       this.vs.addVolunteer(this.newVolunteer, this.categoriesSelected)
         .then(t => {
           this.token = t as number;
-          /////////////////////// need to find out about safe casting in ts
           this.newVolunteer.Id = this.token;
           this.categoriesSelected = [];
-          // this.addedVolunteer.emit(this.newVolunteer);
           this.dialogRef.close(this.token);
         });
       this.mytemplateForm.resetForm();

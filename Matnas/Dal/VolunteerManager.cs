@@ -51,7 +51,7 @@ namespace Dal
         /// <param name="category">Category</param>
         /// <returns>Id of added volunteer</returns>
         public static int AddVolunteer(Volunteer volunteer, Category[] category)
-        {/////////////////////////////////////need to deal with category add
+        {
             int x = 0;
             Volunteers v = Mapper.CastVolunteer(volunteer);
             using (dbRamotEntities db = new dbRamotEntities())
