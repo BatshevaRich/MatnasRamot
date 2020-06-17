@@ -1,7 +1,43 @@
-<mat-card class="fullscreen">
+<mat-card dir="rtl" class="fullscreen">
   <div class="hero">
-    <h2>ברוכים הבאים למתנס</h2>
-    <h1>מעלה רמות</h1>
-    <h3>ארגון חסד קהילתי</h3>
+    <span fxFlex="80%">
+      <h2>ברוכים הבאים למתנס</h2>
+      <h1>מעלה רמות</h1>
+      <h3>ארגון חסד קהילתי</h3>
+    </span>
   </div>
+  <span fxFlex="20%">
+    <mat-card>
+      <mat-error>
+        <h6><span>{{volunteerBadge}}</span> מתנדבות לא מתואמות</h6>
+      </mat-error>
+      <button (click)="router.navigate(['/list/volunteers']);" mat-raised-button color="primary">למעבר למתנדבות<i
+          class="fa fa-arrow-left"></i></button>
+    </mat-card>
+    <div style="height:10pt;"></div>
+    <mat-card>
+      <mat-error>
+        <h6><span>{{familyBadge}}</span> משפחות לא מתואמות</h6>
+      </mat-error>
+      <button (click)="router.navigate(['/list/families']);" mat-raised-button color="primary">למעבר למשפחות<i
+          class="fa fa-arrow-left"></i></button>
+    </mat-card>
+    <div style="height:10pt;"></div>
+    <mat-card>
+      <mat-error>
+        <h6><span>{{organizationBadge}}</span> ארגונים לא מתואמים</h6>
+      </mat-error>
+      <button (click)="router.navigate(['/list/organizations']);" mat-raised-button color="primary">למעבר לארגונים<i
+          class="fa fa-arrow-left"></i></button>
+    </mat-card>
+    <div style="height:10pt;"></div>
+    <mat-card>
+      <mat-error>
+        <h6><span>{{eventBadge}}</span> ארועים לא מתואמים</h6>
+      </mat-error>
+      <button (click)="router.navigate(['/list/events']);" mat-raised-button color="primary">למעבר לארועים<i
+          class="fa fa-arrow-left"></i></button>
+    </mat-card>
+  </span>
+
 </mat-card>
