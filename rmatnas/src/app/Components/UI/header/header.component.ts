@@ -1,19 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, ElementRef } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { VolunteerFComponent } from '../../forms/volunteer-f/volunteer-f.component';
 import { FamilyFComponent } from '../../forms/family-f/family-f.component';
 import { AddVFComponent } from '../../forms/add/add-vf/add-vf.component';
 import { OrganizationFComponent } from '../../forms/organization-f/organization-f.component';
 import { EventFComponent } from '../../forms/event-f/event-f.component';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
+  familyBadge = 0;
+  volunteerBadge = 0;
+  eventBadge = 0;
+  organizationBadge = 0;
+  categoryBadge = 0;
+  constructor(public dialog: MatDialog,
+              private elementRef: ElementRef,
+              public ns: NotificationService) { }
 
-  constructor(public dialog: MatDialog) { }
+  ngAfterViewInit() {
+    this.familyBadge = this.ns.Families.length;
+    this.volunteerBadge = this.ns.Volunteers.length;
+    this.eventBadge = this.ns.Events.length;
+    this.organizationBadge = this.ns.Organizations.length;
+  }
 
   ngOnInit(): void {
   }
@@ -69,6 +83,10 @@ export class HeaderComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
     });
+  }
+
+  ngOnDestroy(): void {
+    this.elementRef.nativeElement.remove();
   }
 
 }
