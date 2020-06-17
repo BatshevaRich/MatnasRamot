@@ -82,3 +82,7 @@ tr.example-element-row:not(.example-expanded-row):active {
 .visible {
   visibility: visible;
 }
+
+.example-chip-list {
+  width: 80%;
+}

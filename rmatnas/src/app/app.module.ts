@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import {ReactiveFormsModule} from '@angular/forms';
+import { ReactiveFormsModule} from '@angular/forms';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { AppComponent } from './app.component';
 import { VolunteerComponent } from './Components/single/volunteer/volunteer.component';
@@ -47,7 +47,8 @@ import { ErrorComponent } from './Components/UI/error/error.component';
 import { SatDatepickerModule, SatNativeDateModule } from 'saturn-datepicker';
 import { RangesFooter } from './Components/UI/ranges-footer/ranges-footer.component';
 import { getHebrewPaginatorIntl } from './Components/UI/hebrew-paginator-intl';
-import { MatPaginatorIntl } from '@angular/material';
+import { MatPaginatorIntl, MatBadgeModule } from '@angular/material';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ChartsModule } from 'ng2-charts';
 import { MatIconRegistry } from '@angular/material/icon';
 import * as WebFont from 'webfontloader';
@@ -105,7 +106,9 @@ WebFont.load({
     ChartsModule,
     ReactiveFormsModule,
     SatDatepickerModule, SatNativeDateModule,
-    ScrollingModule
+    ScrollingModule,
+    DragDropModule,
+    MatBadgeModule
   ],
   entryComponents: [RangesFooter],
   providers: [DatePipe, { provide: MatPaginatorIntl, useValue: getHebrewPaginatorIntl() }],

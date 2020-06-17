@@ -5,11 +5,11 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../../UI/confirm-dialog/confirm-dialog.component';
-import { MatDialog, MatSort } from '@angular/material';
+import { MatDialog, MatSort, MatChipInputEvent } from '@angular/material';
 import { Observable } from 'rxjs';
 import * as XLSX from 'xlsx';
 import { DatePipe } from '@angular/common';
-
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
 export interface Details {
   Id: number;
   Name: string;
@@ -18,6 +18,9 @@ export interface Details {
   Email: string;
   Age: Date;
   IsActive: boolean;
+}
+export interface Fruit {
+  name: string;
 }
 
 @Component({
@@ -56,6 +59,46 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
   loaded = false;
   error = false;
   notFound = false;
+  searchParams = ['volunteer, family, organization, event'];
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  fruits: Fruit[] = [
+    {name: 'אין משפחות'},
+    {name: 'אין התנדבויות'},
+    {name: 'אין ארועים'},
+    {name: 'ותיקה'},
+    {name: 'מתנדבת למס הכי גדול של ילדים'},
+
+  ];
+
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    // Add our fruit
+    if ((value || '').trim()) {
+      this.fruits.push({name: value.trim()});
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+  }
+
+  remove(fruit: Fruit): void {
+    const index = this.fruits.indexOf(fruit);
+
+    if (index >= 0) {
+      this.fruits.splice(index, 1);
+    }
+  }
+
+
+
 
   ngOnInit(): void {
     if (this.vId) {

@@ -8,13 +8,25 @@
             <input matInput (focus)="$event.target.select()" (keyup)="applyFilter($event.target.value)">
             <i matPrefix class="fa fa-search" aria-hidden="true"></i>
           </mat-form-field>
+          <button style="visibility: hidden;"></button>
+          <span class="example-spacer"></span><span class="example-spacer"></span>
+            <mat-form-field class="example-chip-list">
+              <mat-chip-list style="display: flex;" #chipList aria-label="Fruit selection">
+                <mat-chip style="display: inline-block;" *ngFor="let fruit of fruits" [selectable]="selectable" [removable]="removable"
+                  (removed)="remove(fruit)">
+                  {{fruit.name}}
+                  <!-- <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon> -->
+                </mat-chip>
+                <input placeholder="חיפוש מתקדם..." [matChipInputFor]="chipList"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                  (matChipInputTokenEnd)="add($event)">
+              </mat-chip-list>
+            </mat-form-field>
+            <button style="visibility: hidden;"></button>
+            <span class="example-spacer"></span>
+            <button mat-mini-fab>חיפוש</button>
           <span class="example-spacer"></span>
-          <mat-form-field style="display: table">
-            <mat-label>חיפוש מתקדם</mat-label>
-            <input matInput (focus)="$event.target.select()" (keyup)="applyFilter($event.target.value)">
-            <i matPrefix class="fa fa-search" aria-hidden="true"></i>
-          </mat-form-field>
-          <span class="example-spacer"></span>
+          <button style="visibility: hidden;"></button>
           <div class="example-header-image" mat-card-avatar matTooltip="הורדה לקובץ אקסל" (click)="exportTableToExcel()"
             *ngIf="!vId">
             <i class="fa fa-file-excel-o" aria-hidden="true"></i>

@@ -13,8 +13,8 @@
             </mat-button-toggle>
             <mat-button-toggle class="bg-dark">
                 <span>
-                    <button mat-button [matMenuTriggerFor]="menuT" class="nav-letters">
-                        <i class="fa fa-handshake-o" aria-hidden="true"></i>התנדבויות
+                    <button mat-button  [matMenuTriggerFor]="menuT" class="nav-letters">
+                        <i matBadge="4" matBadgeSize="small" matBadgePosition="before" matBadgeColor="accent" class="fa fa-handshake-o" aria-hidden="true"></i>התנדבויות
                     </button>
                     <mat-menu #menuT="matMenu">
                         <button mat-menu-item class="nav-link" [routerLink]="'/list/vaf'"
