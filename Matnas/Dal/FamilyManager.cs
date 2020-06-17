@@ -7,7 +7,7 @@ using Common;
 
 namespace Dal
 {
-    public static class  FamilyManager
+    public static class FamilyManager
     {
         /// <summary>
         /// Get all families.
@@ -52,19 +52,17 @@ namespace Dal
             Families f = Mapper.CastFamily(family);
             using (dbRamotEntities db = new dbRamotEntities())
             {
-                db.Families.Add(f);
                 foreach (var item in categories)
                 {
-                    var test = Mapper.CastCategory(item);
-                    f.Categories.Add(Mapper.CastCategory(item));
-                    // db.SaveChanges();
+                    var c = db.Categories.FirstOrDefault(ca => ca.Id == item.Id);
+                    //var c =cc.FirstOrDefault(ca => ca.Id == item.Id);
+                    f.Categories.Add(c);
                 }
+                db.Families.Add(f);
                 db.SaveChanges();
                 x = db.Families.Local[0].Id;
                 newFamily = Mapper.CastFamilyToComon(db.Families.Local[0]);
             }
-
-            AddCategoriesToFamily(newFamily, categories);
             return x;
 
         }
@@ -89,7 +87,7 @@ namespace Dal
                 db.SaveChanges();
             }
         }
-        
+
         /// <summary>
         /// Remove family by id.
         /// </summary>
@@ -129,15 +127,15 @@ namespace Dal
                 return categories;
             }
         }
-        
+
         /// <summary>
         /// Add category to family.
         /// </summary>
         /// <param name="id">Id of family</param>
         /// <param name="category">Category object</param>
-        public static void AddCategoryToFamily(int id,Category[] category)
+        public static void AddCategoryToFamily(int id, Category[] category)
         {
-          
+
             using (dbRamotEntities db = new dbRamotEntities())
             {
                 Families f = db.Families.Find(id);
@@ -147,11 +145,11 @@ namespace Dal
                     //var c =cc.FirstOrDefault(ca => ca.Id == item.Id);
                     f.Categories.Add(c);
                 }
-                
+
                 db.SaveChanges();
             }
         }
-        
+
         /// <summary>
         /// Remove category from family.
         /// </summary>
@@ -167,16 +165,6 @@ namespace Dal
                 db.SaveChanges();
             }
         }
-        
-        /// <summary>
-        /// Add categories to family
-        /// </summary>
-        /// <param name="family">Family object</param>
-        /// <param name="categories">List of categories</param>
-        public static void AddCategoriesToFamily(Family family,IEnumerable<Category> categories)
-        {
-            
-        }
 
         /// <summary>
         /// Get volunteers of family.
@@ -185,7 +173,7 @@ namespace Dal
         /// <returns>List of volunteers</returns>
         public static IEnumerable<Volunteer> GetVolunteers(int id)
         {
-            List<Volunteer> volunteers  = new List<Volunteer>();
+            List<Volunteer> volunteers = new List<Volunteer>();
             using (dbRamotEntities db = new dbRamotEntities())
             {
                 var f = db.VolunteerAndFamily.Where(g => g.IdFamily == id).Select(g => g.Volunteers).ToArray();
@@ -197,7 +185,7 @@ namespace Dal
             }
             return volunteers;
         }
-       
+
         public static IEnumerable<Common.Organization> GetOrganizations(int id)
         {
             List<Common.Organization> organizations = new List<Common.Organization>();
@@ -207,7 +195,7 @@ namespace Dal
                 var f = db.OrganizationAndFamily.Where(g => g.IdFamily == id).Select(g => g.IdOrganization).ToArray();
                 foreach (var o in f)
                 {
-                   organizations.Add(Mapper.CastOrganizationToComon(db.Organization.Find(o)));
+                    organizations.Add(Mapper.CastOrganizationToComon(db.Organization.Find(o)));
                 }
             }
             return organizations;
