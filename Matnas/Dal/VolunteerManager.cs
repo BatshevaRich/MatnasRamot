@@ -171,8 +171,6 @@ namespace Dal
                 Volunteers v = db.Volunteers.Find(id);
                 foreach (var item in category)
                 {
-                    var test = Mapper.CastCategory(item);
-
                     v.Categories.Add(Mapper.CastCategory(item));
                     db.SaveChanges();
                 }

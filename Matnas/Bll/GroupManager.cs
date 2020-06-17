@@ -35,5 +35,10 @@ namespace Bll
         {
             return Dal.GroupManager.GetVolunteers(id);
         }
+
+        public static IEnumerable<Category> GetCategories(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
