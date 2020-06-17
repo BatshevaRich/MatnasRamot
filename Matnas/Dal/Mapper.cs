@@ -60,7 +60,7 @@ namespace Dal
             return vaf == null? null: new VolunteerAndFamily()
             {
                 Id = vaf.Id,
-                Categories =Mapper.CastCategory( vaf.Category),
+                Categories = Mapper.CastCategory( vaf.Category),
                 Families = Mapper.CastFamily(vaf.Family),
                 Volunteers = Mapper.CastVolunteer(vaf.Volunteer),
                 Comments = vaf.Comments,

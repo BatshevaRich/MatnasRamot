@@ -25,7 +25,7 @@ namespace WebApi.Controllers
             return Bll.FamilyManager.GetCategories(id);
         }
         [Route("api/addCategoryToFamily")]
-        public void AddCategory(int id,[FromBody] Category category)
+        public void AddCategory(int id,[FromBody] Category[] category)
         {
              Bll.FamilyManager.AddCategory(id,category);
         }

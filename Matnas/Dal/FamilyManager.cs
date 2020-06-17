@@ -135,13 +135,19 @@ namespace Dal
         /// </summary>
         /// <param name="id">Id of family</param>
         /// <param name="category">Category object</param>
-        public static void AddCategoryToFamily(int id,Category category)
+        public static void AddCategoryToFamily(int id,Category[] category)
         {
           
             using (dbRamotEntities db = new dbRamotEntities())
             {
                 Families f = db.Families.Find(id);
-                f.Categories.Add(Mapper.CastCategory(category));
+                foreach (var item in category)
+                {
+                    var c = db.Categories.FirstOrDefault(ca => ca.Id == item.Id);
+                    //var c =cc.FirstOrDefault(ca => ca.Id == item.Id);
+                    f.Categories.Add(c);
+                }
+                
                 db.SaveChanges();
             }
         }

@@ -73,7 +73,7 @@ namespace Bll
         /// </summary>
         /// <param name="id">Id of family</param>
         /// <param name="category">Category object</param>
-        public static void AddCategory(int id, Category category)
+        public static void AddCategory(int id, Category[] category)
         {
             Dal.FamilyManager.AddCategoryToFamily(id, category);
         }
