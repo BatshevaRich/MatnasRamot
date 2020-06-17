@@ -3,7 +3,9 @@
         <mat-button-toggle-group>
             <mat-button-toggle class="bg-dark" class="bg-dark">
                 <span>
-                    <button mat-button class="nav-letters bg-dark" [routerLink]='"./"'>מתנס מעלה רמות</button>
+                    <button mat-button class="nav-letters bg-dark" [routerLink]='"./"'>
+                        <span matBadge={{volunteerBadge}} matBadgeSize="small" matBadgePosition="before"
+                            matBadgeColor="accent"></span>מתנס מעלה רמות</button>
                 </span>
             </mat-button-toggle>
             <mat-button-toggle class="bg-dark">
@@ -13,8 +15,9 @@
             </mat-button-toggle>
             <mat-button-toggle class="bg-dark">
                 <span>
-                    <button mat-button  [matMenuTriggerFor]="menuT" class="nav-letters">
-                        <i matBadge="4" matBadgeSize="small" matBadgePosition="before" matBadgeColor="accent" class="fa fa-handshake-o" aria-hidden="true"></i>התנדבויות
+                    <button mat-button [matMenuTriggerFor]="menuT" class="nav-letters">
+                        <i matBadge="4" matBadgeSize="small" matBadgePosition="before" matBadgeColor="accent"
+                            class="fa fa-handshake-o" aria-hidden="true"></i>התנדבויות
                     </button>
                     <mat-menu #menuT="matMenu">
                         <button mat-menu-item class="nav-link" [routerLink]="'/list/vaf'"
@@ -27,7 +30,8 @@
             <mat-button-toggle class="bg-dark">
                 <span>
                     <button mat-button [matMenuTriggerFor]="menu" class="nav-letters">
-                        <i class="fa fa-user"></i>מתנדבות
+                        <i matBadge={{volunteerBadge}} matBadgeSize="small" matBadgePosition="before"
+                            matBadgeColor="accent" class="fa fa-user"></i>מתנדבות
                     </button>
                     <mat-menu #menu="matMenu">
                         <button mat-menu-item class="nav-link" [routerLink]="'/list/volunteers'"
@@ -40,7 +44,8 @@
             <mat-button-toggle class="bg-dark">
                 <span>
                     <button mat-button [matMenuTriggerFor]="menuF" class="nav-letters">
-                        <i class="fa fa-child"></i>משפחות
+                        <i matBadge={{familyBadge}} matBadgeSize="small" matBadgePosition="before"
+                            matBadgeColor="accent" class="fa fa-child"></i>משפחות
                     </button>
                     <mat-menu #menuF="matMenu">
                         <button mat-menu-item class="nav-link" [routerLink]="'/list/families'"
@@ -53,7 +58,8 @@
             <mat-button-toggle class="bg-dark">
                 <span>
                     <button mat-button [matMenuTriggerFor]="menuG" class="nav-letters">
-                        <i class="fa fa-users"></i>ארגונים
+                        <i matBadge={{organizationBadge}} matBadgeSize="small" matBadgePosition="before"
+                            matBadgeColor="accent" class="fa fa-users"></i>ארגונים
                     </button>
                     <mat-menu #menuG="matMenu">
                         <button mat-menu-item class="nav-link" [routerLink]="'/list/organizations'"
@@ -66,7 +72,8 @@
             <mat-button-toggle class="bg-dark">
                 <span>
                     <button mat-button [matMenuTriggerFor]="menuE" class="nav-letters">
-                        <i class="fa fa-calendar-o" aria-hidden="true"></i>ארועים
+                        <i matBadge={{eventBadge}} matBadgeSize="small" matBadgePosition="before" matBadgeColor="accent"
+                            class="fa fa-calendar-o" aria-hidden="true"></i>ארועים
                     </button>
                     <mat-menu #menuE="matMenu">
                         <button mat-menu-item class="nav-link" [routerLink]="'/list/events'"
