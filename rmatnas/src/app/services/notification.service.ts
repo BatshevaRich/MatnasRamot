@@ -16,5 +16,56 @@ export class NotificationService {
   volunteerToConnect: Volunteer[] = [];
   OrganizationsToConnect: Organization[] = [];
   EventsToConnect: Eventt[] = [];
-  constructor(http: HttpClient) { }
+  CategoriesNotInUse: Category[] = [];
+  constructor(public http: HttpClient) { }
+
+  public get Families(): Family[] {
+    return this.familiesToConnect;
+  }
+
+  public get Volunteers(): Volunteer[] {
+    return this.volunteerToConnect;
+  }
+
+  public get Organizations(): Organization[] {
+    return this.OrganizationsToConnect;
+  }
+
+  public get Events(): Eventt[] {
+    return this.EventsToConnect;
+  }
+
+  public get Categories(): Category[] {
+    return this.CategoriesNotInUse;
+  }
+
+  getAllFamiliesToConnect() {
+    return this.http.get<Family[]>(environment.baseURL + '/getfamiliestoconnect').subscribe((res: Family[]) => {
+      this.familiesToConnect = res;
+    });
+  }
+
+  getAllVolunteersToConnect() {
+    return this.http.get<Volunteer[]>(environment.baseURL + '/getvolunteerstoconnect').subscribe((res: Volunteer[]) => {
+      this.volunteerToConnect = res;
+    });
+  }
+
+  getAllOrganiztionsToConnect() {
+    return this.http.get<Organization[]>(environment.baseURL + '/getorganizationstoconnect').subscribe((res: Organization[]) => {
+      this.OrganizationsToConnect = res;
+    });
+  }
+
+  getAllEventsToConnect() {
+    return this.http.get<Eventt[]>(environment.baseURL + '/geteventstoconnect').subscribe((res: Eventt[]) => {
+      this.EventsToConnect = res;
+    });
+  }
+
+  getAllCategoriesNotInUse() {
+    return this.http.get<Category[]>(environment.baseURL + '/getcategoriesnotinuse').subscribe((res: Category[]) => {
+      this.CategoriesNotInUse = res;
+    });
+  }
 }
