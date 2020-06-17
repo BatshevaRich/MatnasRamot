@@ -52,6 +52,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ChartsModule } from 'ng2-charts';
 import { MatIconRegistry } from '@angular/material/icon';
 import * as WebFont from 'webfontloader';
+import { NotificationService } from './services/notification.service';
 WebFont.load({
   custom: { families: ['Material Icons', 'Material Icons Outline'], }
 });
@@ -111,7 +112,7 @@ WebFont.load({
     MatBadgeModule
   ],
   entryComponents: [RangesFooter],
-  providers: [DatePipe, { provide: MatPaginatorIntl, useValue: getHebrewPaginatorIntl() }],
+  providers: [DatePipe, { provide: MatPaginatorIntl, useValue: getHebrewPaginatorIntl() }, NotificationService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
