@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MyTask } from '../../../Classes/MyTask';
-import { User2} from '../../../user2';
+import { User2} from '../../../Classes/user2';
 import { HttpClient, HttpParams } from '@angular/common/http';
 @Component({
   selector: 'app-my-task',
@@ -17,7 +17,7 @@ export class MyTaskComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   changes: boolean;
-  ngOnInit() {this.changes = false;}
+  ngOnInit() {this.changes = false; }
   onChckbokChange() {
     if (!this.changes) {
     this.done.emit(this.task);
@@ -31,8 +31,8 @@ export class MyTaskComponent implements OnInit {
     const head = {params: new HttpParams().set('value', 'hellow')};
     this.http.get<string[]>('http://localhost:51229/api/volunteer');
     //////////////////////// ???????????????????????????????????????????
-    this.http.post('http://localhost:51229/api/volunteer','ggg', head).subscribe((data) => {
-      
+    this.http.post('http://localhost:51229/api/volunteer', 'ggg', head).subscribe((data) => {
+
     });
     this.deleted.emit(this.task);
   }

@@ -53,6 +53,7 @@ import { ChartsModule } from 'ng2-charts';
 import { MatIconRegistry } from '@angular/material/icon';
 import * as WebFont from 'webfontloader';
 import { NotificationService } from './services/notification.service';
+import { LoginComponent } from './Components/security/login/login.component';
 WebFont.load({
   custom: { families: ['Material Icons', 'Material Icons Outline'], }
 });
@@ -93,7 +94,8 @@ WebFont.load({
     MainComponent,
     RangesFooter,
     SpinnerComponent,
-    ErrorComponent
+    ErrorComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
