@@ -61,4 +61,24 @@ export class EventService {
     ////////////////////////////////////////////////////////////////
     return this.http.put(this.path, idEvent);
   }
+
+  trimResultsFromDB(events: Eventt[]) {
+    for (const eventt of events) {
+      eventt.Name = eventt.Name.trim();
+      eventt.StartDate == null ? eventt.StartDate = '' : eventt.StartDate = eventt.StartDate.trim();
+      eventt.EndDate == null ? eventt.EndDate = '' : eventt.EndDate = eventt.EndDate.trim();
+      eventt.DateAdded == null ? eventt.DateAdded = '' : eventt.DateAdded = eventt.DateAdded.trim();
+      eventt.Description == null ? eventt.Description = '' : eventt.Description = eventt.Description.trim();
+    }
+    return events;
+  }
+
+  trimResultFromUpdate(eventt: Eventt) {
+    eventt.Name = eventt.Name.trim();
+    eventt.StartDate == null ? eventt.StartDate = '' : eventt.StartDate = eventt.StartDate.trim();
+    eventt.EndDate == null ? eventt.EndDate = '' : eventt.EndDate = eventt.EndDate.trim();
+    eventt.DateAdded == null ? eventt.DateAdded = '' : eventt.DateAdded = eventt.DateAdded.trim();
+    eventt.Description == null ? eventt.Description = '' : eventt.Description = eventt.Description.trim();
+    return eventt;
+}
 }

@@ -57,4 +57,26 @@ export class VolunteerService {
   getVolunteersForEvent(idEvent: number): Observable<Volunteer[]> {
     return this.http.get<Volunteer[]>(environment.baseURL + 'event/volunteers/' + idEvent);
   }
+
+  public trimResultsFromDB(volunteers: Volunteer[]) {
+    for (const volunteer of volunteers) {
+      volunteer.Name = volunteer.Name.trim();
+      volunteer.Address == null ? volunteer.Address = '' : volunteer.Address = volunteer.Address.trim();
+      volunteer.Telephone == null ? volunteer.Telephone = '' : volunteer.Telephone = volunteer.Telephone.trim();
+      volunteer.Pelephone == null ? volunteer.Pelephone = '' : volunteer.Pelephone = volunteer.Pelephone.trim();
+      volunteer.Email == null ? volunteer.Email = '' : volunteer.Email = volunteer.Email.trim();
+      volunteer.Comments == null ? volunteer.Comments = '' : volunteer.Comments = volunteer.Comments.trim();
+    }
+    return volunteers;
+  }
+
+  public trimResultFromUpdate(volunteer: Volunteer) {
+    volunteer.Name = volunteer.Name.trim();
+    volunteer.Address == null ? volunteer.Address = '' : volunteer.Address = volunteer.Address.trim();
+    volunteer.Telephone == null ? volunteer.Telephone = '' : volunteer.Telephone = volunteer.Telephone.trim();
+    volunteer.Pelephone == null ? volunteer.Pelephone = '' : volunteer.Pelephone = volunteer.Pelephone.trim();
+    volunteer.Email == null ? volunteer.Email = '' : volunteer.Email = volunteer.Email.trim();
+    volunteer.Comments == null ? volunteer.Comments = '' : volunteer.Comments = volunteer.Comments.trim();
+    return volunteer;
+  }
 }

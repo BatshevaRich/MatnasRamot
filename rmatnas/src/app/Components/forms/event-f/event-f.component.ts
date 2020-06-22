@@ -44,7 +44,7 @@ export class EventFComponent implements OnInit, OnDestroy, AfterViewInit {
   }
   ngOnInit() {
     if (this.data.update) {
-      this.newEvent = this.data.dataKey;
+      this.newEvent = this.es.trimResultFromUpdate(this.data.dataKey);
       this.categoriesOfOrganization = this.data.chosenC;
     }
   }

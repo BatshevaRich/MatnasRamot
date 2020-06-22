@@ -33,10 +33,11 @@ export class FamilyFComponent implements OnInit, OnDestroy {
   }
   ngOnInit() {
     if (this.data.update) {
-      this.newFamily = this.data.dataKey;
+      this.newFamily = this.fs.trimResultFromUpdate(this.data.dataKey);
       this.categoriesOfFamily = this.data.chosenC;
     }
   }
+
   submitForm() {
     if (this.data.update) {
       this.newFamily.Id = this.data.id;

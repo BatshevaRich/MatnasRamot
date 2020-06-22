@@ -53,10 +53,40 @@ export class FamilyService {
     return this.http.get<Category[]>(this.path + '/categoriesOfFamily/' + id);
   }
   getFamiliesByCategoryAndVolunteer(idCategory: number, idVolunteer): Observable<Family[]> {
-    return this.http.get<Family[]>(this.path + '/familiesbycategory/' + idCategory, {headers: {Authorization: idVolunteer.toString()}});
+    return this.http.get<Family[]>(this.path + '/familiesbycategory/' + idCategory, { headers: { Authorization: idVolunteer.toString() } });
   }
 
   getFamiliesByCategory(idCategory: number): Observable<Family[]> {
     return this.http.get<Family[]>(this.path + '/familiesbycategory/' + idCategory);
+  }
+
+  public trimResultsFromDB(families: Family[]) {
+    for (const family of families) {
+      family.LastName = family.LastName.trim();
+      family.FirstNameFather = family.FirstNameFather.trim();
+      family.FirstNameMother = family.FirstNameMother.trim();
+      family.Address == null ? family.Address = '' : family.Address = family.Address.trim();
+      family.Telephone == null ? family.Telephone = '' : family.Telephone = family.Telephone.trim();
+      family.PelephoneFather == null ? family.PelephoneFather = '' : family.PelephoneFather = family.PelephoneFather.trim();
+      family.PelephoneMother == null ? family.PelephoneMother = '' : family.PelephoneMother = family.PelephoneMother.trim();
+      family.Status == null ? family.Status = '' : family.Status = family.Status.trim();
+      family.Reference == null ? family.Reference = '' : family.Reference = family.Reference.trim();
+      family.Reason == null ? family.Reason = '' : family.Reason = family.Reason.trim();
+    }
+    return families;
+  }
+
+  public trimResultFromUpdate(family: Family) {
+    family.LastName = family.LastName.trim();
+    family.FirstNameFather = family.FirstNameFather.trim();
+    family.FirstNameMother = family.FirstNameMother.trim();
+    family.Address == null ? family.Address = '' : family.Address = family.Address.trim();
+    family.Telephone == null ? family.Telephone = '' : family.Telephone = family.Telephone.trim();
+    family.PelephoneFather == null ? family.PelephoneFather = '' : family.PelephoneFather = family.PelephoneFather.trim();
+    family.PelephoneMother == null ? family.PelephoneMother = '' : family.PelephoneMother = family.PelephoneMother.trim();
+    family.Status == null ? family.Status = '' : family.Status = family.Status.trim();
+    family.Reference == null ? family.Reference = '' : family.Reference = family.Reference.trim();
+    family.Reason == null ? family.Reason = '' : family.Reason = family.Reason.trim();
+    return family;
   }
 }

@@ -64,22 +64,6 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
     this.elementRef.nativeElement.remove();
   }
 
-  trimResultsFromDB(families: Family[]) {
-    for (const family of families) {
-      family.LastName = family.LastName.trim();
-      family.FirstNameFather = family.FirstNameFather.trim();
-      family.FirstNameMother = family.FirstNameMother.trim();
-      family.Address == null ? family.Address = '' : family.Address = family.Address.trim();
-      family.Telephone == null ? family.Telephone = '' : family.Telephone = family.Telephone.trim();
-      family.PelephoneFather == null ? family.PelephoneFather = '' : family.PelephoneFather = family.PelephoneFather.trim();
-      family.PelephoneMother == null ? family.PelephoneMother = '' : family.PelephoneMother = family.PelephoneMother.trim();
-      family.Status == null ? family.Status = '' : family.Status = family.Status.trim();
-      family.Reference == null ? family.Reference = '' : family.Reference = family.Reference.trim();
-      family.Reason == null ? family.Reason = '' : family.Reason = family.Reason.trim();
-    }
-    return families;
-  }
-
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -90,7 +74,7 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
           if (data.length === 0) {
             this.notFound = true;
           } else {
-            data = this.trimResultsFromDB(data);
+            data = this.fs.trimResultsFromDB(data);
             this.families = data;
             this.dataSource.data = data;
             this.resultsLength = this.dataSource.data.length;
@@ -103,7 +87,7 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
           if (data.length === 0) {
             this.notFound = true;
           } else {
-            data = this.trimResultsFromDB(data);
+            data = this.fs.trimResultsFromDB(data);
             this.families = data;
             this.dataSource.data = data;
             this.resultsLength = this.dataSource.data.length;
@@ -113,7 +97,7 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     } else {
       this.fs.getFamilies().subscribe((data: Family[]) => {
-        data = this.trimResultsFromDB(data);
+        data = this.fs.trimResultsFromDB(data);
         this.families = data;
         this.dataSource.data = data;
         this.resultsLength = this.dataSource.data.length;
@@ -178,26 +162,12 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
     XLSX.writeFile(wb, `משפחות.xlsx`);
   }
 
-  trimResultFromUpdate(family: Family) {
-    family.LastName = family.LastName.trim();
-    family.FirstNameFather = family.FirstNameFather.trim();
-    family.FirstNameMother = family.FirstNameMother.trim();
-    family.Address == null ? family.Address = '' : family.Address = family.Address.trim();
-    family.Telephone == null ? family.Telephone = '' : family.Telephone = family.Telephone.trim();
-    family.PelephoneFather == null ? family.PelephoneFather = '' : family.PelephoneFather = family.PelephoneFather.trim();
-    family.PelephoneMother == null ? family.PelephoneMother = '' : family.PelephoneMother = family.PelephoneMother.trim();
-    family.Status == null ? family.Status = '' : family.Status = family.Status.trim();
-    family.Reference == null ? family.Reference = '' : family.Reference = family.Reference.trim();
-    family.Reason == null ? family.Reason = '' : family.Reason = family.Reason.trim();
-    return family;
-  }
-
   showDetails(element: Family) {
     element.show = !element.show;
   }
 
   updateTable(event: Family) {
-    this.dataSource.data = this.dataSource.data.map((item: Family) => item.Id === event.Id ? this.trimResultFromUpdate(event) : item);
+    this.dataSource.data = this.dataSource.data.map((item: Family) => item.Id === event.Id ? this.fs.trimResultFromUpdate(event) : item);
     this.table.renderRows();
   }
 }

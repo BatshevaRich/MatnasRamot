@@ -40,7 +40,7 @@ export class VolunteerComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngAfterViewInit() {
     this.vs.getVolunteer(this.vId).subscribe((v: Volunteer) => {
-      this.myvolunteer = v;
+      this.myvolunteer = this.vs.trimResultFromUpdate(v);
       this.vs.getCategoriesOfVolunteer(this.vId).subscribe((c: Category[]) => {
         this.categories = c;
       });

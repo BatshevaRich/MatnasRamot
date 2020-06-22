@@ -42,7 +42,7 @@ export class OrganizationComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngAfterViewInit() {
     this.os.getOrganization(this.vId).subscribe((o: Organization) => {
-      this.myOrganization = o;
+      this.myOrganization = this.os.trimResultFromUpdate(o);
       this.os.getCategoriesOfOrganization(this.vId).subscribe((c: Category[]) => {
         this.categories = c;
       });

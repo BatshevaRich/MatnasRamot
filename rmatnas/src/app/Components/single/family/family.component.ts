@@ -35,7 +35,7 @@ export class FamilyComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngAfterViewInit() {
     this.fs.getFamily(this.vId).subscribe((f: Family) => {
-      this.family = f;
+      this.family = this.fs.trimResultFromUpdate(f);
       this.fs.getCategoriesOfFamily(this.vId).subscribe((c: Category[]) => {
         this.categories = c;
       });

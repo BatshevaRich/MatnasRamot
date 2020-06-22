@@ -37,17 +37,6 @@ export class OrganizationFComponent implements OnInit, OnDestroy {
     }
   }
 
-  trimResultsFromDB(organizations: Organization[]) {
-    for (const organization of organizations) {
-      organization.Name = organization.Name.trim();
-      organization.email = organization.email.trim();
-      organization.Address == null ? organization.Address = '' : organization.Address = organization.Address.trim();
-      organization.Phone == null ? organization.Phone = '' : organization.Phone = organization.Phone.trim();
-      organization.Comments == null ? organization.Comments = '' : organization.Comments = organization.Comments.trim();
-      organization.Contact == null ? organization.Contact = '' : organization.Contact = organization.Contact.trim();
-    }
-    return organizations;
-  }
   ngOnDestroy(): void {
     this.elementRef.nativeElement.remove();
   }

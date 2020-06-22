@@ -62,4 +62,26 @@ export class OrganizationService {
   getOrganizationsByCategory(idCategory: number): Observable<Organization[]> {
     return this.http.get<Organization[]>(this.path + '/Organizationsbycategory/' + idCategory);
   }
+
+  public trimResultsFromDB(organizations: Organization[]) {
+    for (const organization of organizations) {
+      organization.Name = organization.Name.trim();
+      organization.email = organization.email.trim();
+      organization.Address == null ? organization.Address = '' : organization.Address = organization.Address.trim();
+      organization.Phone == null ? organization.Phone = '' : organization.Phone = organization.Phone.trim();
+      organization.Comments == null ? organization.Comments = '' : organization.Comments = organization.Comments.trim();
+      organization.Contact == null ? organization.Contact = '' : organization.Contact = organization.Contact.trim();
+    }
+    return organizations;
+  }
+
+  public trimResultFromUpdate(organization: Organization) {
+    organization.Name = organization.Name.trim();
+    organization.email = organization.email.trim();
+    organization.Address == null ? organization.Address = '' : organization.Address = organization.Address.trim();
+    organization.Phone == null ? organization.Phone = '' : organization.Phone = organization.Phone.trim();
+    organization.Comments == null ? organization.Comments = '' : organization.Comments = organization.Comments.trim();
+    organization.Contact == null ? organization.Contact = '' : organization.Contact = organization.Contact.trim();
+    return organization;
+  }
 }

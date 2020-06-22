@@ -106,28 +106,6 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
     }
   }
 
-  trimResultsFromDB(volunteers: Volunteer[]) {
-    for (const volunteer of volunteers) {
-      volunteer.Name = volunteer.Name.trim();
-      volunteer.Address == null ? volunteer.Address = '' : volunteer.Address = volunteer.Address.trim();
-      volunteer.Telephone == null ? volunteer.Telephone = '' : volunteer.Telephone = volunteer.Telephone.trim();
-      volunteer.Pelephone == null ? volunteer.Pelephone = '' : volunteer.Pelephone = volunteer.Pelephone.trim();
-      volunteer.Email == null ? volunteer.Email = '' : volunteer.Email = volunteer.Email.trim();
-      volunteer.Comments == null ? volunteer.Comments = '' : volunteer.Comments = volunteer.Comments.trim();
-    }
-    return volunteers;
-  }
-
-  trimResultFromUpdate(volunteer: Volunteer) {
-    volunteer.Name = volunteer.Name.trim();
-    volunteer.Address == null ? volunteer.Address = '' : volunteer.Address = volunteer.Address.trim();
-    volunteer.Telephone == null ? volunteer.Telephone = '' : volunteer.Telephone = volunteer.Telephone.trim();
-    volunteer.Pelephone == null ? volunteer.Pelephone = '' : volunteer.Pelephone = volunteer.Pelephone.trim();
-    volunteer.Email == null ? volunteer.Email = '' : volunteer.Email = volunteer.Email.trim();
-    volunteer.Comments == null ? volunteer.Comments = '' : volunteer.Comments = volunteer.Comments.trim();
-    return volunteer;
-  }
-
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -138,7 +116,7 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
           if (data.length === 0) {
             this.notFound = true;
           } else {
-            data = this.trimResultsFromDB(data);
+            data = this.vs.trimResultsFromDB(data);
             this.volunteers = data;
             this.dataSource.data = data;
             this.resultsLength = this.dataSource.data.length;
@@ -150,7 +128,7 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
           if (data.length === 0) {
             this.notFound = true;
           } else {
-            data = this.trimResultsFromDB(data);
+            data = this.vs.trimResultsFromDB(data);
             this.volunteers = data;
             this.dataSource.data = data;
             this.resultsLength = this.dataSource.data.length;
@@ -159,7 +137,7 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
       }
     } else {
       this.vs.getVolunteers().subscribe((volunteers: Volunteer[]) => {
-        volunteers = this.trimResultsFromDB(volunteers);
+        volunteers = this.vs.trimResultsFromDB(volunteers);
         this.volunteers = volunteers;
         this.dataSource.data = volunteers;
         this.resultsLength = this.dataSource.data.length;
@@ -227,7 +205,7 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   updateTable(event: Volunteer) {
-    this.dataSource.data = this.dataSource.data.map((item: Volunteer) => item.Id === event.Id ? this.trimResultFromUpdate(event) : item);
+    this.dataSource.data = this.dataSource.data.map((item: Volunteer) => item.Id === event.Id ? this.vs.trimResultFromUpdate(event) : item);
     this.table.renderRows();
   }
 

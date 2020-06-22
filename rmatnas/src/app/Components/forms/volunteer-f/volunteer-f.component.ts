@@ -32,7 +32,7 @@ export class VolunteerFComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (this.data.update) {
-      this.newVolunteer = this.data.dataKey;
+      this.newVolunteer = this.vs.trimResultFromUpdate(this.data.dataKey);
       this.categoriesOfVolunteer = this.data.chosenC;
     }
   }
