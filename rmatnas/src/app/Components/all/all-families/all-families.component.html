@@ -45,7 +45,7 @@
             <ng-container matColumnDef="showDetails">
               <th mat-header-cell *matHeaderCellDef>פרטים </th>
               <td mat-cell *matCellDef="let element">
-                <h5 (click)="showDetails(element)">
+                <h5>
                   <i class="fa fa-caret-down"></i>
                 </h5>
               </td>
@@ -73,7 +73,7 @@
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let element; columns: displayedColumns" class="example-element-row"
-              [class.example-expanded-row]="expandedElement === element" (click)="vId ? null: 
+              [class.example-expanded-row]="expandedElement === element" (click)="showDetails(element);vId ? null: 
                   expandedElement = expandedElement === element ? null : element
                 "></tr>
             <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
@@ -84,14 +84,15 @@
         <router-outlet></router-outlet>
       </mat-card-content>
     </div>
-    <div *ngIf="!error && !loaded" style="height: calc(93vh - (50px + 50px));" style="height: calc(93vh - (50px + 50px));">
-            <app-spinner></app-spinner>
+    <div *ngIf="!error && !loaded" style="height: calc(93vh - (50px + 50px));"
+      style="height: calc(93vh - (50px + 50px));">
+      <app-spinner></app-spinner>
     </div>
     <span *ngIf="notFound" class="text-center">
       <mat-error>לא נמצאו משפחות </mat-error>
     </span>
   </mat-card>
-  </div>
+</div>
 <mat-card *ngIf="error && loaded" class="fullscreen text-center" [ngClass]="error && loaded? 'visible': 'hidden'">
   <app-error></app-error>
 </mat-card>
