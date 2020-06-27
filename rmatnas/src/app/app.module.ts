@@ -47,7 +47,7 @@ import { ErrorComponent } from './Components/UI/error/error.component';
 import { SatDatepickerModule, SatNativeDateModule } from 'saturn-datepicker';
 import { RangesFooter } from './Components/UI/ranges-footer/ranges-footer.component';
 import { getHebrewPaginatorIntl } from './Components/UI/hebrew-paginator-intl';
-import { MatPaginatorIntl, MatBadgeModule } from '@angular/material';
+import { MatPaginatorIntl, MatBadgeModule, MatSpinner } from '@angular/material';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ChartsModule } from 'ng2-charts';
 import { MatIconRegistry } from '@angular/material/icon';
@@ -58,6 +58,23 @@ WebFont.load({
   custom: { families: ['Material Icons', 'Material Icons Outline'], }
 });
 @NgModule({
+  imports: [
+    BrowserModule,
+    FormsModule,
+    RoutingModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    FormsModule,
+    MaterialModule,
+    FlexLayoutModule,
+    ChartsModule,
+    ReactiveFormsModule,
+    SatDatepickerModule,
+    SatNativeDateModule,
+    ScrollingModule,
+    DragDropModule,
+    MatBadgeModule
+  ],
   declarations: [
     AppComponent,
     VolunteerComponent,
@@ -96,22 +113,6 @@ WebFont.load({
     SpinnerComponent,
     ErrorComponent,
     LoginComponent
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    RoutingModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    FormsModule,
-    MaterialModule,
-    FlexLayoutModule,
-    ChartsModule,
-    ReactiveFormsModule,
-    SatDatepickerModule, SatNativeDateModule,
-    ScrollingModule,
-    DragDropModule,
-    MatBadgeModule
   ],
   entryComponents: [RangesFooter],
   providers: [DatePipe, { provide: MatPaginatorIntl, useValue: getHebrewPaginatorIntl() }, NotificationService],

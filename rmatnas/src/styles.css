@@ -33,3 +33,15 @@ html, body {
 .mat-input-element {
   min-height: 32px;
 }
+
+p {
+  text-overflow: ellipsis;
+  word-break: break-all;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+p:hover {
+  overflow: visible;
+  white-space: normal;
+}
