@@ -8,7 +8,6 @@ import { ConfirmDialogModel, ConfirmDialogComponent } from '../../UI/confirm-dia
 import { MatDialog, MatSort, MatChipInputEvent } from '@angular/material';
 import { Observable } from 'rxjs';
 import * as XLSX from 'xlsx';
-import * as FileSaver from 'file-saver';
 import { DatePipe } from '@angular/common';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 export interface Details {
@@ -225,23 +224,24 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
       js = js as Details[];
       const newData = js.map((x) => ({
         // tslint:disable-next-line: no-string-literal
-        name: x['שם'],
+        Name: x['שם'],
         // tslint:disable-next-line: no-string-literal
-        address: x['כתובת'],
+        Address: x['כתובת'],
         // tslint:disable-next-line: no-string-literal
-        telephone: x['טלפון'],
+        Telephone: x['טלפון'],
         // tslint:disable-next-line: no-string-literal
-        pelephone: x['פלאפון'],
+        Pelephone: x['פלאפון'],
         // tslint:disable-next-line: no-string-literal
-        email: x['מייל'],
+        Email: x['מייל'],
         // tslint:disable-next-line: no-string-literal
-        birthdate: x['תאריך_לידה'],
+        Birthdate: x['תאריך_לידה'],
         // tslint:disable-next-line: no-string-literal
-        active: x['פעילה?'] === true ? 'true' : 'false',
+        Active: x['פעילה?'] === true ? 'true' : 'false',
         // tslint:disable-next-line: no-string-literal
-        comments: x['הערות']
+        Comments: x['הערות']
       }));
       this.dataSource.data = newData;
+      console.log(newData);
     };
     readFile.readAsArrayBuffer(this.fileUploaded);
   }
