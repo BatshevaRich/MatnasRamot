@@ -6,7 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../../UI/confirm-dialog/confirm-dialog.component';
-import { MatDialog, MatSort } from '@angular/material';
+import { MatDialog, MatSort, MatSnackBar } from '@angular/material';
 import * as XLSX from 'xlsx';
 
 export interface Details {
@@ -54,7 +54,8 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(public fs: FamilyService,
               private changeDetectorRefs: ChangeDetectorRef,
               public dialog: MatDialog,
-              private elementRef: ElementRef) {
+              private elementRef: ElementRef,
+              private snackBar: MatSnackBar) {
     this.dataSource.filterPredicate =
       (data: Details, filter: string) => data.LastName.indexOf(filter) !== -1;
   }
@@ -183,6 +184,13 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
       XLSX.utils.sheet_to_json(worksheet, { raw: true });
       let js = XLSX.utils.sheet_to_json(worksheet, { raw: true });
       js = js as Details[];
+      // tslint:disable-next-line: no-string-literal
+      if (!js[0]['שם_משפחה']) {
+        this.snackBar.open('קובץ לא תקני, נא להעלות קובץ נכון...', 'OK', {
+        duration: 5000,
+        direction: 'rtl'
+      });
+      } else {
       const newData = js.map((x) => ({
         // tslint:disable-next-line: no-string-literal
         LastName: x['שם_משפחה'],
@@ -209,7 +217,11 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
       }));
       this.dataSource.data = newData;
       console.log(newData);
-    };
+      this.snackBar.open('קובץ נטען בהצלחה', 'OK', {
+        duration: 5000,
+        direction: 'rtl'
+      });
+    }};
     readFile.readAsArrayBuffer(this.fileUploaded);
   }
 

@@ -5,7 +5,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../../UI/confirm-dialog/confirm-dialog.component';
-import { MatDialog, MatSort, MatChipInputEvent } from '@angular/material';
+import { MatDialog, MatSort, MatChipInputEvent, MatSnackBar } from '@angular/material';
 import { Observable } from 'rxjs';
 import * as XLSX from 'xlsx';
 import { DatePipe } from '@angular/common';
@@ -39,9 +39,10 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
   arrayBuffer: any;
 
   constructor(public vs: VolunteerService,
-              public dialog: MatDialog,
-              private datePipe: DatePipe,
-              private elementRef: ElementRef) {
+    public dialog: MatDialog,
+    private datePipe: DatePipe,
+    private elementRef: ElementRef,
+    private snackBar: MatSnackBar) {
     // this.dataSource.filterPredicate =
     //   (data: Details, filter: string) => data.Name.indexOf(filter) !== -1;
   }
@@ -199,6 +200,7 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
       פעילה: x.IsActive === true ? 'כן' : 'לא',
       הערות: x.Comments
     }));
+    debugger;
     const wb = XLSX.utils.book_new();
     const ws = XLSX.utils.json_to_sheet(data);
     XLSX.utils.book_append_sheet(wb, ws, 'מתנדבות');
@@ -222,26 +224,38 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
       XLSX.utils.sheet_to_json(worksheet, { raw: true });
       let js = XLSX.utils.sheet_to_json(worksheet, { raw: true });
       js = js as Details[];
-      const newData = js.map((x) => ({
-        // tslint:disable-next-line: no-string-literal
-        Name: x['שם'],
-        // tslint:disable-next-line: no-string-literal
-        Address: x['כתובת'],
-        // tslint:disable-next-line: no-string-literal
-        Telephone: x['טלפון'],
-        // tslint:disable-next-line: no-string-literal
-        Pelephone: x['פלאפון'],
-        // tslint:disable-next-line: no-string-literal
-        Email: x['מייל'],
-        // tslint:disable-next-line: no-string-literal
         Birthdate: x['תאריך_לידה'],
-        // tslint:disable-next-line: no-string-literal
-        Active: x['פעילה?'] === true ? 'true' : 'false',
-        // tslint:disable-next-line: no-string-literal
-        Comments: x['הערות']
-      }));
-      this.dataSource.data = newData;
-      console.log(newData);
+      // tslint:disable-next-line: no-string-literal
+      if (!js[0]['שם']) {
+        this.snackBar.open('קובץ לא תקני, נא להעלות קובץ נכון...', 'OK', {
+          duration: 5000,
+          direction: 'rtl'
+        });
+      } else {
+        const newData = js.map((x) => ({
+          // tslint:disable-next-line: no-string-literal
+          Name: x['שם'],
+          // tslint:disable-next-line: no-string-literal
+          Address: x['כתובת'],
+          // tslint:disable-next-line: no-string-literal
+          Telephone: x['טלפון'],
+          // tslint:disable-next-line: no-string-literal
+          Pelephone: x['פלאפון'],
+          // tslint:disable-next-line: no-string-literal
+          Email: x['מייל'],
+          // tslint:disable-next-line: no-string-literal
+          // tslint:disable-next-line: no-string-literal
+          Active: x['פעילה?'] === true ? 'true' : 'false',
+          // tslint:disable-next-line: no-string-literal
+          Comments: x['הערות']
+        }));
+        this.dataSource.data = newData;
+        console.log(newData);
+        this.snackBar.open('קובץ נטען בהצלחה', 'OK', {
+          duration: 5000,
+          direction: 'rtl'
+        });
+      }
     };
     readFile.readAsArrayBuffer(this.fileUploaded);
   }
