@@ -31,6 +31,8 @@
             *ngIf="!vId">
             <i class="fa fa-file-excel-o" aria-hidden="true"></i>
           </div>
+          <span class="example-spacer"></span>
+          <input type="file" class="form-control" (change)="uploadedFile($event)" placeholder="Upload file" accept=".xlsx">   
         </mat-toolbar-row>
       </mat-card-header>
       <mat-card-content>

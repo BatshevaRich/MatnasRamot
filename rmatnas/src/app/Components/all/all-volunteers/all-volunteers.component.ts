@@ -8,8 +8,9 @@ import { ConfirmDialogModel, ConfirmDialogComponent } from '../../UI/confirm-dia
 import { MatDialog, MatSort, MatChipInputEvent } from '@angular/material';
 import { Observable } from 'rxjs';
 import * as XLSX from 'xlsx';
+import * as FileSaver from 'file-saver';
 import { DatePipe } from '@angular/common';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 export interface Details {
   Id: number;
   Name: string;
@@ -36,6 +37,7 @@ export interface Fruit {
   ],
 })
 export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit {
+  arrayBuffer: any;
 
   constructor(public vs: VolunteerService,
               public dialog: MatDialog,
@@ -66,13 +68,16 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   fruits: Fruit[] = [
-    {name: 'אין משפחות'},
-    {name: 'אין התנדבויות'},
-    {name: 'אין ארועים'},
-    {name: 'ותיקה'},
-    {name: 'מתנדבת למס הכי גדול של ילדים'},
+    { name: 'אין משפחות' },
+    { name: 'אין התנדבויות' },
+    { name: 'אין ארועים' },
+    { name: 'ותיקה' },
+    { name: 'מתנדבת למס הכי גדול של ילדים' },
 
   ];
+  fileUploaded: File;
+  worksheet: any;
+  volunteerData: any;
 
   add(event: MatChipInputEvent): void {
     const input = event.input;
@@ -80,7 +85,7 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
 
     // Add our fruit
     if ((value || '').trim()) {
-      this.fruits.push({name: value.trim()});
+      this.fruits.push({ name: value.trim() });
     }
 
     // Reset the input value
@@ -96,9 +101,6 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
       this.fruits.splice(index, 1);
     }
   }
-
-
-
 
   ngOnInit(): void {
     if (this.vId) {
@@ -202,6 +204,46 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
     const ws = XLSX.utils.json_to_sheet(data);
     XLSX.utils.book_append_sheet(wb, ws, 'מתנדבות');
     XLSX.writeFile(wb, `מתנדבות.xlsx`);
+  }
+  uploadedFile(event) {
+    this.fileUploaded = event.target.files[0];
+    this.readExcel();
+  }
+  readExcel() {
+    const readFile = new FileReader();
+    readFile.onload = (e) => {
+      this.arrayBuffer = readFile.result;
+      const data = new Uint8Array(this.arrayBuffer);
+      const arr = new Array();
+      for (let i = 0; i !== data.length; ++i) { arr[i] = String.fromCharCode(data[i]); }
+      const bstr = arr.join('');
+      const workbook = XLSX.read(bstr, { type: 'binary' });
+      const firstSheetName = workbook.SheetNames[0];
+      const worksheet = workbook.Sheets[firstSheetName];
+      XLSX.utils.sheet_to_json(worksheet, { raw: true });
+      let js = XLSX.utils.sheet_to_json(worksheet, { raw: true });
+      js = js as Details[];
+      const newData = js.map((x) => ({
+        // tslint:disable-next-line: no-string-literal
+        name: x['שם'],
+        // tslint:disable-next-line: no-string-literal
+        address: x['כתובת'],
+        // tslint:disable-next-line: no-string-literal
+        telephone: x['טלפון'],
+        // tslint:disable-next-line: no-string-literal
+        pelephone: x['פלאפון'],
+        // tslint:disable-next-line: no-string-literal
+        email: x['מייל'],
+        // tslint:disable-next-line: no-string-literal
+        birthdate: x['תאריך_לידה'],
+        // tslint:disable-next-line: no-string-literal
+        active: x['פעילה?'] === true ? 'true' : 'false',
+        // tslint:disable-next-line: no-string-literal
+        comments: x['הערות']
+      }));
+      this.dataSource.data = newData;
+    };
+    readFile.readAsArrayBuffer(this.fileUploaded);
   }
 
   updateTable(event: Volunteer) {
