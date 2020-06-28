@@ -4,43 +4,64 @@
     <span *ngIf="data.update" mat-dialog-title>עדכון מתנדבת</span>
   </mat-toolbar>
   <mat-dialog-content>
-    <form (ngSubmit)="submitForm()" class="text-right" #volunteerForm="ngForm">
+    <form (ngSubmit)="submitForm()" novalidate class="text-right" [formGroup]="myForm" #volunteerForm="ngForm">
       <div class="form-group">
         <mat-form-field appearance="outline">
-          <mat-hint>שם</mat-hint>
-          <input matInput (focus)="$event.target.select()" maxlength="10" [(ngModel)]="newVolunteer.Name" name="Name" required>
+          <mat-hint>שם &nbsp;
+            <span style="color: red;"
+              *ngIf="myForm.controls['name'].invalid && (myForm.controls['name'].dirty || myForm.controls['name'].touched)">
+              <span *ngIf="myForm.controls['name'].errors.required">
+                שדה חובה
+              </span>
+              <span *ngIf="myForm.controls['name'].errors.minlength">
+                קצר מדי
+              </span>
+            </span>
+          </mat-hint>
+          <input matInput (focus)="$event.target.select()" maxlength="20" minlength="5" [(ngModel)]="newVolunteer.Name"
+            name="name" [ngModelOptions]="{standalone: true}" (change)="myForm.get('name').setValue($event.value)"  required>
           <mat-icon matPrefix>person</mat-icon>
         </mat-form-field>
-        <br />
+        <br>
         <mat-form-field appearance="outline">
           <mat-hint>מייל</mat-hint>
-          <input matInput (focus)="$event.target.select()" placeholder="volunteer@example.com" required email [(ngModel)]="newVolunteer.Email"
-            name="Email">
+          <input type="email" matInput (focus)="$event.target.select()" placeholder="volunteer@example.com" required
+            [(ngModel)]="newVolunteer.Email" name="email" minlength="5" [ngModelOptions]="{standalone: true}" (change)="myForm.get('email').setValue($event.value)">
           <mat-icon matPrefix>email</mat-icon>
-          <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+          <span style="color: red;"
+            *ngIf="myForm.controls['email'].invalid && (myForm.controls['email'].dirty || myForm.controls['email'].touched)">
+            <span *ngIf="myForm.controls['email'].errors.required">
+              שדה חובה
+            </span>
+            <span *ngIf="myForm.controls['email'].errors">
+              שגיאה בכתובת מייל
+            </span>
+          </span>
         </mat-form-field>
         <br />
         <mat-form-field appearance="outline">
           <mat-hint>טלפון</mat-hint>
-          <input matInput (focus)="$event.target.select()" placeholder="050-525-2525" appPhoneMask [(ngModel)]="newVolunteer.Telephone" name="Telephone">
+          <input matInput (focus)="$event.target.select()" placeholder="02-525-2525" appPhoneMask
+            [(ngModel)]="newVolunteer.Telephone"[ngModelOptions]="{standalone: true}" name="Telephone">
           <mat-icon matPrefix>phone</mat-icon>
         </mat-form-field>
         <br />
         <mat-form-field appearance="outline">
           <mat-hint>פלאפון</mat-hint>
-          <input matInput (focus)="$event.target.select()" placeholder="050-525-2525" required [(ngModel)]="newVolunteer.Pelephone" name="Pelephone">
+          <input matInput (focus)="$event.target.select()" placeholder="050-525-2525" required
+            [(ngModel)]="newVolunteer.Pelephone"[ngModelOptions]="{standalone: true}" name="Pelephone">
           <mat-icon matPrefix>phone</mat-icon>
         </mat-form-field>
         <br />
         <mat-form-field appearance="outline">
           <mat-hint>כתובת</mat-hint>
-          <input matInput (focus)="$event.target.select()" [(ngModel)]="newVolunteer.Address" name="Address">
+          <input matInput (focus)="$event.target.select()"[ngModelOptions]="{standalone: true}" [(ngModel)]="newVolunteer.Address" name="Address">
           <mat-icon matPrefix>location_city</mat-icon>
         </mat-form-field>
         <br />
         <mat-form-field appearance="outline">
           <mat-hint>תאריך לידה</mat-hint>
-          <input matInput (focus)="$event.target.select()" [matDatepicker]="picker1" [(ngModel)]="newVolunteer.Age"
+          <input matInput (focus)="$event.target.select()"[ngModelOptions]="{standalone: true}" [matDatepicker]="picker1" [(ngModel)]="newVolunteer.Age"
             (ngModelChange)="newVolunteer.Age = $event" name="Age">
           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
           <mat-datepicker #picker1></mat-datepicker>
@@ -48,7 +69,7 @@
         <br />
         <br />
         <mat-hint>פעילה? </mat-hint>
-        <mat-slide-toggle name="isActive" [ngModel]="newVolunteer.IsActive" [checked]="newVolunteer.IsActive"
+        <mat-slide-toggle name="isActive"[ngModelOptions]="{standalone: true}" [ngModel]="newVolunteer.IsActive" [checked]="newVolunteer.IsActive"
           (ngModelChange)="newVolunteer.IsActive = !newVolunteer.IsActive"></mat-slide-toggle>
         <br />
         <br />
@@ -57,12 +78,13 @@
       </div>
       <mat-form-field appearance="outline" class="example-full-width">
         <mat-hint>הערות</mat-hint>
-        <textarea matInput (focus)="$event.target.select()" [(ngModel)]="newVolunteer.Comments" name="Comments"></textarea>
+        <textarea matInput (focus)="$event.target.select()"[ngModelOptions]="{standalone: true}" [(ngModel)]="newVolunteer.Comments"
+          name="Comments"></textarea>
         <mat-icon matSuffix>comment</mat-icon>
       </mat-form-field>
       <mat-dialog-actions align="end">
         <button mat-button mat-raised-button mat-dialog-close>ביטול</button>
-        <button mat-button mat-raised-button [mat-dialog-close]="token" type="submit">
+        <button mat-button mat-raised-button [mat-dialog-close]="token" [disabled]="!myForm.valid" type="submit">
           <span *ngIf="!data.update">הוספה</span>
           <span *ngIf="data.update">עדכון</span>
         </button>

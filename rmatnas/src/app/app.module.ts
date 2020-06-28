@@ -59,6 +59,7 @@ WebFont.load({
 });
 @NgModule({
   imports: [
+    ReactiveFormsModule,
     BrowserModule,
     FormsModule,
     RoutingModule,

@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter, Output, ViewChild, Inject, OnDestroy, ElementRef } from '@angular/core';
 import { Volunteer } from '../../../Classes/Volunteer';
 import { VolunteerService } from 'src/app/services/volunteer.service';
-import { NgForm, FormControl, Validators } from '@angular/forms';
+import { NgForm, FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Category } from 'src/app/Classes/Category';
 import { CategoryService } from 'src/app/services/category.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -15,16 +15,30 @@ export class VolunteerFComponent implements OnInit, OnDestroy {
   categories: Category[] = [];
   categoriesOfVolunteer: Category[] = [];
   @ViewChild('volunteerForm') mytemplateForm: NgForm;
-  email = new FormControl('', [Validators.required, Validators.email]);
   token = 0;
   categoriesSelected: Category[] = [];
-  newVolunteer: Volunteer = new Volunteer('...', '...', '...', '...@example.com', '...', '1999-01-01', true);
+  form: FormGroup;
+  newVolunteer: Volunteer = new Volunteer('...', '...', '...', 'example@example.com', '...', '1999-01-01', true);
+  @Output() createdVolunteer: EventEmitter<Volunteer> = new EventEmitter<Volunteer>();
+  myForm: FormGroup;
   constructor(public vs: VolunteerService,
-              private cs: CategoryService,
+              cs: CategoryService,
               private dialogRef: MatDialogRef<VolunteerFComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
               public snackBar: MatSnackBar,
-              private elementRef: ElementRef) {
+              private elementRef: ElementRef,
+              private formBuilder: FormBuilder) {
+    this.myForm = this.formBuilder.group({
+      name: new FormControl('Enter your name', [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(20)
+      ]),
+      email: new FormControl('example@example.com', [
+        Validators.required,
+        Validators.minLength(20)
+      ])
+    });
     cs.getCategories().subscribe((res: Category[]) => {
       this.categories = res;
     });
@@ -72,10 +86,5 @@ export class VolunteerFComponent implements OnInit, OnDestroy {
     });
   }
 
-  getErrorMessage() {
-    if (this.email.hasError('required')) {
-      return 'הערך שהוזן אינו תקני';
-    }
-  }
 
 }
