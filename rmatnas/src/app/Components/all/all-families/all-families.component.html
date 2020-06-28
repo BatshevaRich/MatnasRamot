@@ -13,6 +13,12 @@
             *ngIf="!vId">
             <i class="fa fa-file-excel-o" aria-hidden="true"></i>
           </div>
+          <span class="example-spacer"></span>
+          <button style="visibility: hidden;"></button>
+          <div mat-card-avatar matTooltip="העלאת קובץ אקסל" onclick="document.getElementById('fileToUpload').click()"><i
+              matPrefix class="fa fa-upload" aria-hidden="true"></i></div>
+          <input mat-input type="file" id="fileToUpload" style="display:none;" (change)="uploadedFile($event)"
+            placeholder="Upload file" accept=".xlsx">
         </mat-toolbar-row>
       </mat-card-header>
       <mat-card-content>

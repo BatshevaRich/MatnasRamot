@@ -47,7 +47,10 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
   loaded = false;
   error = false;
   notFound = false;
-
+  fileUploaded: File;
+  worksheet: any;
+  volunteerData: any;
+  arrayBuffer: any;
   constructor(public fs: FamilyService,
               private changeDetectorRefs: ChangeDetectorRef,
               public dialog: MatDialog,
@@ -161,6 +164,55 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
     XLSX.utils.book_append_sheet(wb, ws, 'משפחות');
     XLSX.writeFile(wb, `משפחות.xlsx`);
   }
+
+  uploadedFile(event) {
+    this.fileUploaded = event.target.files[0];
+    this.readExcel();
+  }
+  readExcel() {
+    const readFile = new FileReader();
+    readFile.onload = (e) => {
+      this.arrayBuffer = readFile.result;
+      const data = new Uint8Array(this.arrayBuffer);
+      const arr = new Array();
+      for (let i = 0; i !== data.length; ++i) { arr[i] = String.fromCharCode(data[i]); }
+      const bstr = arr.join('');
+      const workbook = XLSX.read(bstr, { type: 'binary' });
+      const firstSheetName = workbook.SheetNames[0];
+      const worksheet = workbook.Sheets[firstSheetName];
+      XLSX.utils.sheet_to_json(worksheet, { raw: true });
+      let js = XLSX.utils.sheet_to_json(worksheet, { raw: true });
+      js = js as Details[];
+      const newData = js.map((x) => ({
+        // tslint:disable-next-line: no-string-literal
+        LastName: x['שם_משפחה'],
+        // tslint:disable-next-line: no-string-literal
+        FirstNameFather: x['אבא'],
+        // tslint:disable-next-line: no-string-literal
+        FirstNameMother: x['אמא'],
+        // tslint:disable-next-line: no-string-literal
+        Address: x['כתובת'],
+        // tslint:disable-next-line: no-string-literal
+        Telephone: x['טלפון'],
+        // tslint:disable-next-line: no-string-literal
+        PelephoneFather: x['פלאפון_אבא'],
+        // tslint:disable-next-line: no-string-literal
+        PelephoneMother: x['פלאפון_אמא'],
+        // tslint:disable-next-line: no-string-literal
+        NumChildren: x['מספר_ילדים'],
+        // tslint:disable-next-line: no-string-literal
+        Status: x['סטטוס'],
+        // tslint:disable-next-line: no-string-literal
+        Reference: x['הפניה'],
+        // tslint:disable-next-line: no-string-literal
+        Reason: x['סיבה']
+      }));
+      this.dataSource.data = newData;
+      console.log(newData);
+    };
+    readFile.readAsArrayBuffer(this.fileUploaded);
+  }
+
 
   showDetails(element: Family) {
     element.show = !element.show;
