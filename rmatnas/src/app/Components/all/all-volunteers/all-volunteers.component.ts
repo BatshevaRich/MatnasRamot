@@ -39,10 +39,10 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
   arrayBuffer: any;
 
   constructor(public vs: VolunteerService,
-    public dialog: MatDialog,
-    private datePipe: DatePipe,
-    private elementRef: ElementRef,
-    private snackBar: MatSnackBar) {
+              public dialog: MatDialog,
+              private datePipe: DatePipe,
+              private elementRef: ElementRef,
+              private snackBar: MatSnackBar) {
     // this.dataSource.filterPredicate =
     //   (data: Details, filter: string) => data.Name.indexOf(filter) !== -1;
   }
@@ -196,11 +196,10 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
       טלפון: x.Telephone,
       פלאפון: x.Pelephone,
       מייל: x.Email,
-      תאריך_לידה: this.datePipe.transform(x.Age, 'dd/mm/yyyy'),
+      תאריך_לידה: this.datePipe.transform(x.Age, 'MM/dd/yyyy'),
       פעילה: x.IsActive === true ? 'כן' : 'לא',
       הערות: x.Comments
     }));
-    debugger;
     const wb = XLSX.utils.book_new();
     const ws = XLSX.utils.json_to_sheet(data);
     XLSX.utils.book_append_sheet(wb, ws, 'מתנדבות');
@@ -224,7 +223,6 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
       XLSX.utils.sheet_to_json(worksheet, { raw: true });
       let js = XLSX.utils.sheet_to_json(worksheet, { raw: true });
       js = js as Details[];
-        Birthdate: x['תאריך_לידה'],
       // tslint:disable-next-line: no-string-literal
       if (!js[0]['שם']) {
         this.snackBar.open('קובץ לא תקני, נא להעלות קובץ נכון...', 'OK', {
@@ -244,6 +242,7 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
           // tslint:disable-next-line: no-string-literal
           Email: x['מייל'],
           // tslint:disable-next-line: no-string-literal
+          Age: x['תאריך_לידה'] ? this.datePipe.transform(new Date(x['תאריך_לידה']).toDateString(), 'MM/dd/yyyy') : new Date(),
           // tslint:disable-next-line: no-string-literal
           Active: x['פעילה?'] === true ? 'true' : 'false',
           // tslint:disable-next-line: no-string-literal
