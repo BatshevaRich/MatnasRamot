@@ -4,73 +4,94 @@
     <span *ngIf="data.update" mat-dialog-title>עדכון מתנדבת</span>
   </mat-toolbar>
   <mat-dialog-content>
-    <form (ngSubmit)="submitForm()" novalidate class="text-right" [formGroup]="myForm" #volunteerForm="ngForm">
+    <form (ngSubmit)="submitForm()" class="text-right" [formGroup]="myForm">
       <div class="form-group">
         <mat-form-field appearance="outline">
           <mat-hint>שם &nbsp;
             <span style="color: red;"
-              *ngIf="myForm.controls['name'].invalid && (myForm.controls['name'].dirty || myForm.controls['name'].touched)">
-              <span *ngIf="myForm.controls['name'].errors.required">
+              *ngIf="myForm.get('name').invalid && (myForm.get('name').dirty || myForm.get('name').touched)">
+              <span *ngIf="myForm.get('name').errors.required">
                 שדה חובה
               </span>
-              <span *ngIf="myForm.controls['name'].errors.minlength">
+              <span *ngIf="myForm.get('name').errors.minlength">
                 קצר מדי
               </span>
             </span>
           </mat-hint>
-          <input matInput (focus)="$event.target.select()" maxlength="20" minlength="5" [(ngModel)]="newVolunteer.Name"
-            name="name" [ngModelOptions]="{standalone: true}" (change)="myForm.get('name').setValue($event.value)"  required>
+          <input matInput placeholder="שם" (focus)="$event.target.select()" maxlength="20" minlength="5"
+            [(ngModel)]="newVolunteer.Name" name="name" [ngModelOptions]="{standalone: true}"
+            (change)="myForm.get('name').setValue(newVolunteer.Name); myForm.get('name').valueChanges; myForm.get('name').markAsTouched()"
+            required>
           <mat-icon matPrefix>person</mat-icon>
         </mat-form-field>
         <br>
         <mat-form-field appearance="outline">
-          <mat-hint>מייל</mat-hint>
-          <input type="email" matInput (focus)="$event.target.select()" placeholder="volunteer@example.com" required
-            [(ngModel)]="newVolunteer.Email" name="email" minlength="5" [ngModelOptions]="{standalone: true}" (change)="myForm.get('email').setValue($event.value)">
+          <mat-hint>מייל&nbsp;
+            <span style="color: red;"
+              *ngIf="myForm.get('email').invalid && (myForm.get('email').dirty || myForm.get('email').touched)">
+              <span *ngIf="myForm.get('email').errors">
+                שגיאה בכתובת מייל
+              </span>
+            </span>
+          </mat-hint>
+          <input type="email" appEmailMask matInput (focus)="$event.target.select()" placeholder="volunteer@example.com"
+            [(ngModel)]="newVolunteer.Email" name="email" [ngModelOptions]="{standalone: true}"
+            (change)="myForm.get('email').setValue(newVolunteer.Email);myForm.get('email').markAsDirty(); myForm.get('email').markAsTouched()">
           <mat-icon matPrefix>email</mat-icon>
-          <span style="color: red;"
-            *ngIf="myForm.controls['email'].invalid && (myForm.controls['email'].dirty || myForm.controls['email'].touched)">
-            <span *ngIf="myForm.controls['email'].errors.required">
-              שדה חובה
-            </span>
-            <span *ngIf="myForm.controls['email'].errors">
-              שגיאה בכתובת מייל
-            </span>
-          </span>
         </mat-form-field>
         <br />
         <mat-form-field appearance="outline">
-          <mat-hint>טלפון</mat-hint>
-          <input matInput (focus)="$event.target.select()" placeholder="02-525-2525" appPhoneMask
-            [(ngModel)]="newVolunteer.Telephone"[ngModelOptions]="{standalone: true}" name="Telephone">
+          <mat-hint>טלפון&nbsp;
+            <span style="color: red;"
+              *ngIf="myForm.get('phone').invalid && (myForm.get('phone').dirty || myForm.get('phone').touched)">
+              <span *ngIf="myForm.get('phone').errors.minlength">
+                קצר מדי
+              </span>
+            </span></mat-hint>
+          <input matInput minlength="9" name="phone" (focus)="$event.target.select()" placeholder="02-525-2525"
+            [(ngModel)]="newVolunteer.Telephone" [ngModelOptions]="{standalone: true}" appPhoneMask
+            (change)="myForm.get('phone').setValue(newVolunteer.Telephone);myForm.get('phone').markAsDirty(); myForm.get('phone').markAsTouched()">
           <mat-icon matPrefix>phone</mat-icon>
         </mat-form-field>
         <br />
         <mat-form-field appearance="outline">
-          <mat-hint>פלאפון</mat-hint>
-          <input matInput (focus)="$event.target.select()" placeholder="050-525-2525" required
-            [(ngModel)]="newVolunteer.Pelephone"[ngModelOptions]="{standalone: true}" name="Pelephone">
+          <mat-hint>פלאפון&nbsp;
+            <span style="color: red;"
+              *ngIf="myForm.get('cellphone').invalid && (myForm.get('cellphone').dirty || myForm.get('cellphone').touched)">
+              <span *ngIf="myForm.get('cellphone').errors.minlength">
+                קצר מדי
+              </span>
+              <span *ngIf="myForm.get('cellphone').errors.required">
+                שדה חובה
+              </span>
+            </span></mat-hint>
+          <input matInput (focus)="$event.target.select()" required placeholder="050-525-2525" required
+            [(ngModel)]="newVolunteer.Pelephone" [ngModelOptions]="{standalone: true}" name="Pelephone"
+            (change)="myForm.get('cellphone').setValue(newVolunteer.Pelephone);myForm.get('cellphone').markAsDirty(); myForm.get('cellphone').markAsTouched()">
           <mat-icon matPrefix>phone</mat-icon>
         </mat-form-field>
         <br />
         <mat-form-field appearance="outline">
           <mat-hint>כתובת</mat-hint>
-          <input matInput (focus)="$event.target.select()"[ngModelOptions]="{standalone: true}" [(ngModel)]="newVolunteer.Address" name="Address">
+          <input matInput placeholder="כתובת" (focus)="$event.target.select()" [ngModelOptions]="{standalone: true}"
+            [(ngModel)]="newVolunteer.Address" name="Address">
           <mat-icon matPrefix>location_city</mat-icon>
         </mat-form-field>
         <br />
         <mat-form-field appearance="outline">
           <mat-hint>תאריך לידה</mat-hint>
-          <input matInput (focus)="$event.target.select()"[ngModelOptions]="{standalone: true}" [matDatepicker]="picker1" [(ngModel)]="newVolunteer.Age"
-            (ngModelChange)="newVolunteer.Age = $event" name="Age">
+          <input matInput (focus)="$event.target.select()" [ngModelOptions]="{standalone: true}"
+            [matDatepicker]="picker1" [(ngModel)]="newVolunteer.Age" (ngModelChange)="newVolunteer.Age = $event"
+            name="Age">
           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
           <mat-datepicker #picker1></mat-datepicker>
         </mat-form-field>
         <br />
         <br />
         <mat-hint>פעילה? </mat-hint>
-        <mat-slide-toggle name="isActive"[ngModelOptions]="{standalone: true}" [ngModel]="newVolunteer.IsActive" [checked]="newVolunteer.IsActive"
-          (ngModelChange)="newVolunteer.IsActive = !newVolunteer.IsActive"></mat-slide-toggle>
+        <mat-slide-toggle name="isActive" [ngModelOptions]="{standalone: true}" [ngModel]="newVolunteer.IsActive"
+          [checked]="newVolunteer.IsActive" (ngModelChange)="newVolunteer.IsActive = !newVolunteer.IsActive">
+        </mat-slide-toggle>
         <br />
         <br />
         <app-choose-category [chosenC]="categoriesOfVolunteer" (selectc)="selectCategories($event)">
@@ -78,13 +99,13 @@
       </div>
       <mat-form-field appearance="outline" class="example-full-width">
         <mat-hint>הערות</mat-hint>
-        <textarea matInput (focus)="$event.target.select()"[ngModelOptions]="{standalone: true}" [(ngModel)]="newVolunteer.Comments"
-          name="Comments"></textarea>
+        <textarea matInput (focus)="$event.target.select()" [ngModelOptions]="{standalone: true}"
+          [(ngModel)]="newVolunteer.Comments" name="Comments"></textarea>
         <mat-icon matSuffix>comment</mat-icon>
       </mat-form-field>
       <mat-dialog-actions align="end">
         <button mat-button mat-raised-button mat-dialog-close>ביטול</button>
-        <button mat-button mat-raised-button [mat-dialog-close]="token" [disabled]="!myForm.valid" type="submit">
+        <button mat-button mat-raised-button [mat-dialog-close]="token" type="submit" [disabled]="!myForm.valid">
           <span *ngIf="!data.update">הוספה</span>
           <span *ngIf="data.update">עדכון</span>
         </button>

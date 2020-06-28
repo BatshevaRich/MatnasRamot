@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import * as moment from 'moment';
+import moment from 'moment';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { SatCalendar, SatCalendarFooter, SatDatepicker } from 'saturn-datepicker';

@@ -14,11 +14,9 @@ import { MatSnackBar } from '@angular/material';
 export class VolunteerFComponent implements OnInit, OnDestroy {
   categories: Category[] = [];
   categoriesOfVolunteer: Category[] = [];
-  @ViewChild('volunteerForm') mytemplateForm: NgForm;
   token = 0;
   categoriesSelected: Category[] = [];
-  form: FormGroup;
-  newVolunteer: Volunteer = new Volunteer('...', '...', '...', 'example@example.com', '...', '1999-01-01', true);
+  newVolunteer: Volunteer = new Volunteer('', '', '', '', '', '2001-01-01', true);
   @Output() createdVolunteer: EventEmitter<Volunteer> = new EventEmitter<Volunteer>();
   myForm: FormGroup;
   constructor(public vs: VolunteerService,
@@ -29,14 +27,25 @@ export class VolunteerFComponent implements OnInit, OnDestroy {
               private elementRef: ElementRef,
               private formBuilder: FormBuilder) {
     this.myForm = this.formBuilder.group({
-      name: new FormControl('Enter your name', [
+      name: new FormControl('', [
         Validators.required,
         Validators.minLength(5),
         Validators.maxLength(20)
       ]),
-      email: new FormControl('example@example.com', [
+      email: new FormControl('', [
+        Validators.minLength(5),
+        Validators.maxLength(25),
+        Validators.pattern('^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$')
+      ]),
+      phone: new FormControl('', [
+        Validators.minLength(9),
+        Validators.maxLength(9),
+        Validators.pattern('^[0-9]*$')
+      ]),
+      cellphone: new FormControl('', [
         Validators.required,
-        Validators.minLength(20)
+        Validators.minLength(10),
+        Validators.maxLength(10)
       ])
     });
     cs.getCategories().subscribe((res: Category[]) => {
@@ -64,7 +73,6 @@ export class VolunteerFComponent implements OnInit, OnDestroy {
           this.categoriesSelected = [];
           this.dialogRef.close(this.token);
         });
-      this.mytemplateForm.resetForm();
       this.newVolunteer = new Volunteer('default', '000000000', '000000000', 'default@ddd', 'default', '1999-01-01', false);
       this.snackBar.open('שמירת מתנדבת מבוצעת...', 'OK', {
         duration: 2000,
