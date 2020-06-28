@@ -8,6 +8,10 @@
   outline: none !important
 }
 
+body {
+  direction: rtl;
+}
+
 .fullscreen {
   width: 100%;
   position: relative;

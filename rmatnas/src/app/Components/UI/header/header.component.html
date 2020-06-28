@@ -1,11 +1,13 @@
 <nav dir="rtl" class="navbar navbar-expand-lg navbar-dark bg-dark shadow" style="padding: 0;">
     <span fxShow="true" fxHide.lt-md="true">
         <mat-button-toggle-group>
-            <mat-button-toggle class="bg-dark" class="bg-dark">
+            <mat-button-toggle class="bg-dark">
                 <span>
                     <button mat-button class="nav-letters bg-dark" [routerLink]='"./"'>
                         <span matBadge={{volunteerBadge}} matBadgeSize="small" matBadgePosition="before"
-                            matBadgeColor="accent"></span>מתנס מעלה רמות</button>
+                            matBadgeColor="accent">
+                        </span>מתנס מעלה רמות
+                    </button>
                 </span>
             </mat-button-toggle>
             <mat-button-toggle class="bg-dark">
@@ -14,74 +16,93 @@
                 </span>
             </mat-button-toggle>
             <mat-button-toggle class="bg-dark">
-                <span>
-                    <button mat-button [matMenuTriggerFor]="menuT" class="nav-letters">
+                <div class="btn-group">
+                    <button mat-button class="nav-letters" [routerLink]="'/list/vaf'" routerLinkActive="activeLink">
                         <i matBadge="4" matBadgeSize="small" matBadgePosition="before" matBadgeColor="accent"
                             class="fa fa-handshake-o" aria-hidden="true"></i>התנדבויות
                     </button>
-                    <mat-menu #menuT="matMenu">
-                        <button mat-menu-item class="nav-link" [routerLink]="'/list/vaf'"
-                            routerLinkActive="activeLink"><i class="fa fa-list"></i> כל ההתנדבויות</button>
-                        <button mat-menu-item (click)="ToVolunteeropenDialog()"><i class="fa fa-user-plus">
+                    <button mat-button class="nav-letters dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu shadow bg-dark">
+                        <button mat-menu-item class="nav-letters" (click)="ToVolunteeropenDialog()"><i
+                                class="fa fa-user-plus">
                             </i> הוספה</button>
-                    </mat-menu>
-                </span>
+                    </div>
+                </div>
             </mat-button-toggle>
             <mat-button-toggle class="bg-dark">
-                <span>
-                    <button mat-button [matMenuTriggerFor]="menu" class="nav-letters">
+                <div class="btn-group">
+                    <button mat-button class="nav-letters" [routerLink]="'/list/volunteers'"
+                        routerLinkActive="activeLink">
                         <i matBadge={{volunteerBadge}} matBadgeSize="small" matBadgePosition="before"
-                            matBadgeColor="accent" class="fa fa-user"></i>מתנדבות
+                            matBadgeColor="accent" class="fa fa-user" aria-hidden="true"></i>מתנדבות
                     </button>
-                    <mat-menu #menu="matMenu">
-                        <button mat-menu-item class="nav-link" [routerLink]="'/list/volunteers'"
-                            routerLinkActive="activeLink"><i class="fa fa-list"></i> כל המתנדבות</button>
-                        <button mat-menu-item (click)="VolunteeropenDialog()"><i class="fa fa-user-plus">
+                    <button mat-button class="nav-letters dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu shadow bg-dark">
+                        <button mat-menu-item class="nav-letters" (click)="VolunteeropenDialog()"><i
+                                class="fa fa-user-plus">
                             </i> הוספה</button>
-                    </mat-menu>
-                </span>
+                    </div>
+                </div>
             </mat-button-toggle>
             <mat-button-toggle class="bg-dark">
-                <span>
-                    <button mat-button [matMenuTriggerFor]="menuF" class="nav-letters">
+                <div class="btn-group">
+                    <button mat-button class="nav-letters" [routerLink]="'/list/families'"
+                        routerLinkActive="activeLink">
                         <i matBadge={{familyBadge}} matBadgeSize="small" matBadgePosition="before"
-                            matBadgeColor="accent" class="fa fa-child"></i>משפחות
+                            matBadgeColor="accent" class="fa fa-child" aria-hidden="true"></i>משפחות
                     </button>
-                    <mat-menu #menuF="matMenu">
-                        <button mat-menu-item class="nav-link" [routerLink]="'/list/families'"
-                            routerLinkActive="activeLink"><i class="fa fa-list"></i> כל המשפחות</button>
-                        <button mat-menu-item (click)="FamilyopenDialog()"><i class="fa fa-user-plus">
+                    <button mat-button class="nav-letters dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu shadow bg-dark">
+                        <button mat-menu-item class="nav-letters" (click)="FamilyopenDialog()"><i
+                                class="fa fa-user-plus">
                             </i> הוספה</button>
-                    </mat-menu>
-                </span>
+                    </div>
+                </div>
             </mat-button-toggle>
             <mat-button-toggle class="bg-dark">
-                <span>
-                    <button mat-button [matMenuTriggerFor]="menuG" class="nav-letters">
+                <div class="btn-group">
+                    <button mat-button class="nav-letters" [routerLink]="'/list/organizations'"
+                        routerLinkActive="activeLink">
                         <i matBadge={{organizationBadge}} matBadgeSize="small" matBadgePosition="before"
-                            matBadgeColor="accent" class="fa fa-users"></i>ארגונים
+                            matBadgeColor="accent" class="fa fa-users" aria-hidden="true"></i>ארגונים
                     </button>
-                    <mat-menu #menuG="matMenu">
-                        <button mat-menu-item class="nav-link" [routerLink]="'/list/organizations'"
-                            routerLinkActive="activeLink"><i class="fa fa-list"></i> כל הארגונים</button>
-                        <button mat-menu-item (click)="OrganizationopenDialog()"><i class="fa fa-user-plus">
+                    <button mat-button class="nav-letters dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu shadow bg-dark">
+                        <button mat-menu-item class="nav-letters" (click)="OrganizationopenDialog()"><i
+                                class="fa fa-user-plus">
                             </i> הוספה</button>
-                    </mat-menu>
-                </span>
+                    </div>
+                </div>
             </mat-button-toggle>
             <mat-button-toggle class="bg-dark">
-                <span>
-                    <button mat-button [matMenuTriggerFor]="menuE" class="nav-letters">
-                        <i matBadge={{eventBadge}} matBadgeSize="small" matBadgePosition="before" matBadgeColor="accent"
-                            class="fa fa-calendar-o" aria-hidden="true"></i>ארועים
+                <div class="btn-group">
+                    <button mat-button class="nav-letters" [routerLink]="'/list/volunteers'"
+                        routerLinkActive="activeLink">
+                        <i matBadge={{eventBadge}} matBadgeSize="small" matBadgePosition="before"
+                            matBadgeColor="accent" class="fa fa-calendar-o" aria-hidden="true"></i>ארועים
                     </button>
-                    <mat-menu #menuE="matMenu">
-                        <button mat-menu-item class="nav-link" [routerLink]="'/list/events'"
-                            routerLinkActive="activeLink"><i class="fa fa-list"></i> כל הארועים</button>
-                        <button mat-menu-item (click)="EventopenDialog()"><i class="fa fa-user-plus">
+                    <button mat-button class="nav-letters dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu shadow bg-dark">
+                        <button mat-menu-item class="nav-letters" (click)="EventopenDialog()"><i
+                                class="fa fa-user-plus">
                             </i> הוספה</button>
-                    </mat-menu>
-                </span>
+                    </div>
+                </div>
             </mat-button-toggle>
         </mat-button-toggle-group>
     </span>

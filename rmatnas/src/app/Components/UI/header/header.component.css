@@ -4,7 +4,6 @@
 }
 
 .top {
-    /* width: 100%; */
     font-size: large;
     height: 50px;
 }
@@ -19,11 +18,6 @@ div {
     overflow: inherit;
 }
 
-/* .mat-sidenav-container{
-    background-color: lightskyblue;
-    min-height: 93vh !important;
-  } */
-
 a {
     text-decoration: none;
     font-size: 110%;
@@ -31,9 +25,8 @@ a {
 }
 
 button {
-    /* font-size: 110%; */
     min-width: min-content;
-    padding:3px!important;
+    padding: 3px!important;
 }
 
 .example-icon {
@@ -53,45 +46,59 @@ button {
     min-height: 100%;
     height: 100%;
     width: 100%;
-    /* margin-bottom: 10vh; */
     display: table;
     text-align: right;
     position: relative;
 }
 
-/* .mat-button-toggle {
-    background-color: darkslategray;
-    color: white;
-  }
-
-  .mat-button-toggle-checked {
-    background-color: gray;
-    color: black;
-  } */
-
-  mat-button-toggle-group {
+mat-button-toggle-group {
     box-shadow: none;
-  }
-  
-  mat-button-toggle {
-      /* background-color: darkslategray; */
-      /* border: 1px solid !important; */
-      /* margin-top: 5px !important; */
-      padding: 0 1px !important;
-  }
-  
-  mat-button-toggle:hover {
-      /* border: 1px solid !important; */
-      border-radius: 1px !important;
-  }
-  
-  .mat-button-toggle-checked {
-        box-shadow: 0 0 10px 10px  !important;
-      border-radius: 1px !important;
-      /* background-color: gray !important; */
-  }
-  
-  .mat-button-toggle-input {
-      background-color: none !important;
-      /* padding-left: 32px !important; */
-  }
+}
+
+mat-button-toggle {
+    padding: 0 1px !important;
+}
+
+mat-button-toggle:hover {
+    border-radius: 1px !important;
+}
+
+.mat-button-toggle-checked {
+    box-shadow: 0 0 10px 10px !important;
+    border-radius: 1px !important;
+}
+
+.mat-button-toggle-input {
+    background-color: none !important;
+}
+
+.rtl {
+    direction: rtl;
+}
+
+.rtl .dropdown-menu-right {
+    text-align: right;
+}
+
+.btn-group>.btn-group:not(:first-child)>.btn, .btn-group>.btn:not(:first-child) {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.btn-group>.btn-group:not(:last-child)>.btn, .btn-group>.btn:not(:last-child):not(.dropdown-toggle) {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+.mat-button-toggle-group, .mat-button-toggle-standalone {
+    overflow: visible;
+}
+
+.dropdown-menu {
+    border-radius: 5px;
+    min-width: 7rem;
+}
