@@ -4,7 +4,7 @@ import { FamilyService } from 'src/app/services/family.service';
 import { Category } from '../../../Classes/Category';
 import { CategoryService } from 'src/app/services/category.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 
 @Component({
@@ -18,15 +18,58 @@ export class FamilyFComponent implements OnInit, OnDestroy {
   @ViewChild('familyForm') mytemplateForm: NgForm;
   categoriesOfFamily: Category[] = [];
   newFamily: Family = new Family(
-    '...', '...', '...',
-    '0', '0', '0', '...', '...', 2, '...', '...');
+    '', '', '', '', '', '', '', '', 1, '', '');
   id: number;
+  myForm: FormGroup;
   constructor(public fs: FamilyService,
               private cs: CategoryService,
               private dialogRef: MatDialogRef<FamilyFComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
               private snackBar: MatSnackBar,
-              private elementRef: ElementRef) {
+              private elementRef: ElementRef,
+              private formBuilder: FormBuilder) {
+    this.myForm = this.formBuilder.group({
+      firstnameF: new FormControl('', [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(20)
+      ]),
+      firstnameM: new FormControl('', [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(20)
+      ]),
+      lastname: new FormControl('', [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(20)
+      ]),
+      email: new FormControl('', [
+        Validators.minLength(5),
+        Validators.maxLength(25),
+        Validators.pattern('^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$')
+      ]),
+      phone: new FormControl('', [
+        Validators.minLength(9),
+        Validators.maxLength(9),
+        Validators.pattern('^[0-9]*$')
+      ]),
+      cellphoneF: new FormControl('', [
+        Validators.required,
+        Validators.minLength(10),
+        Validators.maxLength(10)
+      ]),
+      cellphoneM: new FormControl('', [
+        Validators.required,
+        Validators.minLength(10),
+        Validators.maxLength(10)
+      ]),
+      numchildren: new FormControl('', [
+        Validators.required,
+        Validators.min(0),
+        Validators.max(20)
+      ])
+    });
     cs.getCategories().subscribe((res: Category[]) => {
       this.categories = res;
     });

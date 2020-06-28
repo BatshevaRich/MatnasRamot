@@ -4,72 +4,157 @@
     <span *ngIf="data.update" mat-dialog-title>עדכון משפחה</span>
   </mat-toolbar>
   <mat-dialog-content>
-    <form (ngSubmit)="submitForm()" class="text-right" #familyForm="ngForm">
+    <form (ngSubmit)="submitForm()" class="text-right" [formGroup]="myForm">
       <div class="form-group">
         <mat-form-field appearance="outline">
-          <mat-hint>שם משפחה</mat-hint>
-          <input matInput (focus)="$event.target.select()" maxlength="10" [(ngModel)]="newFamily.LastName" name="LastName" required>
+          <mat-hint>שם משפחה&nbsp;
+            <span style="color: red;"
+              *ngIf="myForm.get('lastname').invalid && (myForm.get('lastname').dirty || myForm.get('lastname').touched || myForm.get('lastname').errors)">
+              <span *ngIf="myForm.get('lastname').errors.required">
+                שדה חובה
+              </span>
+              <span *ngIf="myForm.get('lastname').errors.minlength">
+                קצר מדי
+              </span>
+            </span>
+          </mat-hint>
+          <input matInput placeholder="שם משפחה" (focus)="$event.target.select()" maxlength="10"
+            [(ngModel)]="newFamily.LastName" name="LastName" [ngModelOptions]="{standalone: true}"
+            (change)="myForm.get('lastname').setValue(newFamily.LastName); myForm.get('lastname').valueChanges; myForm.get('lastname').markAsTouched()"
+            required>
           <mat-icon matPrefix>person</mat-icon>
         </mat-form-field>
         <br />
         <mat-form-field appearance="outline">
-          <mat-hint>שם אב</mat-hint>
-          <input matInput (focus)="$event.target.select()" maxlength="10" [(ngModel)]="newFamily.FirstNameFather" name="FirstNameFather" required>
+          <mat-hint>שם אב&nbsp;
+            <span style="color: red;"
+              *ngIf="myForm.get('firstnameF').invalid && (myForm.get('firstnameF').dirty || myForm.get('firstnameF').touched)">
+              <span *ngIf="myForm.get('firstnameF').errors.required">
+                שדה חובה
+              </span>
+              <span *ngIf="myForm.get('firstnameF').errors.minlength">
+                קצר מדי
+              </span>
+            </span></mat-hint>
+          <input matInput placeholder="שם אב" (focus)="$event.target.select()" maxlength="10"
+            [(ngModel)]="newFamily.FirstNameFather" name="FirstNameFather" [ngModelOptions]="{standalone: true}"
+            (change)="myForm.get('firstnameF').setValue(newFamily.FirstNameFather); myForm.get('firstnameF').valueChanges; myForm.get('firstnameF').markAsTouched()"
+            required>
           <mat-icon matPrefix>person</mat-icon>
         </mat-form-field>
         <br />
         <mat-form-field appearance="outline">
-          <mat-hint>שם אם</mat-hint>
-          <input matInput (focus)="$event.target.select()" maxlength="10" [(ngModel)]="newFamily.FirstNameMother" name="FirstNameMother" required>
+          <mat-hint>שם אם&nbsp;
+            <span style="color: red;"
+              *ngIf="myForm.get('firstnameM').invalid && (myForm.get('firstnameM').dirty || myForm.get('firstnameM').touched)">
+              <span *ngIf="myForm.get('firstnameM').errors.required">
+                שדה חובה
+              </span>
+              <span *ngIf="myForm.get('firstnameM').errors.minlength">
+                קצר מדי
+              </span>
+            </span></mat-hint>
+          <input matInput placeholder="שם אם" (focus)="$event.target.select()" maxlength="10"
+            [(ngModel)]="newFamily.FirstNameMother" name="FirstNameMother" [ngModelOptions]="{standalone: true}"
+            (change)="myForm.get('firstnameM').setValue(newFamily.FirstNameMother); myForm.get('firstnameM').valueChanges; myForm.get('firstnameM').markAsTouched()"
+            required>
           <mat-icon matPrefix>person</mat-icon>
         </mat-form-field>
         <br />
         <mat-form-field appearance="outline">
-          <mat-hint>טלפון</mat-hint>
-          <input matInput (focus)="$event.target.select()" placeholder="050-525-2525" appPhoneMask [(ngModel)]="newFamily.Telephone" name="Telephone">
+          <mat-hint>טלפון&nbsp;
+            <span style="color: red;"
+              *ngIf="myForm.get('phone').invalid && (myForm.get('phone').dirty || myForm.get('phone').touched)">
+              <span *ngIf="myForm.get('phone').errors.minlength">
+                קצר מדי
+              </span>
+            </span></mat-hint>
+          <input matInput (focus)="$event.target.select()" placeholder="02-525-2525" [(ngModel)]="newFamily.Telephone"
+            name="Telephone" [ngModelOptions]="{standalone: true}" appPhoneMask
+            (change)="myForm.get('phone').setValue(newFamily.Telephone);myForm.get('phone').markAsDirty(); myForm.get('phone').markAsTouched()">
           <mat-icon matPrefix>phone</mat-icon>
         </mat-form-field>
         <br />
         <mat-form-field appearance="outline">
-          <mat-hint>פלאפון אב</mat-hint>
-          <input matInput (focus)="$event.target.select()" placeholder="050-525-2525" required [(ngModel)]="newFamily.PelephoneFather"
-            name="PelephoneFather">
+          <mat-hint>פלאפון אב&nbsp;
+            <span style="color: red;"
+              *ngIf="myForm.get('cellphoneF').invalid && (myForm.get('cellphoneF').dirty || myForm.get('cellphoneF').touched)">
+              <span *ngIf="myForm.get('cellphoneF').errors.minlength">
+                קצר מדי
+              </span>
+              <span *ngIf="myForm.get('cellphoneF').errors.required">
+                שדה חובה
+              </span>
+            </span></mat-hint>
+          <input matInput (focus)="$event.target.select()" placeholder="050-525-2525" required
+            [(ngModel)]="newFamily.PelephoneFather" name="PelephoneFather" [ngModelOptions]="{standalone: true}"
+            (change)="myForm.get('cellphoneF').setValue(newFamily.PelephoneFather);myForm.get('cellphoneF').markAsDirty(); myForm.get('cellphoneF').markAsTouched()">
           <mat-icon matPrefix>phone</mat-icon>
         </mat-form-field>
         <br />
         <mat-form-field appearance="outline">
-          <mat-hint>פלאפון אם</mat-hint>
-          <input matInput (focus)="$event.target.select()" placeholder="050-525-2525" required [(ngModel)]="newFamily.PelephoneMother"
-            name="PelephoneMother">
+          <mat-hint>פלאפון אם
+            &nbsp;
+            <span style="color: red;"
+              *ngIf="myForm.get('cellphoneM').invalid && (myForm.get('cellphoneM').dirty || myForm.get('cellphoneM').touched)">
+              <span *ngIf="myForm.get('cellphoneM').errors.minlength">
+                קצר מדי
+              </span>
+              <span *ngIf="myForm.get('cellphoneM').errors.required">
+                שדה חובה
+              </span>
+            </span>
+          </mat-hint>
+          <input matInput (focus)="$event.target.select()" placeholder="050-525-2525" required
+            [(ngModel)]="newFamily.PelephoneMother" name="PelephoneMother" [ngModelOptions]="{standalone: true}"
+            (change)="myForm.get('cellphoneM').setValue(newFamily.PelephoneMother);myForm.get('cellphoneM').markAsDirty(); myForm.get('cellphoneM').markAsTouched()">
           <mat-icon matPrefix>phone</mat-icon>
         </mat-form-field>
         <br />
         <mat-form-field appearance="outline">
           <mat-hint>כתובת</mat-hint>
-          <input matInput (focus)="$event.target.select()" [(ngModel)]="newFamily.Address" name="Address">
+          <input matInput (focus)="$event.target.select()" placeholder="כתובת" [ngModelOptions]="{standalone: true}"
+            [(ngModel)]="newFamily.Address" name="Address">
           <mat-icon matPrefix>location_city</mat-icon>
         </mat-form-field>
         <br />
         <mat-form-field appearance="outline">
           <mat-hint>גורם מפנה</mat-hint>
-          <input matInput (focus)="$event.target.select()" maxlength="10" [(ngModel)]="newFamily.Reference" name="Reference">
+          <input matInput (focus)="$event.target.select()" placeholder="גורם מפנה" maxlength="10"
+            [ngModelOptions]="{standalone: true}" [(ngModel)]="newFamily.Reference" name="Reference">
           <mat-icon matPrefix>person</mat-icon>
         </mat-form-field>
         <br />
         <mat-form-field appearance="outline">
-          <mat-hint>מספר ילדים</mat-hint>
-          <input [(ngModel)]="newFamily.NumChildren" name="NumChildren" type="number" min="0" max="20" matInput (focus)="$event.target.select()">
+          <mat-hint>מספר ילדים&nbsp;
+            <span style="color: red;"
+              *ngIf="myForm.get('numchildren').invalid && (myForm.get('numchildren').dirty || myForm.get('numchildren').touched)">
+              <span *ngIf="myForm.get('numchildren').errors.min">
+                קטן מדי
+              </span>
+              <span *ngIf="myForm.get('numchildren').errors.max">
+                גדול מדי
+              </span>
+              <span *ngIf="myForm.get('numchildren').errors.required">
+                שדה חובה
+              </span>
+            </span></mat-hint>
+          <input name="NumChildren" #children type="number" min="0" max="20" placeholder="1" matInput (focus)="$event.target.select()"
+            [formControl]="myForm.get('numchildren')"
+            (change)="newFamily.NumChildren = children.value; myForm.get('numchildren').setValue(newFamily.NumChildren);myForm.get('numchildren').markAsDirty(); myForm.get('numchildren').markAsTouched()">
         </mat-form-field>
         <br />
         <mat-form-field appearance="outline">
           <mat-hint>סטטוס</mat-hint>
-          <input matInput (focus)="$event.target.select()" maxlength="10" [(ngModel)]="newFamily.Status" name="Status">
+          <input matInput (focus)="$event.target.select()" placeholder="סטטוס" [ngModelOptions]="{standalone: true}"
+            maxlength="10" [(ngModel)]="newFamily.Status" name="Status">
           <mat-icon matPrefix>person</mat-icon>
         </mat-form-field>
         <br />
         <mat-form-field appearance="outline" class="example-full-width">
           <mat-hint>סיבה</mat-hint>
-          <textarea matInput (focus)="$event.target.select()" [(ngModel)]="newFamily.Reason" name="Reason"></textarea>
+          <textarea matInput (focus)="$event.target.select()" placeholder="סיבה" [ngModelOptions]="{standalone: true}"
+            [(ngModel)]="newFamily.Reason" name="Reason"></textarea>
           <mat-icon matSuffix>comment</mat-icon>
         </mat-form-field>
         <br />
@@ -79,7 +164,7 @@
       </div>
       <mat-dialog-actions align="end">
         <button mat-button mat-raised-button mat-dialog-close>ביטול</button>
-        <button mat-button mat-raised-button [mat-dialog-close] type="submit">
+        <button mat-button mat-raised-button [mat-dialog-close] type="submit" [disabled]="!myForm.valid">
           <span *ngIf="!data.update">הוספה</span>
           <span *ngIf="data.update">עדכון</span>
         </button>
