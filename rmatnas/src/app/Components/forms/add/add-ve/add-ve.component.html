@@ -1,1 +1,22 @@
-<p>add-ve works!</p>
+<span dir="rtl" style="direction: rtl">
+    <app-event style="display: inline-block; padding: 5px;vertical-align: top" [vId]="selectedEvent.Id"
+        [toV]=true>
+    </app-event>
+    <span style="display: inline-block;padding: 5px;vertical-align: top; text-align: right;">
+        <form (ngSubmit)="submitForm(categoryForm)" class="text-right" #categoryForm="ngForm">
+            <h6>משפחות מתאימות ע"פ קטגוריות ארגון:</h6>
+            <mat-selection-list name="volunteersselected" [(ngModel)]="selectedVolunteers"
+                (ngModelChange)="onSelection($event)" #volunteersS *ngIf="volunteers.length > 0">
+                <mat-list-option [value]="volunteer" *ngFor="let volunteer of volunteers">
+                    {{volunteer.Name}}
+                </mat-list-option>
+            </mat-selection-list>
+            <mat-dialog-actions align="end">
+                <button mat-button mat-raised-button mat-dialog-close>ביטול</button>
+                <button mat-button mat-raised-button type="submit">
+                    <span>להוספת מתנדבות לארוע</span>
+                </button>
+            </mat-dialog-actions>
+        </form>
+    </span>
+</span>
