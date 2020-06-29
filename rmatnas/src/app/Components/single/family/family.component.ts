@@ -5,7 +5,7 @@ import { FamilyService } from 'src/app/services/family.service';
 import { Category } from 'src/app/Classes/Category';
 import { FamilyFComponent } from '../../forms/family-f/family-f.component';
 import { MatDialog } from '@angular/material/dialog';
-import { MatTabChangeEvent } from '@angular/material';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 @Component({
   selector: 'app-family',
   templateUrl: './family.component.html',

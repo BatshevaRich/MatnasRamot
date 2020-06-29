@@ -1,7 +1,10 @@
 import { Component, OnInit, ViewChild, Input, AfterViewInit, OnDestroy, ElementRef } from '@angular/core';
 import { Eventt } from 'src/app/Classes/Eventt';
 import { EventService } from 'src/app/services/event.service';
-import { MatSort, MatTable, MatPaginator, MatTableDataSource, MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../../UI/confirm-dialog/confirm-dialog.component';
 import { trigger, state, style, transition, animate } from '@angular/animations';

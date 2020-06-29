@@ -3,7 +3,7 @@ import { CategoryService } from 'src/app/services/category.service';
 import { Category } from 'src/app/Classes/Category';
 import { Observable } from 'rxjs';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../../UI/confirm-dialog/confirm-dialog.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-choose-category',

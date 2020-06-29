@@ -13,6 +13,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "xlsx",
+              "chart.js",
+              "chartjs-plugin-datalabels",
+              "webfontloader"
+           ],
             "outputPath": "dist/rmatnas",
             "index": "src/index.html",
             "main": "src/main.ts",

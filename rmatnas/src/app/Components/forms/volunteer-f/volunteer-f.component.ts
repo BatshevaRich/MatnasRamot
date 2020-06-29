@@ -5,7 +5,7 @@ import { NgForm, FormControl, Validators, FormBuilder, FormGroup } from '@angula
 import { Category } from 'src/app/Classes/Category';
 import { CategoryService } from 'src/app/services/category.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-volunteer-f',
   templateUrl: './volunteer-f.component.html',

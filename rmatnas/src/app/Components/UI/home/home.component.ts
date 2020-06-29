@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit, ElementRef, OnDestroy } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { NotificationService } from 'src/app/services/notification.service';
 import { Router } from '@angular/router';
 

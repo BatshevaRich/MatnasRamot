@@ -5,7 +5,10 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../../UI/confirm-dialog/confirm-dialog.component';
-import { MatDialog, MatSort, MatChipInputEvent, MatSnackBar } from '@angular/material';
+import { MatChipInputEvent } from '@angular/material/chips';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSort } from '@angular/material/sort';
 import { Observable } from 'rxjs';
 import * as XLSX from 'xlsx';
 import { DatePipe } from '@angular/common';

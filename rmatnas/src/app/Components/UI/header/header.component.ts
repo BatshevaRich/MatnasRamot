@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit, OnDestroy, ElementRef } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { VolunteerFComponent } from '../../forms/volunteer-f/volunteer-f.component';
 import { FamilyFComponent } from '../../forms/family-f/family-f.component';
 import { AddVFComponent } from '../../forms/add/add-vf/add-vf.component';

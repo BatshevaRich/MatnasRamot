@@ -5,7 +5,7 @@ import { Category } from '../../../Classes/Category';
 import { CategoryService } from 'src/app/services/category.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NgForm, FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-family-f',

@@ -6,7 +6,8 @@ import { FamilyService } from 'src/app/services/family.service';
 import { OrganizationService } from 'src/app/services/organization.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { OrganizationAndFamilyService } from 'src/app/services/organization-and-family.service';
-import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { OrganizationAndFamily } from 'src/app/Classes/OrganizationAndFamily';
 
 @Component({

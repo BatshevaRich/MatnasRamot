@@ -141,7 +141,7 @@
             </span></mat-hint>
           <input name="NumChildren" #children type="number" min="0" max="20" placeholder="1" matInput (focus)="$event.target.select()"
             [formControl]="myForm.get('numchildren')"
-            (change)="newFamily.NumChildren = children.value; myForm.get('numchildren').setValue(newFamily.NumChildren);myForm.get('numchildren').markAsDirty(); myForm.get('numchildren').markAsTouched()">
+            (input)="newFamily.NumChildren = children.value; myForm.get('numchildren').setValue(newFamily.NumChildren);myForm.get('numchildren').markAsDirty(); myForm.get('numchildren').markAsTouched()">
         </mat-form-field>
         <br />
         <mat-form-field appearance="outline">

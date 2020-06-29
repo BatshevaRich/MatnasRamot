@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild, Inject, OnDestroy, ElementRef } from '@angular/core';
 import { Organization } from 'src/app/Classes/Organization';
 import { NgForm, FormControl, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { OrganizationService } from 'src/app/services/organization.service';
 import { Category } from 'src/app/Classes/Category';
 import { CategoryService } from 'src/app/services/category.service';

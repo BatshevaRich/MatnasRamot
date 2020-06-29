@@ -4,7 +4,7 @@ import { VolunteerService } from 'src/app/services/volunteer.service';
 import { Category } from 'src/app/Classes/Category';
 import { MatDialog } from '@angular/material/dialog';
 import { VolunteerFComponent } from '../../forms/volunteer-f/volunteer-f.component';
-import { MatTabChangeEvent } from '@angular/material';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 @Component({
   selector: 'app-volunteer',
   templateUrl: './volunteer.component.html',

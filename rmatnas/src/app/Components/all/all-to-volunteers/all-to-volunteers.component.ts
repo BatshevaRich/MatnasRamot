@@ -6,7 +6,7 @@ import { FamilyService } from 'src/app/services/family.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../../UI/confirm-dialog/confirm-dialog.component';
 import * as XLSX from 'xlsx';

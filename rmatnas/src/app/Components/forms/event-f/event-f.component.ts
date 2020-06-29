@@ -4,7 +4,8 @@ import { EventService } from 'src/app/services/event.service';
 import { NgForm, FormBuilder, FormGroup } from '@angular/forms';
 import { Category } from 'src/app/Classes/Category';
 import { CategoryService } from 'src/app/services/category.service';
-import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { OrganizationFComponent } from '../organization-f/organization-f.component';
 import { RangesFooter } from '../../UI/ranges-footer/ranges-footer.component';
 @Component({

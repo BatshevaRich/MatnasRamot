@@ -7,7 +7,7 @@ import { FamilyService } from 'src/app/services/family.service';
 import { VolunteerService } from 'src/app/services/volunteer.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { VolunteerAndFamilyService } from 'src/app/services/volunteer-and-family.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-vf',
