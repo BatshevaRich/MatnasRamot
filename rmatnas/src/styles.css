@@ -116,3 +116,7 @@ tr.example-element-row:not(.example-expanded-row):active {
   -webkit-hyphens: auto;
   hyphens: auto;
 }
+
+.mat-tab-labels>.mat-tab-label:first-child {
+  display: none !important;
+}
