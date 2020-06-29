@@ -66,7 +66,7 @@ export class AllEventsComponent implements OnInit, OnDestroy, AfterViewInit {
         this.notFound = true;
       } else {
         this.eventts = this.es.trimResultsFromDB(events);
-        this.dataSource.data = this.eventts;
+        this.dataSource = new MatTableDataSource(Object.values(this.eventts));
         this.resultsLength = this.dataSource.data.length;
         this.error = false;
       }
@@ -88,8 +88,8 @@ export class AllEventsComponent implements OnInit, OnDestroy, AfterViewInit {
       this.result = res;
       if (res) {
         // this.os.removeVolunteer(elm.Id);
-        // this.dataSource.data = this.dataSource.data
-        //   .filter(i => i !== elm);
+        // this.dataSource = new MatTableDataSource(Object.values(this.dataSource)
+        //   .filter(i => i !== elm));
         // .map((i, idx) => (i.position = (idx + 1), i));
       }
     });
@@ -106,7 +106,8 @@ export class AllEventsComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   updateTable(event: Eventt) {
-    this.dataSource.data = this.dataSource.data.map((item: Eventt) => item.Id === event.Id ? this.es.trimResultFromUpdate(event) : item);
+    this.dataSource = new MatTableDataSource(Object.values(this.dataSource)
+    .map((item: Eventt) => item.Id === event.Id ? this.es.trimResultFromUpdate(event) : item));
     this.table.renderRows();
   }
 

@@ -74,7 +74,7 @@ export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewIni
               item.IdVolunteer = element.Volunteer.Id;
               item.IdFamily = element.Family.Id;
             });
-            this.dataSource.data = this.allvolunteerings;
+            this.dataSource = new MatTableDataSource(Object.values(this.allvolunteerings));
           }
         }, err => { this.error = true; this.loaded = true; });
       } else if (this.where === 2) {
@@ -97,7 +97,7 @@ export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewIni
               item.IdVolunteer = element.Volunteer.Id;
               item.IdFamily = element.Family.Id;
             });
-            this.dataSource.data = this.allvolunteerings;
+            this.dataSource = new MatTableDataSource(Object.values(this.allvolunteerings));
           }
         }, err => { this.error = true; this.loaded = true; });
       }
@@ -121,7 +121,7 @@ export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewIni
       //         item.IdVolunteer = element.Volunteer.Id;
       //         item.IdFamily = element.Family.Id;
       //       });
-      //       this.dataSource.data = this.allvolunteerings;
+      //       this.dataSource = new MatTableDataSource(Object.values(this.allvolunteerings));
       //     }
       //   }, err => { this.error = true; this.loaded = true; });
       // }
@@ -145,7 +145,7 @@ export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewIni
             item.IdVolunteer = element.Volunteer.Id;
             item.IdFamily = element.Family.Id;
           });
-          this.dataSource.data = this.allvolunteerings;
+          this.dataSource = new MatTableDataSource(Object.values(this.allvolunteerings));
         }
       }, err => { this.error = true; this.loaded = true; });
     }
@@ -168,8 +168,8 @@ export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewIni
       this.result = res;
       if (res) {
         this.vfs.removeVolunteering(elm.Id);
-        this.dataSource.data = this.dataSource.data
-          .filter(i => i !== elm);
+        this.dataSource = new MatTableDataSource(Object.values(this.dataSource.data)
+          .filter(i => i !== elm));
         // .map((i, idx) => (i.position = (idx + 1), i));
       }
     });

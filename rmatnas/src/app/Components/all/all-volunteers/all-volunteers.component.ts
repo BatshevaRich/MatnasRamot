@@ -154,8 +154,8 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
       this.result = res;
       if (res) {
         this.vs.removeVolunteer(elm.Id);
-        this.dataSource.data = this.dataSource.data
-          .filter(i => i !== elm);
+        this.dataSource = new MatTableDataSource(Object.values(this.dataSource)
+          .filter(i => i !== elm));
         // .map((i, idx) => (i.position = (idx + 1), i));
       }
     });
@@ -267,7 +267,9 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   updateTable(event: Volunteer) {
-    this.dataSource.data = this.dataSource.data.map((item: Volunteer) => item.Id === event.Id ? this.vs.trimResultFromUpdate(event) : item);
+    this.dataSource =
+    new MatTableDataSource(Object.values(this.dataSource)
+    .map((item: Volunteer) => item.Id === event.Id ? this.vs.trimResultFromUpdate(event) : item));
     this.table.renderRows();
   }
 

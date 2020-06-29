@@ -113,7 +113,7 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
 
   newFamily(family: Family) {
     this.families.push(family);
-    this.dataSource.data = this.families as unknown as MatTableDataSource<Details>[];
+    this.dataSource = new MatTableDataSource(Object.values(this.families));
     this.table.renderRows();
     this.changeDetectorRefs.detectChanges();
   }
@@ -129,8 +129,8 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
       this.result = res;
       if (res) {
         this.fs.removeFamily(elm.Id);
-        this.dataSource.data = this.dataSource.data
-          .filter(i => i !== elm);
+        this.dataSource = new MatTableDataSource(Object.values(this.dataSource)
+          .filter(i => i !== elm));
         // .map((i, idx) => (i.position = (idx + 1), i));
       }
     });
@@ -238,7 +238,8 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   updateTable(event: Family) {
-    this.dataSource.data = this.dataSource.data.map((item: Family) => item.Id === event.Id ? this.fs.trimResultFromUpdate(event) : item);
+    this.dataSource = new MatTableDataSource(Object.values(this.dataSource)
+    .map((item: Family) => item.Id === event.Id ? this.fs.trimResultFromUpdate(event) : item));
     this.table.renderRows();
   }
 }
