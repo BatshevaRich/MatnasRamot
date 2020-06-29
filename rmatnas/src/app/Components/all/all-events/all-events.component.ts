@@ -5,6 +5,7 @@ import { MatSort, MatTable, MatPaginator, MatTableDataSource, MatDialog } from '
 import { Observable } from 'rxjs';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../../UI/confirm-dialog/confirm-dialog.component';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { AddVEComponent } from '../../forms/add/add-ve/add-ve.component';
 export interface Details {
   Id: number;
   Name: string;
@@ -32,7 +33,7 @@ export class AllEventsComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  displayedColumns = ['showDetails', 'Name', 'Description', 'StartDate', 'EndDate', 'addvolunteer', 'addfamily', 'columndelete'];
+  displayedColumns = ['showDetails', 'Name', 'Description', 'StartDate', 'EndDate', 'addvolunteer', 'columndelete'];
   expandedElement: Details | null;
   dataSource = new MatTableDataSource([]);
   resultsLength = 0;
@@ -110,11 +111,13 @@ export class AllEventsComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   addVolunteer(event: Details) {
-
-  }
-
-  addFamily(event: Details) {
-
+    const dialogRef = this.dialog.open(AddVEComponent, {
+      maxWidth: '75%',
+      data: {
+        id: event.Id
+      }
+    });
+    return dialogRef.afterClosed();
   }
 
 }
