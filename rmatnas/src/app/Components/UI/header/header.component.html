@@ -21,12 +21,13 @@
                         <i matBadge="4" matBadgeSize="small" matBadgePosition="before" matBadgeColor="accent"
                             class="fa fa-handshake-o" aria-hidden="true"></i>התנדבויות
                     </button>
-                    <button mat-button class="nav-letters dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
+                    <button mat-button class="nav-letters dropdown-toggle dropdown-toggle-split bgdark"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="sr-only">Toggle Dropdown</span>
                     </button>
                     <div class="dropdown-menu shadow bg-dark">
-                        <button mat-menu-item class="nav-letters" (click)="ToVolunteeropenDialog()"><i
+                        <button mat-flat-button class="dropdown-menu nav-letters bgdark"
+                            style="background-color:#343a40" (click)="ToVolunteeropenDialog()"><i
                                 class="fa fa-user-plus">
                             </i> הוספה</button>
                     </div>
@@ -44,8 +45,8 @@
                         <span class="sr-only">Toggle Dropdown</span>
                     </button>
                     <div class="dropdown-menu shadow bg-dark">
-                        <button mat-menu-item class="nav-letters" (click)="VolunteeropenDialog()"><i
-                                class="fa fa-user-plus">
+                        <button mat-flat-button class="dropdown-menu nav-letters bgdark"
+                            style="background-color:#343a40" (click)="VolunteeropenDialog()"><i class="fa fa-user-plus">
                             </i> הוספה</button>
                     </div>
                 </div>
@@ -62,8 +63,8 @@
                         <span class="sr-only">Toggle Dropdown</span>
                     </button>
                     <div class="dropdown-menu shadow bg-dark">
-                        <button mat-menu-item class="nav-letters" (click)="FamilyopenDialog()"><i
-                                class="fa fa-user-plus">
+                        <button mat-flat-button class="dropdown-menu nav-letters bgdark"
+                            style="background-color:#343a40" (click)="FamilyopenDialog()"><i class="fa fa-user-plus">
                             </i> הוספה</button>
                     </div>
                 </div>
@@ -80,7 +81,8 @@
                         <span class="sr-only">Toggle Dropdown</span>
                     </button>
                     <div class="dropdown-menu shadow bg-dark">
-                        <button mat-menu-item class="nav-letters" (click)="OrganizationopenDialog()"><i
+                        <button mat-flat-button class="dropdown-menu nav-letters bgdark"
+                            style="background-color:#343a40" (click)="OrganizationopenDialog()"><i
                                 class="fa fa-user-plus">
                             </i> הוספה</button>
                     </div>
@@ -97,8 +99,8 @@
                         <span class="sr-only">Toggle Dropdown</span>
                     </button>
                     <div class="dropdown-menu shadow bg-dark">
-                        <button mat-menu-item class="nav-letters" (click)="EventopenDialog()"><i
-                                class="fa fa-user-plus">
+                        <button mat-flat-button class="dropdown-menu nav-letters bgdark"
+                            style="background-color:#343a40" (click)="EventopenDialog()"><i class="fa fa-user-plus">
                             </i> הוספה</button>
                     </div>
                 </div>
@@ -113,7 +115,7 @@
     </span>
 </nav>
 <mat-sidenav-container dir="rtl" fxFlexFill>
-    <mat-sidenav style="background-color: darkslategray;" #sidenav fxLayout="column" mode="over" opened="false"
+    <mat-sidenav style="background-color:#343a40" class="nav-letters bgdark shadow" #sidenav fxLayout="column" mode="over" opened="false"
         fxHide.gt-sm="true">
         <span fxLayout="column" style="text-align: left !important;">
             <span>
@@ -138,8 +140,8 @@
                     <span class="sr-only">Toggle Dropdown</span>
                 </button>
                 <div class="dropdown-menu shadow bg-dark">
-                    <button mat-menu-item class="nav-letters" (click)="ToVolunteeropenDialog()"><i
-                            class="fa fa-user-plus">
+                    <button mat-flat-button class="dropdown-menu nav-letters bgdark" style="background-color:#343a40"
+                        (click)="ToVolunteeropenDialog()"><i class="fa fa-user-plus">
                         </i> הוספה</button>
                 </div>
             </div>
@@ -153,8 +155,8 @@
                     <span class="sr-only">Toggle Dropdown</span>
                 </button>
                 <div class="dropdown-menu shadow bg-dark">
-                    <button mat-menu-item class="nav-letters" (click)="VolunteeropenDialog()"><i
-                            class="fa fa-user-plus">
+                    <button mat-flat-button class="dropdown-menu nav-letters bgdark" style="background-color:#343a40"
+                        (click)="VolunteeropenDialog()"><i class="fa fa-user-plus">
                         </i> הוספה</button>
                 </div>
             </div>
@@ -168,7 +170,8 @@
                     <span class="sr-only">Toggle Dropdown</span>
                 </button>
                 <div class="dropdown-menu shadow bg-dark">
-                    <button mat-menu-item class="nav-letters" (click)="FamilyopenDialog()"><i class="fa fa-user-plus">
+                    <button mat-flat-button class="dropdown-menu nav-letters bgdark" style="background-color:#343a40"
+                        (click)="FamilyopenDialog()"><i class="fa fa-user-plus">
                         </i> הוספה</button>
                 </div>
             </div>
@@ -183,8 +186,8 @@
                     <span class="sr-only">Toggle Dropdown</span>
                 </button>
                 <div class="dropdown-menu shadow bg-dark">
-                    <button mat-menu-item class="nav-letters" (click)="OrganizationopenDialog()"><i
-                            class="fa fa-user-plus">
+                    <button mat-flat-button class="dropdown-menu nav-letters bgdark" style="background-color:#343a40"
+                        (click)="OrganizationopenDialog()"><i class="fa fa-user-plus">
                         </i> הוספה</button>
                 </div>
             </div>
@@ -198,7 +201,8 @@
                     <span class="sr-only">Toggle Dropdown</span>
                 </button>
                 <div class="dropdown-menu shadow bg-dark">
-                    <button mat-menu-item class="nav-letters" (click)="EventopenDialog()"><i class="fa fa-user-plus">
+                    <button mat-flat-button class="dropdown-menu nav-letters bgdark" style="background-color:#343a40"
+                        (click)="EventopenDialog()"><i class="fa fa-user-plus">
                         </i> הוספה</button>
                 </div>
             </div>
