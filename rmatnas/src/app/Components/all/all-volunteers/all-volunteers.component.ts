@@ -191,6 +191,7 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
 
   public exportTableToExcel() {
     const data = this.volunteers.map((x: Volunteer) => ({
+      Id: x.Id,
       שם: x.Name,
       כתובת: x.Address,
       טלפון: x.Telephone,
@@ -202,6 +203,8 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
     }));
     const wb = XLSX.utils.book_new();
     const ws = XLSX.utils.json_to_sheet(data);
+    ws['!cols'] = []; // hide id column
+    ws['!cols'][0] = { hidden: true };
     XLSX.utils.book_append_sheet(wb, ws, 'מתנדבות');
     XLSX.writeFile(wb, `מתנדבות.xlsx`);
   }
@@ -224,13 +227,15 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
       let js = XLSX.utils.sheet_to_json(worksheet, { raw: true });
       js = js as Details[];
       // tslint:disable-next-line: no-string-literal
-      if (!js[0]['שם']) {
+      if (!js[1]['שם']) {
         this.snackBar.open('קובץ לא תקני, נא להעלות קובץ נכון...', 'OK', {
           duration: 5000,
           direction: 'rtl'
         });
       } else {
         const newData = js.map((x) => ({
+          // tslint:disable-next-line: no-string-literal
+          Id: x['Id'] as number,
           // tslint:disable-next-line: no-string-literal
           Name: x['שם'],
           // tslint:disable-next-line: no-string-literal
@@ -249,6 +254,8 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
           Comments: x['הערות']
         }));
         this.dataSource.data = newData;
+        this.resultsLength = this.dataSource.data.length;
+        this.table.renderRows();
         console.log(newData);
         this.snackBar.open('קובץ נטען בהצלחה', 'OK', {
           duration: 5000,
