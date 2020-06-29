@@ -148,6 +148,7 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public exportTableToExcel() {
     const data = this.families.map(x => ({
+      Id: x.Id,
       שם_משפחה: x.LastName,
       אבא: x.FirstNameFather,
       אמא: x.FirstNameMother,
@@ -162,6 +163,8 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
     }));
     const wb = XLSX.utils.book_new();
     const ws = XLSX.utils.json_to_sheet(data);
+    ws['!cols'] = []; // hide id column
+    ws['!cols'][0] = { hidden: true };
     XLSX.utils.book_append_sheet(wb, ws, 'משפחות');
     XLSX.writeFile(wb, `משפחות.xlsx`);
   }
@@ -185,13 +188,15 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
       let js = XLSX.utils.sheet_to_json(worksheet, { raw: true });
       js = js as Details[];
       // tslint:disable-next-line: no-string-literal
-      if (!js[0]['שם_משפחה']) {
+      if (!js[1]['שם_משפחה']) {
         this.snackBar.open('קובץ לא תקני, נא להעלות קובץ נכון...', 'OK', {
         duration: 5000,
         direction: 'rtl'
       });
       } else {
       const newData = js.map((x) => ({
+        // tslint:disable-next-line: no-string-literal
+        Id: x['Id'] as number,
         // tslint:disable-next-line: no-string-literal
         LastName: x['שם_משפחה'],
         // tslint:disable-next-line: no-string-literal
@@ -216,6 +221,8 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
         Reason: x['סיבה']
       }));
       this.dataSource.data = newData;
+      this.resultsLength = this.dataSource.data.length;
+      this.table.renderRows();
       console.log(newData);
       this.snackBar.open('קובץ נטען בהצלחה', 'OK', {
         duration: 5000,
