@@ -10,7 +10,7 @@
           </mat-form-field>
           <button style="visibility: hidden;"></button>
           <span class="example-spacer"></span>
-          <mat-form-field class="example-chip-list" style="display: table;">
+          <mat-form-field  *ngIf="!vId" class="example-chip-list" style="display: table;">
             <mat-chip-list style="display: flex;" #chipList aria-label="Fruit selection">
               <mat-chip style="display: inline-block;" *ngFor="let fruit of fruits" [selectable]="selectable"
                 [removable]="removable" (removed)="remove(fruit)">
@@ -31,7 +31,7 @@
           </div>
           <span class="example-spacer"></span>
           <button style="visibility: hidden;"></button>
-          <div mat-card-avatar matTooltip="העלאת קובץ אקסל" onclick="document.getElementById('fileToUpload').click()"><i matPrefix
+          <div mat-card-avatar matTooltip="העלאת קובץ אקסל"  *ngIf="!vId" onclick="document.getElementById('fileToUpload').click()"><i matPrefix
               class="fa fa-upload" aria-hidden="true"></i></div>
           <input mat-input type="file" id="fileToUpload" style="display:none;" (change)="uploadedFile($event)"
             placeholder="Upload file" accept=".xlsx">
