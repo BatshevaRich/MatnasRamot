@@ -102,3 +102,8 @@ mat-button-toggle:hover {
     border-radius: 5px;
     min-width: 7rem;
 }
+
+.btn-group, .btn-group-vertical {
+    position: relative;
+    display: block;
+}
