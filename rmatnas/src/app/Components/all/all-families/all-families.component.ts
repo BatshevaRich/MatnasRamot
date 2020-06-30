@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import * as XLSX from 'xlsx';
+import { AddVFComponent } from '../../forms/add/add-vf/add-vf.component';
 
 export interface Details {
   Id: number;
@@ -37,7 +38,7 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  displayedColumns = ['showDetails', 'LastName', 'Address', 'Telephone', 'NumChildren', 'Status', 'Reference', 'columndelete'];
+  displayedColumns = ['showDetails', 'LastName', 'Address', 'Telephone', 'NumChildren', 'Status', 'Reference', 'columnadd', 'columndelete'];
   expandedElement: Details | null;
   families: Family[] = [];
   dataSource = new MatTableDataSource([]);
@@ -243,5 +244,17 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
     this.dataSource = new MatTableDataSource(Object.values(this.dataSource)
     .map((item: Family) => item.Id === event.Id ? this.fs.trimResultFromUpdate(event) : item));
     this.table.renderRows();
+  }
+
+  addVolunteering(event: Details) {
+    const dialogRef = this.dialog.open(AddVFComponent, {
+      maxWidth: '75%',
+      data: {
+        id: event.Id,
+        type: 'family',
+        family: event
+      }
+    });
+    return dialogRef.afterClosed();
   }
 }

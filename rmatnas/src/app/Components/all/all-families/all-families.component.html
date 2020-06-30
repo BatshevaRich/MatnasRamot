@@ -15,8 +15,9 @@
           </div>
           <span class="example-spacer"></span>
           <button style="visibility: hidden;"></button>
-          <div mat-card-avatar matTooltip="העלאת קובץ אקסל"  *ngIf="!vId" onclick="document.getElementById('fileToUpload').click()"><i
-              matPrefix class="fa fa-upload" aria-hidden="true"></i></div>
+          <div mat-card-avatar matTooltip="העלאת קובץ אקסל" *ngIf="!vId"
+            onclick="document.getElementById('fileToUpload').click()"><i matPrefix class="fa fa-upload"
+              aria-hidden="true"></i></div>
           <input mat-input type="file" id="fileToUpload" style="display:none;" (change)="uploadedFile($event)"
             placeholder="Upload file" accept=".xlsx">
         </mat-toolbar-row>
@@ -53,6 +54,16 @@
               <td mat-cell *matCellDef="let element">
                 <h5>
                   <i class="fa fa-caret-down"></i>
+                </h5>
+              </td>
+            </ng-container>
+            <ng-container *ngIf="!vId" matColumnDef="columnadd">
+              <th mat-header-cell *matHeaderCellDef> + התנדבות</th>
+              <td mat-cell *matCellDef="let element">
+                <h5> <button
+                    style="background: none; color: inherit; border: none; padding: 0; font: inherit; outline: inherit;"
+                    (click)="addVolunteering(element)"><i class="fa fa-handshake-o"></i>
+                  </button>
                 </h5>
               </td>
             </ng-container>
