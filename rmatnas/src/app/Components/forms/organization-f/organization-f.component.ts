@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, Inject, OnDestroy, ElementRef } from '@angular/core';
 import { Organization } from 'src/app/Classes/Organization';
-import { NgForm, FormControl, Validators } from '@angular/forms';
+import { NgForm, FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { OrganizationService } from 'src/app/services/organization.service';
@@ -17,19 +17,44 @@ export class OrganizationFComponent implements OnInit, OnDestroy {
   categories: Category[] = [];
   categoriesOfOrganization: Category[] = [];
   email = new FormControl('', [Validators.required, Validators.email]);
-  newOrganization: Organization = new Organization('ברירת מחדל', 'ברירת מחדל', '11', 'ברירת מחדל', 'ברירת מחדל', '1@1');
+  newOrganization: Organization = new Organization('', '', '', '', '', '');
   token = 0;
   categoriesSelected: Category[] = [];
+  myForm: FormGroup;
   constructor(public os: OrganizationService,
               private cs: CategoryService,
               private dialogRef: MatDialogRef<OrganizationFComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
               public snackBar: MatSnackBar,
-              private elementRef: ElementRef) {
-                cs.getCategories().subscribe((res: Category[]) => {
-                  this.categories = res;
-                });
-               }
+              private elementRef: ElementRef,
+              private formBuilder: FormBuilder) {
+    this.myForm = this.formBuilder.group({
+      name: new FormControl('', [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(20)
+      ]),
+      email: new FormControl('', [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(25),
+        Validators.pattern('^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$')
+      ]),
+      phone: new FormControl('', [
+        Validators.minLength(9),
+        Validators.maxLength(10),
+        Validators.pattern('^[0-9]*$')
+      ]),
+      cellphone: new FormControl('', [
+        Validators.required,
+        Validators.minLength(10),
+        Validators.maxLength(10)
+      ])
+    });
+    cs.getCategories().subscribe((res: Category[]) => {
+      this.categories = res;
+    });
+  }
 
   ngOnInit() {
     if (this.data.update) {
@@ -65,7 +90,7 @@ export class OrganizationFComponent implements OnInit, OnDestroy {
           this.dialogRef.close(this.token);
         });
       this.mytemplateForm.resetForm();
-      this.newOrganization = new Organization('default', null, '000000000', null, null, 'default@ddd');
+      this.newOrganization = new Organization('', null, '', null, null, '');
       this.snackBar.open('שמירת ארגון מבוצעת...', 'OK', {
         duration: 2000,
         direction: 'rtl'

@@ -4,40 +4,68 @@
     <span *ngIf="data.update" mat-dialog-title>עדכון ארגון</span>
   </mat-toolbar>
   <mat-dialog-content>
-    <form (ngSubmit)="submitForm()" class="text-right" #organizationForm="ngForm">
+    <form (ngSubmit)="submitForm()" class="text-right" [formGroup]="myForm">
       <div class="form-group">
         <mat-form-field appearance="outline">
-          <mat-hint>שם</mat-hint>
-          <input matInput (focus)="$event.target.select()" maxlength="20" [(ngModel)]="newOrganization.Name" name="Name"
+          <mat-hint>שם &nbsp;
+            <span style="color: red;"
+              *ngIf="myForm.get('name').invalid && (myForm.get('name').dirty || myForm.get('name').touched)">
+              <span *ngIf="myForm.get('name').errors.required">
+                שדה חובה
+              </span>
+              <span *ngIf="myForm.get('name').errors.minlength">
+                קצר מדי
+              </span>
+            </span>
+          </mat-hint>
+          <input matInput placeholder="שם" (focus)="$event.target.select()" maxlength="20" minlength="5"
+            [(ngModel)]="newOrganization.Name" name="name" [ngModelOptions]="{standalone: true}"
+            (change)="myForm.get('name').setValue(newOrganization.Name); myForm.get('name').valueChanges; myForm.get('name').markAsTouched()"
             required>
           <mat-icon matPrefix>person</mat-icon>
         </mat-form-field>
         <br />
         <mat-form-field appearance="outline">
           <mat-hint>איש קשר</mat-hint>
-          <input matInput (focus)="$event.target.select()" maxlength="20" [(ngModel)]="newOrganization.Contact" name="Contact"
-            required>
+          <input matInput (focus)="$event.target.select()" maxlength="20" [(ngModel)]="newOrganization.Contact"
+            name="Contact" required>
           <mat-icon matPrefix>person</mat-icon>
         </mat-form-field>
         <br />
         <mat-form-field appearance="outline">
-          <mat-hint>מייל</mat-hint>
-          <input matInput (focus)="$event.target.select()" placeholder="organization@example.com" required email
-            [(ngModel)]="newOrganization.email" name="Email">
+          <mat-hint>מייל&nbsp;
+            <span style="color: red;"
+              *ngIf="myForm.get('email').invalid && (myForm.get('email').dirty || myForm.get('email').touched)">
+              <span *ngIf="myForm.get('email').errors">
+                שגיאה בכתובת מייל
+              </span>
+            </span>
+          </mat-hint>
+          <input type="email" required matInput (focus)="$event.target.select()" placeholder="organization@org.com"
+            [(ngModel)]="newOrganization.email" name="email" [ngModelOptions]="{standalone: true}"
+            (change)="myForm.get('email').setValue(newOrganization.email);myForm.get('email').markAsDirty(); myForm.get('email').markAsTouched()">
           <mat-icon matPrefix>email</mat-icon>
-          <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
         <br />
         <mat-form-field appearance="outline">
-          <mat-hint>טלפון</mat-hint>
-          <input matInput (focus)="$event.target.select()" placeholder="050-525-2525" appPhoneMask
-            [(ngModel)]="newOrganization.Phone" name="Telephone">
+          <mat-hint>טלפון&nbsp;
+            <span style="color: red;"
+              *ngIf="myForm.get('phone').invalid && (myForm.get('phone').dirty || myForm.get('phone').touched)">
+              <span *ngIf="myForm.get('phone').errors.minlength">
+                קצר מדי
+              </span>
+            </span></mat-hint>
+          <input matInput required minlength="9" maxlength="11" name="phone" (focus)="$event.target.select()"
+            placeholder="02-525-2525" [(ngModel)]="newOrganization.Phone" [ngModelOptions]="{standalone: true}"
+            appPhoneMask
+            (change)="myForm.get('phone').setValue(newOrganization.Phone);myForm.get('phone').markAsDirty(); myForm.get('phone').markAsTouched()">
           <mat-icon matPrefix>phone</mat-icon>
         </mat-form-field>
         <br />
         <mat-form-field appearance="outline">
           <mat-hint>כתובת</mat-hint>
-          <input matInput (focus)="$event.target.select()" [(ngModel)]="newOrganization.Address" name="Address">
+          <input matInput (focus)="$event.target.select()" [ngModelOptions]="{standalone: true}"
+            [(ngModel)]="newOrganization.Address" name="Address">
           <mat-icon matPrefix>location_city</mat-icon>
         </mat-form-field>
         <br />
@@ -46,14 +74,15 @@
         <br>
         <mat-form-field appearance="outline" class="example-full-width">
           <mat-hint>הערות</mat-hint>
-          <textarea matInput (focus)="$event.target.select()" [(ngModel)]="newOrganization.Comments" name="Comments"></textarea>
+          <textarea matInput (focus)="$event.target.select()" [ngModelOptions]="{standalone: true}"
+            [(ngModel)]="newOrganization.Comments" name="Comments"></textarea>
           <mat-icon matSuffix>comment</mat-icon>
         </mat-form-field>
         <br />
       </div>
       <mat-dialog-actions align="end">
         <button mat-button mat-raised-button mat-dialog-close>ביטול</button>
-        <button mat-button mat-raised-button [mat-dialog-close]="token" type="submit">
+        <button mat-button mat-raised-button [mat-dialog-close]="token" [disabled]="!myForm.valid" type="submit">
           <span *ngIf="!data.update">הוספה</span>
           <span *ngIf="data.update">עדכון</span>
         </button>

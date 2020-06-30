@@ -73,7 +73,7 @@ export class VolunteerFComponent implements OnInit, OnDestroy {
           this.categoriesSelected = [];
           this.dialogRef.close(this.token);
         });
-      this.newVolunteer = new Volunteer('default', '000000000', '000000000', 'default@ddd', 'default', '1999-01-01', false);
+      this.newVolunteer = new Volunteer('', '', '', '', '', '2001-01-01', true);
       this.snackBar.open('שמירת מתנדבת מבוצעת...', 'OK', {
         duration: 2000,
         direction: 'rtl'

@@ -34,7 +34,7 @@
               </span>
             </span>
           </mat-hint>
-          <input type="email" appEmailMask matInput (focus)="$event.target.select()" placeholder="volunteer@example.com"
+          <input type="email" matInput (focus)="$event.target.select()" placeholder="volunteer@example.com"
             [(ngModel)]="newVolunteer.Email" name="email" [ngModelOptions]="{standalone: true}"
             (change)="myForm.get('email').setValue(newVolunteer.Email);myForm.get('email').markAsDirty(); myForm.get('email').markAsTouched()">
           <mat-icon matPrefix>email</mat-icon>

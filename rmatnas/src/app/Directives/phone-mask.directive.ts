@@ -19,7 +19,7 @@ export class PhoneMaskDirective implements OnInit {
   @HostListener('input')
   onkeypress() {
     const x = this.el.nativeElement.value;
-    if (isNaN(x) || x.length > 9) { this.el.nativeElement.value = x.slice(0, -1); }
+    if (isNaN(x) || x.length > 10) { this.el.nativeElement.value = x.slice(0, -1); }
    // if (isNaN(x) || x.length > 9) { this.red.setAttribute(this.el.nativeElement,"value"," x.slice(0, -1)"); }
   }
 }
