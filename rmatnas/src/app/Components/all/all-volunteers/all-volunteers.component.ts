@@ -13,6 +13,7 @@ import { Observable } from 'rxjs';
 import * as XLSX from 'xlsx';
 import { DatePipe } from '@angular/common';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { AddVFComponent } from '../../forms/add/add-vf/add-vf.component';
 export interface Details {
   Id: number;
   Name: string;
@@ -277,7 +278,15 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   addVolunteering(event: Details) {
-
+    const dialogRef = this.dialog.open(AddVFComponent, {
+      maxWidth: '75%',
+      data: {
+        id: event.Id,
+        type: 'volunteer',
+        volunteer: event
+      }
+    });
+    return dialogRef.afterClosed();
   }
 
 }
