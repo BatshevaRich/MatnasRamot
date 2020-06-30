@@ -5,6 +5,8 @@ import { VolunteerFComponent } from './Components/forms/volunteer-f/volunteer-f.
 import { FamilyFComponent } from './Components/forms/family-f/family-f.component';
 import { AllVolunteersComponent } from './Components/all/all-volunteers/all-volunteers.component';
 import { AddVFComponent } from './Components/forms/add/add-vf/add-vf.component';
+import { UserAuth } from './Classes/UserAuth';
+import { SecurityService } from './Security/security.service';
 
 @Component({
   selector: 'app-root',
@@ -12,9 +14,15 @@ import { AddVFComponent } from './Components/forms/add/add-vf/add-vf.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  securityObject: UserAuth = null;
   title = 'endproject';
-  constructor() {
+  constructor(private securityService: SecurityService) {
+    this.securityObject = securityService.securityObject;
 
+  }
+
+  logout(): void {
+    this.securityService.logout();
   }
 
 }
