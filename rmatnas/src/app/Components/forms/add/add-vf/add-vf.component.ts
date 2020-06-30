@@ -25,6 +25,8 @@ export class AddVFComponent implements OnInit, OnDestroy {
   selectedFamily: Family = null;
   selectedVolunteer: Volunteer = null;
   selectedCategory: Category;
+  selectedVolunteers: any;
+  selectedFamilies: any;
   constructor(private fs: FamilyService,
               private vs: VolunteerService,
               private cs: CategoryService,
@@ -37,15 +39,19 @@ export class AddVFComponent implements OnInit, OnDestroy {
   }
   refresh() {
     this.selectedCategory = null;
-    this.selectedFamily = null;
-    this.selectedVolunteer = null;
-    this.vs.getVolunteers().subscribe((res: Volunteer[]) => {
-      this.volunteers = res;
-      this.volunteers = this.volunteers.filter((v: Volunteer) => v.IsActive);
-    });
-    this.fs.getFamilies().subscribe((res: Family[]) => {
-      this.families = res;
-    });
+    this.selectedFamily = this.data.family;
+    this.selectedVolunteer = this.data.volunteer;
+    if (this.selectedFamily) {
+      this.vs.getVolunteers().subscribe((res: Volunteer[]) => {
+        this.volunteers = res;
+        this.volunteers = this.volunteers.filter((v: Volunteer) => v.IsActive);
+      });
+    }
+    if (this.selectedVolunteer) {
+      this.fs.getFamilies().subscribe((res: Family[]) => {
+        this.families = res;
+      });
+    }
     this.cs.getCategories().subscribe((res: Category[]) => {
       this.categories = res;
     });
@@ -114,14 +120,38 @@ export class AddVFComponent implements OnInit, OnDestroy {
         }) : this.selectedCategory = null;
     }
   }
-  submitForm() {
-    this.vaf.addVolunteerAction(this.selectedVolunteer, this.selectedFamily, this.selectedCategory);
-    this.snackBar.open('שמירת התנדבות מבוצעת...', 'OK', {
-      duration: 2000,
-      direction: 'rtl'
-    });
-  }
+  // submitForm() {
+  //   this.vaf.addVolunteerAction(this.selectedVolunteer, this.selectedFamily, this.selectedCategory);
+  //   this.snackBar.open('שמירת התנדבות מבוצעת...', 'OK', {
+  //     duration: 2000,
+  //     direction: 'rtl'
+  //   });
+  // }
   onTabChange() {
     this.refresh();
   }
+
+  onSelection(event) {
+  }
+
+
+  submitFormF() {
+    this.selectedVolunteers.forEach((element: Volunteer) => {
+      this.vaf.addVolunteerAction(element, this.selectedFamily, this.selectedCategory);
+      this.snackBar.open('שמירת התנדבות מבוצעת...', 'OK', {
+            direction: 'rtl'
+          });
+    });
+
+  }
+
+  submitFormV() {
+    this.selectedFamilies.forEach((element: Family) => {
+      this.vaf.addVolunteerAction(this.selectedVolunteer, element, this.selectedCategory);
+      this.snackBar.open('שמירת התנדבות מבוצעת...', 'OK', {
+        direction: 'rtl'
+      });
+    });
+  }
+
 }

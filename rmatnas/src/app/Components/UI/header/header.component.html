@@ -21,16 +21,6 @@
                         <i matBadge="4" matBadgeSize="small" matBadgePosition="before" matBadgeColor="accent"
                             class="fa fa-handshake-o" aria-hidden="true"></i>התנדבויות
                     </button>
-                    <button mat-button class="nav-letters dropdown-toggle dropdown-toggle-split bgdark"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="sr-only">Toggle Dropdown</span>
-                    </button>
-                    <div class="dropdown-menu shadow bg-dark">
-                        <button mat-flat-button class="dropdown-menu nav-letters bgdark"
-                            style="background-color:#343a40" (click)="ToVolunteeropenDialog()"><i
-                                class="fa fa-user-plus">
-                            </i> הוספה</button>
-                    </div>
                 </div>
             </mat-button-toggle>
             <mat-button-toggle class="bg-dark">
@@ -135,15 +125,6 @@
                     <i matBadge="4" matBadgeSize="small" matBadgePosition="before" matBadgeColor="accent"
                         class="fa fa-handshake-o" aria-hidden="true"></i>התנדבויות
                 </button>
-                <button mat-button class="nav-letters dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    <span class="sr-only">Toggle Dropdown</span>
-                </button>
-                <div class="dropdown-menu shadow bg-dark">
-                    <button mat-flat-button class="dropdown-menu nav-letters bgdark" style="background-color:#343a40"
-                        (click)="ToVolunteeropenDialog()"><i class="fa fa-user-plus">
-                        </i> הוספה</button>
-                </div>
             </div>
             <div class="btn-group">
                 <button mat-button class="nav-letters" [routerLink]="'/list/volunteers'" routerLinkActive="activeLink">
