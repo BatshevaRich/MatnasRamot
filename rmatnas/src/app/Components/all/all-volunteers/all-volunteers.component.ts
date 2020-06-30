@@ -52,7 +52,7 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  displayedColumns = ['showDetails', 'Name', 'Address', 'Pelephone', 'Email', 'Age', 'IsActive', 'columndelete'];
+  displayedColumns = ['showDetails', 'Name', 'Address', 'Pelephone', 'Email', 'Age', 'IsActive', 'columnadd', 'columndelete'];
   expandedElement: Details | null;
   volunteers: any;
   dataSource = new MatTableDataSource([]);
@@ -274,6 +274,10 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
     new MatTableDataSource(Object.values(this.dataSource)
     .map((item: Volunteer) => item.Id === event.Id ? this.vs.trimResultFromUpdate(event) : item));
     this.table.renderRows();
+  }
+
+  addVolunteering(event: Details) {
+
   }
 
 }
