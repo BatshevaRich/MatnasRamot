@@ -5,7 +5,7 @@ import { FamilyFComponent } from '../../forms/family-f/family-f.component';
 import { AddVFComponent } from '../../forms/add/add-vf/add-vf.component';
 import { OrganizationFComponent } from '../../forms/organization-f/organization-f.component';
 import { EventFComponent } from '../../forms/event-f/event-f.component';
-import { NotificationService } from 'src/app/services/notification.service';
+import { NotificationService } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-header',

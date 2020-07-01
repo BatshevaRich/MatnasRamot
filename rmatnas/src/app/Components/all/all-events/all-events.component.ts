@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, Input, AfterViewInit, OnDestroy, ElementRef } from '@angular/core';
-import { Eventt } from 'src/app/Classes/Eventt';
-import { EventService } from 'src/app/services/event.service';
+import { Eventt } from '../../../Classes/Eventt';
+import { EventService } from '../../../services/event.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -34,8 +34,8 @@ export class AllEventsComponent implements OnInit, OnDestroy, AfterViewInit {
   eventts: any;
   search = '';
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild(MatTable) table: MatTable<any>;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatTable, {static: false}) table: MatTable<any>;
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   displayedColumns = ['showDetails', 'Name', 'Description', 'StartDate', 'EndDate', 'addvolunteer', 'columndelete'];
   expandedElement: Details | null;
   dataSource = new MatTableDataSource([]);

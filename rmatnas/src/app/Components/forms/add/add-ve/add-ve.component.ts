@@ -1,13 +1,13 @@
 import { Component, OnInit, Input, Inject, ElementRef, OnDestroy } from '@angular/core';
-import { Volunteer } from 'src/app/Classes/Volunteer';
-import { Category } from 'src/app/Classes/Category';
-import { Eventt } from 'src/app/Classes/Eventt';
-import { VolunteerService } from 'src/app/services/volunteer.service';
-import { CategoryService } from 'src/app/services/category.service';
+import { Volunteer } from '../../../../Classes/Volunteer';
+import { Category } from '../../../../Classes/Category';
+import { Eventt } from '../../../../Classes/Eventt';
+import { VolunteerService } from '../../../../services/volunteer.service';
+import { CategoryService } from '../../../../services/category.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AddFOComponent } from '../add-fo/add-fo.component';
-import { EventService } from 'src/app/services/event.service';
+import { EventService } from '../../../../services/event.service';
 
 @Component({
   selector: 'app-add-ve',

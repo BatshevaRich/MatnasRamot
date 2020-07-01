@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ElementRef } from '@angular/core';
-import { Eventt } from 'src/app/Classes/Eventt';
-import { EventService } from 'src/app/services/event.service';
-import { Category } from 'src/app/Classes/Category';
+import { Eventt } from '../../../Classes/Eventt';
+import { EventService } from '../../../services/event.service';
+import { Category } from '../../../Classes/Category';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { EventFComponent } from '../../forms/event-f/event-f.component';

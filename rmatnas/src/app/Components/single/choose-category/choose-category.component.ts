@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Output, EventEmitter, Input, ElementRef, AfterViewInit } from '@angular/core';
-import { CategoryService } from 'src/app/services/category.service';
-import { Category } from 'src/app/Classes/Category';
+import { CategoryService } from '../../../services/category.service';
+import { Category } from '../../../Classes/Category';
 import { Observable } from 'rxjs';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../../UI/confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';

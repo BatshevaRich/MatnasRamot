@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, ViewChild, AfterViewInit, OnDestroy, ElementRef } from '@angular/core';
-import { VolunteerAndFamilyService } from 'src/app/services/volunteer-and-family.service';
-import { VolunteerAndFamily } from 'src/app/Classes/VolunteerAndFamily';
-import { Family } from 'src/app/Classes/Family';
-import { FamilyService } from 'src/app/services/family.service';
+import { VolunteerAndFamilyService } from '../../../services/volunteer-and-family.service';
+import { VolunteerAndFamily } from '../../../Classes/VolunteerAndFamily';
+import { Family } from '../../../Classes/Family';
+import { FamilyService } from '../../../services/family.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -26,8 +26,8 @@ import { DatePipe } from '@angular/common';
 })
 export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  @ViewChild(MatTable) table: MatTable<any>;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatTable, {static: false}) table: MatTable<any>;
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   displayedColumns = ['NameVolunteer', 'NameFamily', 'Category', 'PelephoneVolunteer', 'columndelete'];
   expandedElement: Details | null;
   allvolunteerings: Details[] = [];

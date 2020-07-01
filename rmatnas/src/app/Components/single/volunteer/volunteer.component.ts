@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { Volunteer } from '../../../Classes/Volunteer';
-import { VolunteerService } from 'src/app/services/volunteer.service';
-import { Category } from 'src/app/Classes/Category';
-import { MatDialog } from '@angular/material/dialog';
+import { Category } from '../../../Classes/Category';
+import { VolunteerService } from '../../../services/volunteer.service';
 import { VolunteerFComponent } from '../../forms/volunteer-f/volunteer-f.component';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 @Component({
   selector: 'app-volunteer',

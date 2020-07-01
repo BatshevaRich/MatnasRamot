@@ -1,9 +1,9 @@
 import { Component, OnInit, EventEmitter, Output, ViewChild, Inject, OnDestroy, ElementRef } from '@angular/core';
 import { Volunteer } from '../../../Classes/Volunteer';
-import { VolunteerService } from 'src/app/services/volunteer.service';
+import { VolunteerService } from '../../../services/volunteer.service';
 import { NgForm, FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { Category } from 'src/app/Classes/Category';
-import { CategoryService } from 'src/app/services/category.service';
+import { Category } from '../../../Classes/Category';
+import { CategoryService } from '../../../services/category.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({

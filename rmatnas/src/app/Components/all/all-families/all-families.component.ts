@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild, ChangeDetectorRef, AfterViewInit, OnDestroy, ElementRef } from '@angular/core';
 import { Family } from '../../../Classes/Family';
-import { FamilyService } from 'src/app/services/family.service';
+import { FamilyService } from '../../../services/family.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
@@ -36,8 +36,8 @@ export interface Details {
 })
 export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild(MatTable) table: MatTable<any>;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatTable, {static: false}) table: MatTable<any>;
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   displayedColumns = ['showDetails', 'LastName', 'Address', 'Telephone', 'NumChildren', 'Status', 'Reference', 'columnadd', 'columndelete'];
   expandedElement: Details | null;
   families: Family[] = [];

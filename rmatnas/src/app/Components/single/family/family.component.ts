@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit, ElementRef } from '@angular/core';
 import { Family } from '../../../Classes/Family';
 import { OnDestroy } from '@angular/core';
-import { FamilyService } from 'src/app/services/family.service';
-import { Category } from 'src/app/Classes/Category';
+import { FamilyService } from '../../../services/family.service';
+import { Category } from '../../../Classes/Category';
 import { FamilyFComponent } from '../../forms/family-f/family-f.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTabChangeEvent } from '@angular/material/tabs';

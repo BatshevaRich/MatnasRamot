@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit, Input, ElementRef, OnDestroy } from '@angular/core';
 import { Volunteer } from '../../../Classes/Volunteer';
-import { VolunteerService } from 'src/app/services/volunteer.service';
+import { VolunteerService } from '../../../services/volunteer.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
@@ -51,8 +51,8 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
     //   (data: Details, filter: string) => data.Name.indexOf(filter) !== -1;
   }
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild(MatTable) table: MatTable<any>;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatTable, {static: false}) table: MatTable<any>;
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   displayedColumns = ['showDetails', 'Name', 'Address', 'Pelephone', 'Email', 'Age', 'IsActive', 'columnadd', 'columndelete'];
   expandedElement: Details | null;
   volunteers: any;

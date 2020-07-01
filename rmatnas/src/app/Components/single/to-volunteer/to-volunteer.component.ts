@@ -1,12 +1,12 @@
 import { Component, OnInit, Input, ElementRef, OnDestroy } from '@angular/core';
-import { VolunteerAndFamily } from 'src/app/Classes/VolunteerAndFamily';
-import { VolunteerService } from 'src/app/services/volunteer.service';
+import { VolunteerAndFamily } from '../../../Classes/VolunteerAndFamily';
+import { VolunteerService } from '../../../services/volunteer.service';
 import { MatDialog } from '@angular/material/dialog';
-import { Volunteer } from 'src/app/Classes/Volunteer';
+import { Volunteer } from '../../../Classes/Volunteer';
 import { VolunteerFComponent } from '../../forms/volunteer-f/volunteer-f.component';
-import { VolunteerAndFamilyService } from 'src/app/services/volunteer-and-family.service';
-import { Category } from 'src/app/Classes/Category';
-import { Family } from 'src/app/Classes/Family';
+import { VolunteerAndFamilyService } from '../../../services/volunteer-and-family.service';
+import { Category } from '../../../Classes/Category';
+import { Family } from '../../../Classes/Family';
 import { AddVFComponent } from '../../forms/add/add-vf/add-vf.component';
 
 @Component({

@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject, ViewChild, OnDestroy, ElementRef } from '@angular/core';
-import { Family } from 'src/app/Classes/Family';
-import { FamilyService } from 'src/app/services/family.service';
+import { Family } from '../../../Classes/Family';
+import { FamilyService } from '../../../services/family.service';
 import { Category } from '../../../Classes/Category';
-import { CategoryService } from 'src/app/services/category.service';
+import { CategoryService } from '../../../services/category.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NgForm, FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';

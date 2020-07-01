@@ -1,14 +1,14 @@
 import { Component, OnInit, Input, Inject, ElementRef, OnDestroy } from '@angular/core';
-import { Family } from 'src/app/Classes/Family';
-import { Organization } from 'src/app/Classes/Organization';
-import { Category } from 'src/app/Classes/Category';
-import { FamilyService } from 'src/app/services/family.service';
-import { OrganizationService } from 'src/app/services/organization.service';
-import { CategoryService } from 'src/app/services/category.service';
-import { OrganizationAndFamilyService } from 'src/app/services/organization-and-family.service';
+import { Family } from '../../../../Classes/Family';
+import { Organization } from '../../../../Classes/Organization';
+import { Category } from '../../../../Classes/Category';
+import { FamilyService } from '../../../../services/family.service';
+import { OrganizationService } from '../../../../services/organization.service';
+import { CategoryService } from '../../../../services/category.service';
+import { OrganizationAndFamilyService } from '../../../../services/organization-and-family.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { OrganizationAndFamily } from 'src/app/Classes/OrganizationAndFamily';
+import { OrganizationAndFamily } from '../../../../Classes/OrganizationAndFamily';
 
 @Component({
   selector: 'app-add-fo',

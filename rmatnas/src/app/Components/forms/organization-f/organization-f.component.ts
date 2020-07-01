@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild, Inject, OnDestroy, ElementRef } from '@angular/core';
-import { Organization } from 'src/app/Classes/Organization';
+import { Organization } from '../../../Classes/Organization';
 import { NgForm, FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { OrganizationService } from 'src/app/services/organization.service';
-import { Category } from 'src/app/Classes/Category';
-import { CategoryService } from 'src/app/services/category.service';
+import { OrganizationService } from '../../../services/organization.service';
+import { Category } from '../../../Classes/Category';
+import { CategoryService } from '../../../services/category.service';
 
 @Component({
   selector: 'app-organization-f',

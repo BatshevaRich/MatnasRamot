@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, ViewChild, Input, Output, EventEmitter, ElementRef, OnDestroy } from '@angular/core';
-import { CategoryService } from 'src/app/services/category.service';
-import { Category } from 'src/app/Classes/Category';
+import { CategoryService } from '../../../services/category.service';
+import { Category } from '../../../Classes/Category';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgForm } from '@angular/forms';

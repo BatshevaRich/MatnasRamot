@@ -1,12 +1,12 @@
 import { Component, OnInit, Input, Inject, OnDestroy, ElementRef } from '@angular/core';
-import { Family } from 'src/app/Classes/Family';
-import { Volunteer } from 'src/app/Classes/Volunteer';
-import { Category } from 'src/app/Classes/Category';
-import { CategoryService } from 'src/app/services/category.service';
-import { FamilyService } from 'src/app/services/family.service';
-import { VolunteerService } from 'src/app/services/volunteer.service';
+import { Family } from '../../../../Classes/Family';
+import { Volunteer } from '../../../../Classes/Volunteer';
+import { Category } from '../../../../Classes/Category';
+import { CategoryService } from '../../../../services/category.service';
+import { FamilyService } from '../../../../services/family.service';
+import { VolunteerService } from '../../../../services/volunteer.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { VolunteerAndFamilyService } from 'src/app/services/volunteer-and-family.service';
+import { VolunteerAndFamilyService } from '../../../../services/volunteer-and-family.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({

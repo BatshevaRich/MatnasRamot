@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ElementRef, AfterViewInit } from '@angular/core';
-import { Organization } from 'src/app/Classes/Organization';
-import { Category } from 'src/app/Classes/Category';
-import { OrganizationService } from 'src/app/services/organization.service';
+import { Organization } from '../../../Classes/Organization';
+import { Category } from '../../../Classes/Category';
+import { OrganizationService } from '../../../services/organization.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { OrganizationFComponent } from '../../forms/organization-f/organization-f.component';

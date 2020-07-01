@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild, Input, AfterViewInit, OnDestroy, ElementRef } from '@angular/core';
-import { Organization } from 'src/app/Classes/Organization';
+import { Organization } from '../../../Classes/Organization';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { OrganizationService } from 'src/app/services/organization.service';
+import { OrganizationService } from '../../../services/organization.service';
 import { Observable } from 'rxjs';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../../UI/confirm-dialog/confirm-dialog.component';
 import { AddFOComponent } from '../../forms/add/add-fo/add-fo.component';
@@ -36,8 +36,8 @@ export class AllOrganizationsComponent implements OnInit, OnDestroy, AfterViewIn
   organizations: any;
   search = '';
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild(MatTable) table: MatTable<any>;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatTable, {static: false}) table: MatTable<any>;
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   displayedColumns = ['showDetails', 'Name', 'Contact', 'Phone', 'Address', 'Email', 'addFamily', 'columndelete'];
   expandedElement: Details | null;
   dataSource = new MatTableDataSource([]);
