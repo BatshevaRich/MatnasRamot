@@ -124,7 +124,7 @@
           <h6>מתנדבות מתאימות ע"פ קטגוריות משפחה:</h6>
           <mat-selection-list name="volunteersselected" [(ngModel)]="selectedVolunteers"
           (ngModelChange)="onSelection($event)" #volunteersS *ngIf="volunteers.length > 0">
-          <mat-list-option [value]="volunteer" *ngFor="let volunteer of volunteers">
+          <mat-list-option checkboxPosition="before"[value]="volunteer" *ngFor="let volunteer of volunteers">
               {{volunteer.Name}}
           </mat-list-option>
       </mat-selection-list>
@@ -147,7 +147,7 @@
           <h6>משפחות מתאימות ע"פ קטגוריות מתנדבת:</h6>
           <mat-selection-list name="familiesselected" [(ngModel)]="selectedFamilies"
           (ngModelChange)="onSelection($event)" #familiesS *ngIf="families.length > 0">
-          <mat-list-option [value]="family" *ngFor="let family of families">
+          <mat-list-option checkboxPosition="before"[value]="family" *ngFor="let family of families">
               {{family.LastName}}
           </mat-list-option>
       </mat-selection-list>

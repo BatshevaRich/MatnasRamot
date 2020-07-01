@@ -7,7 +7,7 @@
             <h6>משפחות מתאימות ע"פ קטגוריות ארגון:</h6>
             <mat-selection-list name="familiesselected" [(ngModel)]="selectedFamilies"
                 (ngModelChange)="onSelection($event)" #familiesS *ngIf="families.length > 0">
-                <mat-list-option [value]="family" *ngFor="let family of families">
+                <mat-list-option checkboxPosition="before"[value]="family" *ngFor="let family of families">
                     {{family.LastName}}
                 </mat-list-option>
             </mat-selection-list>

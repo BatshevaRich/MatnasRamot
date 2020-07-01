@@ -1,9 +1,23 @@
-<div dir="rtl">
+<div dir="rtl" style="text-align: right;">
   <mat-toolbar>
     <span>{{title}}</span>
   </mat-toolbar>
   <mat-dialog-content>
     <p>{{message}}</p>
+    <span *ngIf="listOfVolunteers.length > 0">
+      <mat-selection-list [(ngModel)]="listOfVolunteersSelected" *ngIf="listOfType.length > 0">
+        <mat-list-option checkboxPosition="before"[value]="type" *ngFor="let type of listOfVolunteers">
+          {{type.Name}}
+        </mat-list-option>
+      </mat-selection-list>
+    </span>
+    <span *ngIf="listOfFamilies.length > 0">
+      <mat-selection-list [(ngModel)]="listOfFamiliesSelected" *ngIf="listOfType.length > 0">
+        <mat-list-option checkboxPosition="before"[value]="type" *ngFor="let type of listOfFamilies">
+          {{type.LastName}}
+        </mat-list-option>
+      </mat-selection-list>
+    </span>
   </mat-dialog-content>
   <mat-dialog-actions>
     <button mat-button mat-raised-button mat-dialog-close (click)="onDismiss()">לא</button>
