@@ -8,6 +8,8 @@ import { VolunteerService } from '../../../../services/volunteer.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { VolunteerAndFamilyService } from '../../../../services/volunteer-and-family.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatCheckboxChange } from '@angular/material/checkbox';
+import { MatOption } from '@angular/material/core';
 
 @Component({
   selector: 'app-add-vf',
@@ -25,8 +27,8 @@ export class AddVFComponent implements OnInit, OnDestroy {
   selectedFamily: Family = null;
   selectedVolunteer: Volunteer = null;
   selectedCategory: Category;
-  selectedVolunteers: any;
-  selectedFamilies: any;
+  selectedVolunteers: Volunteer[] = [];
+  selectedFamilies: Family[] = [];
   constructor(private fs: FamilyService,
               private vs: VolunteerService,
               private cs: CategoryService,

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Inject, OnDestroy, ElementRef, AfterViewInit } from '@angular/core';
 import { Eventt } from '../../../Classes/Eventt';
 import { EventService } from '../../../services/event.service';
-import { NgForm, FormBuilder, FormGroup } from '@angular/forms';
+import { NgForm, FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Category } from '../../../Classes/Category';
 import { CategoryService } from '../../../services/category.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -25,15 +25,24 @@ export class EventFComponent implements OnInit, OnDestroy, AfterViewInit {
   inlineRange;
   form: FormGroup;
   rangesFooter = RangesFooter;
+  myForm: FormGroup;
   constructor(public es: EventService,
               private cs: CategoryService,
               private dialogRef: MatDialogRef<OrganizationFComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
               public snackBar: MatSnackBar,
               fb: FormBuilder,
-              private elementRef: ElementRef) {
+              private elementRef: ElementRef,
+              private formBuilder: FormBuilder) {
     this.form = fb.group({
       date: [{ begin: new Date(2020, 7, 5), end: new Date(2020, 7, 25) }]
+    });
+    this.myForm = this.formBuilder.group({
+      name: new FormControl('', [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(20)
+      ])
     });
     cs.getCategories().subscribe((res: Category[]) => {
       this.categories = res;
@@ -46,6 +55,7 @@ export class EventFComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit() {
     if (this.data.update) {
       this.newEvent = this.es.trimResultFromUpdate(this.data.dataKey);
+      this.myForm.get('name').setValue(this.newEvent.Name);
       this.categoriesOfOrganization = this.data.chosenC;
     }
   }

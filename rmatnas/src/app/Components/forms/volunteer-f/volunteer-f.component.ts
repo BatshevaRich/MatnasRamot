@@ -26,6 +26,12 @@ export class VolunteerFComponent implements OnInit, OnDestroy {
               public snackBar: MatSnackBar,
               private elementRef: ElementRef,
               private formBuilder: FormBuilder) {
+    cs.getCategories().subscribe((res: Category[]) => {
+      this.categories = res;
+    });
+  }
+
+  ngOnInit() {
     this.myForm = this.formBuilder.group({
       name: new FormControl('', [
         Validators.required,
@@ -48,14 +54,12 @@ export class VolunteerFComponent implements OnInit, OnDestroy {
         Validators.maxLength(10)
       ])
     });
-    cs.getCategories().subscribe((res: Category[]) => {
-      this.categories = res;
-    });
-  }
-
-  ngOnInit() {
     if (this.data.update) {
       this.newVolunteer = this.vs.trimResultFromUpdate(this.data.dataKey);
+      this.myForm.get('name').setValue(this.newVolunteer.Name);
+      this.myForm.get('email').setValue(this.newVolunteer.Email);
+      this.myForm.get('phone').setValue(this.newVolunteer.Telephone);
+      this.myForm.get('cellphone').setValue(this.newVolunteer.Pelephone);
       this.categoriesOfVolunteer = this.data.chosenC;
     }
   }

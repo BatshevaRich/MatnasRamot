@@ -77,6 +77,13 @@ export class FamilyFComponent implements OnInit, OnDestroy {
   ngOnInit() {
     if (this.data.update) {
       this.newFamily = this.fs.trimResultFromUpdate(this.data.dataKey);
+      this.myForm.get('lastname').setValue(this.newFamily.LastName);
+      this.myForm.get('firstnameF').setValue(this.newFamily.FirstNameFather);
+      this.myForm.get('firstnameM').setValue(this.newFamily.FirstNameMother);
+      this.myForm.get('phone').setValue(this.newFamily.Telephone);
+      this.myForm.get('cellphoneF').setValue(this.newFamily.PelephoneFather);
+      this.myForm.get('cellphoneM').setValue(this.newFamily.PelephoneMother);
+      this.myForm.get('numchildren').setValue(this.newFamily.NumChildren);
       this.categoriesOfFamily = this.data.chosenC;
     }
   }

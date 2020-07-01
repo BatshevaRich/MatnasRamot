@@ -58,7 +58,10 @@ export class OrganizationFComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (this.data.update) {
-      this.newOrganization = this.data.dataKey;
+      this.newOrganization = this.os.trimResultFromUpdate(this.data.dataKey);
+      this.myForm.get('name').setValue(this.newOrganization.Name);
+      this.myForm.get('email').setValue(this.newOrganization.email);
+      this.myForm.get('phone').setValue(this.newOrganization.Phone);
       this.categoriesOfOrganization = this.data.chosenC;
     }
   }
