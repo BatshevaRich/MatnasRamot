@@ -11,7 +11,7 @@ import { Family } from '../../../Classes/Family';
 export class ConfirmDialogComponent implements OnInit {
   title: string;
   message: string;
-  listOfType: object[];
+  listOfType: object[] = [];
   type: string;
   listOfFamilies: Family[] = [];
   listOfVolunteers: Volunteer[] = [];
@@ -23,12 +23,12 @@ export class ConfirmDialogComponent implements OnInit {
     // Update view with given values
     this.title = data.title;
     this.message = data.message;
-    this.listOfType = data.listOfType;
-    this.type = data.type;
-    if (this.data.listOfType.length > 0 && this.type === 'volunteer') {
+    this.listOfType = data.listOfType ? data.listOfType : [];
+    this.type = data.type || '';
+    if (this.listOfType.length > 0 && this.type === 'volunteer') {
       this.listOfVolunteers = data.listOfType as Volunteer[];
     }
-    if (this.data.listOfType.length > 0 && this.type === 'family') {
+    if (this.listOfType.length > 0 && this.type === 'family') {
       this.listOfFamilies = data.listOfType as Family[];
     }
   }
