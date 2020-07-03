@@ -3,7 +3,7 @@
         [toV]=true>
     </app-event>
     <span style="display: inline-block;padding: 5px;vertical-align: top; text-align: right;">
-        <form (ngSubmit)="submitForm(categoryForm)" class="text-right" #categoryForm="ngForm">
+        <form (ngSubmit)="submitForm()" class="text-right" #categoryForm="ngForm">
             <h6>משפחות מתאימות ע"פ קטגוריות ארגון:</h6>
             <mat-selection-list name="volunteersselected" [(ngModel)]="selectedVolunteers"
                 (ngModelChange)="onSelection($event)" #volunteersS *ngIf="volunteers.length > 0">
