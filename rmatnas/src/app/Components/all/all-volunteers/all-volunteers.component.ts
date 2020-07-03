@@ -5,7 +5,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../../UI/confirm-dialog/confirm-dialog.component';
-import { MatChipInputEvent } from '@angular/material/chips';
+import { MatChipInputEvent, MatChip } from '@angular/material/chips';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
@@ -51,8 +51,8 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
     //   (data: Details, filter: string) => data.Name.indexOf(filter) !== -1;
   }
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild(MatTable, {static: false}) table: MatTable<any>;
-  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatTable, { static: false }) table: MatTable<any>;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   displayedColumns = ['showDetails', 'Name', 'Address', 'Pelephone', 'Email', 'Age', 'IsActive', 'columnadd', 'columndelete'];
   expandedElement: Details | null;
   volunteers: any;
@@ -70,6 +70,8 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
   selectable = true;
   removable = true;
   addOnBlur = true;
+  toUpdate: Volunteer[] = [];
+  toSave: Volunteer[] = [];
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   fruits: Fruit[] = [
     { name: 'אין משפחות' },
@@ -104,6 +106,10 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
     if (index >= 0) {
       this.fruits.splice(index, 1);
     }
+  }
+
+  selectedFruit(event: MatChip) {
+    console.log(event);
   }
 
   ngOnInit(): void {
@@ -253,13 +259,53 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
           // tslint:disable-next-line: no-string-literal
           Age: x['תאריך_לידה'] ? this.datePipe.transform(new Date(x['תאריך_לידה']).toDateString(), 'MM/dd/yyyy') : new Date(),
           // tslint:disable-next-line: no-string-literal
-          Active: x['פעילה?'] === true ? 'true' : 'false',
+          IsActive: x['פעילה'] === 'כן' ? true : false,
           // tslint:disable-next-line: no-string-literal
           Comments: x['הערות']
         }));
+        newData.forEach((element) => {
+          if (element.Id) {
+            this.toUpdate.push(Object.assign(element));
+          } else {
+            this.toSave.push(Object.assign(element));
+          }
+        });
         this.dataSource.data = newData;
         this.resultsLength = this.dataSource.data.length;
         this.table.renderRows();
+        this.confirmDialogAdd().subscribe(res => {
+          if (res === false){
+            this.snackBar.open('לא מתבצעת הוספה', 'OK', {
+              duration: 2000,
+              direction: 'rtl'
+            });
+          } else {
+            if (res) {
+            res.forEach(element => {
+              debugger;
+             // this.vs.addVolunteer(element, null);
+            });
+          }
+          }
+        });
+        this.confirmDialogUpdate().subscribe(res => {
+          if (res === false){
+            this.snackBar.open('לא מתבצעת הוספה', 'OK', {
+              duration: 2000,
+              direction: 'rtl'
+            });
+          } else {
+            if (res) {
+            res.forEach(element => {
+              debugger;
+             // this.vs.updateVolunteer(element, null);
+            });
+          }
+          }
+        });
+
+
+
         console.log(newData);
         this.snackBar.open('קובץ נטען בהצלחה', 'OK', {
           duration: 5000,
@@ -272,8 +318,8 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
 
   updateTable(event: Volunteer) {
     this.dataSource =
-    new MatTableDataSource(Object.values(this.dataSource)
-    .map((item: Volunteer) => item.Id === event.Id ? this.vs.trimResultFromUpdate(event) : item));
+      new MatTableDataSource(Object.values(this.dataSource)
+        .map((item: Volunteer) => item.Id === event.Id ? this.vs.trimResultFromUpdate(event) : item));
     this.table.renderRows();
   }
 
@@ -288,6 +334,24 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
     });
     return dialogRef.afterClosed();
   }
+  confirmDialogAdd(): Observable<any> {
+    const message = `האם תרצי להוסיף את המתנדבות הבאות?`;
+    const dialogData = new ConfirmDialogModel('הוספת מתנדבות חדשות', message, this.toSave, 'volunteer');
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: '75%',
+      data: dialogData
+    });
+    return dialogRef.afterClosed();
+  }
 
+  confirmDialogUpdate(): Observable<any> {
+    const message = `האם תרצי לעדכן את המתנדבות הבאות?`;
+    const dialogData = new ConfirmDialogModel('עדכון מתנדבות מקובץ', message, this.toUpdate, 'volunteer');
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: '75%',
+      data: dialogData
+    });
+    return dialogRef.afterClosed();
+  }
 }
 
