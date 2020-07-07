@@ -13,6 +13,7 @@ export class Family {
     Reference: string;
     Reason: string;
     show: boolean;
+    color: boolean;
     // tslint:disable-next-line: max-line-length
     constructor(fatherName: string, motherName: string, lastName: string, telephone: string, pfather: string, pmother: string, address: string, status: string, nChildren: number, reason: string, reference: string) {
         this.FirstNameFather = fatherName;

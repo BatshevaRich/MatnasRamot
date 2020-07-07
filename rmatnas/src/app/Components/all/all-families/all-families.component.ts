@@ -11,6 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import * as XLSX from 'xlsx';
 import { AddVFComponent } from '../../forms/add/add-vf/add-vf.component';
+import { NotificationService } from '../../../services/notification.service';
 
 export interface Details {
   Id: number;
@@ -35,6 +36,15 @@ export interface Details {
   ],
 })
 export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
+  constructor(public fs: FamilyService,
+              public ns: NotificationService,
+              private changeDetectorRefs: ChangeDetectorRef,
+              public dialog: MatDialog,
+              private elementRef: ElementRef,
+              private snackBar: MatSnackBar) {
+    this.dataSource.filterPredicate =
+      (data: Details, filter: string) => data.LastName.indexOf(filter) !== -1;
+  }
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatTable, {static: false}) table: MatTable<any>;
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
@@ -54,14 +64,7 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
   worksheet: any;
   volunteerData: any;
   arrayBuffer: any;
-  constructor(public fs: FamilyService,
-              private changeDetectorRefs: ChangeDetectorRef,
-              public dialog: MatDialog,
-              private elementRef: ElementRef,
-              private snackBar: MatSnackBar) {
-    this.dataSource.filterPredicate =
-      (data: Details, filter: string) => data.LastName.indexOf(filter) !== -1;
-  }
+  familiesToConnect: Family[] = [];
   ngOnInit() {
     if (this.vId) {
       this.displayedColumns = ['LastName', 'Address', 'Telephone', 'NumChildren', 'Status', 'Reference'];
@@ -105,12 +108,26 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
     } else {
       this.fs.getFamilies().subscribe((data: Family[]) => {
         data = this.fs.trimResultsFromDB(data);
-        this.families = data;
-        this.dataSource.data = data;
-        this.resultsLength = this.dataSource.data.length;
-        this.loaded = true;
-        this.error = false;
-      }, err => { this.error = true; this.loaded = true; });
+        this.ns.getAllFamiliesToConnect().subscribe((res: Family[]) => {
+          function sortFunc(a: { Id: number; }, b: { Id: number; }) {
+            const s1 = res.find(s => s.Id === a.Id);
+            const s2 = res.find(s => s.Id === b.Id);
+            if (s1 && s2) { return 0; }
+            else if (s1) { return -1; }
+            else if (s2) { return 1; }
+            return 0;
+          }
+          const sorted = data.sort(sortFunc);
+          for (let index = 0; index < res.length; index++) {
+            sorted[index].color = true;
+          }
+          this.families = data;
+          this.dataSource.data = sorted;
+          this.resultsLength = this.dataSource.data.length;
+          this.loaded = true;
+          this.error = false;
+      });
+      }, () => { this.error = true; this.loaded = true; });
     }
   }
 
