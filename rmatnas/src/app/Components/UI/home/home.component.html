@@ -7,7 +7,7 @@
     </span>
   </div>
   <span fxFlex="20%">
-    <mat-card>
+    <mat-card *ngIf="volunteerBadge > 0">
       <mat-error>
         <h6><span>{{volunteerBadge}}</span> מתנדבות לא מתואמות</h6>
       </mat-error>
@@ -15,7 +15,7 @@
           class="fa fa-arrow-left"></i></button>
     </mat-card>
     <div style="height:10pt;"></div>
-    <mat-card>
+    <mat-card *ngIf="familyBadge > 0">
       <mat-error>
         <h6><span>{{familyBadge}}</span> משפחות לא מתואמות</h6>
       </mat-error>
@@ -23,7 +23,7 @@
           class="fa fa-arrow-left"></i></button>
     </mat-card>
     <div style="height:10pt;"></div>
-    <mat-card>
+    <mat-card *ngIf="organizationBadge > 0">
       <mat-error>
         <h6><span>{{organizationBadge}}</span> ארגונים לא מתואמים</h6>
       </mat-error>
@@ -31,7 +31,7 @@
           class="fa fa-arrow-left"></i></button>
     </mat-card>
     <div style="height:10pt;"></div>
-    <mat-card>
+    <mat-card *ngIf="eventBadge > 0">
       <mat-error>
         <h6><span>{{eventBadge}}</span> ארועים לא מתואמים</h6>
       </mat-error>
