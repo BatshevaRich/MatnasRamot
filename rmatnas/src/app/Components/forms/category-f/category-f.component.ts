@@ -12,7 +12,7 @@ import { NgForm } from '@angular/forms';
 })
 export class CategoryFComponent implements OnInit, OnDestroy {
   @ViewChild('categoryForm') mytemplateForm: NgForm;
-  newCategory: Category = new Category('...', 0);
+  newCategory: Category = new Category('', 0);
   token = 0;
   @Input() vId: number;
   @Output() changedCategory: EventEmitter<Category> = new EventEmitter<Category>();

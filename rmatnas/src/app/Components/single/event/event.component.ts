@@ -30,7 +30,7 @@ export class EventComponent implements OnInit, OnDestroy {
   constructor(public es: EventService,
               public dialog: MatDialog,
               private elementRef: ElementRef) {
-    this.myEvent = new Eventt('...', '...', '11/10/1999', '11/10/1999', '11/10/1999');
+    this.myEvent = new Eventt('', '', '11/10/1999', '11/10/1999', '11/10/1999');
   }
   ngOnInit() {
     this.es.getEvent(this.vId).subscribe(v => {

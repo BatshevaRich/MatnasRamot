@@ -16,9 +16,9 @@ import { AddVFComponent } from '../../forms/add/add-vf/add-vf.component';
 })
 export class ToVolunteerComponent implements OnInit, OnDestroy {
   toVolunteer: VolunteerAndFamily = new VolunteerAndFamily(
-    new Family('...', '...', '...', '0', '0', '0', '...', '...', 1, '...', '...'),
-    new Volunteer('...', '...', '...', '...@...', '...', '1999-01-01', false),
-    new Category('...', 0), 'default', '1999-01-01'
+    new Family('', '', '', '', '', '', '', '', 0, '', ''),
+    new Volunteer('', '', '', '', '', '1999-01-01', false),
+    new Category('', 0), 'default', '1999-01-01'
   );
   id: number;
   @Input() vId: number;

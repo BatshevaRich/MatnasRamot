@@ -30,7 +30,7 @@ export class OrganizationComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(public os: OrganizationService,
               public dialog: MatDialog,
               private elementRef: ElementRef) {
-    this.myOrganization = new Organization('...', '...', '...', '...', '...', '...');
+    this.myOrganization = new Organization('', '', '', '', '', '');
   }
 
   ngOnInit() {

@@ -101,8 +101,7 @@ export class FamilyFComponent implements OnInit, OnDestroy {
           this.dialogRef.close(t);
         });
       this.mytemplateForm.resetForm();
-      this.newFamily = new Family('fathername', 'mothername', 'lastname', '0',
-        '0', '0', 'address', 'status', 2, 'reason', 'reference');
+      this.newFamily = new Family('', '', '', '', '', '', '', '', 0, '', '');
     }
     this.snackBar.open('שמירת משפחה מבוצעת...', 'OK', {
       duration: 2000,

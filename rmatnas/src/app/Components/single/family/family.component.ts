@@ -12,7 +12,7 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
   styleUrls: ['./family.component.css']
 })
 export class FamilyComponent implements OnInit, OnDestroy, AfterViewInit {
-  family: Family = new Family('...', '...', '...', '0', '0', '0', '...', '...', 2, '...', '...');
+  family: Family = new Family('', '', '', '', '', '', '', '', 0, '', '');
   id: number;
   categories: Category[] = [];
   @Input() vId: number;
