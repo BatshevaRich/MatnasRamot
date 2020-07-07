@@ -130,5 +130,20 @@ namespace Dal
             }
             return volunteers;
         }
+
+        public static IEnumerable<Event> GetNextEvents()
+        {
+            using (dbRamotEntities db = new dbRamotEntities())
+            {
+                List<Event> events = new List<Event>();
+                var nextEvents = db.Events.Where(e => DateTime.Compare(e.DateAdded, DateTime.Now) < 0).ToList();
+                foreach (var e in nextEvents)
+                {
+                    var c = DateTime.Compare(e.DateAdded.Date, DateTime.Now);
+                    events.Add(Mapper.CastEventToComon(e));
+                }
+                return events;
+            }
+        }
     }
 }
