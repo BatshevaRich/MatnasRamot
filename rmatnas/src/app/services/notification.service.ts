@@ -12,12 +12,20 @@ import { Eventt } from '../Classes/Eventt';
   providedIn: 'root'
 })
 export class NotificationService {
+  path = environment.baseURL + 'warning';
   familiesToConnect: Family[] = [];
   volunteerToConnect: Volunteer[] = [];
   OrganizationsToConnect: Organization[] = [];
   EventsToConnect: Eventt[] = [];
   CategoriesNotInUse: Category[] = [];
-  constructor(public http: HttpClient) { }
+  constructor(public http: HttpClient) {
+    this.getAllFamiliesToConnect().subscribe((res: Family[]) => {
+      this.familiesToConnect = res;
+    });
+    this.getAllEventsToConnect().subscribe((res: Eventt[]) => {
+      this.EventsToConnect = res;
+    });
+  }
 
   public get Families(): Family[] {
     return this.familiesToConnect;
@@ -40,9 +48,7 @@ export class NotificationService {
   }
 
   getAllFamiliesToConnect() {
-    return this.http.get<Family[]>(environment.baseURL + '/getfamiliestoconnect').subscribe((res: Family[]) => {
-      this.familiesToConnect = res;
-    });
+    return this.http.get<Family[]>(this.path + '/family');
   }
 
   getAllVolunteersToConnect() {
@@ -58,9 +64,7 @@ export class NotificationService {
   }
 
   getAllEventsToConnect() {
-    return this.http.get<Eventt[]>(environment.baseURL + '/geteventstoconnect').subscribe((res: Eventt[]) => {
-      this.EventsToConnect = res;
-    });
+    return this.http.get<Eventt[]>(this.path + '/event');
   }
 
   getAllCategoriesNotInUse() {

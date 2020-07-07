@@ -6,6 +6,8 @@ import { AddVFComponent } from '../../forms/add/add-vf/add-vf.component';
 import { OrganizationFComponent } from '../../forms/organization-f/organization-f.component';
 import { EventFComponent } from '../../forms/event-f/event-f.component';
 import { NotificationService } from '../../../services/notification.service';
+import { Family } from '../../../Classes/Family';
+import { Eventt } from '../../../Classes/Eventt';
 
 @Component({
   selector: 'app-header',
@@ -13,6 +15,7 @@ import { NotificationService } from '../../../services/notification.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
+  allBadge = 0;
   familyBadge = 0;
   volunteerBadge = 0;
   eventBadge = 0;
@@ -20,10 +23,20 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   categoryBadge = 0;
   constructor(public dialog: MatDialog,
               private elementRef: ElementRef,
-              public ns: NotificationService) { }
+              public ns: NotificationService) {
+                this.ns.getAllFamiliesToConnect().subscribe((res: Family[]) => {
+                  this.familyBadge = res.length;
+                  this.allBadge += res.length;
+                });
+                this.ns.getAllEventsToConnect().subscribe((res: Eventt[]) => {
+                  this.eventBadge = res.length;
+                  this.allBadge += res.length;
+                });
+              }
 
   ngAfterViewInit() {
-    this.familyBadge = this.ns.Families.length;
+    // this.ns.getAllFamiliesToConnect();
+    // this.familyBadge = this.ns.Families.length;
     this.volunteerBadge = this.ns.Volunteers.length;
     this.eventBadge = this.ns.Events.length;
     this.organizationBadge = this.ns.Organizations.length;
