@@ -123,5 +123,10 @@ namespace Bll
         {
             return Dal.FamilyManager.GetFamiliesByCategory(idCategory);
         }
+
+        public static IEnumerable<Family> GetFamiluesWithoutVolunteer()
+        {
+            return Dal.FamilyManager.GetFamiliesWithoutVolunteer();
+        }
     }
 }

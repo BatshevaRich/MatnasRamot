@@ -239,5 +239,19 @@ namespace Dal
                 return families;
             }
         }
+
+        public static IEnumerable<Family> GetFamiliesWithoutVolunteer()
+        {
+            List<Family> families = new List<Family>();
+            using (dbRamotEntities db = new dbRamotEntities())
+            {
+                var fam = db.Families.Where(f => f.VolunteerAndFamily.Count == 0).ToArray();
+                foreach (var f in fam)
+                {
+                    families.Add(Mapper.CastFamilyToComon(f));
+                }
+            }
+            return families;
+        }
     }
 }
