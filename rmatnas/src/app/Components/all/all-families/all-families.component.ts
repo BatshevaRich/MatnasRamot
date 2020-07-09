@@ -108,25 +108,24 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
     } else {
       this.fs.getFamilies().subscribe((data: Family[]) => {
         data = this.fs.trimResultsFromDB(data);
-        this.ns.getAllFamiliesToConnect().subscribe((res: Family[]) => {
-          function sortFunc(a: { Id: number; }, b: { Id: number; }) {
-            const s1 = res.find(s => s.Id === a.Id);
-            const s2 = res.find(s => s.Id === b.Id);
-            if (s1 && s2) { return 0; }
-            else if (s1) { return -1; }
-            else if (s2) { return 1; }
-            return 0;
-          }
-          const sorted = data.sort(sortFunc);
-          for (let index = 0; index < res.length; index++) {
-            sorted[index].color = true;
-          }
-          this.families = data;
-          this.dataSource.data = sorted;
-          this.resultsLength = this.dataSource.data.length;
-          this.loaded = true;
-          this.error = false;
-      });
+        const res = this.ns.Families;
+        function sortFunc(a: { Id: number; }, b: { Id: number; }) {
+          const s1 = res.find(s => s.Id === a.Id);
+          const s2 = res.find(s => s.Id === b.Id);
+          if (s1 && s2) { return 0; }
+          else if (s1) { return -1; }
+          else if (s2) { return 1; }
+          return 0;
+        }
+        const sorted = data.sort(sortFunc);
+        for (let index = 0; index < res.length; index++) {
+          sorted[index].color = true;
+        }
+        this.families = data;
+        this.dataSource.data = sorted;
+        this.resultsLength = this.dataSource.data.length;
+        this.loaded = true;
+        this.error = false;
       }, () => { this.error = true; this.loaded = true; });
     }
   }
