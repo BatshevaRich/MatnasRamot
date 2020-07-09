@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, OnDestroy, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { VolunteerFComponent } from '../../forms/volunteer-f/volunteer-f.component';
 import { FamilyFComponent } from '../../forms/family-f/family-f.component';
@@ -6,8 +6,6 @@ import { AddVFComponent } from '../../forms/add/add-vf/add-vf.component';
 import { OrganizationFComponent } from '../../forms/organization-f/organization-f.component';
 import { EventFComponent } from '../../forms/event-f/event-f.component';
 import { NotificationService } from '../../../services/notification.service';
-import { Family } from '../../../Classes/Family';
-import { Eventt } from '../../../Classes/Eventt';
 
 @Component({
   selector: 'app-header',
@@ -23,23 +21,14 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   categoryBadge = 0;
   constructor(public dialog: MatDialog,
               private elementRef: ElementRef,
-              public ns: NotificationService) {
-                this.ns.getAllFamiliesToConnect().subscribe((res: Family[]) => {
-                  this.familyBadge = res.length;
-                  this.allBadge += res.length;
-                });
-                this.ns.getAllEventsToConnect().subscribe((res: Eventt[]) => {
-                  this.eventBadge = res.length;
-                  this.allBadge += res.length;
-                });
-              }
+              public ns: NotificationService,
+              private cdr: ChangeDetectorRef) { }
 
   ngAfterViewInit() {
-    // this.ns.getAllFamiliesToConnect();
-    // this.familyBadge = this.ns.Families.length;
-    this.volunteerBadge = this.ns.Volunteers.length;
+    this.familyBadge = this.ns.Families.length;
     this.eventBadge = this.ns.Events.length;
-    this.organizationBadge = this.ns.Organizations.length;
+    this.allBadge = this.familyBadge + this.eventBadge;
+    this.cdr.detectChanges();
   }
 
   ngOnInit(): void {
