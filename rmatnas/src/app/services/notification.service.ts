@@ -18,14 +18,7 @@ export class NotificationService {
   OrganizationsToConnect: Organization[] = [];
   EventsToConnect: Eventt[] = [];
   CategoriesNotInUse: Category[] = [];
-  constructor(public http: HttpClient) {
-    this.getAllFamiliesToConnect().subscribe((res: Family[]) => {
-      this.familiesToConnect = res;
-    });
-    this.getAllEventsToConnect().subscribe((res: Eventt[]) => {
-      this.EventsToConnect = res;
-    });
-  }
+  constructor(public http: HttpClient) { }
 
   public get Families(): Family[] {
     return this.familiesToConnect;
@@ -47,8 +40,14 @@ export class NotificationService {
     return this.CategoriesNotInUse;
   }
 
-  getAllFamiliesToConnect() {
-    return this.http.get<Family[]>(this.path + '/family');
+  async loadAll() {
+    const res = await Promise.all([this.getAllFamiliesToConnect(), this.getAllEventsToConnect()]);
+    return console.log(res);
+  }
+
+  async getAllFamiliesToConnect() {
+    const res = await this.http.get<Family[]>(this.path + '/family').toPromise();
+    this.familiesToConnect = res;
   }
 
   getAllVolunteersToConnect() {
@@ -63,8 +62,9 @@ export class NotificationService {
     });
   }
 
-  getAllEventsToConnect() {
-    return this.http.get<Eventt[]>(this.path + '/event');
+  async getAllEventsToConnect() {
+    const res = await this.http.get<Eventt[]>(this.path + '/event').toPromise();
+    this.EventsToConnect = res;
   }
 
   getAllCategoriesNotInUse() {
