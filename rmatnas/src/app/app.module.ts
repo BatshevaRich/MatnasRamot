@@ -1,9 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { AppComponent } from './app.component';
 import { VolunteerComponent } from './Components/single/volunteer/volunteer.component';
@@ -59,6 +59,11 @@ import { LoginComponent } from './Components/security/login/login.component';
 WebFont.load({
   custom: { families: ['Material Icons', 'Material Icons Outline'], }
 });
+
+export function startupServiceFactory(startupService: NotificationService) {
+  console.log('startupService', startupService);
+  return () => startupService.loadAll(); // => required, otherwise `this` won't work inside StartupService::load
+}
 @NgModule({
   imports: [
     ReactiveFormsModule,
@@ -118,7 +123,14 @@ WebFont.load({
     LoginComponent
   ],
   entryComponents: [RangesFooter],
-  providers: [DatePipe, { provide: MatPaginatorIntl, useValue: getHebrewPaginatorIntl() }, NotificationService],
+  providers: [DatePipe, MatPaginatorIntl, NotificationService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: startupServiceFactory,
+      deps: [NotificationService],
+      multi: true
+    },
+    { provide: MatPaginatorIntl, useValue: getHebrewPaginatorIntl() }],
   bootstrap: [AppComponent]
 })
 export class AppModule {
