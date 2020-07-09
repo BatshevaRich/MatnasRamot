@@ -46,8 +46,8 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
       (data: Details, filter: string) => data.LastName.indexOf(filter) !== -1;
   }
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild(MatTable, {static: false}) table: MatTable<any>;
-  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatTable, { static: false }) table: MatTable<any>;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   displayedColumns = ['showDetails', 'LastName', 'Address', 'Telephone', 'NumChildren', 'Status', 'Reference', 'columnadd', 'columndelete'];
   expandedElement: Details | null;
   families: Family[] = [];
@@ -209,45 +209,46 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
       // tslint:disable-next-line: no-string-literal
       if (!js[1]['שם_משפחה']) {
         this.snackBar.open('קובץ לא תקני, נא להעלות קובץ נכון...', 'OK', {
-        duration: 5000,
-        direction: 'rtl'
-      });
+          duration: 5000,
+          direction: 'rtl'
+        });
       } else {
-      const newData = js.map((x) => ({
-        // tslint:disable-next-line: no-string-literal
-        Id: x['Id'] as number,
-        // tslint:disable-next-line: no-string-literal
-        LastName: x['שם_משפחה'],
-        // tslint:disable-next-line: no-string-literal
-        FirstNameFather: x['אבא'],
-        // tslint:disable-next-line: no-string-literal
-        FirstNameMother: x['אמא'],
-        // tslint:disable-next-line: no-string-literal
-        Address: x['כתובת'],
-        // tslint:disable-next-line: no-string-literal
-        Telephone: x['טלפון'],
-        // tslint:disable-next-line: no-string-literal
-        PelephoneFather: x['פלאפון_אבא'],
-        // tslint:disable-next-line: no-string-literal
-        PelephoneMother: x['פלאפון_אמא'],
-        // tslint:disable-next-line: no-string-literal
-        NumChildren: x['מספר_ילדים'],
-        // tslint:disable-next-line: no-string-literal
-        Status: x['סטטוס'],
-        // tslint:disable-next-line: no-string-literal
-        Reference: x['הפניה'],
-        // tslint:disable-next-line: no-string-literal
-        Reason: x['סיבה']
-      }));
-      this.dataSource.data = newData;
-      this.resultsLength = this.dataSource.data.length;
-      this.table.renderRows();
-      console.log(newData);
-      this.snackBar.open('קובץ נטען בהצלחה', 'OK', {
-        duration: 5000,
-        direction: 'rtl'
-      });
-    }};
+        const newData = js.map((x) => ({
+          // tslint:disable-next-line: no-string-literal
+          Id: x['Id'] as number,
+          // tslint:disable-next-line: no-string-literal
+          LastName: x['שם_משפחה'],
+          // tslint:disable-next-line: no-string-literal
+          FirstNameFather: x['אבא'],
+          // tslint:disable-next-line: no-string-literal
+          FirstNameMother: x['אמא'],
+          // tslint:disable-next-line: no-string-literal
+          Address: x['כתובת'],
+          // tslint:disable-next-line: no-string-literal
+          Telephone: x['טלפון'],
+          // tslint:disable-next-line: no-string-literal
+          PelephoneFather: x['פלאפון_אבא'],
+          // tslint:disable-next-line: no-string-literal
+          PelephoneMother: x['פלאפון_אמא'],
+          // tslint:disable-next-line: no-string-literal
+          NumChildren: x['מספר_ילדים'],
+          // tslint:disable-next-line: no-string-literal
+          Status: x['סטטוס'],
+          // tslint:disable-next-line: no-string-literal
+          Reference: x['הפניה'],
+          // tslint:disable-next-line: no-string-literal
+          Reason: x['סיבה']
+        }));
+        this.dataSource.data = newData;
+        this.resultsLength = this.dataSource.data.length;
+        this.table.renderRows();
+        console.log(newData);
+        this.snackBar.open('קובץ נטען בהצלחה', 'OK', {
+          duration: 5000,
+          direction: 'rtl'
+        });
+      }
+    };
     readFile.readAsArrayBuffer(this.fileUploaded);
   }
 
@@ -258,7 +259,7 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
 
   updateTable(event: Family) {
     this.dataSource = new MatTableDataSource(Object.values(this.dataSource)
-    .map((item: Family) => item.Id === event.Id ? this.fs.trimResultFromUpdate(event) : item));
+      .map((item: Family) => item.Id === event.Id ? this.fs.trimResultFromUpdate(event) : item));
     this.table.renderRows();
   }
 
