@@ -44,7 +44,11 @@
             <ng-container matColumnDef="showDetails">
               <th mat-header-cell *matHeaderCellDef>פרטים </th>
               <td mat-cell *matCellDef="let element">
-                <h5><i class="fa fa-caret-down"></i>
+                <h5>
+                  <mat-chip-list>
+                    <i class="fa fa-caret-down"></i>
+                    <mat-chip *ngIf="element.color" color="warn" selected>נא לתאם מתנדבת</mat-chip>
+                  </mat-chip-list>
                 </h5>
               </td>
             </ng-container>

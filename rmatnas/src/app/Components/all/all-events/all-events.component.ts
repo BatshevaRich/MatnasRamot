@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../../UI/confirm-dialog/confirm-dialog.component';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { AddVEComponent } from '../../forms/add/add-ve/add-ve.component';
+import { NotificationService } from '../../../services/notification.service';
 export interface Details {
   Id: number;
   Name: string;
@@ -48,6 +49,7 @@ export class AllEventsComponent implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(public es: EventService,
               public dialog: MatDialog,
+              public ns: NotificationService,
               private elementRef: ElementRef) { }
 
   ngOnInit() {
@@ -69,8 +71,23 @@ export class AllEventsComponent implements OnInit, OnDestroy, AfterViewInit {
         this.notFound = true;
       } else {
         this.eventts = this.es.trimResultsFromDB(events);
-        this.dataSource = new MatTableDataSource(Object.values(this.eventts));
+        const res = this.ns.Events;
+        function sortFunc(a: { Id: number; }, b: { Id: number; }) {
+          const s1 = res.find(s => s.Id === a.Id);
+          const s2 = res.find(s => s.Id === b.Id);
+          if (s1 && s2) { return 0; }
+          else if (s1) { return -1; }
+          else if (s2) { return 1; }
+          return 0;
+        }
+        const sorted = events.sort(sortFunc);
+        for (let index = 0; index < res.length; index++) {
+          sorted[index].color = true;
+        }
+        this.eventts = events;
+        this.dataSource = new MatTableDataSource(Object.values(sorted));
         this.resultsLength = this.dataSource.data.length;
+        this.loaded = true;
         this.error = false;
       }
     }, err => { this.error = true; this.loaded = true; });

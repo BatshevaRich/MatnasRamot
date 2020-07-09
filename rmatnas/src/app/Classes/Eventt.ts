@@ -6,6 +6,7 @@ export class Eventt {
     EndDate: string;
     DateAdded: string;
     show: boolean;
+    color: boolean;
     constructor(name: string, description: string, date: string, startDate: string, endDate: string) {
         this.Name = name;
         this.Description = description;
