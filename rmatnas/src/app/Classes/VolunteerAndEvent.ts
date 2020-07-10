@@ -1,17 +1,20 @@
+import { Eventt } from './Eventt';
+import { Volunteer } from './Volunteer';
+import { Category } from './Category';
+
 export class VolunteerAndEvent {
     Id: number;
-    IdEvent: number;
-    IdVolunteer: number;
-    IdCategory: number;
+    eventt: Eventt;
+    volunteer: Volunteer;
+    category: Category;
     Comments: string;
     dateAdded: string;
 
-    constructor(id: number, idEvent: number, idVolunteer: number, idCategory: number, comments: string, dateAdded: string) {
-        this.Id = id;
+    constructor(eventt: Eventt, volunteer: Volunteer, category: Category, comments: string, dateAdded: string) {
         this.Comments = comments;
-        this.IdCategory = idCategory;
-        this.IdEvent = idEvent;
-        this.IdVolunteer = idVolunteer;
+        this.category = category;
+        this.eventt = eventt;
+        this.volunteer = volunteer;
         this.dateAdded = dateAdded;
 
     }
