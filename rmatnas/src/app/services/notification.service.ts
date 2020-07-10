@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Family } from '../Classes/Family';
 import { environment } from '../../environments/environment';
 import { Category } from '../Classes/Category';
@@ -13,15 +13,38 @@ import { Eventt } from '../Classes/Eventt';
 })
 export class NotificationService {
   path = environment.baseURL + 'warning';
+  updateFamily$: Observable<number>;
+  private updateFamilySubject: Subject<number>;
+  updateEvent$: Observable<number>;
+  private updateEventSubject: Subject<number>;
   familiesToConnect: Family[] = [];
   volunteerToConnect: Volunteer[] = [];
   OrganizationsToConnect: Organization[] = [];
   EventsToConnect: Eventt[] = [];
   CategoriesNotInUse: Category[] = [];
-  constructor(public http: HttpClient) { }
+  constructor(public http: HttpClient) {
+    this.updateFamilySubject = new Subject<number>();
+    this.updateFamily$ = this.updateFamilySubject.asObservable();
+    this.updateEventSubject = new Subject<number>();
+    this.updateEvent$ = this.updateEventSubject.asObservable();
+  }
 
   public get Families(): Family[] {
     return this.familiesToConnect;
+  }
+
+  public set Families(f: Family[]) {
+    this.updateFamilySubject.next(f.filter(x => x.color).length);
+    this.familiesToConnect = f;
+  }
+
+  public get Events(): Eventt[] {
+    return this.EventsToConnect;
+  }
+
+  public set Events(e: Eventt[]) {
+    this.updateEventSubject.next(e.filter(x => x.color).length);
+    this.EventsToConnect = e;
   }
 
   public get Volunteers(): Volunteer[] {
@@ -30,10 +53,6 @@ export class NotificationService {
 
   public get Organizations(): Organization[] {
     return this.OrganizationsToConnect;
-  }
-
-  public get Events(): Eventt[] {
-    return this.EventsToConnect;
   }
 
   public get Categories(): Category[] {
