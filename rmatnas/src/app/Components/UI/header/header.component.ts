@@ -6,6 +6,7 @@ import { AddVFComponent } from '../../forms/add/add-vf/add-vf.component';
 import { OrganizationFComponent } from '../../forms/organization-f/organization-f.component';
 import { EventFComponent } from '../../forms/event-f/event-f.component';
 import { NotificationService } from '../../../services/notification.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -19,10 +20,23 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   eventBadge = 0;
   organizationBadge = 0;
   categoryBadge = 0;
+  subscriptionFamily: Subscription;
+  subscriptionEvent: Subscription;
   constructor(public dialog: MatDialog,
               private elementRef: ElementRef,
               public ns: NotificationService,
-              private cdr: ChangeDetectorRef) { }
+              private cdr: ChangeDetectorRef) {
+                this.subscriptionFamily = this.ns.updateFamily$.subscribe(
+                update => {
+                  this.familyBadge = update;
+                  this.allBadge = this.eventBadge + this.familyBadge;
+              });
+                this.subscriptionEvent = this.ns.updateEvent$.subscribe(
+                update => {
+                  this.eventBadge = update;
+                  this.allBadge = this.eventBadge + this.familyBadge;
+              });
+            }
 
   ngAfterViewInit() {
     this.familyBadge = this.ns.Families.length;
@@ -89,6 +103,8 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.elementRef.nativeElement.remove();
+    this.subscriptionEvent.unsubscribe();
+    this.subscriptionFamily.unsubscribe();
   }
 
 }
