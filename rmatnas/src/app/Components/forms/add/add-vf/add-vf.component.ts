@@ -22,11 +22,13 @@ export class AddVFComponent implements OnInit, OnDestroy {
   families: Family[] = [];
   volunteers: Volunteer[] = [];
   categories: Category[] = [];
+  objectCategories: Category[] = [];
   comments: string;
   dateAdded: Date;
   selectedFamily: Family = null;
   selectedVolunteer: Volunteer = null;
   selectedCategory: Category;
+  selectedCategories: Category[] = [];
   selectedVolunteers: Volunteer[] = [];
   selectedFamilies: Family[] = [];
   constructor(private fs: FamilyService,
@@ -44,19 +46,22 @@ export class AddVFComponent implements OnInit, OnDestroy {
     this.selectedFamily = this.data.family;
     this.selectedVolunteer = this.data.volunteer;
     if (this.selectedFamily) {
+      this.fs.getCategoriesOfFamily(this.selectedFamily.Id).subscribe((res: Category[]) => {
+        this.objectCategories = res;
+      });
       this.vs.getVolunteers().subscribe((res: Volunteer[]) => {
         this.volunteers = res;
         this.volunteers = this.volunteers.filter((v: Volunteer) => v.IsActive);
       });
     }
     if (this.selectedVolunteer) {
+      this.vs.getCategoriesOfVolunteer(this.selectedVolunteer.Id).subscribe((res: Category[]) => {
+        this.objectCategories = res;
+      });
       this.fs.getFamilies().subscribe((res: Family[]) => {
         this.families = res;
       });
     }
-    this.cs.getCategories().subscribe((res: Category[]) => {
-      this.categories = res;
-    });
   }
 
   ngOnInit() { }
@@ -65,75 +70,33 @@ export class AddVFComponent implements OnInit, OnDestroy {
     this.elementRef.nativeElement.remove();
   }
 
-  onChangeFamily(tab: number) {
-    if (tab === 3) {
-      this.selectedCategory = null;
-      this.selectedVolunteer = null;
-      this.selectedFamily != null ? this.fs.getCategoriesOfFamily(this.selectedFamily.Id)
-        .subscribe((res: Category[]) => {
-          this.categories = res;
-        }) : this.selectedFamily = null;
-    }
-  }
-
-  volunteerChanged(tab: number) {
-    if (tab === 1) {
-      this.selectedFamily = null;
-      this.selectedVolunteer != null ? this.fs.getFamiliesByCategory(this.selectedCategory.Id)
-        .subscribe((res: Family[]) => {
-          this.families = res;
-        }) : this.selectedVolunteer = null;
-    }
-    if (tab === 2) {
-      this.selectedFamily = null;
-      this.selectedCategory = null;
-      this.selectedVolunteer != null ? this.vs.getCategoriesOfVolunteer(this.selectedVolunteer.Id)
-        .subscribe((res: Category[]) => {
-          this.categories = res;
-        }) : this.selectedVolunteer = null;
-    }
-    if (tab === 3) {
-
-    }
-  }
-  onChangeCtegory(tab: number) {
-    if (tab === 1) {
-      this.selectedVolunteer = null;
-      this.selectedFamily = null;
-      this.selectedCategory != null ? this.vs.getVolunteersByCategory(this.selectedCategory.Id)
-        .subscribe((res: Volunteer[]) => {
-          this.volunteers = res;
-          this.volunteers = this.volunteers.filter((v: Volunteer) => v.IsActive);
-        }) : this.selectedCategory = null;
-    }
-    if (tab === 2) {
-      this.selectedFamily = null;
-      this.selectedCategory != null ? this.fs.getFamiliesByCategory(this.selectedCategory.Id)
-        .subscribe((res: Family[]) => {
-          this.families = res;
-        }) : this.selectedCategory = null;
-    }
-    if (tab === 3) {
-      this.selectedVolunteer = null;
-      this.selectedCategory != null ? this.vs.getVolunteersByCategory(this.selectedCategory.Id)
-        .subscribe((res: Volunteer[]) => {
-          this.volunteers = res;
-          this.volunteers = this.volunteers.filter((v: Volunteer) => v.IsActive);
-        }) : this.selectedCategory = null;
-    }
-  }
-  // submitForm() {
-  //   this.vaf.addVolunteerAction(this.selectedVolunteer, this.selectedFamily, this.selectedCategory);
-  //   this.snackBar.open('שמירת התנדבות מבוצעת...', 'OK', {
-  //     duration: 2000,
-  //     direction: 'rtl'
-  //   });
-  // }
-  onTabChange() {
-    this.refresh();
-  }
-
   onSelection(event) {
+  }
+
+  onSelectionC(event: Category) {
+    if (event) {
+      this.selectedCategory = event;
+      if (this.selectedFamily) {
+        this.vs.getVolunteersByCategory(event.Id).subscribe((res: Volunteer[]) => {
+          this.volunteers = res;
+        });
+      } else if (this.selectedVolunteer) {
+        this.fs.getFamiliesByCategory(event.Id).subscribe((res: Family[]) => {
+          this.families = res;
+        });
+      }
+    } else {
+      this.selectedCategory = null;
+      if (this.selectedFamily) {
+        this.vs.getVolunteers().subscribe((res: Volunteer[]) => {
+          this.volunteers = res;
+        });
+      } else if (this.selectedVolunteer) {
+        this.fs.getFamilies().subscribe((res: Family[]) => {
+          this.families = res;
+        });
+      }
+    }
   }
 
 

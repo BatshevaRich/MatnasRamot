@@ -114,49 +114,79 @@
   </div>
 </form>
 <br /> -->
-
-<span *ngIf="data.family" dir="rtl" style="direction: rtl">
-  <app-family class="object-style" [vId]="data.id"
-      [toV]=true>
-  </app-family>
-  <span class="fill-form">
+<mat-dialog-content>
+  <span *ngIf="data.family" dir="rtl" style="direction: rtl">
+    <span class="object-style">
+      <app-family [vId]="data.id" [toV]=true>
+      </app-family>
+    </span>
+    <span class="object-style">
+      <h6>בחירת קטגורית התנדבות</h6>
+      <mat-radio-group class="example-radio-group" [(ngModel)]="selectedCategories"
+        (ngModelChange)="onSelectionC($event)">
+        <mat-radio-button class="example-radio-button" [checked]="true" checkboxPosition="before">
+          כל הקטגוריות
+        </mat-radio-button>
+        <mat-radio-button class="example-radio-button" checkboxPosition="before" [value]="cat"
+          *ngFor="let cat of objectCategories">
+          {{cat.Name}}
+        </mat-radio-button>
+      </mat-radio-group>
+    </span>
+    <span class="fill-form">
       <form (ngSubmit)="submitFormF(categoryForm)" class="text-right" #categoryForm="ngForm">
-          <h6>מתנדבות מתאימות ע"פ קטגוריות משפחה:</h6>
-          <mat-selection-list name="volunteersselected" [(ngModel)]="selectedVolunteers"
+        <h6>מתנדבות מתאימות ע"פ הקטגוריות:</h6>
+        <mat-selection-list name="volunteersselected" [(ngModel)]="selectedVolunteers"
           (ngModelChange)="onSelection($event)" #volunteersS *ngIf="volunteers.length > 0">
-          <mat-list-option checkboxPosition="before"[value]="volunteer" *ngFor="let volunteer of volunteers">
-              {{volunteer.Name}}
+          <mat-list-option checkboxPosition="before" [value]="volunteer" *ngFor="let volunteer of volunteers">
+            {{volunteer.Name}}
           </mat-list-option>
-      </mat-selection-list>
-          <mat-dialog-actions align="end">
-              <button mat-button mat-raised-button mat-dialog-close>ביטול</button>
-              <button mat-button mat-raised-button type="submit">
-                  <span>להוספת מתנדבות למשפחה</span>
-              </button>
-          </mat-dialog-actions>
+        </mat-selection-list>
+        <mat-dialog-actions align="end">
+          <button mat-button mat-raised-button mat-dialog-close>ביטול</button>
+          <button mat-button mat-raised-button type="submit"
+            [disabled]="selectedVolunteers.length == 0 && selectedFamilies.length == 0">
+            <span>להוספת מתנדבות למשפחה</span>
+          </button>
+        </mat-dialog-actions>
       </form>
+    </span>
   </span>
-</span>
 
-<span *ngIf="data.volunteer" dir="rtl" style="direction: rtl">
-  <app-volunteer class="object-style" [vId]="data.id"
-      [toV]=true>
-  </app-volunteer>
-  <span class="fill-form">
+  <span *ngIf="data.volunteer" dir="rtl" style="direction: rtl">
+    <span class="object-style">
+      <app-volunteer [vId]="data.id" [toV]=true>
+      </app-volunteer>
+    </span>
+    <span class="object-style">
+      <mat-radio-group class="example-radio-group" [(ngModel)]="selectedCategories"
+        (ngModelChange)="onSelectionC($event)">
+        <mat-radio-button class="example-radio-button" [checked]="true" checkboxPosition="before">
+          כל הקטגוריות
+        </mat-radio-button>
+        <mat-radio-button class="example-radio-button" checkboxPosition="before" [value]="cat"
+          *ngFor="let cat of objectCategories">
+          {{cat.Name}}
+        </mat-radio-button>
+      </mat-radio-group>
+    </span>
+    <span class="fill-form">
       <form (ngSubmit)="submitFormV(categoryForm)" class="text-right" #categoryForm="ngForm">
-          <h6>משפחות מתאימות ע"פ קטגוריות מתנדבת:</h6>
-          <mat-selection-list name="familiesselected" [(ngModel)]="selectedFamilies"
-          (ngModelChange)="onSelection($event)" #familiesS *ngIf="families.length > 0">
-          <mat-list-option checkboxPosition="before"[value]="family" *ngFor="let family of families">
-              {{family.LastName}}
+        <h6>משפחות מתאימות ע"פ קטגוריות :</h6>
+        <mat-selection-list name="familiesselected" [(ngModel)]="selectedFamilies" (ngModelChange)="onSelection($event)"
+          #familiesS *ngIf="families.length > 0">
+          <mat-list-option checkboxPosition="before" [value]="family" *ngFor="let family of families">
+            {{family.LastName}}
           </mat-list-option>
-      </mat-selection-list>
-          <mat-dialog-actions align="end">
-              <button mat-button mat-raised-button mat-dialog-close>ביטול</button>
-              <button mat-button mat-raised-button type="submit">
-                  <span>להוספת משפחות למתנדבת</span>
-              </button>
-          </mat-dialog-actions>
+        </mat-selection-list>
+        <mat-dialog-actions align="end">
+          <button mat-button mat-raised-button mat-dialog-close>ביטול</button>
+          <button mat-button mat-raised-button type="submit"
+            [disabled]="selectedVolunteers.length == 0 && selectedFamilies.length == 0">
+            <span>להוספת משפחות למתנדבת</span>
+          </button>
+        </mat-dialog-actions>
       </form>
+    </span>
   </span>
-</span>
+</mat-dialog-content>
