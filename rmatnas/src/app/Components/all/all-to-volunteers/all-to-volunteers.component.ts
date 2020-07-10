@@ -68,7 +68,7 @@ export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewIni
               item.Id = element.Id;
               item.NameFamily = element.Family.LastName;
               item.NameVolunteer = element.Volunteer.Name;
-              element.Category ? item.Category = element.Category.Name : item.Category = 'קטגוריה נמחקה';
+              element.Category ? item.Category = element.Category.Name : item.Category = 'אין קטגוריה';
               item.PelephoneVolunteer = element.Volunteer.Pelephone;
               this.allvolunteerings.push(item);
               item.IdVolunteer = element.Volunteer.Id;
@@ -91,7 +91,7 @@ export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewIni
               item.Id = element.Id;
               item.NameFamily = element.Family.LastName;
               item.NameVolunteer = element.Volunteer.Name;
-              element.Category ? item.Category = element.Category.Name : item.Category = 'קטגוריה נמחקה';
+              element.Category ? item.Category = element.Category.Name : item.Category = 'אין קטגוריה';
               item.PelephoneVolunteer = element.Volunteer.Pelephone;
               this.allvolunteerings.push(item);
               item.IdVolunteer = element.Volunteer.Id;
@@ -139,7 +139,7 @@ export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewIni
             item.Id = element.Id;
             item.NameFamily = element.Family.LastName;
             item.NameVolunteer = element.Volunteer.Name;
-            element.Category ? item.Category = element.Category.Name : item.Category = 'קטגוריה נמחקה';
+            element.Category ? item.Category = element.Category.Name : item.Category = 'אין קטגוריה';
             item.PelephoneVolunteer = element.Volunteer.Pelephone;
             this.allvolunteerings.push(item);
             item.IdVolunteer = element.Volunteer.Id;
