@@ -8,6 +8,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AddFOComponent } from '../add-fo/add-fo.component';
 import { EventService } from '../../../../services/event.service';
+import { VolunteerAndEventService } from '../../../../services/volunteer-and-event.service';
 
 @Component({
   selector: 'app-add-ve',
@@ -17,36 +18,41 @@ import { EventService } from '../../../../services/event.service';
 export class AddVEComponent implements OnInit, OnDestroy {
 
   @Input() idEvent: number;
+  @Input() idVolunteer: number;
   volunteers: Volunteer[] = [];
-  selectedVolunteers: Volunteer[] = [];
-  categories: Category[] = [];
+  objectCategories: Category[] = [];
+  comments: string;
   selectedEvent: Eventt = null;
+  selectedVolunteer: Volunteer = null;
+  selectedCategory: Category;
   selectedCategories: Category[] = [];
+  selectedVolunteers: Volunteer[] = [];
   constructor(private vs: VolunteerService,
               private es: EventService,
               private cs: CategoryService,
-              private dialogRef: MatDialogRef<AddFOComponent>,
+              private vae: VolunteerAndEventService,
+              private dialogRef: MatDialogRef<AddVEComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
               private snackBar: MatSnackBar,
               private elementRef: ElementRef) {
+       this.refresh();
   }
 
-  ngOnInit() {
-    this.idEvent = this.data.id;
-    this.es.getEvent(this.idEvent).subscribe((res: Eventt) => {
-      this.selectedEvent = res;
-    });
-    this.es.getCategoriesOfEvent(this.idEvent).subscribe((cats: Category[]) => {
-      this.selectedCategories = cats;
-      this.selectedCategories.forEach(element => {
-        this.vs.getVolunteersByCategory(element.Id).subscribe((data: Volunteer[]) => {
-          data.forEach(volunteer => {
-            this.volunteers.push(volunteer);
-          });
-        });
+  refresh() {
+    this.selectedCategory = null;
+    this.selectedEvent = this.data.eventt;
+    this.selectedVolunteer = this.data.volunteer;
+    if (this.selectedEvent) {
+      this.es.getCategoriesOfEvent(this.selectedEvent.Id).subscribe((res: Category[]) => {
+        this.objectCategories = res;
       });
-    });
-   }
+      this.vs.getVolunteers().subscribe((res: Volunteer[]) => {
+        this.volunteers = res;
+      });
+    }
+  }
+
+  ngOnInit() { }
 
   ngOnDestroy(): void {
     this.elementRef.nativeElement.remove();
@@ -55,17 +61,39 @@ export class AddVEComponent implements OnInit, OnDestroy {
   onSelection(event) {
   }
 
+  onSelectionC(event: Category) {
+    if (event) {
+      this.selectedCategory = event;
+      if (this.selectedEvent) {
+        this.vs.getVolunteersByCategory(event.Id).subscribe((res: Volunteer[]) => {
+          this.volunteers = res;
+        });
+      }
+    } else {
+      this.selectedCategory = null;
+      this.vs.getVolunteers().subscribe((res: Volunteer[]) => {
+          this.volunteers = res;
+      });
+    }
+  }
 
-  submitForm() {
+    submitFormF() {
+    this.selectedVolunteers.forEach((element: Volunteer) => {
+      this.vae.addVolunteerAction(this.selectedEvent, element, this.selectedCategory);
+      this.snackBar.open('שמירה מבוצעת...', 'OK', {
+        duration: 2000,
+            direction: 'rtl'
+          });
+    });
+    this.dialogRef.close(this.selectedEvent.Id);
+
+  }
+
+
+    submitForm() {
     this.selectedVolunteers.forEach((element: Volunteer) => {
       this.es.addVolunteerToEvent(this.selectedEvent.Id, element.Id);
     });
-
-    // this.vaf.addEventtAction(this.selectedEventt, this.selectedVolunteer, this.selectedCategory);
-    // this.snackBar.open('שמירת התנדבות מבוצעת...', 'OK', {
-    //     duration: 2000,
-    //     direction: 'rtl'
-    //   });
   }
 
 }
