@@ -11,7 +11,7 @@ namespace Dal
     {
         public static Families CastFamily(Family family)
         {
-            return family == null? null: new Families()
+            return family == null ? null : new Families()
             {
                 Id = family.Id,
                 FirstNameFather = family.FirstNameFather,
@@ -31,20 +31,20 @@ namespace Dal
 
         internal static VolunteerAndEvent CastVolunteerAndEvent(Common.VolunteerAndEvent vae)
         {
-           return vae == null? null:  new VolunteerAndEvent()
-           {
-               Id=vae.Id,
-               Categories =CastCategory( vae.Category),
-               Events =CastEvent( vae.Event),
-               Volunteers =CastVolunteer (vae.Volunteer),
-               Comments = vae.Comments,
-               dateAdded =vae.DateAdded
-           };
+            return vae == null ? null : new VolunteerAndEvent()
+            {
+                Id = vae.Id,
+                Categories = CastCategory(vae.Category),
+                Events = CastEvent(vae.Event),
+                Volunteers = CastVolunteer(vae.Volunteer),
+                Comments = vae.Comments,
+                dateAdded = vae.DateAdded
+            };
         }
 
         internal static OrganizationAndFamily CastOrganizationAndFamily(Common.OrganizationAndFamily oaf)
         {
-            return oaf == null? null: new OrganizationAndFamily()
+            return oaf == null ? null : new OrganizationAndFamily()
             {
                 Id = oaf.Id,
                 Categories = CastCategory(oaf.Category),
@@ -55,12 +55,29 @@ namespace Dal
             };
         }
 
+        public static Volunteers CastVolunteer(Volunteer volunteer)
+        {
+            return volunteer == null ? null : new Volunteers()
+            {
+                Id = volunteer.Id,
+                Address = volunteer.Address,
+                Age = volunteer.Age,
+                Comments = volunteer.Comments,
+                Email = volunteer.Email,
+                IsActive = volunteer.IsActive,
+                Name = volunteer.Name,
+                Pelephone = volunteer.Pelephone,
+                Telephone = volunteer.Telephone
+
+            };
+        }
+
         internal static VolunteerAndFamily CastVolunteerAndFamily(Common.VolunteerAndFamily vaf)
         {
-            return vaf == null? null: new VolunteerAndFamily()
+            return vaf == null ? null : new VolunteerAndFamily()
             {
                 Id = vaf.Id,
-                Categories = Mapper.CastCategory( vaf.Category),
+                Categories = Mapper.CastCategory(vaf.Category),
                 Families = Mapper.CastFamily(vaf.Family),
                 Volunteers = Mapper.CastVolunteer(vaf.Volunteer),
                 Comments = vaf.Comments,
@@ -70,7 +87,7 @@ namespace Dal
 
         internal static Organization CastOrganization(Common.Organization organization)
         {
-            return organization == null? null: new Organization()
+            return organization == null ? null : new Organization()
             {
                 Id = organization.Id,
                 Name = organization.Name,
@@ -84,7 +101,7 @@ namespace Dal
 
         internal static Common.Organization CastOrganizationToComon(Organization organization)
         {
-            return organization == null? null: new Common.Organization()
+            return organization == null ? null : new Common.Organization()
             {
                 Id = organization.Id,
                 Name = organization.Name,
@@ -98,7 +115,7 @@ namespace Dal
 
         internal static Common.VolunteerAndEvent CastVolunteerAndEventToComon(VolunteerAndEvent vae)
         {
-            return vae == null? null: new Common.VolunteerAndEvent()
+            return vae == null ? null : new Common.VolunteerAndEvent()
             {
                 Id = vae.Id,
                 Category = CastCategoryToCommon(vae.Categories),
@@ -106,25 +123,25 @@ namespace Dal
                 Volunteer = CastVolunteerToComon(vae.Volunteers),
                 Comments = vae.Comments,
                 DateAdded = vae.dateAdded
-            }; 
+            };
         }
 
         internal static Common.OrganizationAndFamily CastOrganizationAndFamilyToComon(OrganizationAndFamily oaf)
         {
-            return oaf == null? null: new Common.OrganizationAndFamily()
+            return oaf == null ? null : new Common.OrganizationAndFamily()
             {
-                Id= oaf.Id,
-                Category =CastCategoryToCommon (oaf.Categories),
-                Family =CastFamilyToComon( oaf.Families),
-                Organization =CastOrganizationToComon( oaf.Organization),
-                Comments =oaf.Comments,
-                DateAdded= oaf.dateAdded
+                Id = oaf.Id,
+                Category = CastCategoryToCommon(oaf.Categories),
+                Family = CastFamilyToComon(oaf.Families),
+                Organization = CastOrganizationToComon(oaf.Organization),
+                Comments = oaf.Comments,
+                DateAdded = oaf.dateAdded
             };
         }
 
         internal static Common.VolunteerAndFamily CastVolunteerAndFamilyToComon(VolunteerAndFamily vaf)
         {
-            return vaf == null? null: new Common.VolunteerAndFamily()
+            return vaf == null ? null : new Common.VolunteerAndFamily()
             {
                 Id = vaf.Id,
                 Category = Mapper.CastCategoryToCommon(vaf.Categories),
@@ -132,12 +149,12 @@ namespace Dal
                 Volunteer = Mapper.CastVolunteerToComon(vaf.Volunteers),
                 Comments = vaf.Comments,
                 DateAdded = vaf.dateAdded
-            }; 
+            };
         }
 
         public static Family CastFamilyToComon(Families family)
         {
-            return family == null? null: new Family()
+            return family == null ? null : new Family()
             {
                 Id = family.Id,
                 FirstNameFather = family.FirstNameFather,
@@ -157,7 +174,7 @@ namespace Dal
 
         public static Categories CastCategory(Category category)
         {
-            return category == null? null: new Categories
+            return category == null ? null : new Categories
             {
                 Id = category.Id,
                 Name = category.Name
@@ -165,7 +182,7 @@ namespace Dal
         }
         public static Category CastCategoryToCommon(Categories category)
         {
-            return category == null ? null: new Category
+            return category == null ? null : new Category
             {
                 Id = category.Id,
                 Name = category.Name
@@ -173,7 +190,7 @@ namespace Dal
         }
         public static Group CastGroupToComon(Groups group)
         {
-            return group == null? null: new Group()
+            return group == null ? null : new Group()
             {
                 Id = group.Id,
                 Address = group.Address,
@@ -186,7 +203,7 @@ namespace Dal
         }
         public static Events CastEvent(Event eventt)
         {
-            return eventt == null? null: new Events()
+            return eventt == null ? null : new Events()
             {
                 DateAdded = (DateTime)eventt.DateAdded,
                 Description = eventt.Description,
@@ -198,7 +215,7 @@ namespace Dal
         }
         public static Event CastEventToComon(Events eventt)
         {
-            return eventt == null? null: new Event()
+            return eventt == null ? null : new Event()
             {
                 DateAdded = eventt.DateAdded,
                 Description = eventt.Description,
@@ -208,25 +225,10 @@ namespace Dal
                 EndDate = eventt.EndDate
             };
         }
-        public static Volunteers CastVolunteer(Volunteer volunteer)
-        {
-            return volunteer == null ? null: new Volunteers()
-            {
-                Id = volunteer.Id,
-                Address = volunteer.Address,
-                Age = volunteer.Age,
-                Comments = volunteer.Comments,
-                Email = volunteer.Email,
-                IsActive = volunteer.IsActive,
-                Name = volunteer.Name,
-                Pelephone = volunteer.Pelephone,
-                Telephone = volunteer.Telephone
 
-            };
-        }
         public static Volunteer CastVolunteerToComon(Volunteers volunteer)
         {
-            return volunteer == null? null: new Volunteer()
+            return volunteer == null ? null : new Volunteer()
             {
                 Id = volunteer.Id,
                 Address = volunteer.Address,
@@ -242,7 +244,7 @@ namespace Dal
         }
         public static Groups CastGroup(Group group)
         {
-            return group == null? null: new Groups()
+            return group == null ? null : new Groups()
             {
                 Id = group.Id,
                 Address = group.Address,
@@ -265,7 +267,7 @@ namespace Dal
         }
         public static Common.User CastUserToComon(User user)
         {
-            return user == null? null: new Common.User()
+            return user == null ? null : new Common.User()
             {
                 Id = user.Id,
                 isVolunteer = user.isVolunteer,
