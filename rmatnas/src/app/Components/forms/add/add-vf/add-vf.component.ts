@@ -104,9 +104,11 @@ export class AddVFComponent implements OnInit, OnDestroy {
     this.selectedVolunteers.forEach((element: Volunteer) => {
       this.vaf.addVolunteerAction(element, this.selectedFamily, this.selectedCategory);
       this.snackBar.open('שמירת התנדבות מבוצעת...', 'OK', {
+        duration: 2000,
             direction: 'rtl'
           });
     });
+    this.dialogRef.close(this.selectedFamily.Id);
 
   }
 
@@ -114,6 +116,7 @@ export class AddVFComponent implements OnInit, OnDestroy {
     this.selectedFamilies.forEach((element: Family) => {
       this.vaf.addVolunteerAction(this.selectedVolunteer, element, this.selectedCategory);
       this.snackBar.open('שמירת התנדבות מבוצעת...', 'OK', {
+        duration: 2000,
         direction: 'rtl'
       });
     });
