@@ -18,7 +18,7 @@
         </mat-radio-group>
       </span>
       <span class="fill-form">
-        <form (ngSubmit)="submitFormF(categoryForm)" class="text-right" #categoryForm="ngForm">
+        <form (ngSubmit)="submitForm(categoryForm)" class="text-right" #categoryForm="ngForm">
           <h6>מתנדבות מתאימות ע"פ הקטגוריות:</h6>
           <mat-selection-list name="volunteersselected" [(ngModel)]="selectedVolunteers"
             (ngModelChange)="onSelection($event)" #volunteersS *ngIf="volunteers.length > 0">

@@ -77,7 +77,7 @@ export class AddVEComponent implements OnInit, OnDestroy {
     }
   }
 
-    submitFormF() {
+    submitForm() {
     this.selectedVolunteers.forEach((element: Volunteer) => {
       this.vae.addVolunteerAction(this.selectedEvent, element, this.selectedCategory);
       this.snackBar.open('שמירה מבוצעת...', 'OK', {
@@ -87,13 +87,6 @@ export class AddVEComponent implements OnInit, OnDestroy {
     });
     this.dialogRef.close(this.selectedEvent.Id);
 
-  }
-
-
-    submitForm() {
-    this.selectedVolunteers.forEach((element: Volunteer) => {
-      this.es.addVolunteerToEvent(this.selectedEvent.Id, element.Id);
-    });
   }
 
 }
