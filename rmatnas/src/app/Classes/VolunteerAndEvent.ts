@@ -4,18 +4,18 @@ import { Category } from './Category';
 
 export class VolunteerAndEvent {
     Id: number;
-    eventt: Eventt;
-    volunteer: Volunteer;
-    category: Category;
+    Event: Eventt;
+    Volunteer: Volunteer;
+    Category: Category;
     Comments: string;
-    dateAdded: string;
+    DateAdded: string;
 
-    constructor(eventt: Eventt, volunteer: Volunteer, category: Category, comments: string, dateAdded: string) {
+    constructor(event: Eventt, volunteer: Volunteer, category: Category, comments: string, dateAdded: string) {
         this.Comments = comments;
-        this.category = category;
-        this.eventt = eventt;
-        this.volunteer = volunteer;
-        this.dateAdded = dateAdded;
+        this.Category = category;
+        this.Event = event;
+        this.Volunteer = volunteer;
+        this.DateAdded = dateAdded;
 
     }
 }
