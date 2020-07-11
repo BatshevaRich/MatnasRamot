@@ -2,6 +2,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Component, OnInit, Inject } from '@angular/core';
 import { Volunteer } from '../../../Classes/Volunteer';
 import { Family } from '../../../Classes/Family';
+import { Organization } from '../../../Classes/Organization';
 
 @Component({
   selector: 'app-confirm-dialog',
@@ -18,6 +19,8 @@ export class ConfirmDialogComponent implements OnInit {
   listOfTypeSelected: object[] = [];
   listOfVolunteersSelected: Volunteer[] = [];
   listOfFamiliesSelected: Family[] = [];
+  listOfOrganizations: Organization[] = [];
+  listOfOrganizationsSelected: Organization[] = [];
   constructor(public dialogRef: MatDialogRef<ConfirmDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: ConfirmDialogModel) {
     // Update view with given values
@@ -31,6 +34,9 @@ export class ConfirmDialogComponent implements OnInit {
     if (this.listOfType.length > 0 && this.type === 'family') {
       this.listOfFamilies = data.listOfType as Family[];
     }
+    if (this.listOfType.length > 0 && this.type === 'organization') {
+      this.listOfOrganizations = data.listOfType as Organization[];
+    }
   }
 
   ngOnInit() {
@@ -43,6 +49,9 @@ export class ConfirmDialogComponent implements OnInit {
     }
     else if (this.type === 'family') {
       this.dialogRef.close(this.listOfFamiliesSelected);
+    }
+    else if (this.type === 'organization') {
+      this.dialogRef.close(this.listOfOrganizationsSelected);
     }
     else {this.dialogRef.close(this.listOfTypeSelected); }
   }

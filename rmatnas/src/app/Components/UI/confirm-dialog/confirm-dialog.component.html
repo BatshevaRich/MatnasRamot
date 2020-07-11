@@ -18,6 +18,13 @@
         </mat-list-option>
       </mat-selection-list>
     </span>
+    <span *ngIf="listOfOrganizations.length > 0">
+      <mat-selection-list [(ngModel)]="listOfOrganizationsSelected" *ngIf="listOfType.length > 0">
+        <mat-list-option checkboxPosition="before"[value]="type" *ngFor="let type of listOfOrganizations">
+          {{type.Name}}
+        </mat-list-option>
+      </mat-selection-list>
+    </span>
   </mat-dialog-content>
   <mat-dialog-actions>
     <button mat-button mat-raised-button mat-dialog-close (click)="onDismiss()">לא</button>
