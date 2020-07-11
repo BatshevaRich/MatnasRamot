@@ -43,6 +43,7 @@ export class AllOrganizationsComponent implements OnInit, OnDestroy, AfterViewIn
   dataSource = new MatTableDataSource([]);
   resultsLength = 0;
   @Input() vId: number;
+  @Input() where: number;
   result = '';
   loaded = false;
   error = false;

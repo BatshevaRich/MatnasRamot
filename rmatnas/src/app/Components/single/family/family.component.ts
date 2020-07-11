@@ -24,7 +24,7 @@ export class FamilyComponent implements OnInit, OnDestroy, AfterViewInit {
   @Output() addedFamily: EventEmitter<Family> = new EventEmitter<Family>();
   chooseTab: string;
   selectedTabIndex: any;
-  showEvent: boolean;
+  showOrganization: boolean;
   showVolunteer = true;
   showVolunteerings: boolean;
   constructor(public fs: FamilyService,
@@ -63,7 +63,7 @@ export class FamilyComponent implements OnInit, OnDestroy, AfterViewInit {
     setTimeout(() => {
       this.selectedTabIndex = event;
       if (event.index === 3) {
-        this.showEvent = true;
+        this.showOrganization = true;
       }
       if (event.index === 1) {
         this.showVolunteer = true;

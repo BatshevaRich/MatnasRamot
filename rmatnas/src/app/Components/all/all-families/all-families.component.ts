@@ -131,8 +131,8 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
       this.result = res;
       if (res) {
         this.fs.removeFamily(elm.Id);
-        this.dataSource = new MatTableDataSource(Object.values(this.dataSource)
-          .filter(i => i !== elm));
+        this.dataSource.data = this.dataSource.data
+          .filter(i => i !== elm);
         // .map((i, idx) => (i.position = (idx + 1), i));
       }
     });

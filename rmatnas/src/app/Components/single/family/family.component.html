@@ -43,8 +43,8 @@
         <mat-tab label="התנדבויות">
           <app-all-to-volunteers *ngIf="showVolunteerings" dir="rtl" [vId]="vId" [where]=2></app-all-to-volunteers>
         </mat-tab>
-        <mat-tab label="ארועים">
-          <app-all-events *ngIf="showEvent" dir="rtl"></app-all-events>
+        <mat-tab label="ארגונים">
+          <app-all-organizations *ngIf="showOrganization" dir="rtl" [vId]="vId" [where]=2></app-all-organizations>
         </mat-tab>
       </mat-tab-group>
     </mat-card>

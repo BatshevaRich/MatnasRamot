@@ -32,12 +32,6 @@
         <mat-tab label="מתנדבות">
           <app-all-volunteers *ngIf="showVolunteer" [vId]="vId" [where]=4 dir="rtl"></app-all-volunteers>
         </mat-tab>
-        <mat-tab label="משפחות">
-          <app-all-families *ngIf="showFamily" dir="rtl"></app-all-families>
-        </mat-tab>
-        <mat-tab label="ארגונים">
-          <app-all-organizations *ngIf="showOrganization" dir="rtl"></app-all-organizations>
-        </mat-tab>
       </mat-tab-group>
     </mat-card>
   </div>
