@@ -14,6 +14,7 @@ import * as XLSX from 'xlsx';
 import { DatePipe } from '@angular/common';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { AddVFComponent } from '../../forms/add/add-vf/add-vf.component';
+import { Category } from '../../../Classes/Category';
 export interface Details {
   Id: number;
   Name: string;
@@ -148,14 +149,7 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
         });
       }
     } else {
-      this.vs.getVolunteers().subscribe((volunteers: Volunteer[]) => {
-        volunteers = this.vs.trimResultsFromDB(volunteers);
-        this.volunteers = volunteers;
-        this.dataSource.data = volunteers;
-        this.resultsLength = this.dataSource.data.length;
-        this.loaded = true;
-        this.error = false;
-      }, err => { this.error = true; this.loaded = true; });
+      this.loadTable();
     }
   }
 
@@ -270,9 +264,7 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
             this.toSave.push(Object.assign(element));
           }
         });
-        this.dataSource.data = newData;
-        this.resultsLength = this.dataSource.data.length;
-        this.table.renderRows();
+        const cats: Category[] = [];
         this.confirmDialogAdd().subscribe(res => {
           if (res === false){
             this.snackBar.open('לא מתבצעת הוספה', 'OK', {
@@ -281,10 +273,10 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
             });
           } else {
             if (res) {
-            res.forEach(element => {
-              debugger;
-             // this.vs.addVolunteer(element, null);
+              res.forEach((element: Volunteer) => {
+              this.vs.addVolunteer(element, cats);
             });
+              this.loadTable();
           }
           }
         });
@@ -296,10 +288,10 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
             });
           } else {
             if (res) {
-            res.forEach(element => {
-              debugger;
-             // this.vs.updateVolunteer(element, null);
+              res.forEach((element: Volunteer) => {
+             this.vs.updateVolunteer(element, cats);
             });
+              this.loadTable();
           }
           }
         });
@@ -314,6 +306,18 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
       }
     };
     readFile.readAsArrayBuffer(this.fileUploaded);
+  }
+
+  loadTable() {
+    this.vs.getVolunteers().subscribe((volunteers: Volunteer[]) => {
+      volunteers = this.vs.trimResultsFromDB(volunteers);
+      this.volunteers = volunteers;
+      this.dataSource.data = volunteers;
+      this.resultsLength = this.dataSource.data.length;
+      this.table.renderRows();
+      this.loaded = true;
+      this.error = false;
+    }, err => { this.error = true; this.loaded = true; });
   }
 
   updateTable(event: Volunteer) {

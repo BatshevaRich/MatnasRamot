@@ -38,7 +38,13 @@ export class ConfirmDialogComponent implements OnInit {
 
   onConfirm(): void {
     // Close the dialog, return true
-    this.dialogRef.close(this.listOfTypeSelected);
+    if (this.type === 'volunteer') {
+      this.dialogRef.close(this.listOfVolunteersSelected);
+    }
+    else if (this.type === 'family') {
+      this.dialogRef.close(this.listOfFamiliesSelected);
+    }
+    else {this.dialogRef.close(this.listOfTypeSelected); }
   }
 
   onDismiss(): void {
