@@ -27,13 +27,27 @@ namespace Dal
             }
             return x;
         }
-        public static void RemoveEvent(Event eventt)
+        public static void RemoveEvent(int id)
         {
-            Events e = Mapper.CastEvent(eventt);
             using (dbRamotEntities db = new dbRamotEntities())
             {
-                db.Events.Remove(e);
-                db.SaveChanges();
+                var query = from row in db.VolunteerAndEvent.AsEnumerable() where row.IdEvent == id select row;
+                if (query.ToList().Count > 0)
+                {
+                    db.VolunteerAndEvent.FirstOrDefault().Events = null;
+                    // db.VolunteerAndFamily.Remove(db.VolunteerAndFamily.Find(query.FirstOrDefault().Id));
+                }
+                db.Events.Find(id).Categories.Clear();
+                db.Events.Remove(db.Events.Find(id));
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+
             }
         }
 
@@ -58,15 +72,6 @@ namespace Dal
                     db.Events.Find(eventt.Id).Categories.Add(c);
                 }
                 db.Entry<Events>(db.Set<Events>().Find(e.Id)).CurrentValues.SetValues(e);
-                db.SaveChanges();
-            }
-        }
-
-        public static void RemoveEvent(int id)
-        {
-            using (dbRamotEntities db = new dbRamotEntities())
-            {
-                db.Events.Remove(db.Events.Find(id));
                 db.SaveChanges();
             }
         }

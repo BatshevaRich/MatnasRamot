@@ -33,7 +33,7 @@ export class EventService {
     ).subscribe();
   }
   removeEvent(id: number) {
-   this.http.delete(this.path + id).subscribe(data => {
+   this.http.delete(this.path + '/' + id).subscribe(data => {
    });
   }
   getEventsByCategoryAndFamily(idFamily: number, id: number): Observable<Eventt[]> {
