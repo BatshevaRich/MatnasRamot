@@ -52,7 +52,7 @@ export class EventService {
     return this.http.get<Eventt[]>(environment.baseURL + 'EventtAndFamily/Getfe/' + fId);
   }
   getEventsForVolunteer(vId: number): Observable<Eventt[]> {
-    return this.http.get<Eventt[]>(environment.baseURL + 'EventAndVolunteer/Getve/' + vId);
+    return this.http.get<Eventt[]>(this.path + '/volunteer/' + vId);
   }
   getEventsByCategory(idCategory: number): Observable<Eventt[]> {
     return this.http.get<Eventt[]>(this.path + '/Eventsbycategory/' + idCategory);

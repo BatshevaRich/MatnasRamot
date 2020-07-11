@@ -42,6 +42,7 @@ export class AllEventsComponent implements OnInit, OnDestroy, AfterViewInit {
   dataSource = new MatTableDataSource([]);
   resultsLength = 0;
   @Input() vId: number;
+  @Input() where: number;
   result = '';
   loaded = false;
   error = false;
@@ -65,6 +66,22 @@ export class AllEventsComponent implements OnInit, OnDestroy, AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    if (this.vId) {
+      if (this.where === 1) {
+        this.es.getEventsForVolunteer(this.vId).subscribe((data: Eventt[]) => {
+          this.loaded = true;
+          if (data.length === 0) {
+            this.notFound = true;
+          } else {
+            data = this.es.trimResultsFromDB(data);
+            this.eventts = data;
+            this.dataSource.data = data;
+            this.resultsLength = this.dataSource.data.length;
+            this.error = false;
+          }
+        }, err => { this.error = true; this.loaded = true; });
+      }
+    } else {
     this.es.getEvents().subscribe((events: Eventt[]) => {
       this.loaded = true;
       if (events.length === 0) {
@@ -92,6 +109,7 @@ export class AllEventsComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     }, err => { this.error = true; this.loaded = true; });
   }
+}
 
   confirmDialog(): Observable<any> {
     const message = `מחיקה זו היא לצמיתות, ותמחק את כל המקומות בהן קיים ארוע זה (לדוג' אצל מתנדבת)! האם תרצי להמשיך?`;

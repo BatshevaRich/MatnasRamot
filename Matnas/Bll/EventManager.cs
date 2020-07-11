@@ -54,6 +54,11 @@ namespace Bll
         {
             return Dal.EventManager.GetNextEvents();
         }
+
+        public static IEnumerable<Event> GetEventsForVolunteer(int id)
+        {
+            return Dal.EventManager.GetEventsForVolunteer(id);
+        }
     }
 }
 

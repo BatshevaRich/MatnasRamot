@@ -150,5 +150,21 @@ namespace Dal
                 return events;
             }
         }
+
+        public static IEnumerable<Common.Event> GetEventsForVolunteer(int id)
+        {
+            using (dbRamotEntities db = new dbRamotEntities())
+            {//////////////////////////////////////////////////////////////
+                var query = from ve in db.VolunteerAndEvent
+                            where ve.Volunteers.Id == id
+                            select ve;
+                List<Common.Event> events = new List<Common.Event>();
+                foreach (var item in query.AsEnumerable())
+                {
+                    events.Add(Mapper.CastVolunteerAndEventToComon(item).Event);
+                }
+                return events;
+            }
+        }
     }
 }

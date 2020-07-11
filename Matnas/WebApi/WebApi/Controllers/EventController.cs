@@ -66,5 +66,11 @@ namespace WebApi.Controllers
         {
             Bll.EventManager.RemoveCategory(id, category);
         }
+
+        [Route("volunteer/{id}")]
+        public IEnumerable<Event> GetEventsForVolunteer(int id)
+        {
+            return Bll.EventManager.GetEventsForVolunteer(id);
+        }
     }
 }

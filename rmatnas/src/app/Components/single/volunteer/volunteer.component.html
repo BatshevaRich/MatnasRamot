@@ -46,7 +46,7 @@
           <app-all-to-volunteers dir="rtl" *ngIf="showVolunteerings" [vId]="vId" [where]=1></app-all-to-volunteers>
         </mat-tab>
         <mat-tab label="ארועים">
-          <app-all-events dir="rtl" *ngIf="showEvent"></app-all-events>
+          <app-all-events dir="rtl" *ngIf="showEvent" [vId]="vId" [where]=1></app-all-events>
         </mat-tab>
       </mat-tab-group>
     </mat-card>
