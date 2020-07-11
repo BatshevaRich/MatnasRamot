@@ -9,6 +9,7 @@ import { OrganizationService } from '../../../services/organization.service';
 import { Observable } from 'rxjs';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../../UI/confirm-dialog/confirm-dialog.component';
 import { AddFOComponent } from '../../forms/add/add-fo/add-fo.component';
+import * as XLSX from 'xlsx';
 export interface Details {
   Id: number;
   Name: string;
@@ -138,6 +139,24 @@ export class AllOrganizationsComponent implements OnInit, OnDestroy, AfterViewIn
     this.dataSource.data =
     this.dataSource.data.map((item: Organization) => item.Id === event.Id ? this.os.trimResultFromUpdate(event) : item);
     this.table.renderRows();
+  }
+
+  public exportTableToExcel() {
+    const data = this.organizations.map((x: Organization) => ({
+      Id: x.Id,
+      שם: x.Name,
+      איש_קשר: x.Address,
+      טלפון: x.Phone,
+      כתובת: x.Address,
+      מייל: x.email,
+      הערות: x.Comments
+    }));
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.json_to_sheet(data);
+    ws['!cols'] = []; // hide id column
+    ws['!cols'][0] = { hidden: true };
+    XLSX.utils.book_append_sheet(wb, ws, 'ארגונים');
+    XLSX.writeFile(wb, `ארגונים.xlsx`);
   }
 
 }
