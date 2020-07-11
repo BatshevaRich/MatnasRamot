@@ -12,6 +12,7 @@ import { MatSort } from '@angular/material/sort';
 import * as XLSX from 'xlsx';
 import { AddVFComponent } from '../../forms/add/add-vf/add-vf.component';
 import { NotificationService } from '../../../services/notification.service';
+import { Category } from '../../../Classes/Category';
 
 export interface Details {
   Id: number;
@@ -65,6 +66,8 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
   volunteerData: any;
   arrayBuffer: any;
   familiesToConnect: Family[] = [];
+  toUpdate: Family[] = [];
+  toSave: Family[] = [];
   ngOnInit() {
     if (this.vId) {
       this.displayedColumns = ['LastName', 'Address', 'Telephone', 'NumChildren', 'Status', 'Reference'];
@@ -106,27 +109,7 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
         }, err => { this.error = true; this.loaded = true; });
       }
     } else {
-      this.fs.getFamilies().subscribe((data: Family[]) => {
-        data = this.fs.trimResultsFromDB(data);
-        const res = this.ns.Families;
-        function sortFunc(a: { Id: number; }, b: { Id: number; }) {
-          const s1 = res.find(s => s.Id === a.Id);
-          const s2 = res.find(s => s.Id === b.Id);
-          if (s1 && s2) { return 0; }
-          else if (s1) { return -1; }
-          else if (s2) { return 1; }
-          return 0;
-        }
-        const sorted = data.sort(sortFunc);
-        for (let index = 0; index < res.length; index++) {
-          sorted[index].color = true;
-        }
-        this.families = data;
-        this.dataSource.data = sorted;
-        this.resultsLength = this.dataSource.data.length;
-        this.loaded = true;
-        this.error = false;
-      }, () => { this.error = true; this.loaded = true; });
+      this.loadTable();
     }
   }
 
@@ -239,10 +222,44 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
           // tslint:disable-next-line: no-string-literal
           Reason: x['סיבה']
         }));
-        this.dataSource.data = newData;
-        this.resultsLength = this.dataSource.data.length;
-        this.table.renderRows();
-        console.log(newData);
+        newData.forEach((element) => {
+          if (element.Id) {
+            this.toUpdate.push(Object.assign(element));
+          } else {
+            this.toSave.push(Object.assign(element));
+          }
+        });
+        const cats: Category[] = [];
+        this.confirmDialogAdd().subscribe(res => {
+          if (res === false){
+            this.snackBar.open('לא מתבצעת הוספה', 'OK', {
+              duration: 2000,
+              direction: 'rtl'
+            });
+          } else {
+            if (res) {
+              res.forEach((element: Family) => {
+              this.fs.addFamily(element, cats);
+            });
+              this.loadTable();
+          }
+          }
+        });
+        this.confirmDialogUpdate().subscribe(res => {
+          if (res === false){
+            this.snackBar.open('לא מתבצעת הוספה', 'OK', {
+              duration: 2000,
+              direction: 'rtl'
+            });
+          } else {
+            if (res) {
+              res.forEach((element: Family) => {
+             this.fs.updateFamily(element, cats);
+            });
+              this.loadTable();
+          }
+          }
+        });
         this.snackBar.open('קובץ נטען בהצלחה', 'OK', {
           duration: 5000,
           direction: 'rtl'
@@ -252,9 +269,53 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
     readFile.readAsArrayBuffer(this.fileUploaded);
   }
 
+  confirmDialogAdd(): Observable<any> {
+    const message = `האם תרצי להוסיף את המתנדבות הבאות?`;
+    const dialogData = new ConfirmDialogModel('הוספת מתנדבות חדשות', message, this.toSave, 'volunteer');
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: '75%',
+      data: dialogData
+    });
+    return dialogRef.afterClosed();
+  }
+
+  confirmDialogUpdate(): Observable<any> {
+    const message = `האם תרצי לעדכן את המתנדבות הבאות?`;
+    const dialogData = new ConfirmDialogModel('עדכון מתנדבות מקובץ', message, this.toUpdate, 'volunteer');
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: '75%',
+      data: dialogData
+    });
+    return dialogRef.afterClosed();
+  }
 
   showDetails(element: Family) {
     element.show = !element.show;
+  }
+
+  loadTable() {
+    this.ns.getAllFamiliesToConnect();
+    this.fs.getFamilies().subscribe((data: Family[]) => {
+      data = this.fs.trimResultsFromDB(data);
+      const res = this.ns.Families;
+      function sortFunc(a: { Id: number; }, b: { Id: number; }) {
+        const s1 = res.find(s => s.Id === a.Id);
+        const s2 = res.find(s => s.Id === b.Id);
+        if (s1 && s2) { return 0; }
+        else if (s1) { return -1; }
+        else if (s2) { return 1; }
+        return 0;
+      }
+      const sorted = data.sort(sortFunc);
+      for (let index = 0; index < res.length; index++) {
+        sorted[index].color = true;
+      }
+      this.families = data;
+      this.dataSource.data = sorted;
+      this.resultsLength = this.dataSource.data.length;
+      this.loaded = true;
+      this.error = false;
+    }, () => { this.error = true; this.loaded = true; });
   }
 
   updateTable(event: Family) {
