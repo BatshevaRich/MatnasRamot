@@ -127,7 +127,8 @@ export class AllOrganizationsComponent implements OnInit, OnDestroy, AfterViewIn
     const dialogRef = this.dialog.open(AddFOComponent, {
       maxWidth: '75%',
       data: {
-        id: event.Id
+        id: event.Id,
+        organization: event
       }
     });
     return dialogRef.afterClosed();

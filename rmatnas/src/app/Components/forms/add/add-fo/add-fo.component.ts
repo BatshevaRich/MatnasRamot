@@ -23,6 +23,9 @@ export class AddFOComponent implements OnInit, OnDestroy {
   categories: Category[] = [];
   selectedOrganization: Organization = null;
   selectedCategories: Category[] = [];
+  objectCategories: Category[] = [];
+  comments: string;
+  selectedCategory: Category;
   constructor(private fs: FamilyService,
               private os: OrganizationService,
               private cs: CategoryService,
@@ -31,24 +34,23 @@ export class AddFOComponent implements OnInit, OnDestroy {
               @Inject(MAT_DIALOG_DATA) public data: any,
               private snackBar: MatSnackBar,
               private elementRef: ElementRef) {
+      this.refresh();
   }
 
-  ngOnInit() {
-    this.idOrganization = this.data.id;
-    this.os.getOrganization(this.idOrganization).subscribe((res: Organization) => {
-      this.selectedOrganization = res;
-    });
-    this.os.getCategoriesOfOrganization(this.idOrganization).subscribe((cats: Category[]) => {
-      this.selectedCategories = cats;
-      this.selectedCategories.forEach(element => {
-        this.fs.getFamiliesByCategory(element.Id).subscribe((data: Family[]) => {
-          data.forEach(family => {
-            this.families.push(family);
-          });
-        });
+  refresh() {
+    this.selectedCategory = null;
+    this.selectedOrganization = this.data.organization;
+    if (this.selectedOrganization) {
+      this.os.getCategoriesOfOrganization(this.selectedOrganization.Id).subscribe((res: Category[]) => {
+        this.objectCategories = res;
       });
-    });
-   }
+      this.fs.getFamilies().subscribe((res: Family[]) => {
+        this.families = res;
+      });
+    }
+  }
+
+  ngOnInit() {  }
 
   ngOnDestroy(): void {
     this.elementRef.nativeElement.remove();
@@ -57,11 +59,27 @@ export class AddFOComponent implements OnInit, OnDestroy {
   onSelection(event) {
   }
 
+  onSelectionC(event: Category) {
+    if (event) {
+      this.selectedCategory = event;
+      if (this.selectedOrganization) {
+        this.fs.getFamiliesByOrganization(event.Id).subscribe((res: Family[]) => {
+          this.families = res;
+        });
+      }
+    } else {
+      this.selectedCategory = null;
+      this.fs.getFamilies().subscribe((res: Family[]) => {
+          this.families = res;
+      });
+    }
+  }
+
 
   submitForm() {
     this.selectedFamilies.forEach((element: Family) => {
       this.oaf.addFamilyToOrganization(
-        new OrganizationAndFamily(element, this.selectedOrganization, this.selectedCategories[0], '', ''));
+        new OrganizationAndFamily(element, this.selectedOrganization, this.selectedCategory, '', ''));
     });
 
     // this.vaf.addOrganizationAction(this.selectedOrganization, this.selectedFamily, this.selectedCategory);
