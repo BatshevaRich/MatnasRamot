@@ -99,6 +99,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CategoryVolunteerController.cs" />
+    <Compile Include="Controllers\WarningController.cs" />
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\FamilyController.cs" />
     <Compile Include="Controllers\GroupController.cs" />
