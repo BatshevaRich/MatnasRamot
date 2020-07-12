@@ -61,7 +61,6 @@ export class NotificationService {
 
   async loadAll() {
     const res = await Promise.all([this.getAllFamiliesToConnect(), this.getAllEventsToConnect()]);
-    return console.log(res);
   }
 
   async getAllFamiliesToConnect() {

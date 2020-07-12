@@ -24,7 +24,6 @@ export class MainComponent {
   public polarAreaChartLabels: Label[] = ['מתנדבות', 'משפחות', 'ארגונים', 'ארועים'];
   public polarAreaChartData: number[] = [];
   public polarAreaLegend = true;
-
   public polarAreaChartType: ChartType = 'polarArea';
   public polarAreaChartColors = [
     {
@@ -39,22 +38,22 @@ export class MainComponent {
               public os: OrganizationService) {
     vs.getVolunteers().subscribe((res: Volunteer[]) => {
       this.polarAreaChartData.push(res.length);
-      fs.getFamilies().subscribe((res: Family[]) => {
-        this.polarAreaChartData.push(res.length);
-        os.getOrganizations().subscribe((res: Organization[]) => {
-          this.polarAreaChartData.push(res.length);
+      fs.getFamilies().subscribe((re: Family[]) => {
+        this.polarAreaChartData.push(re.length);
+        os.getOrganizations().subscribe((r: Organization[]) => {
+          this.polarAreaChartData.push(r.length);
           es.getEvents().subscribe((e: Eventt[]) => {
             this.polarAreaChartData.push(e.length);
             // group.concat(Object.values(e.map(v => v.StartDate.substr(0, 4))));
             // this.unique.concat([...new Set(group.map(item => item))]);
             // this.barChartLabels = this.unique;
-            const groups = e.reduce((groups, el) => {
+            const groups = e.reduce((gs, el) => {
               const date = el.StartDate.substr(0, 4);
-              if (!groups[date]) {
-                groups[date] = [];
+              if (!gs[date]) {
+                gs[date] = [];
               }
-              groups[date].push(date);
-              return groups;
+              gs[date].push(date);
+              return gs;
             }, {});
             const groupArrays = Object.keys(groups).map((date) => {
               return {
@@ -63,7 +62,7 @@ export class MainComponent {
               };
             });
             groupArrays.forEach(element => {
-              this.barChartLabels.indexOf(element.date) === -1 ? this.barChartLabels.push(element.date) : 1;
+              this.barChartLabels.indexOf(element.date) === -1 ? this.barChartLabels.push(element.date) : this.barChartLegend = true;
               this.barChartData[1].data.push(element.elements.length);
               this.barChartData[1].backgroundColor = 'rgb(103, 58, 183)';
             });
@@ -97,13 +96,13 @@ export class MainComponent {
       });
     });
     vaf.getVolunteerings().subscribe((res: VolunteerAndFamily[]) => {
-      const groups = res.reduce((groups, el) => {
+      const groups = res.reduce((gs, el) => {
         const date = el.DateAdded.substr(0, 4);
-        if (!groups[date]) {
-          groups[date] = [];
+        if (!gs[date]) {
+          gs[date] = [];
         }
-        groups[date].push(date);
-        return groups;
+        gs[date].push(date);
+        return gs;
       }, {});
       const groupArrays = Object.keys(groups).map((date) => {
         return {
@@ -112,7 +111,7 @@ export class MainComponent {
         };
       });
       groupArrays.forEach(element => {
-        this.barChartLabels.indexOf(element.date) === -1 ? this.barChartLabels.push(element.date) : 1;
+        this.barChartLabels.indexOf(element.date) === -1 ? this.barChartLabels.push(element.date) : this.barChartLegend = true;
         this.barChartData[0].data.push(element.elements.length);
       });
     });

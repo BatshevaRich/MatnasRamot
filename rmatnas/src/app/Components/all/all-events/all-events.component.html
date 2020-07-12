@@ -106,13 +106,13 @@
       </mat-card-content>
     </div>
     <div *ngIf="!error && !loaded" style="height: calc(93vh - (50px + 50px));">
-            <app-spinner></app-spinner>
+      <app-spinner></app-spinner>
     </div>
     <span *ngIf="notFound" class="text-center">
       <mat-error>לא נמצאו ארועים </mat-error>
     </span>
   </mat-card>
-  </div>
+</div>
 <mat-card *ngIf="error && loaded" class="fullscreen text-center" [ngClass]="error && loaded? 'visible': 'hidden'">
   <app-error></app-error>
 </mat-card>

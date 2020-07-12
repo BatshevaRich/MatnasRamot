@@ -266,45 +266,44 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
         });
         const cats: Category[] = [];
         if (this.toSave.length > 0) {
-        this.confirmDialogAdd().subscribe(res => {
-          if (res === false){
-            this.snackBar.open('לא מתבצעת הוספה', 'OK', {
-              duration: 2000,
-              direction: 'rtl'
-            });
-          } else {
-            if (res) {
-              res.forEach((element: Volunteer) => {
-              this.vs.addVolunteer(element, cats);
-            });
-              this.loadTable();
-          }
-          }
-        });
-      }
+          this.confirmDialogAdd().subscribe(res => {
+            if (res === false) {
+              this.snackBar.open('לא מתבצעת הוספה', 'OK', {
+                duration: 2000,
+                direction: 'rtl'
+              });
+            } else {
+              if (res) {
+                res.forEach((element: Volunteer) => {
+                  this.vs.addVolunteer(element, cats);
+                });
+                this.loadTable();
+              }
+            }
+          });
+        }
         if (this.toUpdate.length > 0) {
-        this.confirmDialogUpdate().subscribe(res => {
-          if (res === false){
-            this.snackBar.open('לא מתבצעת הוספה', 'OK', {
-              duration: 2000,
-              direction: 'rtl'
-            });
-          } else {
-            if (res) {
-              res.forEach((element: Volunteer) => {
-             this.vs.updateVolunteer(element, cats);
-            });
-              this.loadTable();
-          }
-          }
-        });
-        console.log(newData);
-        this.snackBar.open('קובץ נטען בהצלחה', 'OK', {
-          duration: 5000,
-          direction: 'rtl'
-        });
+          this.confirmDialogUpdate().subscribe(res => {
+            if (res === false) {
+              this.snackBar.open('לא מתבצעת הוספה', 'OK', {
+                duration: 2000,
+                direction: 'rtl'
+              });
+            } else {
+              if (res) {
+                res.forEach((element: Volunteer) => {
+                  this.vs.updateVolunteer(element, cats);
+                });
+                this.loadTable();
+              }
+            }
+          });
+          this.snackBar.open('קובץ נטען בהצלחה', 'OK', {
+            duration: 5000,
+            direction: 'rtl'
+          });
+        }
       }
-    }
     };
     readFile.readAsArrayBuffer(this.fileUploaded);
   }

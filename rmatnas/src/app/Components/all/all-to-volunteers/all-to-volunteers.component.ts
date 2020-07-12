@@ -26,8 +26,8 @@ import { DatePipe } from '@angular/common';
 })
 export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  @ViewChild(MatTable, {static: false}) table: MatTable<any>;
-  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatTable, { static: false }) table: MatTable<any>;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   displayedColumns = ['NameVolunteer', 'NameFamily', 'Category', 'PelephoneVolunteer', 'date', 'columndelete'];
   expandedElement: Details | null;
   allvolunteerings: Details[] = [];
@@ -95,7 +95,7 @@ export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewIni
     }
   }
 
-  mapData(volunteerings: VolunteerAndFamily[]){
+  mapData(volunteerings: VolunteerAndFamily[]) {
     volunteerings.forEach(element => {
       // tslint:disable-next-line: no-use-before-declare
       const item = new Details();

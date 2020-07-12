@@ -20,11 +20,8 @@ import { AllEventsComponent } from './Components/all/all-events/all-events.compo
 import { AllOrganizationsComponent } from './Components/all/all-organizations/all-organizations.component';
 import { EventFComponent } from './Components/forms/event-f/event-f.component';
 import { OrganizationFComponent } from './Components/forms/organization-f/organization-f.component';
-import { MyTaskComponent } from './Components/single/task/task.component';
-import { AllTasksComponent } from './Components/all/all-tasks/all-tasks.component';
 import { BorderDirective } from './Directives/border.directive';
 import { PhoneMaskDirective } from './Directives/phone-mask.directive';
-import { TaskFComponent } from './Components/forms/task-f/task-f.component';
 import { PhonePipe } from './Pipes/phone.pipe';
 import { FilterPipe } from './Pipes/filter.pipe';
 import { ChooseCategoryComponent } from './Components/single/choose-category/choose-category.component';
@@ -61,7 +58,6 @@ WebFont.load({
 });
 
 export function startupServiceFactory(startupService: NotificationService) {
-  console.log('startupService', startupService);
   return () => startupService.loadAll(); // => required, otherwise `this` won't work inside StartupService::load
 }
 @NgModule({
@@ -99,12 +95,9 @@ export function startupServiceFactory(startupService: NotificationService) {
     AllOrganizationsComponent,
     HomeComponent,
     FooterComponent,
-    MyTaskComponent,
     ChooseCategoryComponent,
-    AllTasksComponent,
     BorderDirective,
     PhoneMaskDirective,
-    TaskFComponent,
     PhonePipe,
     FilterPipe,
     AddVFComponent,

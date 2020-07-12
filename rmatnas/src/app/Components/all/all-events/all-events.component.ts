@@ -39,8 +39,8 @@ export class AllEventsComponent implements OnInit, OnDestroy, AfterViewInit {
   eventts: any;
   search = '';
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild(MatTable, {static: false}) table: MatTable<any>;
-  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatTable, { static: false }) table: MatTable<any>;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   displayedColumns = ['showDetails', 'Name', 'Description', 'StartDate', 'EndDate', 'addvolunteer', 'columndelete'];
   expandedElement: Details | null;
   dataSource = new MatTableDataSource([]);
@@ -91,39 +91,39 @@ export class AllEventsComponent implements OnInit, OnDestroy, AfterViewInit {
         }, err => { this.error = true; this.loaded = true; });
       }
     } else {
-    this.loadTable();
-  }
-}
-
-loadTable() {
-  this.ns.getAllEventsToConnect();
-  this.es.getEvents().subscribe((events: Eventt[]) => {
-    this.loaded = true;
-    if (events.length === 0) {
-      this.notFound = true;
-    } else {
-      this.eventts = this.es.trimResultsFromDB(events);
-      const res = this.ns.Events;
-      function sortFunc(a: { Id: number; }, b: { Id: number; }) {
-        const s1 = res.find(s => s.Id === a.Id);
-        const s2 = res.find(s => s.Id === b.Id);
-        if (s1 && s2) { return 0; }
-        else if (s1) { return -1; }
-        else if (s2) { return 1; }
-        return 0;
-      }
-      const sorted = events.sort(sortFunc);
-      for (let index = 0; index < res.length; index++) {
-        sorted[index].color = true;
-      }
-      this.eventts = events;
-      this.dataSource = new MatTableDataSource(Object.values(sorted));
-      this.resultsLength = this.dataSource.data.length;
-      this.loaded = true;
-      this.error = false;
+      this.loadTable();
     }
-  }, err => { this.error = true; this.loaded = true; });
-}
+  }
+
+  loadTable() {
+    this.ns.getAllEventsToConnect();
+    this.es.getEvents().subscribe((events: Eventt[]) => {
+      this.loaded = true;
+      if (events.length === 0) {
+        this.notFound = true;
+      } else {
+        this.eventts = this.es.trimResultsFromDB(events);
+        const res = this.ns.Events;
+        function sortFunc(a: { Id: number; }, b: { Id: number; }) {
+          const s1 = res.find(s => s.Id === a.Id);
+          const s2 = res.find(s => s.Id === b.Id);
+          if (s1 && s2) { return 0; }
+          else if (s1) { return -1; }
+          else if (s2) { return 1; }
+          return 0;
+        }
+        const sorted = events.sort(sortFunc);
+        for (let index = 0; index < res.length; index++) {
+          sorted[index].color = true;
+        }
+        this.eventts = events;
+        this.dataSource = new MatTableDataSource(Object.values(sorted));
+        this.resultsLength = this.dataSource.data.length;
+        this.loaded = true;
+        this.error = false;
+      }
+    }, err => { this.error = true; this.loaded = true; });
+  }
 
   confirmDialog(): Observable<any> {
     const message = `מחיקה זו היא לצמיתות, ותמחק את כל המקומות בהן קיים ארוע זה (לדוג' אצל מתנדבת)! האם תרצי להמשיך?`;
@@ -158,7 +158,7 @@ loadTable() {
 
   updateTable(event: Eventt) {
     this.dataSource = new MatTableDataSource(Object.values(this.dataSource)
-    .map((item: Eventt) => item.Id === event.Id ? this.es.trimResultFromUpdate(event) : item));
+      .map((item: Eventt) => item.Id === event.Id ? this.es.trimResultFromUpdate(event) : item));
     this.table.renderRows();
   }
 
@@ -262,40 +262,39 @@ loadTable() {
         });
         const cats: Category[] = [];
         if (this.toSave.length > 0) {
-        this.confirmDialogAdd().subscribe(res => {
-          if (res === false){
-            this.snackBar.open('לא מתבצעת הוספה', 'OK', {
-              duration: 2000,
-              direction: 'rtl'
-            });
-          } else {
-            if (res) {
-              res.forEach((element: Eventt) => {
-              this.es.addEvent(element, cats);
-            });
-              this.loadTable();
-          }
-          }
-        });
-      }
+          this.confirmDialogAdd().subscribe(res => {
+            if (res === false) {
+              this.snackBar.open('לא מתבצעת הוספה', 'OK', {
+                duration: 2000,
+                direction: 'rtl'
+              });
+            } else {
+              if (res) {
+                res.forEach((element: Eventt) => {
+                  this.es.addEvent(element, cats);
+                });
+                this.loadTable();
+              }
+            }
+          });
+        }
         if (this.toUpdate.length > 0) {
-        this.confirmDialogUpdate().subscribe(res => {
-          if (res === false){
-            this.snackBar.open('לא מתבצעת הוספה', 'OK', {
-              duration: 2000,
-              direction: 'rtl'
-            });
-          } else {
-            if (res) {
-              res.forEach((element: Eventt) => {
-             this.es.updateEvent(element, cats);
-            });
-              this.loadTable();
-          }
-          }
-        });
-      }
-        console.log(newData);
+          this.confirmDialogUpdate().subscribe(res => {
+            if (res === false) {
+              this.snackBar.open('לא מתבצעת הוספה', 'OK', {
+                duration: 2000,
+                direction: 'rtl'
+              });
+            } else {
+              if (res) {
+                res.forEach((element: Eventt) => {
+                  this.es.updateEvent(element, cats);
+                });
+                this.loadTable();
+              }
+            }
+          });
+        }
         this.snackBar.open('קובץ נטען בהצלחה', 'OK', {
           duration: 5000,
           direction: 'rtl'

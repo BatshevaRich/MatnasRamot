@@ -39,8 +39,8 @@ export class AllOrganizationsComponent implements OnInit, OnDestroy, AfterViewIn
   organizations: any;
   search = '';
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild(MatTable, {static: false}) table: MatTable<any>;
-  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatTable, { static: false }) table: MatTable<any>;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   displayedColumns = ['showDetails', 'Name', 'Contact', 'Phone', 'Address', 'Email', 'addFamily', 'columndelete'];
   expandedElement: Details | null;
   dataSource = new MatTableDataSource([]);
@@ -147,7 +147,7 @@ export class AllOrganizationsComponent implements OnInit, OnDestroy, AfterViewIn
 
   updateTable(event: Organization) {
     this.dataSource.data =
-    this.dataSource.data.map((item: Organization) => item.Id === event.Id ? this.os.trimResultFromUpdate(event) : item);
+      this.dataSource.data.map((item: Organization) => item.Id === event.Id ? this.os.trimResultFromUpdate(event) : item);
     this.table.renderRows();
   }
 
@@ -220,45 +220,44 @@ export class AllOrganizationsComponent implements OnInit, OnDestroy, AfterViewIn
         });
         const cats: Category[] = [];
         if (this.toSave.length > 0) {
-        this.confirmDialogAdd().subscribe(res => {
-          if (res === false){
-            this.snackBar.open('לא מתבצעת הוספה', 'OK', {
-              duration: 2000,
-              direction: 'rtl'
-            });
-          } else {
-            if (res) {
-              res.forEach((element: Organization) => {
-              this.os.addOrganization(element, cats);
-            });
-              this.loadTable();
-          }
-          }
-        });
-      }
+          this.confirmDialogAdd().subscribe(res => {
+            if (res === false) {
+              this.snackBar.open('לא מתבצעת הוספה', 'OK', {
+                duration: 2000,
+                direction: 'rtl'
+              });
+            } else {
+              if (res) {
+                res.forEach((element: Organization) => {
+                  this.os.addOrganization(element, cats);
+                });
+                this.loadTable();
+              }
+            }
+          });
+        }
         if (this.toUpdate.length > 0) {
-        this.confirmDialogUpdate().subscribe(res => {
-          if (res === false){
-            this.snackBar.open('לא מתבצעת הוספה', 'OK', {
-              duration: 2000,
-              direction: 'rtl'
-            });
-          } else {
-            if (res) {
-              res.forEach((element: Organization) => {
-             this.os.updateOrganization(element, cats);
-            });
-              this.loadTable();
-          }
-          }
-        });
-        console.log(newData);
-        this.snackBar.open('קובץ נטען בהצלחה', 'OK', {
-          duration: 5000,
-          direction: 'rtl'
-        });
+          this.confirmDialogUpdate().subscribe(res => {
+            if (res === false) {
+              this.snackBar.open('לא מתבצעת הוספה', 'OK', {
+                duration: 2000,
+                direction: 'rtl'
+              });
+            } else {
+              if (res) {
+                res.forEach((element: Organization) => {
+                  this.os.updateOrganization(element, cats);
+                });
+                this.loadTable();
+              }
+            }
+          });
+          this.snackBar.open('קובץ נטען בהצלחה', 'OK', {
+            duration: 5000,
+            direction: 'rtl'
+          });
+        }
       }
-    }
     };
     readFile.readAsArrayBuffer(this.fileUploaded);
   }
