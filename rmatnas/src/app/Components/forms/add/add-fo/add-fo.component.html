@@ -1,11 +1,14 @@
 <mat-dialog-content>
-    <span *ngIf="data.organization" dir="rtl" style="direction: rtl">
-      <span class="object-style">
-        <app-organization [vId]="data.id" [toV]=true>
-        </app-organization>
-      </span>
-      <span class="object-style">
-        <h6>בחירת קטגוריה</h6>
+  <span *ngIf="data.organization" dir="rtl" style="direction: rtl">
+    <span class="object-style">
+      <app-organization [vId]="data.id" [toV]=true>
+      </app-organization>
+    </span>
+    <span class="object-style">
+      <mat-card>
+        <mat-card-title>
+          <h6>בחירת קטגוריה</h6>
+        </mat-card-title>
         <mat-radio-group class="example-radio-group" [(ngModel)]="selectedCategories"
           (ngModelChange)="onSelectionC($event)">
           <mat-radio-button class="example-radio-button" [checked]="true" checkboxPosition="before">
@@ -16,8 +19,10 @@
             {{cat.Name}}
           </mat-radio-button>
         </mat-radio-group>
-      </span>
-      <span class="fill-form">
+      </mat-card>
+    </span>
+    <span class="fill-form">
+      <mat-card>
         <form (ngSubmit)="submitForm(categoryForm)" class="text-right" #categoryForm="ngForm">
           <h6>משפחות מתאימות ע"פ הקטגוריות:</h6>
           <mat-selection-list name="familiesselected" [(ngModel)]="selectedFamilies"
@@ -28,12 +33,12 @@
           </mat-selection-list>
           <mat-dialog-actions align="end">
             <button mat-button mat-raised-button mat-dialog-close>ביטול</button>
-            <button mat-button mat-raised-button type="submit"
-              [disabled]="selectedFamilies.length == 0">
+            <button mat-button mat-raised-button type="submit" [disabled]="selectedFamilies.length == 0">
               <span>להוספת משפחות לארגון</span>
             </button>
           </mat-dialog-actions>
         </form>
-      </span>
+      </mat-card>
     </span>
-  </mat-dialog-content>
+  </span>
+</mat-dialog-content>
