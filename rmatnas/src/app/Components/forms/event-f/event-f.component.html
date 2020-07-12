@@ -26,7 +26,7 @@
         </mat-form-field>
         <br />
         <mat-form-field>
-          <input matInput placeholder="Choose a date" [satDatepicker]="picker" formControlName="date">
+          <input matInput placeholder="Choose a date" (dateChange)="changeDates()" [satDatepicker]="picker" formControlName="date">
           <sat-datepicker style="text-align: left;" dir="ltr" #picker [rangeMode]="true">
           </sat-datepicker>
           <sat-datepicker-toggle matSuffix [for]="picker"></sat-datepicker-toggle>

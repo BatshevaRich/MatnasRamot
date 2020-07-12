@@ -8,6 +8,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { OrganizationFComponent } from '../organization-f/organization-f.component';
 import { RangesFooter } from '../../UI/ranges-footer/ranges-footer.component';
+import { SatDatepicker } from 'saturn-datepicker';
 @Component({
   selector: 'app-event-f',
   templateUrl: './event-f.component.html',
@@ -16,6 +17,7 @@ import { RangesFooter } from '../../UI/ranges-footer/ranges-footer.component';
 export class EventFComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild('eventForm') mytemplateForm: NgForm;
+  @ViewChild('picker') dateInput: SatDatepicker<any>;
   categories: Category[] = [];
   categoriesOfOrganization: Category[] = [];
   newEvent: Eventt = new Eventt(null, null, null, null, null);
@@ -35,7 +37,7 @@ export class EventFComponent implements OnInit, OnDestroy, AfterViewInit {
               private elementRef: ElementRef,
               private formBuilder: FormBuilder) {
     this.form = fb.group({
-      date: [{ begin: new Date(2020, 7, 5), end: new Date(2020, 7, 25) }]
+      date: [{ begin: new Date(), end: new Date() }]
     });
     this.myForm = this.formBuilder.group({
       name: new FormControl('', [
@@ -69,18 +71,21 @@ export class EventFComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
+  changeDates() {
+    this.newEvent.StartDate = this.dateInput.beginDate;
+    this.newEvent.EndDate = this.dateInput.endDate;
+    const daterange = {start: this.newEvent.StartDate, end: this.newEvent.EndDate};
+  }
+
   submitForm() {
     if (this.data.update) {
       this.newEvent.Id = this.data.id;
       this.newEvent.DateAdded = new Date().toDateString();
-      this.newEvent.StartDate = this.date[0].begin.toDateString();
-      this.newEvent.EndDate = this.date[0].end.toDateString();
+
       this.es.updateEvent(this.newEvent, this.categoriesSelected);
       this.dialogRef.close(this.newEvent);
     } else {
       this.newEvent.DateAdded = new Date().toDateString();
-      this.newEvent.StartDate = this.date[0].begin.toDateString();
-      this.newEvent.EndDate = this.date[0].end.toDateString();
       this.es.addEvent(this.newEvent, this.categoriesSelected)
         .then((t: number) => {
           this.token = t;
