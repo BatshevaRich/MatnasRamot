@@ -65,7 +65,8 @@
             <ng-container *ngIf="!vId" matColumnDef="columnadd">
               <th mat-header-cell *matHeaderCellDef> + התנדבות</th>
               <td mat-cell *matCellDef="let element">
-                <h5> <button
+                <h5>
+                  <button matTooltip="הוספת התנדבות"
                     style="background: none; color: inherit; border: none; padding: 0; font: inherit; outline: inherit;"
                     (click)="$event.stopPropagation();addVolunteering(element)"><i class="fa fa-handshake-o"></i>
                   </button>
