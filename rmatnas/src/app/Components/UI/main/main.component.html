@@ -1,6 +1,6 @@
 <div dir="rtl" class="text-right fullscreen" style="padding-top: 3%">
   <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3%" fxLayoutAlign="center">
-    <div fxFlex="30%">
+    <div fxFlex="40%">
       <mat-card class="example-card">
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"><i class="fa fa-user" style="size: 7x;"></i></div>
@@ -10,13 +10,13 @@
           <app-spinner></app-spinner>
         </div>
         <div [ngClass]="pieChartData.length > 0 ? 'visible': 'hidden'">
-        <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
-          [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColors" [legend]="pieChartLegend">
-        </canvas>
-      </div>
+          <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
+            [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColors" [legend]="pieChartLegend">
+          </canvas>
+        </div>
       </mat-card>
     </div>
-    <div fxFlex="30%">
+    <div fxFlex="40%">
       <mat-card class="example-card">
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"><i class="fa fa-child"></i></div>
@@ -29,6 +29,37 @@
           <canvas baseChart [data]="pieChartDataF" [labels]="pieChartLabelsF" [chartType]="pieChartType"
             [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColors" [legend]="pieChartLegend">
           </canvas></div>
+      </mat-card>
+    </div>
+  </div>
+  <br>
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3%" fxLayoutAlign="center">
+    <div fxFlex="40%">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"><i class="fa fa-user" style="size: 7x;"></i></div>
+          <mat-card-title>פעולות במשך הזמן</mat-card-title>
+        </mat-card-header>
+        <div *ngIf="pieChartData.length == 0">
+          <app-spinner></app-spinner>
+        </div>
+        <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+          [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
+        </canvas>
+      </mat-card>
+    </div>
+    <div fxFlex="40%">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"><i class="fa fa-user" style="size: 7x;"></i></div>
+          <mat-card-title>התפלגות במערכת</mat-card-title>
+        </mat-card-header>
+        <div *ngIf="pieChartData.length == 0">
+          <app-spinner></app-spinner>
+        </div>
+        <canvas baseChart [data]="polarAreaChartData" [labels]="polarAreaChartLabels" [legend]="polarAreaLegend"
+          [chartType]="polarAreaChartType" [colors]="polarAreaChartColors">
+        </canvas>
       </mat-card>
     </div>
   </div>
