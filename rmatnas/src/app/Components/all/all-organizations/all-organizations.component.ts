@@ -219,6 +219,7 @@ export class AllOrganizationsComponent implements OnInit, OnDestroy, AfterViewIn
           }
         });
         const cats: Category[] = [];
+        if (this.toSave.length > 0) {
         this.confirmDialogAdd().subscribe(res => {
           if (res === false){
             this.snackBar.open('לא מתבצעת הוספה', 'OK', {
@@ -234,6 +235,8 @@ export class AllOrganizationsComponent implements OnInit, OnDestroy, AfterViewIn
           }
           }
         });
+      }
+        if (this.toUpdate.length > 0) {
         this.confirmDialogUpdate().subscribe(res => {
           if (res === false){
             this.snackBar.open('לא מתבצעת הוספה', 'OK', {
@@ -255,6 +258,7 @@ export class AllOrganizationsComponent implements OnInit, OnDestroy, AfterViewIn
           direction: 'rtl'
         });
       }
+    }
     };
     readFile.readAsArrayBuffer(this.fileUploaded);
   }

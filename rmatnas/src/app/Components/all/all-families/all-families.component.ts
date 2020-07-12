@@ -230,6 +230,7 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
           }
         });
         const cats: Category[] = [];
+        if (this.toSave.length > 0) {
         this.confirmDialogAdd().subscribe(res => {
           if (res === false){
             this.snackBar.open('לא מתבצעת הוספה', 'OK', {
@@ -245,6 +246,8 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
           }
           }
         });
+      }
+        if (this.toUpdate.length > 0) {
         this.confirmDialogUpdate().subscribe(res => {
           if (res === false){
             this.snackBar.open('לא מתבצעת הוספה', 'OK', {
@@ -265,6 +268,7 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
           direction: 'rtl'
         });
       }
+    }
     };
     readFile.readAsArrayBuffer(this.fileUploaded);
   }
