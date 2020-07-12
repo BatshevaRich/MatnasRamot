@@ -96,6 +96,7 @@ export class AllEventsComponent implements OnInit, OnDestroy, AfterViewInit {
 }
 
 loadTable() {
+  this.ns.getAllEventsToConnect();
   this.es.getEvents().subscribe((events: Eventt[]) => {
     this.loaded = true;
     if (events.length === 0) {
