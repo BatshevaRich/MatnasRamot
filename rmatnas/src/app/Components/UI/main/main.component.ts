@@ -21,7 +21,7 @@ import { Organization } from '../../../Classes/Organization';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent {
-  public polarAreaChartLabels: Label[] = ['מתנדבות', 'משפחות', 'ארגונים', 'ארועים'];
+  public polarAreaChartLabels: Label[] = ['מתנדבות', 'משפחות', 'ארגונים', 'ארועים', 'קטגוריות'];
   public polarAreaChartData: number[] = [];
   public polarAreaLegend = true;
   public polarAreaChartType: ChartType = 'polarArea';
@@ -38,6 +38,10 @@ export class MainComponent {
               public os: OrganizationService) {
     vs.getVolunteers().subscribe((res: Volunteer[]) => {
       this.polarAreaChartData.push(res.length);
+      res = res.filter((v: Volunteer) => v.IsActive);
+      const resA = this.polarAreaChartData.length;
+      this.pieChartDataA.push(res.length);
+      this.pieChartDataA.push(resA);
       fs.getFamilies().subscribe((re: Family[]) => {
         this.polarAreaChartData.push(re.length);
         os.getOrganizations().subscribe((r: Organization[]) => {
@@ -72,7 +76,7 @@ export class MainComponent {
     });
     cs.getCategories().subscribe(res => {
       this.categories = res;
-
+      this.polarAreaChartData.push(res.length);
       cs.GetAllCategoriesOfAllVolunteers().subscribe(data => {
         const all = [...data.reduce((mp, o) => {
           if (!mp.has(o.Name)) { mp.set(o.Name, { ...o, count: 0 }); }
@@ -125,6 +129,8 @@ export class MainComponent {
   public pieChartData: number[] = [];
   public pieChartLabelsF: Label[] = [];
   public pieChartDataF: number[] = [];
+  public pieChartLabelsA: Label[] = ['פעילה', 'לא פעילה'];
+  public pieChartDataA: number[] = [];
   public pieChartType: ChartType = 'pie';
   public pieChartLegend = true;
   public pieChartPlugins = [pluginDataLabels];
