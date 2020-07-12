@@ -9,3 +9,28 @@
 .visible {
   visibility: visible;
 }
+
+#bloc_container {
+  display: inline-flex;
+  vertical-align: top;
+  text-align: right;
+  
+}
+
+#bloc1 {
+  display: inline-block;
+  padding: 5px;
+  vertical-align: top;
+}
+
+#bloc2 {
+  display: inline-block;
+  padding: 5px;
+  vertical-align: top
+}
+
+#bloc3 {
+  display: inline-block;
+  padding: 5px;
+  vertical-align: top
+}
