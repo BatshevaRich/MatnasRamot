@@ -28,7 +28,7 @@ export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewIni
 
   @ViewChild(MatTable, {static: false}) table: MatTable<any>;
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
-  displayedColumns = ['NameVolunteer', 'NameFamily', 'Category', 'PelephoneVolunteer', 'columndelete'];
+  displayedColumns = ['NameVolunteer', 'NameFamily', 'Category', 'PelephoneVolunteer', 'date', 'columndelete'];
   expandedElement: Details | null;
   allvolunteerings: Details[] = [];
   dataSource = new MatTableDataSource([]);
@@ -46,6 +46,7 @@ export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewIni
   constructor(public fs: FamilyService,
               public vfs: VolunteerAndFamilyService,
               public dialog: MatDialog,
+              private datePipe: DatePipe,
               private elementRef: ElementRef) {
     // this.dataSource.filterPredicate =
     //   (data: Details, filter: string) => data.NameVolunteer.indexOf(filter) !== -1;
@@ -53,7 +54,7 @@ export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewIni
 
   ngOnInit() {
     if (this.vId) {
-      this.displayedColumns = ['NameVolunteer', 'NameFamily', 'Category', 'PelephoneVolunteer'];
+      this.displayedColumns = ['NameVolunteer', 'NameFamily', 'Category', 'PelephoneVolunteer', 'date'];
       if (this.where === 1) {
         this.vfs.getVolunteeringsForVolunteer(this.vId).subscribe((res: VolunteerAndFamily[]) => {
           this.loaded = true;
@@ -62,18 +63,7 @@ export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewIni
           } else {
             this.volunteerings = res;
             this.resultsLength = this.volunteerings.length;
-            this.volunteerings.forEach(element => {
-              // tslint:disable-next-line: no-use-before-declare
-              const item = new Details();
-              item.Id = element.Id;
-              item.NameFamily = element.Family.LastName;
-              item.NameVolunteer = element.Volunteer.Name;
-              element.Category ? item.Category = element.Category.Name : item.Category = 'אין קטגוריה';
-              item.PelephoneVolunteer = element.Volunteer.Pelephone;
-              this.allvolunteerings.push(item);
-              item.IdVolunteer = element.Volunteer.Id;
-              item.IdFamily = element.Family.Id;
-            });
+            this.mapData(this.volunteerings);
             this.dataSource = new MatTableDataSource(Object.values(this.allvolunteerings));
           }
         }, err => { this.error = true; this.loaded = true; });
@@ -85,46 +75,11 @@ export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewIni
           } else {
             this.volunteerings = res;
             this.resultsLength = this.volunteerings.length;
-            this.volunteerings.forEach(element => {
-              // tslint:disable-next-line: no-use-before-declare
-              const item = new Details();
-              item.Id = element.Id;
-              item.NameFamily = element.Family.LastName;
-              item.NameVolunteer = element.Volunteer.Name;
-              element.Category ? item.Category = element.Category.Name : item.Category = 'אין קטגוריה';
-              item.PelephoneVolunteer = element.Volunteer.Pelephone;
-              this.allvolunteerings.push(item);
-              item.IdVolunteer = element.Volunteer.Id;
-              item.IdFamily = element.Family.Id;
-            });
+            this.mapData(this.volunteerings);
             this.dataSource = new MatTableDataSource(Object.values(this.allvolunteerings));
           }
         }, err => { this.error = true; this.loaded = true; });
       }
-      // if (this.where === 2) {
-      //   this.vfs.getVolunteeringsForFamily(this.vId).subscribe((res: VolunteerAndFamily[]) => {
-      //     this.loaded = true;
-      //     if (res.length === 0) {
-      //       this.notFound = true;
-      //     } else {
-      //       this.volunteerings = res;
-      //       this.resultsLength = this.volunteerings.length;
-      //       this.volunteerings.forEach(element => {
-      //         // tslint:disable-next-line: no-use-before-declare
-      //         const item = new Details();
-      //         item.Id = element.Id;
-      //         item.NameFamily = element.Family.LastName;
-      //         item.NameVolunteer = element.Volunteer.Name;
-      //         element.Category ? item.Category = element.Category.Name : item.Category = 'קטגוריה נמחקה';
-      //         item.PelephoneVolunteer = element.Volunteer.Pelephone;
-      //         this.allvolunteerings.push(item);
-      //         item.IdVolunteer = element.Volunteer.Id;
-      //         item.IdFamily = element.Family.Id;
-      //       });
-      //       this.dataSource = new MatTableDataSource(Object.values(this.allvolunteerings));
-      //     }
-      //   }, err => { this.error = true; this.loaded = true; });
-      // }
     } else {
       this.vfs.getVolunteerings().subscribe((res: VolunteerAndFamily[]) => {
         this.loaded = true;
@@ -133,22 +88,28 @@ export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewIni
         } else {
           this.volunteerings = res;
           this.resultsLength = this.volunteerings.length;
-          this.volunteerings.forEach(element => {
-            // tslint:disable-next-line: no-use-before-declare
-            const item = new Details();
-            item.Id = element.Id;
-            item.NameFamily = element.Family.LastName;
-            item.NameVolunteer = element.Volunteer.Name;
-            element.Category ? item.Category = element.Category.Name : item.Category = 'אין קטגוריה';
-            item.PelephoneVolunteer = element.Volunteer.Pelephone;
-            this.allvolunteerings.push(item);
-            item.IdVolunteer = element.Volunteer.Id;
-            item.IdFamily = element.Family.Id;
-          });
+          this.mapData(this.volunteerings);
           this.dataSource = new MatTableDataSource(Object.values(this.allvolunteerings));
         }
       }, err => { this.error = true; this.loaded = true; });
     }
+  }
+
+  mapData(volunteerings: VolunteerAndFamily[]){
+    volunteerings.forEach(element => {
+      // tslint:disable-next-line: no-use-before-declare
+      const item = new Details();
+      item.Id = element.Id;
+      item.NameFamily = element.Family.LastName;
+      item.NameVolunteer = element.Volunteer.Name;
+      element.Category ? item.Category = element.Category.Name : item.Category = 'אין קטגוריה';
+      item.PelephoneVolunteer = element.Volunteer.Pelephone;
+      this.allvolunteerings.push(item);
+      item.IdVolunteer = element.Volunteer.Id;
+      item.IdFamily = element.Family.Id;
+      item.DateVolunteer = this.datePipe.transform(new Date(element.DateAdded).toDateString(), 'MM/dd/yyyy');
+    });
+    return volunteerings;
   }
   ngOnDestroy() {
     this.elementRef.nativeElement.remove();
@@ -191,6 +152,7 @@ export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewIni
       שם_משפחה: x.NameFamily,
       קטגוריה: x.Category,
       פלאפון_מתנדבת: x.PelephoneVolunteer,
+      תאריך_התנדבות: x.DateVolunteer
     }));
     const wb = XLSX.utils.book_new();
     const ws = XLSX.utils.json_to_sheet(data);
@@ -208,4 +170,5 @@ export class Details {
   NameFamily: string;
   Category: string;
   PelephoneVolunteer: string;
+  DateVolunteer: string;
 }

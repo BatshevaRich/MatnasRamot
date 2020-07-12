@@ -33,6 +33,10 @@
               <th mat-header-cell *matHeaderCellDef> פלאפון </th>
               <td mat-cell *matCellDef="let element"> {{element.PelephoneVolunteer}} </td>
             </ng-container>
+            <ng-container matColumnDef="date">
+              <th mat-header-cell *matHeaderCellDef> תאריך התנדבות </th>
+              <td mat-cell *matCellDef="let element"> {{element.DateVolunteer}} </td>
+            </ng-container>
             <ng-container *ngIf="!vId" matColumnDef="columndelete">
               <th mat-header-cell *matHeaderCellDef>מחיקה </th>
               <td mat-cell *matCellDef="let element">
