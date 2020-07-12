@@ -9,10 +9,19 @@
             <i matPrefix class="fa fa-search" aria-hidden="true"></i>
           </mat-form-field>
           <span class="example-spacer"></span>
-          <!-- <div class="example-header-image" mat-card-avatar matTooltip="הורדה לקובץ אקסל" (click)="exportTableToExcel()"
-          *ngIf="!vId">
-          <i class="fa fa-file-excel-o" aria-hidden="true"></i>
-        </div> -->
+          <button style="visibility: hidden;"></button>
+          <span class="example-spacer"></span>
+          <button style="visibility: hidden;"></button>
+          <div mat-card-avatar matTooltip="הורדה לקובץ אקסל" (click)="exportTableToExcel()" *ngIf="!vId">
+            <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+          </div>
+          <span class="example-spacer"></span>
+          <button style="visibility: hidden;"></button>
+          <div mat-card-avatar matTooltip="העלאת קובץ אקסל" *ngIf="!vId"
+            onclick="document.getElementById('fileToUpload').click()"><i matPrefix class="fa fa-upload"
+              aria-hidden="true"></i></div>
+          <input mat-input type="file" id="fileToUpload" style="display:none;" (change)="uploadedFile($event)"
+            placeholder="Upload file" accept=".xlsx">
         </mat-toolbar-row>
       </mat-card-header>
       <mat-card-content>

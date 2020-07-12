@@ -212,4 +212,116 @@ loadTable() {
     XLSX.utils.book_append_sheet(wb, ws, 'ארועים');
     XLSX.writeFile(wb, `ארועים.xlsx`);
   }
+
+  uploadedFile(event) {
+    this.fileUploaded = event.target.files[0];
+    this.readExcel();
+  }
+  readExcel() {
+    const readFile = new FileReader();
+    readFile.onload = (e) => {
+      this.arrayBuffer = readFile.result;
+      const data = new Uint8Array(this.arrayBuffer);
+      const arr = new Array();
+      for (let i = 0; i !== data.length; ++i) { arr[i] = String.fromCharCode(data[i]); }
+      const bstr = arr.join('');
+      const workbook = XLSX.read(bstr, { type: 'binary' });
+      const firstSheetName = workbook.SheetNames[0];
+      const worksheet = workbook.Sheets[firstSheetName];
+      XLSX.utils.sheet_to_json(worksheet, { raw: true });
+      let js = XLSX.utils.sheet_to_json(worksheet, { raw: true });
+      js = js as Details[];
+      // tslint:disable-next-line: no-string-literal
+      if (!js[1]['שם']) {
+        this.snackBar.open('קובץ לא תקני, נא להעלות קובץ נכון...', 'OK', {
+          duration: 5000,
+          direction: 'rtl'
+        });
+      } else {
+        const newData = js.map((x) => ({
+          // tslint:disable-next-line: no-string-literal
+          Id: x['Id'] as number,
+          // tslint:disable-next-line: no-string-literal
+          Name: x['שם'],
+          // tslint:disable-next-line: no-string-literal
+          Description: x['תאור'],
+          // tslint:disable-next-line: no-string-literal
+          StartDate: x['תאריך_התחלה'] ? this.datePipe.transform(new Date(x['תאריך_התחלה']).toDateString(), 'MM/dd/yyyy') : new Date(),
+          // tslint:disable-next-line: no-string-literal
+          EndDate: x['תאריך_סיום'] ? this.datePipe.transform(new Date(x['תאריך_סיום']).toDateString(), 'MM/dd/yyyy') : new Date(),
+          // tslint:disable-next-line: no-string-literal
+          DateAdded: x['תאריך_הוספה'] ? this.datePipe.transform(new Date(x['תאריך_הוספה']).toDateString(), 'MM/dd/yyyy') : new Date(),
+        }));
+        newData.forEach((element) => {
+          if (element.Id) {
+            this.toUpdate.push(Object.assign(element));
+          } else {
+            this.toSave.push(Object.assign(element));
+          }
+        });
+        const cats: Category[] = [];
+        if (this.toSave.length > 0) {
+        this.confirmDialogAdd().subscribe(res => {
+          if (res === false){
+            this.snackBar.open('לא מתבצעת הוספה', 'OK', {
+              duration: 2000,
+              direction: 'rtl'
+            });
+          } else {
+            if (res) {
+              res.forEach((element: Eventt) => {
+              this.es.addEvent(element, cats);
+            });
+              this.loadTable();
+          }
+          }
+        });
+      }
+        if (this.toUpdate.length > 0) {
+        this.confirmDialogUpdate().subscribe(res => {
+          if (res === false){
+            this.snackBar.open('לא מתבצעת הוספה', 'OK', {
+              duration: 2000,
+              direction: 'rtl'
+            });
+          } else {
+            if (res) {
+              res.forEach((element: Eventt) => {
+             this.es.updateEvent(element, cats);
+            });
+              this.loadTable();
+          }
+          }
+        });
+      }
+        console.log(newData);
+        this.snackBar.open('קובץ נטען בהצלחה', 'OK', {
+          duration: 5000,
+          direction: 'rtl'
+        });
+      }
+    };
+    readFile.readAsArrayBuffer(this.fileUploaded);
+  }
+
+  confirmDialogAdd(): Observable<any> {
+    const message = `האם תרצי להוסיף את הארועים הבאים?`;
+    const dialogData = new ConfirmDialogModel('הוספת ארועים חדשים', message, this.toSave, 'event');
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: '75%',
+      data: dialogData
+    });
+    return dialogRef.afterClosed();
+  }
+
+  confirmDialogUpdate(): Observable<any> {
+    const message = `האם תרצי לעדכן את הארועים הבאים?`;
+    const dialogData = new ConfirmDialogModel('עדכון ארועים מקובץ', message, this.toUpdate, 'event');
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: '75%',
+      data: dialogData
+    });
+    return dialogRef.afterClosed();
+  }
+
 }
