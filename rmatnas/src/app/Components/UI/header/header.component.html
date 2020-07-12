@@ -4,15 +4,17 @@
             <mat-button-toggle class="bg-dark">
                 <span>
                     <button mat-button class="nav-letters bg-dark" [routerLink]='"./"'>
-                        <span [matBadgeHidden] = "!allBadge" matBadge={{allBadge}} matBadgeSize="small" matBadgePosition="before"
-                            matBadgeColor="accent">
+                        <span [matBadgeHidden]="!allBadge" matBadge={{allBadge}} matBadgeSize="small"
+                            matBadgePosition="before" matBadgeColor="accent">
                         </span>מתנס מעלה רמות
                     </button>
                 </span>
             </mat-button-toggle>
             <mat-button-toggle class="bg-dark">
                 <span>
-                    <button mat-button class="nav-letters" [routerLink]='"main"'>ראשי</button>
+                    <button mat-button class="nav-letters" [routerLink]='"main"'>
+                        <i class="fa fa-home" aria-hidden="true" style="size: 7px;"></i>
+                    </button>
                 </span>
             </mat-button-toggle>
             <mat-button-toggle class="bg-dark">
@@ -45,8 +47,9 @@
                 <div class="btn-group">
                     <button mat-button class="nav-letters" [routerLink]="'/list/families'"
                         routerLinkActive="activeLink">
-                        <i matBadge={{familyBadge}} [matBadgeHidden] = "!familyBadge" matBadgeSize="small" matBadgePosition="before"
-                            matBadgeColor="accent" class="fa fa-child" aria-hidden="true"></i>משפחות
+                        <i matBadge={{familyBadge}} [matBadgeHidden]="!familyBadge" matBadgeSize="small"
+                            matBadgePosition="before" matBadgeColor="accent" class="fa fa-child"
+                            aria-hidden="true"></i>משפחות
                     </button>
                     <button mat-button class="nav-letters dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
@@ -81,8 +84,9 @@
             <mat-button-toggle class="bg-dark">
                 <div class="btn-group">
                     <button mat-button class="nav-letters" [routerLink]="'/list/events'" routerLinkActive="activeLink">
-                        <i matBadge={{eventBadge}} [matBadgeHidden] = "!eventBadge" matBadgeSize="small" matBadgePosition="before" matBadgeColor="accent"
-                            class="fa fa-calendar-o" aria-hidden="true"></i>ארועים
+                        <i matBadge={{eventBadge}} [matBadgeHidden]="!eventBadge" matBadgeSize="small"
+                            matBadgePosition="before" matBadgeColor="accent" class="fa fa-calendar-o"
+                            aria-hidden="true"></i>ארועים
                     </button>
                     <button mat-button class="nav-letters dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
@@ -109,27 +113,27 @@
         mode="over" opened="false" fxHide.gt-sm="true">
         <span fxLayout="column" style="text-align: left !important;">
             <span>
-                <div class="btn-group">
-                    <button mat-button class="nav-letters" [routerLink]='"./"'>&nbsp; &nbsp;
-                        <span matBadge={{volunteerBadge}} matBadgeSize="small" matBadgePosition="before"
-                            matBadgeColor="accent">
-                        </span>מתנס מעלה רמות
-                    </button>
-                </div>
+                <button mat-button class="nav-letters bg-dark" [routerLink]='"./"'>
+                    <span [matBadgeHidden]="!allBadge" matBadge={{allBadge}} matBadgeSize="small"
+                        matBadgePosition="before" matBadgeColor="accent">
+                    </span>מתנס מעלה רמות
+                </button>
             </span>
             <span>
-                <button mat-button class="nav-letters" [routerLink]='"main"'>ראשי</button>
+                <button mat-button class="nav-letters" [routerLink]='"main"'>
+                    <i class="fa fa-home" aria-hidden="true" style="size: 7px;"></i>
+                </button>
             </span>
             <div class="btn-group">
                 <button mat-button class="nav-letters" [routerLink]="'/list/vaf'" routerLinkActive="activeLink">
-                    <i matBadge="4" matBadgeSize="small" matBadgePosition="before" matBadgeColor="accent"
-                        class="fa fa-handshake-o" aria-hidden="true"></i>התנדבויות
+                    <i class="fa fa-handshake-o" aria-hidden="true"></i>
+                    התנדבויות
                 </button>
             </div>
             <div class="btn-group">
                 <button mat-button class="nav-letters" [routerLink]="'/list/volunteers'" routerLinkActive="activeLink">
-                    <i matBadge={{volunteerBadge}} matBadgeSize="small" matBadgePosition="before" matBadgeColor="accent"
-                        class="fa fa-user" aria-hidden="true"></i>מתנדבות
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    מתנדבות
                 </button>
                 <button mat-button class="nav-letters dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
@@ -143,8 +147,9 @@
             </div>
             <div class="btn-group">
                 <button mat-button class="nav-letters" [routerLink]="'/list/families'" routerLinkActive="activeLink">
-                    <i matBadge={{familyBadge}} matBadgeSize="small" matBadgePosition="before" matBadgeColor="accent"
-                        class="fa fa-child" aria-hidden="true"></i>משפחות
+                    <i matBadge={{familyBadge}} [matBadgeHidden]="!familyBadge" matBadgeSize="small"
+                        matBadgePosition="before" matBadgeColor="accent" class="fa fa-child"
+                        aria-hidden="true"></i>משפחות
                 </button>
                 <button mat-button class="nav-letters dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
@@ -159,8 +164,8 @@
             <div class="btn-group">
                 <button mat-button class="nav-letters" [routerLink]="'/list/organizations'"
                     routerLinkActive="activeLink">
-                    <i matBadge={{organizationBadge}} matBadgeSize="small" matBadgePosition="before"
-                        matBadgeColor="accent" class="fa fa-users" aria-hidden="true"></i>ארגונים
+                    <i class="fa fa-users" aria-hidden="true"></i>
+                    ארגונים
                 </button>
                 <button mat-button class="nav-letters dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
@@ -174,8 +179,9 @@
             </div>
             <div class="btn-group">
                 <button mat-button class="nav-letters" [routerLink]="'/list/events'" routerLinkActive="activeLink">
-                    <i matBadge={{eventBadge}} matBadgeSize="small" matBadgePosition="before" matBadgeColor="accent"
-                        class="fa fa-calendar-o" aria-hidden="true"></i>ארועים
+                    <i matBadge={{eventBadge}} [matBadgeHidden]="!eventBadge" matBadgeSize="small"
+                        matBadgePosition="before" matBadgeColor="accent" class="fa fa-calendar-o"
+                        aria-hidden="true"></i>ארועים
                 </button>
                 <button mat-button class="nav-letters dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
