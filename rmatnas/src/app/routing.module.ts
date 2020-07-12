@@ -6,8 +6,6 @@ import { AllFamiliesComponent } from './Components/all/all-families/all-families
 import { AllOrganizationsComponent } from './Components/all/all-organizations/all-organizations.component';
 import { AllEventsComponent } from './Components/all/all-events/all-events.component';
 import { AllVolunteersComponent } from './Components/all/all-volunteers/all-volunteers.component';
-import { AllTasksComponent } from './Components/all/all-tasks/all-tasks.component';
-import { MyTaskComponent } from './Components/single/task/task.component';
 import { MainComponent } from './Components/UI/main/main.component';
 import { LoginComponent } from './Components/security/login/login.component';
 
@@ -23,9 +21,7 @@ export const routeList: Routes = [
       { path: 'volunteers', component: AllVolunteersComponent },
       { path: 'families', component: AllFamiliesComponent },
       { path: 'events', component: AllEventsComponent },
-      { path: 'organizations', component: AllOrganizationsComponent },
-      { path: 'tasks', component: AllTasksComponent },
-      { path: 'task/:taskId', component: MyTaskComponent }
+      { path: 'organizations', component: AllOrganizationsComponent }
     ]
   }
 ];
