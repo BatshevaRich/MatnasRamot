@@ -10,6 +10,10 @@ import { ConfirmDialogModel, ConfirmDialogComponent } from '../../UI/confirm-dia
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { AddVEComponent } from '../../forms/add/add-ve/add-ve.component';
 import { NotificationService } from '../../../services/notification.service';
+import { DatePipe } from '@angular/common';
+import * as XLSX from 'xlsx';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Category } from '../../../Classes/Category';
 export interface Details {
   Id: number;
   Name: string;
@@ -47,11 +51,16 @@ export class AllEventsComponent implements OnInit, OnDestroy, AfterViewInit {
   loaded = false;
   error = false;
   notFound = false;
-
+  arrayBuffer: any;
+  fileUploaded: File;
+  toUpdate: Eventt[] = [];
+  toSave: Eventt[] = [];
   constructor(public es: EventService,
               public dialog: MatDialog,
               public ns: NotificationService,
-              private elementRef: ElementRef) { }
+              private datePipe: DatePipe,
+              private elementRef: ElementRef,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     if (this.vId) {
@@ -82,33 +91,37 @@ export class AllEventsComponent implements OnInit, OnDestroy, AfterViewInit {
         }, err => { this.error = true; this.loaded = true; });
       }
     } else {
-    this.es.getEvents().subscribe((events: Eventt[]) => {
-      this.loaded = true;
-      if (events.length === 0) {
-        this.notFound = true;
-      } else {
-        this.eventts = this.es.trimResultsFromDB(events);
-        const res = this.ns.Events;
-        function sortFunc(a: { Id: number; }, b: { Id: number; }) {
-          const s1 = res.find(s => s.Id === a.Id);
-          const s2 = res.find(s => s.Id === b.Id);
-          if (s1 && s2) { return 0; }
-          else if (s1) { return -1; }
-          else if (s2) { return 1; }
-          return 0;
-        }
-        const sorted = events.sort(sortFunc);
-        for (let index = 0; index < res.length; index++) {
-          sorted[index].color = true;
-        }
-        this.eventts = events;
-        this.dataSource = new MatTableDataSource(Object.values(sorted));
-        this.resultsLength = this.dataSource.data.length;
-        this.loaded = true;
-        this.error = false;
-      }
-    }, err => { this.error = true; this.loaded = true; });
+    this.loadTable();
   }
+}
+
+loadTable() {
+  this.es.getEvents().subscribe((events: Eventt[]) => {
+    this.loaded = true;
+    if (events.length === 0) {
+      this.notFound = true;
+    } else {
+      this.eventts = this.es.trimResultsFromDB(events);
+      const res = this.ns.Events;
+      function sortFunc(a: { Id: number; }, b: { Id: number; }) {
+        const s1 = res.find(s => s.Id === a.Id);
+        const s2 = res.find(s => s.Id === b.Id);
+        if (s1 && s2) { return 0; }
+        else if (s1) { return -1; }
+        else if (s2) { return 1; }
+        return 0;
+      }
+      const sorted = events.sort(sortFunc);
+      for (let index = 0; index < res.length; index++) {
+        sorted[index].color = true;
+      }
+      this.eventts = events;
+      this.dataSource = new MatTableDataSource(Object.values(sorted));
+      this.resultsLength = this.dataSource.data.length;
+      this.loaded = true;
+      this.error = false;
+    }
+  }, err => { this.error = true; this.loaded = true; });
 }
 
   confirmDialog(): Observable<any> {
@@ -183,4 +196,20 @@ export class AllEventsComponent implements OnInit, OnDestroy, AfterViewInit {
     return dialogRef.afterClosed();
   }
 
+  public exportTableToExcel() {
+    const data = this.eventts.map((x: Eventt) => ({
+      Id: x.Id,
+      שם: x.Name,
+      תאור: x.Description,
+      תאריך_התחלה: this.datePipe.transform(x.StartDate, 'MM/dd/yyyy'),
+      תאריך_סיום: this.datePipe.transform(x.EndDate, 'MM/dd/yyyy'),
+      תאריך_הוספה: this.datePipe.transform(x.DateAdded, 'MM/dd/yyyy')
+    }));
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.json_to_sheet(data);
+    ws['!cols'] = []; // hide id column
+    ws['!cols'][0] = { hidden: true };
+    XLSX.utils.book_append_sheet(wb, ws, 'ארועים');
+    XLSX.writeFile(wb, `ארועים.xlsx`);
+  }
 }
