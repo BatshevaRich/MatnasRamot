@@ -39,7 +39,7 @@ export class MainComponent {
     vs.getVolunteers().subscribe((res: Volunteer[]) => {
       this.polarAreaChartData.push(res.length);
       res = res.filter((v: Volunteer) => v.IsActive);
-      const resA = this.polarAreaChartData.length;
+      const resA = this.polarAreaChartData[0] - res.length;
       this.pieChartDataA.push(res.length);
       this.pieChartDataA.push(resA);
       fs.getFamilies().subscribe((re: Family[]) => {
@@ -89,12 +89,14 @@ export class MainComponent {
         });
       });
       cs.GetAllCategoriesOfAllFamilies().subscribe(data => {
-        const all = data.reduce((map => (r, a) =>
-          (!map.has(a.Name) && map.set(a.Name, r[r.push({ name: a.Name, count: a.Id }) - 1]), map.get(a.Name), r))(new Map()),
-          []
-        );
-        all.forEach((element: { name: Label; count: number; }) => {
-          this.pieChartLabelsF.push(element.name);
+        const all = [...data.reduce((mp, o) => {
+          if (!mp.has(o.Name)) { mp.set(o.Name, { ...o, count: 0 }); }
+          mp.get(o.Name).count++;
+          return mp;
+        }, new Map()).values()];
+        debugger
+        all.forEach((element: { Name: Label; count: number; }) => {
+          this.pieChartLabelsF.push(element.Name);
           this.pieChartDataF.push(element.count);
         });
       });
