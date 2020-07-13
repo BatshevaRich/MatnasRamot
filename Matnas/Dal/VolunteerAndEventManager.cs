@@ -6,13 +6,21 @@ using System.Threading.Tasks;
 
 namespace Dal
 {
-   public static class VolunteerAndEventManager
+    public static class VolunteerAndEventManager
     {
         public static void AddVolunteerAndEvent(Common.VolunteerAndEvent vae)
         {
             VolunteerAndEvent g = Mapper.CastVolunteerAndEvent(vae);
             using (dbRamotEntities db = new dbRamotEntities())
-            { //if (db.VolunteerAndEvent.Contains(g)) 
+            { 
+                Categories c = null;
+                if (vae.Category != null)
+                    c = db.Categories.FirstOrDefault(ca => ca.Id == vae.Category.Id);
+                var v = db.Volunteers.FirstOrDefault(ca => ca.Id == vae.Volunteer.Id);
+                var e = db.Events.FirstOrDefault(ca => ca.Id == vae.Event.Id);
+                g.Categories = c;
+                g.Volunteers = v;
+                g.Events = e;
                 db.VolunteerAndEvent.Add(g);
                 db.SaveChanges();
             }

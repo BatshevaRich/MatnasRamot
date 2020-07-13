@@ -55,7 +55,6 @@ namespace Dal
                 foreach (var item in categories)
                 {
                     var c = db.Categories.FirstOrDefault(ca => ca.Id == item.Id);
-                    //var c =cc.FirstOrDefault(ca => ca.Id == item.Id);
                     f.Categories.Add(c);
                 }
                 db.Families.Add(f);
@@ -142,7 +141,6 @@ namespace Dal
                 foreach (var item in category)
                 {
                     var c = db.Categories.FirstOrDefault(ca => ca.Id == item.Id);
-                    //var c =cc.FirstOrDefault(ca => ca.Id == item.Id);
                     f.Categories.Add(c);
                 }
 

@@ -12,11 +12,15 @@ namespace Dal
         {
             OrganizationAndFamily g = Mapper.CastOrganizationAndFamily(oaf);
             using (dbRamotEntities db = new dbRamotEntities())
-            { //if (db.OrganizationAndFamily.Contains(g)) 
-                //var family = db.Families.FirstOrDefault(ca => ca.Id == oaf.Family.Id);
-                //var organization = db.Groups.FirstOrDefault(g => g.Id == oaf.Organization.Id);
-                //var category = db.Categories.FirstOrDefault(c => c.Id == oaf.Category.Id);
-               
+            {
+                Categories c = null;
+                if (oaf.Category != null)
+                    c = db.Categories.FirstOrDefault(ca => ca.Id == oaf.Category.Id);
+                var f = db.Families.FirstOrDefault(ca => ca.Id == oaf.Family.Id);
+                var o = db.Organization.FirstOrDefault(ca => ca.Id == oaf.Organization.Id);
+                g.Categories = c;
+                g.Families = f;
+                g.Organization = o;
                 db.OrganizationAndFamily.Add(g);
                 db.SaveChanges();
             }

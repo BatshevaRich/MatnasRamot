@@ -59,7 +59,6 @@ namespace Dal
                 foreach (var item in category)
                 {
                     var c = db.Categories.FirstOrDefault(ca => ca.Id == item.Id);
-                    //var c =cc.FirstOrDefault(ca => ca.Id == item.Id);
                     v.Categories.Add(c);
                 }
                 db.Volunteers.Add(v);
@@ -171,7 +170,8 @@ namespace Dal
                 Volunteers v = db.Volunteers.Find(id);
                 foreach (var item in category)
                 {
-                    v.Categories.Add(Mapper.CastCategory(item));
+                    var c = db.Categories.FirstOrDefault(ca => ca.Id == item.Id);
+                    v.Categories.Add(c);
                     db.SaveChanges();
                 }
 

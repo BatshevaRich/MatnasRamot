@@ -13,13 +13,21 @@ namespace Dal
             VolunteerAndFamily g = Mapper.CastVolunteerAndFamily(vaf);
             using (dbRamotEntities db = new dbRamotEntities())
             { //if (db.VolunteerAndFamily.Contains(g)) 
+                Categories c = null;
+                if (vaf.Category != null)
+                    c = db.Categories.FirstOrDefault(ca => ca.Id == vaf.Category.Id);
+                var v = db.Volunteers.FirstOrDefault(ca => ca.Id == vaf.Volunteer.Id);
+                var f = db.Families.FirstOrDefault(ca => ca.Id == vaf.Family.Id);
+                g.Categories = c;
+                g.Volunteers = v;
+                g.Families = f;
                 db.VolunteerAndFamily.Add(g);
                 db.SaveChanges();
             }
         }
         public static void RemoveVolunteerAndFamily(int id)
         {
-          
+
             using (dbRamotEntities db = new dbRamotEntities())
             {
                 db.VolunteerAndFamily.Remove(db.VolunteerAndFamily.Find(id));
