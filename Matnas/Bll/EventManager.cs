@@ -18,9 +18,9 @@ namespace Bll
         {
             Dal.EventManager.RemoveEvent(id);
         }
-        public static void UpdateEvent(Event eventt, Category[] categories)
+        public static int UpdateEvent(Event eventt, Category[] categories)
         {
-            Dal.EventManager.UpdateEvent(eventt, categories);
+            return Dal.EventManager.UpdateEvent(eventt, categories);
         }
 
         public static Event GetEvent(int id)

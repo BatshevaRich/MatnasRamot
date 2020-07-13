@@ -39,11 +39,11 @@ namespace WebApi.Controllers
         }
 
         // PUT: api/Event/5
-        public void Put([FromBody] JObject data)
+        public int Put([FromBody] JObject data)
         {
             Event newEvent = data["event"].ToObject<Event>();
             Category[] category = data["categories"].ToObject<Category[]>();
-            Bll.EventManager.UpdateEvent(newEvent, category);
+            return Bll.EventManager.UpdateEvent(newEvent, category);
         }
 
         // DELETE: api/Event/5

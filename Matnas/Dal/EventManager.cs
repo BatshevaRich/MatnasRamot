@@ -18,7 +18,6 @@ namespace Dal
                 foreach (var item in categories)
                 {
                     var c = db.Categories.FirstOrDefault(ca => ca.Id == item.Id);
-                    //var c =cc.FirstOrDefault(ca => ca.Id == item.Id);
                     v.Categories.Add(c);
                 }
                 db.Events.Add(v);
@@ -60,8 +59,9 @@ namespace Dal
             }
         }
 
-        public static void UpdateEvent(Event eventt, Category[] categories)
+        public static int UpdateEvent(Event eventt, Category[] categories)
         {
+            int x = 0;
             Events e = Mapper.CastEvent(eventt);
             using (dbRamotEntities db = new dbRamotEntities())
             {
@@ -73,7 +73,9 @@ namespace Dal
                 }
                 db.Entry<Events>(db.Set<Events>().Find(e.Id)).CurrentValues.SetValues(e);
                 db.SaveChanges();
+                x = db.Events.Local[0].Id;
             }
+            return x;
         }
 
         public static IEnumerable<Event> GetEvents()
@@ -94,7 +96,8 @@ namespace Dal
             using (dbRamotEntities db = new dbRamotEntities())
             {
                 Events e = db.Events.Find(id);
-                e.Categories.Add(Mapper.CastCategory(category));
+                var c = db.Categories.FirstOrDefault(ca => ca.Id == e.Id);
+                e.Categories.Add(c);
                 db.SaveChanges();
             }
         }

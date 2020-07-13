@@ -117,7 +117,7 @@ export class AllEventsComponent implements OnInit, OnDestroy, AfterViewInit {
           sorted[index].color = true;
         }
         this.eventts = events;
-        this.dataSource = new MatTableDataSource(Object.values(sorted));
+        this.dataSource.data = sorted;
         this.resultsLength = this.dataSource.data.length;
         this.loaded = true;
         this.error = false;
@@ -157,8 +157,8 @@ export class AllEventsComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   updateTable(event: Eventt) {
-    this.dataSource = new MatTableDataSource(Object.values(this.dataSource)
-      .map((item: Eventt) => item.Id === event.Id ? this.es.trimResultFromUpdate(event) : item));
+    this.dataSource.data = this.dataSource.data
+      .map((item: Eventt) => item.Id === event.Id ? this.es.trimResultFromUpdate(event) : item);
     this.table.renderRows();
   }
 
