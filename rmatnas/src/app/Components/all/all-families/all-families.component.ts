@@ -115,7 +115,7 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
 
   newFamily(family: Family) {
     this.families.push(family);
-    this.dataSource = new MatTableDataSource(Object.values(this.families));
+    this.dataSource.data = this.families;
     this.table.renderRows();
     this.changeDetectorRefs.detectChanges();
   }
@@ -275,7 +275,7 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
 
   confirmDialogAdd(): Observable<any> {
     const message = `האם תרצי להוסיף את המתנדבות הבאות?`;
-    const dialogData = new ConfirmDialogModel('הוספת מתנדבות חדשות', message, this.toSave, 'volunteer');
+    const dialogData = new ConfirmDialogModel('הוספת מתנדבות חדשות', message, this.toSave, 'family');
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       maxWidth: '75%',
       data: dialogData
@@ -285,7 +285,7 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
 
   confirmDialogUpdate(): Observable<any> {
     const message = `האם תרצי לעדכן את המתנדבות הבאות?`;
-    const dialogData = new ConfirmDialogModel('עדכון מתנדבות מקובץ', message, this.toUpdate, 'volunteer');
+    const dialogData = new ConfirmDialogModel('עדכון מתנדבות מקובץ', message, this.toUpdate, 'family');
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       maxWidth: '75%',
       data: dialogData
@@ -323,8 +323,8 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   updateTable(event: Family) {
-    this.dataSource = new MatTableDataSource(Object.values(this.dataSource)
-      .map((item: Family) => item.Id === event.Id ? this.fs.trimResultFromUpdate(event) : item));
+    this.dataSource.data = this.dataSource.data
+      .map((item: Family) => item.Id === event.Id ? this.fs.trimResultFromUpdate(event) : item);
     this.table.renderRows();
   }
 

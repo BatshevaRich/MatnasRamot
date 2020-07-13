@@ -76,7 +76,7 @@ export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewIni
             this.volunteerings = res;
             this.resultsLength = this.volunteerings.length;
             this.mapData(this.volunteerings);
-            this.dataSource = new MatTableDataSource(Object.values(this.allvolunteerings));
+            this.dataSource.data = this.allvolunteerings;
           }
         }, err => { this.error = true; this.loaded = true; });
       }
@@ -89,7 +89,7 @@ export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewIni
           this.volunteerings = res;
           this.resultsLength = this.volunteerings.length;
           this.mapData(this.volunteerings);
-          this.dataSource = new MatTableDataSource(Object.values(this.allvolunteerings));
+          this.dataSource.data = this.allvolunteerings;
         }
       }, err => { this.error = true; this.loaded = true; });
     }
@@ -129,8 +129,8 @@ export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewIni
       this.result = res;
       if (res) {
         this.vfs.removeVolunteering(elm.Id);
-        this.dataSource = new MatTableDataSource(Object.values(this.dataSource.data)
-          .filter(i => i !== elm));
+        this.dataSource.data = this.dataSource.data
+          .filter(i => i !== elm);
         // .map((i, idx) => (i.position = (idx + 1), i));
       }
     });

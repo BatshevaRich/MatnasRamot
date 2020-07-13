@@ -321,9 +321,9 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   updateTable(event: Volunteer) {
-    this.dataSource =
-      new MatTableDataSource(Object.values(this.dataSource)
-        .map((item: Volunteer) => item.Id === event.Id ? this.vs.trimResultFromUpdate(event) : item));
+    this.dataSource.data =
+      this.dataSource.data
+        .map((item: Volunteer) => item.Id === event.Id ? this.vs.trimResultFromUpdate(event) : item);
     this.table.renderRows();
   }
 

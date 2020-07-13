@@ -63,7 +63,7 @@ export class AddFOComponent implements OnInit, OnDestroy {
     if (event) {
       this.selectedCategory = event;
       if (this.selectedOrganization) {
-        this.fs.getFamiliesByOrganization(event.Id).subscribe((res: Family[]) => {
+        this.fs.getFamiliesByCategory(event.Id).subscribe((res: Family[]) => {
           this.families = res;
         });
       }
