@@ -9,14 +9,22 @@ namespace Dal
 {
    public class OrganizationManager
     {
-        public static void AddOrganization(Common.Organization organization)
+        public static int AddOrganization(Common.Organization organization, Category[] categories)
         {
+            int x = 0;
             Organization e = Mapper.CastOrganization(organization);
             using (dbRamotEntities db = new dbRamotEntities())
             {
+                foreach (var item in categories)
+                {
+                    var c = db.Categories.FirstOrDefault(ca => ca.Id == item.Id);
+                    e.Categories.Add(c);
+                }
                 db.Organization.Add(e);
                 db.SaveChanges();
+                x = db.Organization.Local[0].Id;
             }
+            return x;
         }
         public static void RemoveOrganization(Common.Organization organization)
         {
@@ -37,8 +45,9 @@ namespace Dal
             }
         }
 
-        public static void UpdateOrganization(Common.Organization organization, Category[] categories)
+        public static int UpdateOrganization(Common.Organization organization, Category[] categories)
         {
+            int x = 0;
             Organization e = Mapper.CastOrganization(organization);
             using (dbRamotEntities db = new dbRamotEntities())
             {
@@ -50,7 +59,9 @@ namespace Dal
                 }
                 db.Entry<Organization>(db.Set<Organization>().Find(e.Id)).CurrentValues.SetValues(e);
                 db.SaveChanges();
+                x = db.Organization.Local[0].Id;
             }
+            return x;
         }
 
         public static void RemoveOrganization(int id)
@@ -87,7 +98,8 @@ namespace Dal
             using (dbRamotEntities db = new dbRamotEntities())
             {
                 Organization e = db.Organization.Find(id);
-                e.Categories.Add(Mapper.CastCategory(category));
+                var c = db.Categories.FirstOrDefault(ca => ca.Id == e.Id);
+                e.Categories.Add(c);
                 db.SaveChanges();
             }
         }

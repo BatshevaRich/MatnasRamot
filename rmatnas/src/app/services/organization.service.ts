@@ -22,7 +22,7 @@ export class OrganizationService {
   addOrganization(myOrganization: Organization, categories: Category[]) {
     // returns id to be updated in table
     const myData = {} as any;
-    myData.Organization = myOrganization;
+    myData.organization = myOrganization;
     myData.categories = categories;
     return this.http
       .post(this.path, myData).toPromise().then(res => res);

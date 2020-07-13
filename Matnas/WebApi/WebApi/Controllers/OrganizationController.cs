@@ -27,17 +27,19 @@ namespace WebApi.Controllers
         }
 
         // POST: api/Organization
-        public void Post([FromBody]Organization organization)
-        {
-            Bll.OrganizationManager.AddOrganization(organization);
-        }
-
-        // PUT: api/Organization/5
-        public void Put([FromBody] JObject data)
+        public int Post([FromBody] JObject data)
         {
             Organization newOrganization = data["organization"].ToObject<Organization>();
             Category[] category = data["categories"].ToObject<Category[]>();
-            Bll.OrganizationManager.UpdateOrganization(newOrganization, category);
+            return Bll.OrganizationManager.AddOrganization(newOrganization, category);
+        }
+
+        // PUT: api/Organization/5
+        public int Put([FromBody] JObject data)
+        {
+            Organization newOrganization = data["organization"].ToObject<Organization>();
+            Category[] category = data["categories"].ToObject<Category[]>();
+            return Bll.OrganizationManager.UpdateOrganization(newOrganization, category);
         }
 
         // DELETE: api/Organization/5

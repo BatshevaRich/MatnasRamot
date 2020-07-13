@@ -44,11 +44,6 @@ export class OrganizationFComponent implements OnInit, OnDestroy {
         Validators.minLength(9),
         Validators.maxLength(10),
         Validators.pattern('^[0-9]*$')
-      ]),
-      cellphone: new FormControl('', [
-        Validators.required,
-        Validators.minLength(10),
-        Validators.maxLength(10)
       ])
     });
     cs.getCategories().subscribe((res: Category[]) => {

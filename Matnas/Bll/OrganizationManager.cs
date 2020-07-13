@@ -9,17 +9,17 @@ namespace Bll
 {
    public class OrganizationManager
     {
-        public static void AddOrganization(Organization organization)
+        public static int AddOrganization(Organization organization, Category[] categories)
         {
-            Dal.OrganizationManager.AddOrganization(organization);
+            return Dal.OrganizationManager.AddOrganization(organization, categories);
         }
         public static void RemoveOrganization(Organization organization)
         {
             Dal.OrganizationManager.RemoveOrganization(organization);
         }
-        public static void UpdateOrganization(Organization organization, Category[] categories)
+        public static int UpdateOrganization(Organization organization, Category[] categories)
         {
-            Dal.OrganizationManager.UpdateOrganization(organization, categories);
+            return Dal.OrganizationManager.UpdateOrganization(organization, categories);
         }
 
         public static Organization GetOrganization(int id)
