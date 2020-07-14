@@ -66,6 +66,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
     dialogRef.afterClosed().subscribe(result => {
+      this.ns.Families.push(result);
     });
   }
   ToVolunteeropenDialog() {
@@ -98,6 +99,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
     dialogRef.afterClosed().subscribe(result => {
+      this.ns.Events.push(result);
     });
   }
 
