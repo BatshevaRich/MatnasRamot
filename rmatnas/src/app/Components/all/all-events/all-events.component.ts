@@ -139,9 +139,7 @@ export class AllEventsComponent implements OnInit, OnDestroy, AfterViewInit {
     this.confirmDialog().subscribe(res => {
       this.result = res;
       if (res) {
-        this.es.removeEvent(event.Id);
-        this.dataSource.data = this.dataSource.data
-          .filter(i => i !== event);
+        this.removeFromBadge(event.Id);
       }
     });
   }
@@ -157,9 +155,7 @@ export class AllEventsComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   updateTable(event: Eventt) {
-    this.dataSource.data = this.dataSource.data
-      .map((item: Eventt) => item.Id === event.Id ? this.es.trimResultFromUpdate(event) : item);
-    this.table.renderRows();
+    this.loadTable();
   }
 
   addVolunteer(event: Details) {
@@ -173,28 +169,32 @@ export class AllEventsComponent implements OnInit, OnDestroy, AfterViewInit {
     });
     dialogRef.afterClosed().subscribe(id => {
       if (id) {
-        const removeIndex = this.ns.Events.map((item) => item.Id).indexOf(id);
-        this.dataSource.data[removeIndex].color = false;
-        // tslint:disable-next-line: no-bitwise
-        const removed = ~removeIndex && this.ns.Events.splice(removeIndex, 1);
-        const res = this.ns.Events;
-        function sortFunc(a: { Id: number; }, b: { Id: number; }) {
-          const s1 = res.find(s => s.Id === a.Id);
-          const s2 = res.find(s => s.Id === b.Id);
-          if (s1 && s2) { return 0; }
-          else if (s1) { return -1; }
-          else if (s2) { return 1; }
-          return 0;
-        }
-        const sorted = this.dataSource.data.sort(sortFunc);
-        for (let index = 0; index < res.length; index++) {
-          sorted[index].color = true;
-        }
-        this.dataSource.data = sorted;
-        this.ns.Events = sorted;
+        this.removeFromBadge(id);
       }
     });
     return dialogRef.afterClosed();
+  }
+
+  removeFromBadge(id: number) {
+    const removeIndex = this.ns.Events.map((item) => item.Id).indexOf(id);
+    this.dataSource.data[removeIndex].color = false;
+    // tslint:disable-next-line: no-bitwise
+    const removed = ~removeIndex && this.ns.Events.splice(removeIndex, 1);
+    const res = this.ns.Events;
+    function sortFunc(a: { Id: number; }, b: { Id: number; }) {
+      const s1 = res.find(s => s.Id === a.Id);
+      const s2 = res.find(s => s.Id === b.Id);
+      if (s1 && s2) { return 0; }
+      else if (s1) { return -1; }
+      else if (s2) { return 1; }
+      return 0;
+    }
+    const sorted = this.dataSource.data.sort(sortFunc);
+    for (let index = 0; index < res.length; index++) {
+      sorted[index].color = true;
+    }
+    this.dataSource.data = sorted;
+    this.ns.Events = sorted;
   }
 
   public exportTableToExcel() {
