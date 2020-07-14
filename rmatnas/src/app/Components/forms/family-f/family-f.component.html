@@ -147,7 +147,7 @@
         <mat-form-field appearance="outline">
           <mat-hint>סטטוס</mat-hint>
           <input matInput (focus)="$event.target.select()" placeholder="סטטוס" [ngModelOptions]="{standalone: true}"
-            maxlength="10" [(ngModel)]="newFamily.Status" name="Status">
+            maxlength="20" [(ngModel)]="newFamily.Status" name="Status">
           <mat-icon matPrefix>person</mat-icon>
         </mat-form-field>
         <br />

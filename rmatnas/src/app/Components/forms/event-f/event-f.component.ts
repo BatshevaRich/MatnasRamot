@@ -95,7 +95,7 @@ export class EventFComponent implements OnInit, OnDestroy, AfterViewInit {
         });
       this.mytemplateForm.resetForm();
       this.newEvent = new Eventt(null, null, null, null, null);
-      this.snackBar.open('שמירת ארגון מבוצעת...', 'OK', {
+      this.snackBar.open('שמירת ארוע מבוצעת...', 'OK', {
         duration: 2000,
         direction: 'rtl'
       });

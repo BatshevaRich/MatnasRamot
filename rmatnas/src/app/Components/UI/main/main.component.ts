@@ -94,7 +94,6 @@ export class MainComponent {
           mp.get(o.Name).count++;
           return mp;
         }, new Map()).values()];
-        debugger
         all.forEach((element: { Name: Label; count: number; }) => {
           this.pieChartLabelsF.push(element.Name);
           this.pieChartDataF.push(element.count);

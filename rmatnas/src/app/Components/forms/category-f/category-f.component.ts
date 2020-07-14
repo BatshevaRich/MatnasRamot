@@ -36,6 +36,7 @@ export class CategoryFComponent implements OnInit, OnDestroy {
       this.newCategory.Id = this.vId;
       this.cs.updateCategory(this.newCategory).subscribe(res => {
         this.changedCategory.emit(this.newCategory);
+        this.dialogRef.close(0);
       });
     } else {
       this.cs.addCategory(this.newCategory)
@@ -43,6 +44,7 @@ export class CategoryFComponent implements OnInit, OnDestroy {
           this.token = t;
           this.newCategory.Id = this.token;
           this.changedCategory.emit(this.newCategory);
+          this.dialogRef.close(0);
         });
       this.mytemplateForm.resetForm();
       this.newCategory = new Category('default', 0);
