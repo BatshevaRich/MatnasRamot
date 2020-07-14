@@ -128,7 +128,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdEvent" Type="int" Nullable="false" />
           <Property Name="IdVolunteer" Type="int" Nullable="false" />
           <Property Name="IdCategory" Type="int" />
@@ -139,7 +139,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdFamily" Type="int" Nullable="false" />
           <Property Name="IdVolunteer" Type="int" Nullable="false" />
           <Property Name="IdCategory" Type="int" />
@@ -151,10 +151,10 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nchar" MaxLength="30" Nullable="false" />
-          <Property Name="Address" Type="nchar" MaxLength="50" />
-          <Property Name="Telephone" Type="nchar" MaxLength="10" />
-          <Property Name="Pelephone" Type="nchar" MaxLength="10" />
+          <Property Name="Name" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="Telephone" Type="nvarchar" MaxLength="10" />
+          <Property Name="Pelephone" Type="nvarchar" MaxLength="10" />
           <Property Name="Email" Type="nchar" MaxLength="30" />
           <Property Name="Age" Type="datetime" />
           <Property Name="Comments" Type="text" />
@@ -201,6 +201,18 @@
             </Principal>
             <Dependent Role="OrganizationAndFamily">
               <PropertyRef Name="IdCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="event">
+          <End Role="Events" Type="Self.Events" Multiplicity="1" />
+          <End Role="VolunteerAndEvent" Type="Self.VolunteerAndEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Events">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VolunteerAndEvent">
+              <PropertyRef Name="IdEvent" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -425,6 +437,10 @@
             <End Role="Categories" EntitySet="Categories" />
             <End Role="OrganizationAndFamily" EntitySet="OrganizationAndFamily" />
           </AssociationSet>
+          <AssociationSet Name="event" Association="Self.event">
+            <End Role="Events" EntitySet="Events" />
+            <End Role="VolunteerAndEvent" EntitySet="VolunteerAndEvent" />
+          </AssociationSet>
           <AssociationSet Name="family" Association="Self.family">
             <End Role="Families" EntitySet="Families" />
             <End Role="VolunteerAndFamily" EntitySet="VolunteerAndFamily" />
@@ -626,10 +642,10 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Address" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="Telephone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Pelephone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Telephone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Pelephone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
           <Property Name="Age" Type="DateTime" Precision="3" />
           <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -1021,7 +1037,7 @@
             <EndProperty Name="Groups">
               <ScalarProperty Name="Id" ColumnName="IdGroup" />
             </EndProperty>
-          </AssociationSetMapping>
+		  </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
