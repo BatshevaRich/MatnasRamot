@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../../UI/confirm-dialog/confirm-dialog.component';
 import * as XLSX from 'xlsx';
 import { DatePipe } from '@angular/common';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-all-to-volunteers',
@@ -25,7 +26,7 @@ import { DatePipe } from '@angular/common';
   ],
 })
 export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewInit {
-
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatTable, { static: false }) table: MatTable<any>;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   displayedColumns = ['NameVolunteer', 'NameFamily', 'Category', 'PelephoneVolunteer', 'date', 'columndelete'];
@@ -115,6 +116,7 @@ export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewIni
     this.elementRef.nativeElement.remove();
   }
   ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }
 
