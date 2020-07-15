@@ -16,6 +16,7 @@
     </mat-card>
     <div style="height:10pt;"></div>
     <mat-card *ngIf="familyBadge > 0">
+      <mat-card-header><i class="fa fa-child"></i></mat-card-header>
       <mat-error>
         <h6><span>{{familyBadge}}</span> משפחות לא מתואמות</h6>
       </mat-error>
@@ -32,8 +33,9 @@
     </mat-card>
     <div style="height:10pt;"></div>
     <mat-card *ngIf="eventBadge > 0">
+      <mat-card-header><i class="fa fa-calendar-o"></i></mat-card-header>
       <mat-error>
-        <h6><span>{{eventBadge}}</span> ארועים לא מתואמים</h6>
+        <h6><span>{{eventBadge}}</span> ארועים קרובים</h6>
       </mat-error>
       <button (click)="router.navigate(['/list/events']);" mat-raised-button color="primary">למעבר לארועים<i
           class="fa fa-arrow-left"></i></button>
