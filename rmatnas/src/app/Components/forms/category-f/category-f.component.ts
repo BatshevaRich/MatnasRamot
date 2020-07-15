@@ -11,18 +11,16 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./category-f.component.css']
 })
 export class CategoryFComponent implements OnInit, OnDestroy {
-  @ViewChild('categoryForm') mytemplateForm: NgForm;
   newCategory: Category = new Category('', 0);
   token = 0;
   @Input() vId: number;
+  @ViewChild('categoryForm') mytemplateForm: NgForm;
   @Output() changedCategory: EventEmitter<Category> = new EventEmitter<Category>();
   constructor(private cs: CategoryService,
               private dialogRef: MatDialogRef<CategoryFComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
               public snackBar: MatSnackBar,
-              private elementRef: ElementRef) {
-
-  }
+              private elementRef: ElementRef) {  }
 
   ngOnInit() {
     if (this.vId) {
@@ -31,6 +29,7 @@ export class CategoryFComponent implements OnInit, OnDestroy {
       });
     }
   }
+
   submitForm() {
     if (this.vId) {
       this.newCategory.Id = this.vId;

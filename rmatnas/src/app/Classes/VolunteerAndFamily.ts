@@ -16,6 +16,5 @@ export class VolunteerAndFamily {
         this.Family = family;
         this.Volunteer = myvolunteer;
         this.DateAdded = dateAdded;
-
     }
 }

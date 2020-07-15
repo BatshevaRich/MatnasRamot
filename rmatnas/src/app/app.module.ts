@@ -27,7 +27,6 @@ import { FilterPipe } from './Pipes/filter.pipe';
 import { ChooseCategoryComponent } from './Components/single/choose-category/choose-category.component';
 import { AddVFComponent } from './Components/forms/add/add-vf/add-vf.component';
 import { AddVEComponent } from './Components/forms/add/add-ve/add-ve.component';
-import { AddVGComponent } from './Components/forms/add/add-vg/add-vg.component';
 import { AddFOComponent } from './Components/forms/add/add-fo/add-fo.component';
 import { CategoryFComponent } from './Components/forms/category-f/category-f.component';
 import { AllToVolunteersComponent } from './Components/all/all-to-volunteers/all-to-volunteers.component';
@@ -102,7 +101,6 @@ export function startupServiceFactory(startupService: NotificationService) {
     FilterPipe,
     AddVFComponent,
     AddVEComponent,
-    AddVGComponent,
     AddFOComponent,
     AllToVolunteersComponent,
     ToVolunteerComponent,

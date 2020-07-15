@@ -55,6 +55,7 @@ export class VolunteerFComponent implements OnInit, OnDestroy {
       ])
     });
     if (this.data.update) {
+      // set validators for volunteer update fields
       this.newVolunteer = this.vs.trimResultFromUpdate(this.data.dataKey);
       this.myForm.get('name').setValue(this.newVolunteer.Name);
       this.myForm.get('email').setValue(this.newVolunteer.Email);
@@ -68,6 +69,7 @@ export class VolunteerFComponent implements OnInit, OnDestroy {
     if (this.data.update) {
       this.newVolunteer.Id = this.data.id;
       this.vs.updateVolunteer(this.newVolunteer, this.categoriesSelected);
+      // return volunteer to update
       this.dialogRef.close(this.newVolunteer);
     } else {
       this.vs.addVolunteer(this.newVolunteer, this.categoriesSelected)
@@ -75,6 +77,7 @@ export class VolunteerFComponent implements OnInit, OnDestroy {
           this.token = t;
           this.newVolunteer.Id = this.token;
           this.categoriesSelected = [];
+          // return id of new volunteer
           this.dialogRef.close(this.token);
         });
       this.newVolunteer = new Volunteer('', '', '', '', '', '2001-01-01', true);
@@ -97,6 +100,5 @@ export class VolunteerFComponent implements OnInit, OnDestroy {
       }
     });
   }
-
 
 }

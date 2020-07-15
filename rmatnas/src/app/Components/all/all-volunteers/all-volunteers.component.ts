@@ -37,18 +37,6 @@ export interface Details {
 })
 export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit {
   arrayBuffer: any;
-
-  constructor(public vs: VolunteerService,
-              public dialog: MatDialog,
-              private datePipe: DatePipe,
-              private elementRef: ElementRef,
-              private snackBar: MatSnackBar) {
-    // this.dataSource.filterPredicate =
-    //   (data: Details, filter: string) => data.Name.indexOf(filter) !== -1;
-  }
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild(MatTable, { static: false }) table: MatTable<any>;
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   displayedColumns = ['showDetails', 'Name', 'Address', 'Pelephone', 'Email', 'Age', 'IsActive', 'columnadd', 'columndelete'];
   expandedElement: Details | null;
   volunteers: any;
@@ -57,19 +45,25 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
   resultsLength = 0;
   @Input() vId: number;
   @Input() where: number;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatTable, { static: false }) table: MatTable<any>;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   result = '';
   loaded = false;
   error = false;
   notFound = false;
-  visible = true;
-  selectable = true;
-  removable = true;
-  addOnBlur = true;
   toUpdate: Volunteer[] = [];
   toSave: Volunteer[] = [];
   fileUploaded: File;
   worksheet: any;
   volunteerData: any;
+
+  constructor(public vs: VolunteerService,
+              public dialog: MatDialog,
+              private datePipe: DatePipe,
+              private elementRef: ElementRef,
+              private snackBar: MatSnackBar) { }
+
   ngOnInit(): void {
     if (this.vId) {
       this.displayedColumns = ['Name', 'Address', 'Pelephone', 'Email', 'Age', 'IsActive'];
