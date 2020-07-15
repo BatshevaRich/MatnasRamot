@@ -16,9 +16,7 @@
   </button>
   &nbsp;
   <mat-checkbox [(ngModel)]="c.checked" (change)="add()" [id]="c.id">{{ c.name }}</mat-checkbox>
-
 </p>
-
 <span *ngIf="displayForm">
   <app-category-f (changedCategory)="reloadWithNewData()" [vId]="idOfCategory"></app-category-f>
 </span>

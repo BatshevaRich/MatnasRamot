@@ -17,11 +17,13 @@ export class FamilyComponent implements OnInit, OnDestroy, AfterViewInit {
   categories: Category[] = [];
   @Input() vId: number;
   @Input() toV: boolean;
+  @Output() addedFamily: EventEmitter<Family> = new EventEmitter<Family>();
+  // params for flex on page, if to show tables or not- do not show on
+  // volunteer actions, show for example on all volunteers page
   smallest = '20%';
   small = '80%';
   large = '100%';
   largest = '0%';
-  @Output() addedFamily: EventEmitter<Family> = new EventEmitter<Family>();
   chooseTab: string;
   selectedTabIndex: any;
   showOrganization: boolean;
@@ -35,7 +37,9 @@ export class FamilyComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngAfterViewInit() {
     this.fs.getFamily(this.vId).subscribe((f: Family) => {
+      // get data of specific family
       this.family = this.fs.trimResultFromUpdate(f);
+      // trim white space from data.
       this.fs.getCategoriesOfFamily(this.vId).subscribe((c: Category[]) => {
         this.categories = c;
       });

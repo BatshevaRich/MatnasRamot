@@ -11,13 +11,22 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./choose-category.component.css']
 })
 export class ChooseCategoryComponent implements OnInit, OnDestroy, AfterViewInit {
+  displayForm = false;
+  categories: Category[] = [];
+  @Output() selectc: EventEmitter<{ checked: boolean, id: number, name: string }[]>
+    = new EventEmitter<{ checked: boolean, id: number, name: string }[]>();
+  // chosen categories, input from form component
+  @Input() chosenC: Category[] = [];
+  categoriesSelected: Category[] = [];
+  arr: Array<{ checked: boolean, id: number, name: string }> = [];
+  idOfCategory: number;
   constructor(private cs: CategoryService,
               private elementRef: ElementRef,
               public dialog: MatDialog) {
     cs.getCategories().subscribe((data: Category[]) => {
       this.categories = data;
       this.categories.forEach((element: Category) => {
-        if (this.chosenC) {
+        if (this.chosenC) { // if categories from form, mark them as selected
           if (this.chosenC.find(x => x.Id === element.Id)) {
             this.arr.push({ checked: true, id: element.Id, name: element.Name });
           } else {
@@ -29,14 +38,6 @@ export class ChooseCategoryComponent implements OnInit, OnDestroy, AfterViewInit
       });
     });
   }
-  displayForm = false;
-  categories: Category[] = [];
-  @Output() selectc: EventEmitter<{ checked: boolean, id: number, name: string }[]>
-    = new EventEmitter<{ checked: boolean, id: number, name: string }[]>();
-  @Input() chosenC: Category[] = [];
-  categoriesSelected: Category[] = [];
-  arr: Array<{ checked: boolean, id: number, name: string }> = [];
-  idOfCategory: number;
 
   ngOnInit() { }
 
@@ -45,14 +46,18 @@ export class ChooseCategoryComponent implements OnInit, OnDestroy, AfterViewInit
   ngOnDestroy(): void {
     this.elementRef.nativeElement.remove();
   }
+
   add() {
+    // emit to form that categories were selected
     this.selectc.emit(this.arr);
   }
   displayCat(id: number) {
+    // edit category
     this.idOfCategory = id;
     this.displayForm = true;
   }
   deleteCat(id: number) {
+    // delete category, removes from all places containing category!
     this.confirmDialog().subscribe(res => {
       if (res) {
         this.cs.removeCategory(id).subscribe(result => {
@@ -74,6 +79,7 @@ export class ChooseCategoryComponent implements OnInit, OnDestroy, AfterViewInit
   }
 
   public reloadWithNewData() {
+    // reload all categories after edit of category
     this.cs.getCategories().subscribe((res: Category[]) => {
       this.arr = [];
       this.categories = res;

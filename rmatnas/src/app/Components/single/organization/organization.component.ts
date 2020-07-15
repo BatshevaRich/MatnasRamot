@@ -18,11 +18,13 @@ export class OrganizationComponent implements OnInit, OnDestroy, AfterViewInit {
   id: number;
   @Input() vId: number;
   @Input() toV: boolean;
+  @Output() addedOrganization: EventEmitter<Organization> = new EventEmitter<Organization>();
+  // params for flex on page, if to show tables or not- do not show on
+  // volunteer actions, show for example on all volunteers page
   smallest = '20%';
   small = '80%';
   large = '100%';
   largest = '0%';
-  @Output() addedOrganization: EventEmitter<Organization> = new EventEmitter<Organization>();
   selectedTabIndex: any;
   showEvent: boolean;
   showFamily = true;
@@ -33,9 +35,7 @@ export class OrganizationComponent implements OnInit, OnDestroy, AfterViewInit {
     this.myOrganization = new Organization('', '', '', '', '', '');
   }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() { }
 
   ngOnDestroy(): void {
     this.elementRef.nativeElement.remove();
@@ -43,7 +43,9 @@ export class OrganizationComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngAfterViewInit() {
     this.os.getOrganization(this.vId).subscribe((o: Organization) => {
+      // get data of specific organization
       this.myOrganization = this.os.trimResultFromUpdate(o);
+      // trim white space from data returned
       this.os.getCategoriesOfOrganization(this.vId).subscribe((c: Category[]) => {
         this.categories = c;
       });

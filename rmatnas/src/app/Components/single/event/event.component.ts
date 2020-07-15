@@ -18,11 +18,13 @@ export class EventComponent implements OnInit, OnDestroy {
   id: number;
   @Input() vId: number;
   @Input() toV: boolean;
+  @Output() addedEvent: EventEmitter<Eventt> = new EventEmitter<Eventt>();
+  // params for flex on page, if to show tables or not- do not show on
+  // volunteer actions, show for example on all volunteers page
   smallest = '20%';
   small = '80%';
   large = '100%';
   largest = '0%';
-  @Output() addedEvent: EventEmitter<Eventt> = new EventEmitter<Eventt>();
   selectedTabIndex: any;
   showFamily: boolean;
   showOrganization: boolean;
@@ -30,10 +32,11 @@ export class EventComponent implements OnInit, OnDestroy {
   constructor(public es: EventService,
               public dialog: MatDialog,
               private elementRef: ElementRef) {
-    this.myEvent = new Eventt('', '', '11/10/1999', '11/10/1999', '11/10/1999');
+    this.myEvent = new Eventt('', '', '11/10/2020', '11/10/2020', '11/10/2020');
   }
   ngOnInit() {
     this.es.getEvent(this.vId).subscribe(v => {
+      // get data of specific event
       this.myEvent = v;
       this.es.getCategoriesOfEvent(this.vId).subscribe((c: Category[]) => {
         this.categories = c;
@@ -67,9 +70,6 @@ export class EventComponent implements OnInit, OnDestroy {
       if (event.index === 1) {
         this.showVolunteer = true;
       }
-      // if (event.index === 2) {
-      //   this.showFamily = true;
-      // }
     });
   }
 

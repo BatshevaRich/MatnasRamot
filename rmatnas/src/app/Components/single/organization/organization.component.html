@@ -1,32 +1,32 @@
 <div dir="rtl" class="text-right" style="padding-top: 1%">
   <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3%" fxLayoutAlign="right">
     <div [fxFlex]="toV ? large : smallest">
-    <mat-card>
-      <mat-toolbar>
-        <mat-card-header>
-          <div mat-card-avatar class="example-header-image"><i class="fa fa-users"></i></div>
-          <mat-card-title>{{ myOrganization.Name }}</mat-card-title>
-        </mat-card-header>
-      </mat-toolbar>
-      <mat-card-content>
-        <p>איש קשר: {{myOrganization.Contact}}</p>
-        <p>פלאפון: {{myOrganization.Phone}}</p>
-        <p>כתובת: {{myOrganization.Address}}</p>
-        <p>הערות: {{myOrganization.Comments}}</p>
-        <p>מייל: {{myOrganization.email}}</p>
-        <header *ngIf="categories.length > 0">קטגוריות</header>
-        <div *ngFor="let c of categories">
-          <li>
-            {{c.Name}}</li>
-        </div>
-        <mat-card-actions >
-          <button mat-raised-button (click)="OrganizationOpenDialog()">לעריכת
-            הפרטים</button>
-        </mat-card-actions>
-      </mat-card-content>
-    </mat-card>
+      <mat-card>
+        <mat-toolbar>
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image"><i class="fa fa-users"></i></div>
+            <mat-card-title>{{ myOrganization.Name }}</mat-card-title>
+          </mat-card-header>
+        </mat-toolbar>
+        <mat-card-content>
+          <p>איש קשר: {{myOrganization.Contact}}</p>
+          <p>פלאפון: {{myOrganization.Phone}}</p>
+          <p>כתובת: {{myOrganization.Address}}</p>
+          <p>הערות: {{myOrganization.Comments}}</p>
+          <p>מייל: {{myOrganization.email}}</p>
+          <header *ngIf="categories.length > 0">קטגוריות</header>
+          <div *ngFor="let c of categories">
+            <li>
+              {{c.Name}}</li>
+          </div>
+          <mat-card-actions>
+            <button mat-raised-button (click)="OrganizationOpenDialog()">לעריכת
+              הפרטים</button>
+          </mat-card-actions>
+        </mat-card-content>
+      </mat-card>
     </div>
-    <mat-card *ngIf="toV != true"[fxFlex]="toV ? largest : small">
+    <mat-card *ngIf="toV != true" [fxFlex]="toV ? largest : small">
       <button *ngIf="false" (click)="tabs.selectedIndex = 0">RESET</button>
       <mat-tab-group dir="rtl" [selectedIndex]=1 (selectedTabChange)="onTabChange($event)" #tabs>
         <mat-tab></mat-tab> <!-- ADDITIONAL TAB -->
