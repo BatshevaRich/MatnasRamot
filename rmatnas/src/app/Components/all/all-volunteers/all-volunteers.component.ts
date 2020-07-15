@@ -5,14 +5,12 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../../UI/confirm-dialog/confirm-dialog.component';
-import { MatChipInputEvent, MatChip } from '@angular/material/chips';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { Observable } from 'rxjs';
 import * as XLSX from 'xlsx';
 import { DatePipe } from '@angular/common';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { AddVFComponent } from '../../forms/add/add-vf/add-vf.component';
 import { Category } from '../../../Classes/Category';
 export interface Details {
@@ -23,9 +21,6 @@ export interface Details {
   Email: string;
   Age: Date;
   IsActive: boolean;
-}
-export interface Fruit {
-  name: string;
 }
 
 @Component({
@@ -66,53 +61,15 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
   loaded = false;
   error = false;
   notFound = false;
-  searchParams = ['volunteer, family, organization, event'];
   visible = true;
   selectable = true;
   removable = true;
   addOnBlur = true;
   toUpdate: Volunteer[] = [];
   toSave: Volunteer[] = [];
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  fruits: Fruit[] = [
-    { name: 'אין משפחות' },
-    { name: 'אין התנדבויות' },
-    { name: 'אין ארועים' },
-    { name: 'ותיקה' },
-    { name: 'מתנדבת למס הכי גדול של ילדים' },
-
-  ];
   fileUploaded: File;
   worksheet: any;
   volunteerData: any;
-
-  add(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
-
-    // Add our fruit
-    if ((value || '').trim()) {
-      this.fruits.push({ name: value.trim() });
-    }
-
-    // Reset the input value
-    if (input) {
-      input.value = '';
-    }
-  }
-
-  remove(fruit: Fruit): void {
-    const index = this.fruits.indexOf(fruit);
-
-    if (index >= 0) {
-      this.fruits.splice(index, 1);
-    }
-  }
-
-  selectedFruit(event: MatChip) {
-    console.log(event);
-  }
-
   ngOnInit(): void {
     if (this.vId) {
       this.displayedColumns = ['Name', 'Address', 'Pelephone', 'Email', 'Age', 'IsActive'];
