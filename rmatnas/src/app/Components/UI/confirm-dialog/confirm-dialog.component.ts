@@ -62,7 +62,7 @@ export class ConfirmDialogComponent implements OnInit {
     else if (this.type === 'event') {
       this.dialogRef.close(this.listOfEventsSelected);
     }
-    else {this.dialogRef.close(this.listOfTypeSelected); }
+    else { this.dialogRef.close(this.listOfTypeSelected); }
   }
 
   onDismiss(): void {

@@ -15,14 +15,11 @@ const hebrewRangeLabel = (page: number, pageSize: number, length: number) => {
   return `${startIndex + 1} - ${endIndex} מתוך ${length}`;
 };
 
-
 export function getHebrewPaginatorIntl() {
   const paginatorIntl = new MatPaginatorIntl();
-
   paginatorIntl.itemsPerPageLabel = 'מספר פרטים בעמוד: ';
   paginatorIntl.nextPageLabel = 'עמוד הבא';
   paginatorIntl.previousPageLabel = 'עמוד קודם';
   paginatorIntl.getRangeLabel = hebrewRangeLabel;
-
   return paginatorIntl;
 }

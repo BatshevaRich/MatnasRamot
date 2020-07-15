@@ -11,10 +11,7 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   familyBadge = 0;
-  volunteerBadge = 0;
   eventBadge = 0;
-  organizationBadge = 0;
-  categoryBadge = 0;
   constructor(public dialog: MatDialog,
               public router: Router,
               public ns: NotificationService,
@@ -27,9 +24,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.cdr.detectChanges();
   }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() { }
 
   ngOnDestroy(): void {
     this.elementRef.nativeElement.remove();

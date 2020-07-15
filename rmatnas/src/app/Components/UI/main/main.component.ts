@@ -25,7 +25,7 @@ export class MainComponent {
   public polarAreaChartData: number[] = [];
   public polarAreaLegend = true;
   public polarAreaChartType: ChartType = 'polarArea';
-  public polarAreaChartColors = [{ backgroundColor: ['rgb(103, 58, 183)', 'rgba(0,255,0,0.3)', 'rgba(255,215,64, 0.8)', '#343a40'] },];
+  public polarAreaChartColors = [{ backgroundColor: ['rgb(103, 58, 183)', 'rgba(0,255,0,0.3)', 'rgba(255,215,64, 0.8)', '#343a40'] }, ];
   public barChartLabels: Label[] = [];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
@@ -45,7 +45,7 @@ export class MainComponent {
   unique: string[] = [];
   datesOfEvents: string[] = [];
   public pieChartOptions: ChartOptions = { responsive: true, legend: { position: 'top', } };
-  public pieChartColors = [{ backgroundColor: ['rgb(103, 58, 183)', 'rgba(0,255,0,0.3)', 'rgba(255,215,64, 0.8)'], },];
+  public pieChartColors = [{ backgroundColor: ['rgb(103, 58, 183)', 'rgba(0,255,0,0.3)', 'rgba(255,215,64, 0.8)'], }, ];
   public barChartOptions: ChartOptions = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.

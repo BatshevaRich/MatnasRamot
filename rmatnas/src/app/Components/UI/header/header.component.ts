@@ -16,27 +16,24 @@ import { Subscription } from 'rxjs';
 export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   allBadge = 0;
   familyBadge = 0;
-  volunteerBadge = 0;
   eventBadge = 0;
-  organizationBadge = 0;
-  categoryBadge = 0;
   subscriptionFamily: Subscription;
   subscriptionEvent: Subscription;
   constructor(public dialog: MatDialog,
               private elementRef: ElementRef,
               public ns: NotificationService,
               private cdr: ChangeDetectorRef) {
-                this.subscriptionFamily = this.ns.updateFamily$.subscribe(
-                update => {
-                  this.familyBadge = update;
-                  this.allBadge = this.eventBadge + this.familyBadge;
-              });
-                this.subscriptionEvent = this.ns.updateEvent$.subscribe(
-                update => {
-                  this.eventBadge = update;
-                  this.allBadge = this.eventBadge + this.familyBadge;
-              });
-            }
+    this.subscriptionFamily = this.ns.updateFamily$.subscribe(
+      update => {
+        this.familyBadge = update;
+        this.allBadge = this.eventBadge + this.familyBadge;
+      });
+    this.subscriptionEvent = this.ns.updateEvent$.subscribe(
+      update => {
+        this.eventBadge = update;
+        this.allBadge = this.eventBadge + this.familyBadge;
+      });
+  }
 
   ngAfterViewInit() {
     this.familyBadge = this.ns.Families.length;

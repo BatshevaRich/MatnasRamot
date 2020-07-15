@@ -6,28 +6,28 @@
     <p>{{message}}</p>
     <span *ngIf="listOfVolunteers.length > 0">
       <mat-selection-list [(ngModel)]="listOfVolunteersSelected" *ngIf="listOfType.length > 0">
-        <mat-list-option checkboxPosition="before"[value]="type" *ngFor="let type of listOfVolunteers">
+        <mat-list-option checkboxPosition="before" [value]="type" *ngFor="let type of listOfVolunteers">
           {{type.Name}}
         </mat-list-option>
       </mat-selection-list>
     </span>
     <span *ngIf="listOfFamilies.length > 0">
       <mat-selection-list [(ngModel)]="listOfFamiliesSelected" *ngIf="listOfType.length > 0">
-        <mat-list-option checkboxPosition="before"[value]="type" *ngFor="let type of listOfFamilies">
+        <mat-list-option checkboxPosition="before" [value]="type" *ngFor="let type of listOfFamilies">
           {{type.LastName}}
         </mat-list-option>
       </mat-selection-list>
     </span>
     <span *ngIf="listOfOrganizations.length > 0">
       <mat-selection-list [(ngModel)]="listOfOrganizationsSelected" *ngIf="listOfType.length > 0">
-        <mat-list-option checkboxPosition="before"[value]="type" *ngFor="let type of listOfOrganizations">
+        <mat-list-option checkboxPosition="before" [value]="type" *ngFor="let type of listOfOrganizations">
           {{type.Name}}
         </mat-list-option>
       </mat-selection-list>
     </span>
     <span *ngIf="listOfEvents.length > 0">
       <mat-selection-list [(ngModel)]="listOfEventsSelected" *ngIf="listOfType.length > 0">
-        <mat-list-option checkboxPosition="before"[value]="type" *ngFor="let type of listOfEvents">
+        <mat-list-option checkboxPosition="before" [value]="type" *ngFor="let type of listOfEvents">
           {{type.Name}}
         </mat-list-option>
       </mat-selection-list>
