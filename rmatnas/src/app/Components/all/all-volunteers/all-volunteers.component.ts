@@ -66,6 +66,7 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
 
   ngOnInit(): void {
     if (this.vId) {
+      // remove delete function when displayes as inner component
       this.displayedColumns = ['Name', 'Address', 'Pelephone', 'Email', 'Age', 'IsActive'];
     }
   }
@@ -75,6 +76,7 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
     this.dataSource.sort = this.sort;
     if (this.vId) {
       if (this.where === 4) {
+        // in event component
         this.vs.getVolunteersForEvent(this.vId).subscribe((data: Volunteer[]) => {
           this.loaded = true;
           if (data.length === 0) {
@@ -87,6 +89,7 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
           }
         });
       } else if (this.where === 2) {
+        // family component
         this.vs.getVolunteersForFamily(this.vId).subscribe((data: Volunteer[]) => {
           this.loaded = true;
           if (data.length === 0) {
@@ -100,6 +103,7 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
         });
       }
     } else {
+      // main component
       this.loadTable();
     }
   }
@@ -115,14 +119,18 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
       }
     });
   }
+
   showDetails(element: Volunteer) {
+    // open individual component
     element.show = !element.show;
   }
+
   ngOnDestroy() {
     this.elementRef.nativeElement.remove();
   }
 
   confirmDialog(): Observable<any> {
+    // dialog for user
     const message = `מחיקה זו היא לצמיתות! האם תרצי להמשיך?`;
     const dialogData = new ConfirmDialogModel('מחיקת מתנדבת', message);
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
@@ -155,7 +163,7 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
       תאריך_לידה: this.datePipe.transform(x.Age, 'MM/dd/yyyy'),
       פעילה: x.IsActive === true ? 'כן' : 'לא',
       הערות: x.Comments
-    }));
+    })); // map fields to hebrew for excel file column titles
     const wb = XLSX.utils.book_new();
     const ws = XLSX.utils.json_to_sheet(data);
     ws['!cols'] = []; // hide id column
@@ -163,10 +171,12 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
     XLSX.utils.book_append_sheet(wb, ws, 'מתנדבות');
     XLSX.writeFile(wb, `מתנדבות.xlsx`);
   }
+
   uploadedFile(event) {
     this.fileUploaded = event.target.files[0];
     this.readExcel();
   }
+
   readExcel() {
     const readFile = new FileReader();
     readFile.onload = (e) => {
@@ -188,6 +198,7 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
           direction: 'rtl'
         });
       } else {
+        // map excel file by hebrew column names
         const newData = js.map((x) => ({
           // tslint:disable-next-line: no-string-literal
           Id: x['Id'] as number,
@@ -209,6 +220,7 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
           Comments: x['הערות']
         }));
         newData.forEach((element) => {
+          // if item has id, it needs to be updated. otherwise, new item.
           if (element.Id) {
             this.toUpdate.push(Object.assign(element));
           } else {
@@ -216,7 +228,7 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
           }
         });
         const cats: Category[] = [];
-        if (this.toSave.length > 0) {
+        if (this.toSave.length > 0) { // if user authorized save
           this.confirmDialogAdd().subscribe(res => {
             if (res === false) {
               this.snackBar.open('לא מתבצעת הוספה', 'OK', {
@@ -224,7 +236,7 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
                 direction: 'rtl'
               });
             } else {
-              if (res) {
+              if (res) { // add new items to db
                 res.forEach((element: Volunteer) => {
                   this.vs.addVolunteer(element, cats);
                 });
@@ -272,6 +284,7 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   updateTable(event: Volunteer) {
+    // update table after update of item
     this.dataSource.data =
       this.dataSource.data
         .map((item: Volunteer) => item.Id === event.Id ? this.vs.trimResultFromUpdate(event) : item);
@@ -279,6 +292,7 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   addVolunteering(event: Details) {
+    // add volunteer action, send id, type and item
     const dialogRef = this.dialog.open(AddVFComponent, {
       maxWidth: '75%',
       data: {
@@ -290,6 +304,7 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
     return dialogRef.afterClosed();
   }
   confirmDialogAdd(): Observable<any> {
+    // confirm adding from file
     const message = `האם תרצי להוסיף את המתנדבות הבאות?`;
     const dialogData = new ConfirmDialogModel('הוספת מתנדבות חדשות', message, this.toSave, 'volunteer');
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
@@ -300,6 +315,7 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   confirmDialogUpdate(): Observable<any> {
+    // confirm updating from file
     const message = `האם תרצי לעדכן את המתנדבות הבאות?`;
     const dialogData = new ConfirmDialogModel('עדכון מתנדבות מקובץ', message, this.toUpdate, 'volunteer');
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
