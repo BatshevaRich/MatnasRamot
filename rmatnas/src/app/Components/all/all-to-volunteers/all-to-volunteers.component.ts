@@ -49,6 +49,15 @@ export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewIni
               public dialog: MatDialog,
               private datePipe: DatePipe,
               private elementRef: ElementRef) {
+    this.dataSource.sortingDataAccessor = (item: Details, property) => {
+      switch (property) {
+        case 'NameVolunteer': return item.NameVolunteer;
+        case 'NameFamily': return item.NameFamily;
+        case 'Category': return item.Category;
+        case 'date': return item.DateVolunteer;
+        default: return item[property];
+      }
+    };
     // this.dataSource.filterPredicate =
     //   (data: Details, filter: string) => data.NameVolunteer.indexOf(filter) !== -1;
   }
