@@ -24,8 +24,7 @@ export class VolunteerAndFamilyService {
     });
   }
   public removeVolunteering(id: number) {
-    this.http.delete(this.path + id).subscribe(data => {
-    });
+    return this.http.delete(this.path + id);
   }
 
   addVolunteerAction(myvolunteer: Volunteer, myfamily: Family, category: Category) {

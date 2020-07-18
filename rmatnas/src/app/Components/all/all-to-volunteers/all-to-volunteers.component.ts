@@ -64,7 +64,7 @@ export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewIni
 
   ngOnInit() {
     if (this.vId) {
-      this.displayedColumns = ['NameVolunteer', 'NameFamily', 'Category', 'PelephoneVolunteer', 'date'];
+      // this.displayedColumns = ['NameVolunteer', 'NameFamily', 'Category', 'PelephoneVolunteer', 'date'];
       if (this.where === 1) {
         this.vfs.getVolunteeringsForVolunteer(this.vId).subscribe((res: VolunteerAndFamily[]) => {
           this.loaded = true;
@@ -139,10 +139,10 @@ export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewIni
     this.confirmDialog().subscribe(res => {
       this.result = res;
       if (res) {
-        this.vfs.removeVolunteering(elm.Id);
-        this.dataSource.data = this.dataSource.data
-          .filter(i => i !== elm);
-        // .map((i, idx) => (i.position = (idx + 1), i));
+        this.vfs.removeVolunteering(elm.Id).subscribe(() => {
+          this.dataSource.data = this.dataSource.data
+            .filter(i => i !== elm);
+        }, (err) => { console.log(err.message); alert('בעיה במחיקת ההתנדבות. נסי שוב מאוחר יותר'); });
       }
     });
   }
