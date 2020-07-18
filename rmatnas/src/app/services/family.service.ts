@@ -41,9 +41,9 @@ export class FamilyService {
     const myData = {} as any;
     myData.family = family;
     myData.categories = categoriesSelected;
-    this.http.put(
+    return this.http.put(
       this.path, myData
-    ).subscribe();
+    );
   }
   removeFamily(id: number) {
     // const head={params:new HttpParams() ('newFamily',Family)};

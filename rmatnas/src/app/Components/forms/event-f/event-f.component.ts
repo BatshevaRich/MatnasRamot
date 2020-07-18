@@ -81,9 +81,9 @@ export class EventFComponent implements OnInit, OnDestroy, AfterViewInit {
     if (this.data.update) {
       this.newEvent.Id = this.data.id;
       this.newEvent.DateAdded = new Date().toDateString();
-
-      this.es.updateEvent(this.newEvent, this.categoriesSelected);
+      this.es.updateEvent(this.newEvent, this.categoriesSelected).subscribe(() => {
       this.dialogRef.close(this.newEvent);
+      }, (err) => { console.log(err.message); alert('בעיה בעדכון הארוע. נסי שוב מאוחר יותר'); });
     } else {
       this.newEvent.DateAdded = new Date().toDateString();
       this.es.addEvent(this.newEvent, this.categoriesSelected)

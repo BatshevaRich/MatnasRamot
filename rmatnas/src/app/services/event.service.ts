@@ -28,9 +28,9 @@ export class EventService {
     const myData = {} as any;
     myData.event = event;
     myData.categories = categoriesSelect;
-    this.http.put(
+    return this.http.put(
       this.path, myData
-    ).subscribe();
+    );
   }
   removeEvent(id: number) {
     return this.http.delete(this.path + '/' + id);

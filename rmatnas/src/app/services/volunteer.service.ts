@@ -31,16 +31,16 @@ export class VolunteerService {
     const myData = {} as any;
     myData.volunteer = myvolunteer;
     myData.categories = categoriesSelected;
-    this.http.put(
+    return this.http.put(
       this.path, myData
-    ).subscribe();
+    );
   }
   removeVolunteer(id: number) {
     // const head={params:new HttpParams() ('newVolunteer',myvolunteer)};
     return this.http.delete(this.path + '/' + id);
   }
   getVolunteersByCategoryAndFamily(idFamily: number, id: number): Observable<Volunteer[]> {
-    return this.http.get<Volunteer[]>(this.path + '/volunteersbyfac/' + id, {headers: {Authorization: idFamily.toString()}});
+    return this.http.get<Volunteer[]>(this.path + '/volunteersbyfac/' + id, { headers: { Authorization: idFamily.toString() } });
   }
   getCategoriesOfVolunteer(id: number) {
     return this.http.get<Category[]>(environment.baseURL + 'CategoryVolunteer/' + id);

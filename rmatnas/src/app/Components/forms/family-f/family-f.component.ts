@@ -91,8 +91,9 @@ export class FamilyFComponent implements OnInit, OnDestroy {
   submitForm() {
     if (this.data.update) {
       this.newFamily.Id = this.data.id;
-      this.fs.updateFamily(this.newFamily, this.categoriesSelected);
+      this.fs.updateFamily(this.newFamily, this.categoriesSelected).subscribe(() => {
       this.dialogRef.close(this.newFamily);
+      }, (err) => { console.log(err.message); alert('בעיה בעדכון המשפחה. נסי שוב מאוחר יותר'); });
     } else {
       this.fs.addFamily(this.newFamily, this.categoriesSelected)
         .then((t: number) => {

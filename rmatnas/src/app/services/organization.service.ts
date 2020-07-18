@@ -32,20 +32,20 @@ export class OrganizationService {
     const myData = {} as any;
     myData.organization = myOrganization;
     myData.categories = categoriesSelected;
-    this.http.put(
+    return this.http.put(
       this.path, myData
-    ).subscribe();
+    );
   }
   removeOrganization(id: number) {
     // const head={params:new HttpParams() ('newOrganization',myOrganization)};
     return this.http.delete(this.path + '/' + id);
   }
   getOrganizationsByCategoryAndFamily(idFamily: number, id: number): Observable<Organization[]> {
-    return this.http.get<Organization[]>(this.path + '/Organizationsbyfac/' + id, {headers: {Authorization: idFamily.toString()}});
+    return this.http.get<Organization[]>(this.path + '/Organizationsbyfac/' + id, { headers: { Authorization: idFamily.toString() } });
   }
   getOrganizationsByCategoryAndVolunteer(idFamily: number, idVolunteer: number, id: number): Observable<Organization[]> {
     return this.http.get<Organization[]>(this.path + '/Organizationsbyfac/' + id,
-    {headers: {Authorization: idFamily.toString(), volunteer: idVolunteer.toString()}});
+      { headers: { Authorization: idFamily.toString(), volunteer: idVolunteer.toString() } });
   }
   getCategoriesOfOrganization(id: number): Observable<Category[]> {
     return this.http.get<Category[]>(this.path + '/categories/' + id);

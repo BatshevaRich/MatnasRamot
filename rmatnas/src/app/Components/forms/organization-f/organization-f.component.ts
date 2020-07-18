@@ -77,8 +77,9 @@ export class OrganizationFComponent implements OnInit, OnDestroy {
   submitForm() {
     if (this.data.update) {
       this.newOrganization.Id = this.data.id;
-      this.os.updateOrganization(this.newOrganization, this.categoriesSelected);
+      this.os.updateOrganization(this.newOrganization, this.categoriesSelected).subscribe(() => {
       this.dialogRef.close(this.newOrganization);
+      }, (err) => { console.log(err.message); alert('בעיה בעדכון הארגון. נסי שוב מאוחר יותר'); });
     } else {
       this.os.addOrganization(this.newOrganization, this.categoriesSelected)
         .then((t: number) => {

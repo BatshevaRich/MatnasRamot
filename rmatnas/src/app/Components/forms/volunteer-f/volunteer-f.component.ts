@@ -68,9 +68,10 @@ export class VolunteerFComponent implements OnInit, OnDestroy {
   submitForm() {
     if (this.data.update) {
       this.newVolunteer.Id = this.data.id;
-      this.vs.updateVolunteer(this.newVolunteer, this.categoriesSelected);
-      // return volunteer to update
-      this.dialogRef.close(this.newVolunteer);
+      this.vs.updateVolunteer(this.newVolunteer, this.categoriesSelected).subscribe(() => {
+        // return volunteer to update
+        this.dialogRef.close(this.newVolunteer);
+      }, (err) => { console.log(err.message); alert('בעיה בעדכון המתנדבת. נסי שוב מאוחר יותר'); });
     } else {
       this.vs.addVolunteer(this.newVolunteer, this.categoriesSelected)
         .then((t: number) => {
