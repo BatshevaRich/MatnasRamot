@@ -37,7 +37,7 @@ export class VolunteerService {
   }
   removeVolunteer(id: number) {
     // const head={params:new HttpParams() ('newVolunteer',myvolunteer)};
-    this.http.delete(this.path + '/' + id).subscribe();
+    return this.http.delete(this.path + '/' + id);
   }
   getVolunteersByCategoryAndFamily(idFamily: number, id: number): Observable<Volunteer[]> {
     return this.http.get<Volunteer[]>(this.path + '/volunteersbyfac/' + id, {headers: {Authorization: idFamily.toString()}});

@@ -38,7 +38,7 @@ export class OrganizationService {
   }
   removeOrganization(id: number) {
     // const head={params:new HttpParams() ('newOrganization',myOrganization)};
-    this.http.delete(this.path + '/' + id).subscribe();
+    return this.http.delete(this.path + '/' + id);
   }
   getOrganizationsByCategoryAndFamily(idFamily: number, id: number): Observable<Organization[]> {
     return this.http.get<Organization[]>(this.path + '/Organizationsbyfac/' + id, {headers: {Authorization: idFamily.toString()}});

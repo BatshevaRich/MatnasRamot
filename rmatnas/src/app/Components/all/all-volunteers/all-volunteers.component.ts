@@ -108,10 +108,10 @@ export class AllVolunteersComponent implements OnInit, OnDestroy, AfterViewInit 
     this.confirmDialog().subscribe(res => {
       this.result = res;
       if (res) {
-        this.vs.removeVolunteer(elm.Id);
-        this.dataSource.data = this.dataSource.data
-          .filter(i => i !== elm);
-        // .map((i, idx) => (i.position = (idx + 1), i));
+        this.vs.removeVolunteer(elm.Id).subscribe(() => {
+          this.dataSource.data = this.dataSource.data
+          .filter(i => i !== elm); },
+           (err) => {console.log(err.message); alert('בעיה במחיקת המתנדבת. נסי שוב מאוחר יותר'); } );
       }
     });
   }

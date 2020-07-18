@@ -139,6 +139,10 @@ export class AllEventsComponent implements OnInit, OnDestroy, AfterViewInit {
     this.confirmDialog().subscribe(res => {
       this.result = res;
       if (res) {
+        this.es.removeEvent(event.Id).subscribe(() => {
+          this.dataSource.data = this.dataSource.data
+          .filter(i => i !== event); },
+           (err) => {console.log(err.message); alert('בעיה במחיקת הארוע. נסי שוב מאוחר יותר'); } );
         this.removeFromBadge(event.Id);
       }
     });

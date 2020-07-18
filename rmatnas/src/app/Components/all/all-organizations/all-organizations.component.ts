@@ -116,13 +116,13 @@ export class AllOrganizationsComponent implements OnInit, OnDestroy, AfterViewIn
     this.confirmDialog().subscribe(res => {
       this.result = res;
       if (res) {
-        this.os.removeOrganization(elm.Id);
-        this.dataSource = new MatTableDataSource(Object.values(this.dataSource.data)
-          .filter(i => i !== elm));
-        // .map((i, idx) => (i.position = (idx + 1), i));
-      }
-    });
-  }
+        this.os.removeOrganization(elm.Id).subscribe(() => {
+          this.dataSource.data = this.dataSource.data
+          .filter(i => i !== elm); },
+           (err) => {console.log(err.message); alert('בעיה במחיקת הארגון. נסי שוב מאוחר יותר'); } );
+    }
+  });
+}
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace

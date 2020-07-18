@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, from } from 'rxjs';
-import {Eventt} from '../Classes/Eventt' ;
+import { Eventt } from '../Classes/Eventt';
 import { Category } from '../Classes/Category';
-import { environment} from '../../environments/environment';
+import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
@@ -33,14 +33,13 @@ export class EventService {
     ).subscribe();
   }
   removeEvent(id: number) {
-   this.http.delete(this.path + '/' + id).subscribe(data => {
-   });
+    return this.http.delete(this.path + '/' + id);
   }
   getEventsByCategoryAndFamily(idFamily: number, id: number): Observable<Eventt[]> {
-    return this.http.get<Eventt[]>(this.path + '/Eventsbyfac/' + id, {headers: {Authorization: idFamily.toString()}});
+    return this.http.get<Eventt[]>(this.path + '/Eventsbyfac/' + id, { headers: { Authorization: idFamily.toString() } });
   }
   getEventsByCategoryAndVolunteer(idVolunteer: number, id: number): Observable<Eventt[]> {
-    return this.http.get<Eventt[]>(this.path + '/Eventsbyvac/' + id, {headers: {Authorization: idVolunteer.toString()}});
+    return this.http.get<Eventt[]>(this.path + '/Eventsbyvac/' + id, { headers: { Authorization: idVolunteer.toString() } });
   }
   getCategoriesOfEvent(id: number) {
     return this.http.get<Category[]>(this.path + '/categoriesOfEvent/' + id);
@@ -80,5 +79,5 @@ export class EventService {
     eventt.DateAdded == null ? eventt.DateAdded = '' : eventt.DateAdded = eventt.DateAdded.trim();
     eventt.Description == null ? eventt.Description = '' : eventt.Description = eventt.Description.trim();
     return eventt;
-}
+  }
 }

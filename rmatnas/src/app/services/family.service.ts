@@ -47,7 +47,7 @@ export class FamilyService {
   }
   removeFamily(id: number) {
     // const head={params:new HttpParams() ('newFamily',Family)};
-    this.http.delete(this.path + '/' + id).subscribe();
+    return this.http.delete(this.path + '/' + id);
   }
   getCategoriesOfFamily(id: number): Observable<Category[]> {
     return this.http.get<Category[]>(this.path + '/categoriesOfFamily/' + id);

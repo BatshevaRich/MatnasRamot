@@ -130,9 +130,11 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
     this.confirmDialog().subscribe(res => {
       this.result = res;
       if (res) {
-        // this.ns.updateFamilySubject.next()
+        this.fs.removeFamily(elm.Id).subscribe(() => {
+          this.dataSource.data = this.dataSource.data
+            .filter(i => i !== elm);
+        }, (err) => { console.log(err.message); alert('בעיה במחיקת המשפחה. נסי שוב מאוחר יותר'); });
         this.removeFromBadge(elm.Id);
-        // .map((i, idx) => (i.position = (idx + 1), i));
       }
     });
   }
@@ -344,8 +346,8 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
 
   removeFromBadge(id: number) {
     const removeIndex = this.ns.Families.map((item) => item.Id).indexOf(id);
-    if (this.dataSource.data[removeIndex]){
-     this.dataSource.data[removeIndex].color = false;
+    if (this.dataSource.data[removeIndex]) {
+      this.dataSource.data[removeIndex].color = false;
     }
     // tslint:disable-next-line: no-bitwise
     const removed = ~removeIndex && this.ns.Families.splice(removeIndex, 1);
