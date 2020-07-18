@@ -95,12 +95,11 @@ export class FamilyFComponent implements OnInit, OnDestroy {
       this.dialogRef.close(this.newFamily);
       }, (err) => { console.log(err.message); alert('בעיה בעדכון המשפחה. נסי שוב מאוחר יותר'); });
     } else {
-      this.fs.addFamily(this.newFamily, this.categoriesSelected)
-        .then((t: number) => {
+      this.fs.addFamily(this.newFamily, this.categoriesSelected).subscribe((t: number) => {
           this.newFamily.Id = t;
           this.categoriesSelected = [];
           this.dialogRef.close(t);
-        });
+        }, err => {console.log(err.message); alert('לא ניתן להוסיף משפחה. נא לנסות מאוחר יותר'); });
       this.mytemplateForm.resetForm();
       this.newFamily = new Family('', '', '', '', '', '', '', '', 0, '', '');
     }

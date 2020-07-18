@@ -81,13 +81,12 @@ export class OrganizationFComponent implements OnInit, OnDestroy {
       this.dialogRef.close(this.newOrganization);
       }, (err) => { console.log(err.message); alert('בעיה בעדכון הארגון. נסי שוב מאוחר יותר'); });
     } else {
-      this.os.addOrganization(this.newOrganization, this.categoriesSelected)
-        .then((t: number) => {
+      this.os.addOrganization(this.newOrganization, this.categoriesSelected).subscribe((t: number) => {
           this.token = t;
           this.newOrganization.Id = this.token;
           this.categoriesSelected = [];
           this.dialogRef.close(this.token);
-        });
+        }, err => {console.log(err.message); alert('לא ניתן להוסיף ארגון. נא לנסות מאוחר יותר'); });
       this.mytemplateForm.resetForm();
       this.newOrganization = new Organization('', null, '', null, null, '');
       this.snackBar.open('שמירת ארגון מבוצעת...', 'OK', {

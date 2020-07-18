@@ -28,9 +28,8 @@ export class VolunteerAndFamilyService {
   }
 
   addVolunteerAction(myvolunteer: Volunteer, myfamily: Family, category: Category) {
-    const vaf: VolunteerAndFamily  = new VolunteerAndFamily(myfamily, myvolunteer, category, '', new Date().toISOString());
-    return this.http
-      .post(this.path, vaf).toPromise().then(res => res);
+    const vaf: VolunteerAndFamily = new VolunteerAndFamily(myfamily, myvolunteer, category, '', new Date().toISOString());
+    return this.http.post(this.path, vaf);
   }
 
   getVolunteeringsForVolunteer(idVolunteer: number) {

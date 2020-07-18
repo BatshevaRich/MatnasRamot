@@ -27,8 +27,7 @@ export class VolunteerAndEventService {
   }
   addVolunteerAction(myEvent: Eventt, myVolunteer: Volunteer, category: Category) {
     const vae: VolunteerAndEvent  = new VolunteerAndEvent(myEvent, myVolunteer, category, '', new Date().toISOString());
-    return this.http
-      .post(this.path, vae).toPromise().then(res => res);
+    return this.http.post(this.path, vae);
   }
   removeVolunteering(id: number) {
     this.http.delete(this.path + id).subscribe(data => {

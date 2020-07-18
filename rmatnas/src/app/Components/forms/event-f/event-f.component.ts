@@ -87,12 +87,12 @@ export class EventFComponent implements OnInit, OnDestroy, AfterViewInit {
     } else {
       this.newEvent.DateAdded = new Date().toDateString();
       this.es.addEvent(this.newEvent, this.categoriesSelected)
-        .then((t: number) => {
+        .subscribe((t: number) => {
           this.token = t;
           this.newEvent.Id = this.token;
           this.categoriesSelected = [];
           this.dialogRef.close(this.token);
-        });
+        }, err => {console.log(err.message); alert('לא ניתן להוסיף ארוע. נא לנסות מאוחר יותר'); });
       this.mytemplateForm.resetForm();
       this.newEvent = new Eventt(null, null, null, null, null);
       this.snackBar.open('שמירת ארוע מבוצעת...', 'OK', {

@@ -79,7 +79,8 @@ export class AddFOComponent implements OnInit, OnDestroy {
   submitForm() {
     this.selectedFamilies.forEach((element: Family) => {
       this.oaf.addFamilyToOrganization(
-        new OrganizationAndFamily(element, this.selectedOrganization, this.selectedCategory, '', ''));
+        new OrganizationAndFamily(element, this.selectedOrganization, this.selectedCategory, '', '')).subscribe(() => {
+        }, err => {console.log(err.message); alert('לא ניתן להוסיף משפחה לארגון. נא לנסות מאוחר יותר'); });
     });
 
     // this.vaf.addOrganizationAction(this.selectedOrganization, this.selectedFamily, this.selectedCategory);

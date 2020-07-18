@@ -24,8 +24,7 @@ export class OrganizationService {
     const myData = {} as any;
     myData.organization = myOrganization;
     myData.categories = categories;
-    return this.http
-      .post(this.path, myData).toPromise().then(res => res);
+    return this.http.post(this.path, myData);
   }
   updateOrganization(myOrganization: Organization, categoriesSelected: Category[]) {
     // const head={params:new HttpParams() ('newOrganization',myOrganization)};

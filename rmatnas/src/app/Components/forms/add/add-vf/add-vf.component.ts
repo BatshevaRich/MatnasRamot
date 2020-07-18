@@ -114,7 +114,8 @@ export class AddVFComponent implements OnInit, OnDestroy {
 
   submitFormV() {
     this.selectedFamilies.forEach((element: Family) => {
-      this.vaf.addVolunteerAction(this.selectedVolunteer, element, this.selectedCategory);
+      this.vaf.addVolunteerAction(this.selectedVolunteer, element, this.selectedCategory).subscribe(() => {
+      }, err => {console.log(err.message); alert('לא ניתן להוסיף התנדבות. נא לנסות מאוחר יותר'); });
       this.snackBar.open('שמירת התנדבות מבוצעת...', 'OK', {
         duration: 2000,
         direction: 'rtl'

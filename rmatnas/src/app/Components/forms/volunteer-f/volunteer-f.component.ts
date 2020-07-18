@@ -73,14 +73,13 @@ export class VolunteerFComponent implements OnInit, OnDestroy {
         this.dialogRef.close(this.newVolunteer);
       }, (err) => { console.log(err.message); alert('בעיה בעדכון המתנדבת. נסי שוב מאוחר יותר'); });
     } else {
-      this.vs.addVolunteer(this.newVolunteer, this.categoriesSelected)
-        .then((t: number) => {
+      this.vs.addVolunteer(this.newVolunteer, this.categoriesSelected).subscribe((t: number) => {
           this.token = t;
           this.newVolunteer.Id = this.token;
           this.categoriesSelected = [];
           // return id of new volunteer
           this.dialogRef.close(this.token);
-        });
+        }, err => {console.log(err.message); alert('לא ניתן להוסיף מתנדבת. נא לנסות מאוחר יותר'); });
       this.newVolunteer = new Volunteer('', '', '', '', '', '2001-01-01', true);
       this.snackBar.open('שמירת מתנדבת מבוצעת...', 'OK', {
         duration: 2000,

@@ -79,7 +79,8 @@ export class AddVEComponent implements OnInit, OnDestroy {
 
     submitForm() {
     this.selectedVolunteers.forEach((element: Volunteer) => {
-      this.vae.addVolunteerAction(this.selectedEvent, element, this.selectedCategory);
+      this.vae.addVolunteerAction(this.selectedEvent, element, this.selectedCategory).subscribe(() => {
+      }, err => {console.log(err.message); alert('לא ניתן להוסיף מתנדבת לארוע. נא לנסות מאוחר יותר'); });
       this.snackBar.open('שמירה מבוצעת...', 'OK', {
         duration: 2000,
             direction: 'rtl'

@@ -19,7 +19,7 @@ export class OrganizationAndFamilyService {
     return this.http.get<OrganizationAndFamily>(this.path + id);
   }
   addFamilyToOrganization(value: OrganizationAndFamily) {
-    return this.http.post(this.path, value).subscribe(res => res);
+    return this.http.post(this.path, value);
   }
   removeVolunteering(id: number) {
     this.http.delete(this.path + id).subscribe(data => {

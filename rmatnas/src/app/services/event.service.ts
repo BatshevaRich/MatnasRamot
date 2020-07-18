@@ -21,8 +21,7 @@ export class EventService {
     const myData = {} as any;
     myData.event = event;
     myData.categories = categoriesSelect;
-    return this.http
-      .post(this.path, myData).toPromise().then(res => res);
+    return this.http.post(this.path, myData);
   }
   updateEvent(event: Eventt, categoriesSelect: Category[]) {
     const myData = {} as any;

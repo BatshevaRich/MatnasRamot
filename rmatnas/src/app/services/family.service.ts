@@ -32,9 +32,7 @@ export class FamilyService {
     const myData = {} as any;
     myData.family = family;
     myData.categories = categories;
-    return this.http
-      .post(this.path, myData)
-      .toPromise().then(res => res);
+    return this.http.post(this.path, myData);
   }
   updateFamily(family: Family, categoriesSelected: Category[]) {
     // const head={params:new HttpParams() ('newFamily',Family)};
