@@ -43,8 +43,8 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
               public dialog: MatDialog,
               private elementRef: ElementRef,
               private snackBar: MatSnackBar) {
-    this.dataSource.filterPredicate =
-      (data: Details, filter: string) => data.LastName.indexOf(filter) !== -1;
+    // this.dataSource.filterPredicate =
+    //   (data: Details, filter: string) => data.LastName.indexOf(filter) !== -1;
   }
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatTable, { static: false }) table: MatTable<any>;
@@ -130,6 +130,7 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
     this.confirmDialog().subscribe(res => {
       this.result = res;
       if (res) {
+        // this.ns.updateFamilySubject.next()
         this.removeFromBadge(elm.Id);
         // .map((i, idx) => (i.position = (idx + 1), i));
       }
@@ -347,8 +348,8 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
      this.dataSource.data[removeIndex].color = false;
     }
     // tslint:disable-next-line: no-bitwise
-    const removed = ~removeIndex && this.ns.Events.splice(removeIndex, 1);
-    const res = this.ns.Events;
+    const removed = ~removeIndex && this.ns.Families.splice(removeIndex, 1);
+    const res = this.ns.Families;
     function sortFunc(a: { Id: number; }, b: { Id: number; }) {
       const s1 = res.find(s => s.Id === a.Id);
       const s2 = res.find(s => s.Id === b.Id);
