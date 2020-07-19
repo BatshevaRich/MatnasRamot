@@ -58,7 +58,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     });
     this.ns.getMostOrganization().subscribe((res: Organization) => {
       this.mostOrganization = res;
-      this.os.get
     });
   }
 
