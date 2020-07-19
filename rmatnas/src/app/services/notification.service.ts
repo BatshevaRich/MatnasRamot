@@ -90,4 +90,12 @@ export class NotificationService {
       this.CategoriesNotInUse = res;
     });
   }
+
+  getMostVolunteer() {
+    return this.http.get<Volunteer>(this.path + '/mostVolunteer');
+  }
+
+  getMostFamily() {
+    return this.http.get<Family>(this.path + '/mostFamily');
+  }
 }
