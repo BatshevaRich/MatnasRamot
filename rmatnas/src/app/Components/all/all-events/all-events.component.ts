@@ -64,6 +64,7 @@ export class AllEventsComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit() {
     if (this.vId) {
+    // remove delete function when displayes as inner component
       this.displayedColumns = ['Name', 'Description', 'StartDate', 'EndDate'];
     }
   }
@@ -77,6 +78,7 @@ export class AllEventsComponent implements OnInit, OnDestroy, AfterViewInit {
     this.dataSource.sort = this.sort;
     if (this.vId) {
       if (this.where === 1) {
+        // in volunteer component
         this.es.getEventsForVolunteer(this.vId).subscribe((data: Eventt[]) => {
           this.loaded = true;
           if (data.length === 0) {
