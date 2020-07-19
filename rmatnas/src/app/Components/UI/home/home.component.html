@@ -51,7 +51,12 @@
               </h5>
             </mat-panel-title>
           </mat-expansion-panel-header>
-          <p>{{mostVolunteer.Name}}</p>
+          <h5><u>{{mostVolunteer.Name}}</u></h5>
+          <p>עם קטגוריות:</p>|
+          <span *ngFor="let c of CatsOfVolunteer">
+            <span>
+              {{c.Name}}|</span>
+            </span>
         </mat-expansion-panel>
         <br>
         <mat-expansion-panel *ngIf="mostFamily">
@@ -65,7 +70,12 @@
               </h5>
             </mat-panel-title>
           </mat-expansion-panel-header>
-          <p>משפחת {{mostFamily.LastName}}</p>
+          <h5><u>משפחת {{mostFamily.LastName}}</u></h5>
+          <p>עם קטגוריות:</p>|
+          <span *ngFor="let c of catsOfFamily">
+            <span>
+              {{c.Name}}|</span>
+            </span>
         </mat-expansion-panel>
         <br>
         <mat-expansion-panel>
@@ -79,7 +89,7 @@
               </h5>
             </mat-panel-title>
           </mat-expansion-panel-header>
-          <p>{{closestEvent}}</p>
+          <h5><u>{{closestEvent}}</u></h5>
           <p>בתאריך: {{DateClosestEvent  | date:"MMMM dd yyyy"}}</p>
           <p>בעוד: {{DaysToEvent}} ימים</p>
         </mat-expansion-panel>
