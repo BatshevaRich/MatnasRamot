@@ -23,5 +23,12 @@ namespace WebApi.Controllers
         {
             return Bll.EventManager.GetNextEvents();
         }
+
+        [Route("api/warning/mostFamily")]
+        public Family GetMostFamily()
+        {
+            return Bll.FamilyManager.GetMostFamily();
+        }
+
     }
 }

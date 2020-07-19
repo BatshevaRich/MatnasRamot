@@ -128,5 +128,10 @@ namespace Bll
         {
             return Dal.FamilyManager.GetFamiliesWithoutVolunteer();
         }
+
+        public static Family GetMostFamily()
+        {
+            return Dal.FamilyManager.GetMostFamily();
+        }
     }
 }

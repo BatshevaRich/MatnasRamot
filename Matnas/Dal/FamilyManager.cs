@@ -251,5 +251,14 @@ namespace Dal
             }
             return families;
         }
+
+        public static Family GetMostFamily()
+        {
+            using (dbRamotEntities db = new dbRamotEntities())
+            {
+                var family = db.Families.OrderBy(f => f.VolunteerAndFamily.Count + f.OrganizationAndFamily.Count).ToList();
+                return Mapper.CastFamilyToComon(family.Last());
+            }
+        }
     }
 }
