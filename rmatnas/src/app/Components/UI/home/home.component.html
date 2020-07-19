@@ -1,37 +1,101 @@
-<mat-card dir="rtl" class="fullscreen">
-  <div class="hero">
-    <span fxFlex="80%">
-      <h2>ברוכים הבאים למתנס</h2>
-      <h1>מעלה רמות</h1>
-      <h3>ארגון חסד קהילתי</h3>
+<div>
+  <mat-card dir="rtl" class="fullscreen">
+    <span fxFlex="75%">
+      <div class="hero">
+        <span fxFlex="70%">
+          <h2>ברוכים הבאים למתנ"ס</h2>
+          <h1>מעלה רמות</h1>
+          <h3>ארגון חסד קהילתי</h3>
+        </span>
+      </div>
+      <span fxFlex="30%">
+        <div style="height:10pt;"></div>
+        <mat-card *ngIf="familyBadge > 0">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image"><i class="fa fa-child"></i></div>
+            <mat-card-title>
+              <mat-error>
+                <span>{{familyBadge}}</span> משפחות לא מתואמות
+              </mat-error>
+            </mat-card-title>
+          </mat-card-header>
+          <button (click)="router.navigate(['/list/families']);" mat-raised-button color="primary">למעבר למשפחות<i
+              class="fa fa-arrow-left"></i></button>
+        </mat-card>
+        <div style="height:10pt;"></div>
+        <mat-card *ngIf="eventBadge > 0">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image"><i class="fa fa-calendar-o"></i></div>
+            <mat-card-title>
+              <mat-error>
+                <span>{{eventBadge}}</span> ארועים קרובים
+              </mat-error>
+            </mat-card-title>
+          </mat-card-header>
+          <button (click)="router.navigate(['/list/events']);" mat-raised-button color="primary">למעבר לארועים<i
+              class="fa fa-arrow-left"></i></button>
+        </mat-card>
+      </span>
+      <br>
     </span>
-  </div>
-  <span fxFlex="22%">
-    <div style="height:10pt;"></div>
-    <mat-card *ngIf="familyBadge > 0">
-      <mat-card-header>
-        <div mat-card-avatar class="example-header-image"><i class="fa fa-child"></i></div>
-        <mat-card-title>
-          <mat-error>
-            <span>{{familyBadge}}</span> משפחות לא מתואמות
-          </mat-error>
-        </mat-card-title>
-      </mat-card-header>
-      <button (click)="router.navigate(['/list/families']);" mat-raised-button color="primary">למעבר למשפחות<i
-          class="fa fa-arrow-left"></i></button>
-    </mat-card>
-    <div style="height:10pt;"></div>
-    <mat-card *ngIf="eventBadge > 0">
-      <mat-card-header>
-        <div mat-card-avatar class="example-header-image"><i class="fa fa-calendar-o"></i></div>
-        <mat-card-title>
-          <mat-error>
-            <span>{{eventBadge}}</span> ארועים קרובים
-          </mat-error>
-        </mat-card-title>
-      </mat-card-header>
-      <button (click)="router.navigate(['/list/events']);" mat-raised-button color="primary">למעבר לארועים<i
-          class="fa fa-arrow-left"></i></button>
-    </mat-card>
-  </span>
-</mat-card>
+    <span fxFlex="25%">
+      <mat-accordion>
+        <mat-expansion-panel *ngIf="mostVolunteer">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <h5>
+                <button mat-icon-button color="primary">
+                  <i class="fa fa-user"></i>
+                </button>
+                מתנדבת הכי פעילה
+              </h5>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <p>{{mostVolunteer.Name}}</p>
+        </mat-expansion-panel>
+        <br>
+        <mat-expansion-panel *ngIf="mostFamily">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <h5>
+                <button mat-icon-button color="primary">
+                  <i class="fa fa-child"></i>
+                </button>
+                משפחה הכי נזקקת
+              </h5>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <p>משפחת {{mostFamily.LastName}}</p>
+        </mat-expansion-panel>
+        <br>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <h5>
+                <button mat-icon-button color="primary">
+                  <i class="fa fa-calendar-o"></i>
+                </button>
+                ארוע הכי קרוב
+              </h5>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <p>{{closestEvent}}</p>
+          <p>בתאריך: {{DateClosestEvent  | date:"MMMM dd yyyy"}}</p>
+          <p>בעוד: {{DaysToEvent}} ימים</p>
+        </mat-expansion-panel>
+        <!-- <mat-expansion-panel (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Self aware panel
+            </mat-panel-title>
+            <mat-panel-description>
+              Currently I am {{panelOpenState ? 'open' : 'closed'}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <p>I'm visible because I am open</p>
+        </mat-expansion-panel> -->
+      </mat-accordion>
+    </span>
+  </mat-card>
+</div>
