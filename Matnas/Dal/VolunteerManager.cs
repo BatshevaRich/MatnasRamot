@@ -279,5 +279,15 @@ namespace Dal
                 return volunteers;
             }
         }
+
+
+        public static Volunteer GetMostVolunteer()
+        {
+            using (dbRamotEntities db = new dbRamotEntities())
+            {
+                var volunteer = db.Volunteers.OrderBy(v => v.VolunteerAndFamily.Count + v.VolunteerAndEvent.Count).ToList();
+                return Mapper.CastVolunteerToComon(volunteer.Last());
+            }
+        }
     }
 }

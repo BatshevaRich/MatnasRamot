@@ -141,5 +141,10 @@ namespace Bll
         {
             return Dal.VolunteerManager.GetEvents(id);
         }
+
+        public static Volunteer GetMostVolunteer()
+        {
+            return Dal.VolunteerManager.GetMostVolunteer();
+        }
     }
 }

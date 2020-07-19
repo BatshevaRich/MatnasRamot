@@ -30,5 +30,11 @@ namespace WebApi.Controllers
             return Bll.FamilyManager.GetMostFamily();
         }
 
+        // GET: api/Warning
+        [Route("api/warning/mostVolunteer")]
+        public Volunteer GetMostVolunteer()
+        {
+            return Bll.VolunteerManager.GetMostVolunteer();
+        }
     }
 }
