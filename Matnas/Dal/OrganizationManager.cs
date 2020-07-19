@@ -140,5 +140,13 @@ namespace Dal
             }
             return families;
         }
+        public static Common.Organization GetMostOrganization()
+        {
+            using (dbRamotEntities db = new dbRamotEntities())
+            {
+                var organization = db.Organization.OrderBy(f => f.OrganizationAndFamily.Count).ToList();
+                return Mapper.CastOrganizationToComon(organization.Last());
+            }
+        }
     }
 }

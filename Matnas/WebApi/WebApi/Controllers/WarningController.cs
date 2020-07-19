@@ -36,5 +36,10 @@ namespace WebApi.Controllers
         {
             return Bll.VolunteerManager.GetMostVolunteer();
         }
+        [Route("api/warning/mostOrganization")]
+        public Organization GetMostOrganization()
+        {
+            return Bll.OrganizationManager.GetMostOrganization();
+        }
     }
 }

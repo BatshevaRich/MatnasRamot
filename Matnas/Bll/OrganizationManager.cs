@@ -54,5 +54,9 @@ namespace Bll
         {
             return Dal.OrganizationManager.GetFamilies(id);
         }
+        public static Organization GetMostOrganization()
+        {
+            return Dal.OrganizationManager.GetMostOrganization();
+        }
     }
 }
