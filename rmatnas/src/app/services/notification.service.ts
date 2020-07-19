@@ -98,4 +98,7 @@ export class NotificationService {
   getMostFamily() {
     return this.http.get<Family>(this.path + '/mostFamily');
   }
+  getMostOrganization() {
+    return this.http.get<Organization>(this.path + '/mostOrganization');
+  }
 }

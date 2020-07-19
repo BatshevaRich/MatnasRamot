@@ -19,7 +19,7 @@
               </mat-error>
             </mat-card-title>
           </mat-card-header>
-          <button (click)="router.navigate(['/list/families']);" mat-raised-button color="primary">למעבר למשפחות<i
+          <button (click)="router.navigate(['/list/families']);" mat-raised-button color="accent">למעבר למשפחות<i
               class="fa fa-arrow-left"></i></button>
         </mat-card>
         <div style="height:10pt;"></div>
@@ -32,7 +32,7 @@
               </mat-error>
             </mat-card-title>
           </mat-card-header>
-          <button (click)="router.navigate(['/list/events']);" mat-raised-button color="primary">למעבר לארועים<i
+          <button (click)="router.navigate(['/list/events']);" mat-raised-button color="accent">למעבר לארועים<i
               class="fa fa-arrow-left"></i></button>
         </mat-card>
       </span>
@@ -76,6 +76,20 @@
             <span>
               {{c.Name}}|</span>
             </span>
+        </mat-expansion-panel>
+        <br>
+        <mat-expansion-panel *ngIf="mostOrganization">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <h5>
+                <button mat-icon-button color="primary">
+                  <i class="fa fa-group"></i>
+                </button>
+                ארגון הכי גדול
+              </h5>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <h5><u>{{mostOrganization.Name}}</u></h5>
         </mat-expansion-panel>
         <br>
         <mat-expansion-panel>

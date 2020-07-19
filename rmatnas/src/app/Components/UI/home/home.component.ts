@@ -7,6 +7,9 @@ import { Family } from '../../../Classes/Family';
 import { VolunteerService } from '../../../services/volunteer.service';
 import { FamilyService } from '../../../services/family.service';
 import { Category } from '../../../Classes/Category';
+import { Organization } from '../../../Classes/Organization';
+import { OrganizationService } from '../../../services/organization.service';
+import { OrganizationAndFamilyService } from '../../../services/organization-and-family.service';
 
 @Component({
   selector: 'app-home',
@@ -24,11 +27,13 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   mostFamily: Family;
   CatsOfVolunteer: Category[];
   catsOfFamily: Category[];
+  mostOrganization: Organization;
   constructor(public dialog: MatDialog,
               public router: Router,
               public ns: NotificationService,
               public vs: VolunteerService,
               public fs: FamilyService,
+              public os: OrganizationAndFamilyService,
               private elementRef: ElementRef,
               private cdr: ChangeDetectorRef) {
     const temp = this.ns.Events.map(e => Math.abs(Date.now() - new Date(e.StartDate).getTime()));
@@ -50,6 +55,10 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       this.fs.getCategoriesOfFamily(res.Id).subscribe((cats: Category[]) => {
         this.catsOfFamily = cats;
       });
+    });
+    this.ns.getMostOrganization().subscribe((res: Organization) => {
+      this.mostOrganization = res;
+      this.os.get
     });
   }
 
