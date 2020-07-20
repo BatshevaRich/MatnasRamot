@@ -42,10 +42,7 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
               private changeDetectorRefs: ChangeDetectorRef,
               public dialog: MatDialog,
               private elementRef: ElementRef,
-              private snackBar: MatSnackBar) {
-    // this.dataSource.filterPredicate =
-    //   (data: Details, filter: string) => data.LastName.indexOf(filter) !== -1;
-  }
+              private snackBar: MatSnackBar) { }
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatTable, { static: false }) table: MatTable<any>;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;

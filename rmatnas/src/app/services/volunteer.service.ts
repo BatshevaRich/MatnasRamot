@@ -26,7 +26,6 @@ export class VolunteerService {
     return this.http.post(this.path, myData);
   }
   updateVolunteer(myvolunteer: Volunteer, categoriesSelected: Category[]) {
-    // const head={params:new HttpParams() ('newVolunteer',myvolunteer)};
     const myData = {} as any;
     myData.volunteer = myvolunteer;
     myData.categories = categoriesSelected;
@@ -35,7 +34,6 @@ export class VolunteerService {
     );
   }
   removeVolunteer(id: number) {
-    // const head={params:new HttpParams() ('newVolunteer',myvolunteer)};
     return this.http.delete(this.path + '/' + id);
   }
   getVolunteersByCategoryAndFamily(idFamily: number, id: number): Observable<Volunteer[]> {

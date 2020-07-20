@@ -82,11 +82,5 @@ export class AddFOComponent implements OnInit, OnDestroy {
         new OrganizationAndFamily(element, this.selectedOrganization, this.selectedCategory, '', '')).subscribe(() => {
         }, err => {console.log(err.message); alert('לא ניתן להוסיף משפחה לארגון. נא לנסות מאוחר יותר'); });
     });
-
-    // this.vaf.addOrganizationAction(this.selectedOrganization, this.selectedFamily, this.selectedCategory);
-    // this.snackBar.open('שמירת התנדבות מבוצעת...', 'OK', {
-    //     duration: 2000,
-    //     direction: 'rtl'
-    //   });
   }
 }

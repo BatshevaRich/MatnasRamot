@@ -34,7 +34,6 @@ namespace Dal
                 if (query.ToList().Count > 0)
                 {
                     db.VolunteerAndEvent.FirstOrDefault().Events = null;
-                    // db.VolunteerAndFamily.Remove(db.VolunteerAndFamily.Find(query.FirstOrDefault().Id));
                 }
                 db.Events.Find(id).Categories.Clear();
                 db.Events.Remove(db.Events.Find(id));
@@ -147,7 +146,6 @@ namespace Dal
                 var nextEvents = db.Events.Where(e => DateTime.Compare(e.StartDate, DateTime.Now) > 0).ToList();
                 foreach (var e in nextEvents)
                 {
-                    var c = DateTime.Compare(e.DateAdded.Date, DateTime.Now);
                     events.Add(Mapper.CastEventToComon(e));
                 }
                 return events;
@@ -157,7 +155,7 @@ namespace Dal
         public static IEnumerable<Common.Event> GetEventsForVolunteer(int id)
         {
             using (dbRamotEntities db = new dbRamotEntities())
-            {//////////////////////////////////////////////////////////////
+            {
                 var query = from ve in db.VolunteerAndEvent
                             where ve.Volunteers.Id == id
                             select ve;

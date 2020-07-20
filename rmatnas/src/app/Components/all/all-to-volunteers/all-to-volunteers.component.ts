@@ -58,8 +58,6 @@ export class AllToVolunteersComponent implements OnInit, OnDestroy, AfterViewIni
         default: return item[property];
       }
     };
-    // this.dataSource.filterPredicate =
-    //   (data: Details, filter: string) => data.NameVolunteer.indexOf(filter) !== -1;
   }
 
   ngOnInit() {

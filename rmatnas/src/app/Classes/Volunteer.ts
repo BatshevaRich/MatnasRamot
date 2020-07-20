@@ -11,7 +11,6 @@ export class Volunteer {
     show: boolean;
     // tslint:disable-next-line: max-line-length
     constructor(Name: string, telephone: string, pelephone: string, email: string, address: string, birthdate: string, isActive: boolean) {
-        // this.Id = id;
         this.Name = Name;
         this.Telephone = telephone;
         this.Pelephone = pelephone;

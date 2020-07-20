@@ -53,7 +53,6 @@ export class EventFComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    // this.date = [{ begin: new Date(), end: new Date() }];
     this.dateInput.beginDate = new Date();
     this.dateInput.endDate = new Date();
   }

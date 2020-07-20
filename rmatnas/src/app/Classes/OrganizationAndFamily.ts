@@ -11,7 +11,6 @@ export class OrganizationAndFamily {
     dateAdded: string;
 
     constructor(idFamily: Family, idOrganization: Organization, idCategory: Category, comments: string, dateAdded: string) {
-        // this.Id = id;
         this.Comments = comments;
         this.Category = idCategory;
         this.Family = idFamily;

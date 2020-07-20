@@ -35,7 +35,6 @@ export class FamilyService {
     return this.http.post(this.path, myData);
   }
   updateFamily(family: Family, categoriesSelected: Category[]) {
-    // const head={params:new HttpParams() ('newFamily',Family)};
     const myData = {} as any;
     myData.family = family;
     myData.categories = categoriesSelected;
@@ -44,7 +43,6 @@ export class FamilyService {
     );
   }
   removeFamily(id: number) {
-    // const head={params:new HttpParams() ('newFamily',Family)};
     return this.http.delete(this.path + '/' + id);
   }
   getCategoriesOfFamily(id: number): Observable<Category[]> {

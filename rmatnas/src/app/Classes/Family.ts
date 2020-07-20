@@ -7,7 +7,6 @@ export class Family {
     PelephoneFather: string;
     PelephoneMother: string;
     Address: string;
-    // Email: string;
     Status: string;
     NumChildren: number;
     Reference: string;
@@ -23,7 +22,6 @@ export class Family {
         this.PelephoneFather = pfather;
         this.PelephoneMother = pmother;
         this.Address = address;
-        // this.Email = email;
         this.Status = status;
         this.NumChildren = nChildren;
         this.Reference = reference;

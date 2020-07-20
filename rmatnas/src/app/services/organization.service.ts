@@ -27,7 +27,6 @@ export class OrganizationService {
     return this.http.post(this.path, myData);
   }
   updateOrganization(myOrganization: Organization, categoriesSelected: Category[]) {
-    // const head={params:new HttpParams() ('newOrganization',myOrganization)};
     const myData = {} as any;
     myData.organization = myOrganization;
     myData.categories = categoriesSelected;
@@ -36,7 +35,6 @@ export class OrganizationService {
     );
   }
   removeOrganization(id: number) {
-    // const head={params:new HttpParams() ('newOrganization',myOrganization)};
     return this.http.delete(this.path + '/' + id);
   }
   getOrganizationsByCategoryAndFamily(idFamily: number, id: number): Observable<Organization[]> {
