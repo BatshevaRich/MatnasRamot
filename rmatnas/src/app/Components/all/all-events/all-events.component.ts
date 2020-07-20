@@ -183,7 +183,9 @@ export class AllEventsComponent implements OnInit, OnDestroy, AfterViewInit {
 
   removeFromBadge(id: number) {
     const removeIndex = this.ns.Events.map((item) => item.Id).indexOf(id);
-    this.dataSource.data[removeIndex].color = false;
+    if (this.dataSource.data[removeIndex]) {
+      this.dataSource.data[removeIndex].color = false;
+    }
     // tslint:disable-next-line: no-bitwise
     const removed = ~removeIndex && this.ns.Events.splice(removeIndex, 1);
     const res = this.ns.Events;
@@ -200,7 +202,6 @@ export class AllEventsComponent implements OnInit, OnDestroy, AfterViewInit {
       sorted[index].color = true;
     }
     this.dataSource.data = sorted;
-    this.ns.Events = sorted;
   }
 
   public exportTableToExcel() {

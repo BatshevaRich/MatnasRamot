@@ -366,6 +366,5 @@ export class AllFamiliesComponent implements OnInit, OnDestroy, AfterViewInit {
     }
     this.dataSource.data = sorted;
     this.table.renderRows();
-    this.ns.Families = sorted;
   }
 }
