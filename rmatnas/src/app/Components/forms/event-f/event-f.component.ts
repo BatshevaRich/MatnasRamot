@@ -9,6 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { OrganizationFComponent } from '../organization-f/organization-f.component';
 import { RangesFooter } from '../../UI/ranges-footer/ranges-footer.component';
 import { SatDatepicker } from 'saturn-datepicker';
+import { NotificationService } from '../../../services/notification.service';
 @Component({
   selector: 'app-event-f',
   templateUrl: './event-f.component.html',
@@ -33,6 +34,7 @@ export class EventFComponent implements OnInit, OnDestroy, AfterViewInit {
               private dialogRef: MatDialogRef<OrganizationFComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
               public snackBar: MatSnackBar,
+              public ns: NotificationService,
               fb: FormBuilder,
               private elementRef: ElementRef,
               private formBuilder: FormBuilder) {
@@ -42,8 +44,7 @@ export class EventFComponent implements OnInit, OnDestroy, AfterViewInit {
     this.myForm = this.formBuilder.group({
       name: new FormControl('', [
         Validators.required,
-        Validators.minLength(5),
-        Validators.maxLength(20)
+        Validators.minLength(4)
       ])
     });
     cs.getCategories().subscribe((res: Category[]) => {
@@ -52,7 +53,9 @@ export class EventFComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.date = [{ begin: new Date(), end: new Date() }];
+    // this.date = [{ begin: new Date(), end: new Date() }];
+    this.dateInput.beginDate = new Date();
+    this.dateInput.endDate = new Date();
   }
   ngOnInit() {
     if (this.data.update) {

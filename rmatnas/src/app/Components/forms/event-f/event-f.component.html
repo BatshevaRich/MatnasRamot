@@ -18,7 +18,7 @@
               </span>
             </span>
           </mat-hint>
-          <input matInput placeholder="שם" (focus)="$event.target.select()" maxlength="20" minlength="5"
+          <input matInput placeholder="שם" (focus)="$event.target.select()" maxlength="20" minlength="4"
             [(ngModel)]="newEvent.Name" name="name" [ngModelOptions]="{standalone: true}"
             (change)="myForm.get('name').setValue(newEvent.Name); myForm.get('name').valueChanges; myForm.get('name').markAsTouched()"
             required>
@@ -39,7 +39,7 @@
       </div>
       <mat-dialog-actions align="end">
         <button mat-button mat-raised-button mat-dialog-close>ביטול</button>
-        <button mat-button mat-raised-button [mat-dialog-close]="token" type="submit">
+        <button mat-button mat-raised-button [mat-dialog-close]="token" [disabled]="!myForm.valid" type="submit">
           <span *ngIf="!data.update">הוספה</span>
           <span *ngIf="data.update">עדכון</span>
         </button>
