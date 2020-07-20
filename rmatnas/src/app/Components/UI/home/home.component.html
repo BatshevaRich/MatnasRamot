@@ -56,7 +56,7 @@
           <span *ngFor="let c of CatsOfVolunteer">
             <span>
               {{c.Name}}|</span>
-            </span>
+          </span>
         </mat-expansion-panel>
         <br>
         <mat-expansion-panel *ngIf="mostFamily">
@@ -75,7 +75,7 @@
           <span *ngFor="let c of catsOfFamily">
             <span>
               {{c.Name}}|</span>
-            </span>
+          </span>
         </mat-expansion-panel>
         <br>
         <mat-expansion-panel *ngIf="mostOrganization">
@@ -104,8 +104,10 @@
             </mat-panel-title>
           </mat-expansion-panel-header>
           <h5><u>{{closestEvent}}</u></h5>
-          <p>בתאריך: {{DateClosestEvent  | date:"MMMM dd yyyy"}}</p>
-          <p>בעוד: {{DaysToEvent}} ימים</p>
+          <span *ngIf="DateClosestEvent">
+            <p>בתאריך: {{DateClosestEvent  | date:"MMMM dd yyyy"}}</p>
+            <p>בעוד: {{DaysToEvent}} ימים</p>
+          </span>
         </mat-expansion-panel>
         <!-- <mat-expansion-panel (opened)="panelOpenState = true"
                              (closed)="panelOpenState = false">

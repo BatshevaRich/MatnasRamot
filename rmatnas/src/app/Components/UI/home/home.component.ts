@@ -36,14 +36,19 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
               public os: OrganizationAndFamilyService,
               private elementRef: ElementRef,
               private cdr: ChangeDetectorRef) {
-    const temp = this.ns.Events.map(e => Math.abs(Date.now() - new Date(e.StartDate).getTime()));
-    const idx = temp.indexOf(Math.min(...temp));
-    this.closestEvent = this.ns.Events[idx].Name;
-    this.DateClosestEvent = this.ns.Events[idx].StartDate;
-    const d = this.ns.Events[idx].StartDate.slice(0, 10).split('-');
-    const x = d[1] + '/' + d[2] + '/' + d[0];
-    const diff = Math.abs(new Date(x).getTime() - new Date().getTime());
-    this.DaysToEvent  = Math.ceil(diff / (1000 * 3600 * 24));
+    try {
+      const temp = this.ns.Events.map(e => Math.abs(Date.now() - new Date(e.StartDate).getTime()));
+      const idx = temp.indexOf(Math.min(...temp));
+      this.closestEvent = this.ns.Events[idx] ? this.ns.Events[idx].Name : '';
+      this.DateClosestEvent = this.ns.Events[idx] ? this.ns.Events[idx].StartDate : '';
+      const d = this.ns.Events[idx].StartDate.slice(0, 10).split('-');
+      const x = d[1] + '/' + d[2] + '/' + d[0];
+      const diff = Math.abs(new Date(x).getTime() - new Date().getTime());
+      this.DaysToEvent  = Math.ceil(diff / (1000 * 3600 * 24));
+    } catch (error) {
+      this.DateClosestEvent = '';
+      this.closestEvent = '';
+    }
     this.ns.getMostVolunteer().subscribe((res: Volunteer) => {
       this.mostVolunteer = res;
       this.vs.getCategoriesOfVolunteer(res.Id).subscribe((cats: Category[]) => {
